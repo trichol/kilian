@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "580390824355",
+    "project_id": "kilian-17fe9",
+    "storage_bucket": "kilian-17fe9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:580390824355:android:abcf051bd705fb10941216",
+        "android_client_info": {
+          "package_name": "com.freepartners.kilian"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "580390824355-qugqisnb84dlke9lb13f7nf8nincgsfg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.freepartners.kilian",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "580390824355-so1n6a06ckdmpp4ut9mbsrjq1tfc53ag.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCA1IYbw7zB9sq2Vmnu2qaBGxjYOVEZVBM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "580390824355-so1n6a06ckdmpp4ut9mbsrjq1tfc53ag.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "580390824355-0tq0t68fhc9b74nu25kc87o27e22486j.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.freepartners.kilian"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
