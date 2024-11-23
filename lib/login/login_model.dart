@@ -58,9 +58,17 @@ class LoginModel extends FlutterFlowModel<LoginWidget> {
   // Stores action output result for [Custom Action - myLoginWithErrorHandling] action in Button widget.
   bool? isAuthLogged;
   // Stores action output result for [Backend Call - API (GeoJSLocation)] action in Button widget.
-  ApiCallResponse? userCurrentLocation;
+  ApiCallResponse? userCurrentLocationPassword;
   // Stores action output result for [Custom Action - generateAndSaveDeviceToken] action in Button widget.
-  bool? isTokenGenerateAndSave;
+  bool? isTokenGenerateAndSavePassword;
+  // Stores action output result for [Backend Call - API (GeoJSLocation)] action in Button widget.
+  ApiCallResponse? userCurrentLocationGoogle;
+  // Stores action output result for [Custom Action - generateAndSaveDeviceToken] action in Button widget.
+  bool? isTokenGenerateAndSaveForGoogle;
+  // Stores action output result for [Backend Call - API (GeoJSLocation)] action in Button widget.
+  ApiCallResponse? userCurrentLocationApple;
+  // Stores action output result for [Custom Action - generateAndSaveDeviceToken] action in Button widget.
+  bool? isTokenGenerateAndSaveForApple;
   // State field(s) for emailAddress_Create widget.
   FocusNode? emailAddressCreateFocusNode;
   TextEditingController? emailAddressCreateTextController;
@@ -129,11 +137,7 @@ class LoginModel extends FlutterFlowModel<LoginWidget> {
   }
 
   // Stores action output result for [Custom Action - createAccountWithErrorHandling] action in Button widget.
-  String? isAccountCreated;
-  // Stores action output result for [Custom Action - createAccountWithErrorHandling] action in Button widget.
-  String? isAccountCreatedGoogle;
-  // Stores action output result for [Custom Action - createAccountWithErrorHandling] action in Button widget.
-  String? isAccountAppleCreated;
+  String? isAccountPasswordCreated;
 
   @override
   void initState(BuildContext context) {

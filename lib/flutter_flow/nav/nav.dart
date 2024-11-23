@@ -156,13 +156,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'historique',
-          path: '/historique',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'historique')
-              : const HistoriqueWidget(),
-        ),
-        FFRoute(
           name: 'successPageBuildPDF',
           path: '/successPageBuildPDF',
           builder: (context, params) => NavBarPage(

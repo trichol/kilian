@@ -9,18 +9,19 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-import 'dart:html' as html;
+import 'package:universal_html/html.dart' as html;
 
 Future<bool> downloadPdfWeb(String? url) async {
-  // Add your function code here!
   if (url == null || url.isEmpty) {
-    // Handle the null or empty filePath case
-    print('Error: url is null or empty.');
+    print('Error: URL is null or empty.');
     return false;
   }
 
-  html.AnchorElement anchorElement = html.AnchorElement(href: url);
-  anchorElement.download = url;
-  anchorElement.click();
+  // Create an anchor element dynamically for download
+  final anchor = html.AnchorElement(href: url)
+    ..target = 'blank' // Opens in a new tab if needed
+    ..download = 'file.pdf' // Suggests a default file name for download
+    ..click();
+
   return true;
 }

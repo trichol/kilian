@@ -135,6 +135,12 @@ String? fixImproperJson(String? rawJson) {
     (match) => '${match.group(1)}"${match.group(2)}"',
   );
 
+  // Step 3: Ensure `phone_number` is quoted
+  fixedJson = fixedJson.replaceAllMapped(
+    RegExp(r'("phone_number":\s*)([^",\]}]+)'),
+    (match) => '${match.group(1)}"${match.group(2)}"',
+  );
+
   // print("apres");
   // print(fixedJson);
   return fixedJson;

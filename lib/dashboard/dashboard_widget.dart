@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dashboard_model.dart';
 export 'dashboard_model.dart';
@@ -40,6 +41,30 @@ class _DashboardWidgetState extends State<DashboardWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => DashboardModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if (valueOrDefault<bool>(
+              currentUserDocument?.isCompleteRegistration, false) ==
+          false) {
+        context.pushNamed(
+          'profilePage',
+          queryParameters: {
+            'isEditMode': serializeParam(
+              true,
+              ParamType.bool,
+            ),
+          }.withoutNulls,
+          extra: <String, dynamic>{
+            kTransitionInfoKey: const TransitionInfo(
+              hasTransition: true,
+              transitionType: PageTransitionType.fade,
+              duration: Duration(milliseconds: 0),
+            ),
+          },
+        );
+      }
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -228,7 +253,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                       children: [
                         FFButtonWidget(
                           onPressed: () async {
-                            context.pushNamed('historique');
+                            context.pushNamed('notifications');
                           },
                           text: 'Historique des contrats',
                           icon: Icon(
@@ -302,79 +327,72 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                         Align(
                                           alignment:
                                               const AlignmentDirectional(0.0, 0.0),
-                                          child: Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    16.0, 0.0, 16.0, 0.0),
-                                            child: FlutterFlowChoiceChips(
-                                              options: const [
-                                                ChipData(
-                                                    'Contrat de consentement entre adulte',
-                                                    FontAwesomeIcons
-                                                        .userSecret),
-                                                ChipData(
-                                                    'Contrat de vente entre particulier',
-                                                    FontAwesomeIcons
-                                                        .moneyCheckAlt),
-                                                ChipData(
-                                                    'Contrat de cessation entre particulier',
-                                                    FontAwesomeIcons.gift)
-                                              ],
-                                              onChanged: (val) => safeSetState(
-                                                  () => _model
-                                                          .typeContratSelectedValue =
-                                                      val?.firstOrNull),
-                                              selectedChipStyle: ChipStyle(
-                                                backgroundColor: Colors.black,
-                                                textStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Inter',
-                                                          color: Colors.white,
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                iconColor: Colors.white,
-                                                iconSize: 18.0,
-                                                labelPadding:
-                                                    const EdgeInsetsDirectional
-                                                        .fromSTEB(
-                                                            0.0, 0.0, 0.0, 0.0),
-                                                elevation: 0.0,
-                                                borderWidth: 2.0,
-                                              ),
-                                              unselectedChipStyle: ChipStyle(
-                                                backgroundColor: Colors.white,
-                                                textStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodySmall
-                                                        .override(
-                                                          fontFamily: 'Inter',
-                                                          color: Colors.black,
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                iconColor: Colors.black,
-                                                iconSize: 18.0,
-                                                labelPadding:
-                                                    const EdgeInsetsDirectional
-                                                        .fromSTEB(10.0, 0.0,
-                                                            10.0, 0.0),
-                                                elevation: 0.0,
-                                                borderColor: Colors.black,
-                                                borderWidth: 1.0,
-                                              ),
-                                              chipSpacing: 8.0,
-                                              rowSpacing: 8.0,
-                                              multiselect: false,
-                                              alignment: WrapAlignment.start,
-                                              controller: _model
-                                                      .typeContratSelectedValueController ??=
-                                                  FormFieldController<
-                                                      List<String>>(
-                                                [],
-                                              ),
-                                              wrapped: true,
+                                          child: FlutterFlowChoiceChips(
+                                            options: const [
+                                              ChipData(
+                                                  'Contrat de consentement entre adulte',
+                                                  FontAwesomeIcons.userSecret),
+                                              ChipData(
+                                                  'Contrat de vente entre particulier',
+                                                  FontAwesomeIcons
+                                                      .moneyCheckAlt),
+                                              ChipData(
+                                                  'Contrat de cessation entre particulier',
+                                                  FontAwesomeIcons.gift)
+                                            ],
+                                            onChanged: (val) => safeSetState(() =>
+                                                _model.typeContratSelectedValue =
+                                                    val?.firstOrNull),
+                                            selectedChipStyle: ChipStyle(
+                                              backgroundColor: Colors.black,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        color: Colors.white,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                              iconColor: Colors.white,
+                                              iconSize: 18.0,
+                                              labelPadding:
+                                                  const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 0.0, 0.0, 0.0),
+                                              elevation: 0.0,
+                                              borderWidth: 2.0,
                                             ),
+                                            unselectedChipStyle: ChipStyle(
+                                              backgroundColor: Colors.white,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodySmall
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        color: Colors.black,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                              iconColor: Colors.black,
+                                              iconSize: 18.0,
+                                              labelPadding:
+                                                  const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 0.0, 0.0, 0.0),
+                                              elevation: 0.0,
+                                              borderColor: Colors.black,
+                                              borderWidth: 1.0,
+                                            ),
+                                            chipSpacing: 8.0,
+                                            rowSpacing: 8.0,
+                                            multiselect: false,
+                                            alignment: WrapAlignment.start,
+                                            controller: _model
+                                                    .typeContratSelectedValueController ??=
+                                                FormFieldController<
+                                                    List<String>>(
+                                              [],
+                                            ),
+                                            wrapped: true,
                                           ),
                                         ),
                                         FFButtonWidget(

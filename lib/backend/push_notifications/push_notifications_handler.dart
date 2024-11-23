@@ -126,7 +126,6 @@ final parametersBuilderMap =
           'nombreContractant': getParameter<String>(data, 'nombreContractant'),
         },
       ),
-  'historique': ParameterData.none(),
   'successPageBuildPDF': (data) async => ParameterData(
         allParams: {
           'pdf': getParameter<String>(data, 'pdf'),

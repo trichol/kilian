@@ -55,6 +55,7 @@ class _MySignatureWidgetState extends State<MySignatureWidget> {
           width: 2.0,
         ),
       ),
+      alignment: const AlignmentDirectional(0.0, -1.0),
       child: Padding(
         padding: const EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
         child: Column(

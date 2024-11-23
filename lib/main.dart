@@ -146,7 +146,6 @@ class _NavBarPageState extends State<NavBarPage> {
     final tabs = {
       'dashboard': const DashboardWidget(),
       'profilePage': const ProfilePageWidget(),
-      'historique': const HistoriqueWidget(),
       'notifications': const NotificationsWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
@@ -245,30 +244,6 @@ class _NavBarPageState extends State<NavBarPage> {
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       color: currentIndex == 2
-                          ? Colors.black
-                          : FlutterFlowTheme.of(context).secondaryText,
-                      fontSize: 11.0,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            FloatingNavbarItem(
-              customWidget: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.history_rounded,
-                    color: currentIndex == 3
-                        ? Colors.black
-                        : FlutterFlowTheme.of(context).secondaryText,
-                    size: 24.0,
-                  ),
-                  Text(
-                    'Historique',
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      color: currentIndex == 3
                           ? Colors.black
                           : FlutterFlowTheme.of(context).secondaryText,
                       fontSize: 11.0,
