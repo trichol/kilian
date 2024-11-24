@@ -1,0 +1,80 @@
+# Flutter
+.dart_tool/
+.packages
+.flutter-plugins
+.flutter-plugins-dependencies
+.flutter-versions
+.flutter-symbol-cache
+.flutter/
+build/
+pubspec.lock
+generated_plugin_registrant.dart
+
+# iOS
+ios/Flutter/.last_build_id
+ios/Flutter/flutter_export_environment.sh
+ios/.symlinks/
+ios/Pods/
+ios/Podfile.lock
+ios/Runner.xcworkspace/
+ios/Flutter/App.framework
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+
+# Android
+android/.gradle/
+android/app/debug.keystore
+android/app/profile.keystore
+android/app/release.keystore
+android/build/
+*.jks
+*.keystore
+
+# Firebase
+.firebase/
+*.firebase-rc
+*.firebaserc
+*.env
+
+# IDE Configurations
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+.project
+.cproject
+.settings/
+*.pydevproject
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Editor-specific files
+*.swp
+*.swo
+*.swn
+*~
+*.bak
+*.tmp
+
+# Logs
+*.log
+*.out
+*.err
+
+# Coverage
+coverage/
+
+# Packages
+node_modules/

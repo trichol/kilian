@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "580390824355-4buv2hkfr19htl6o7ak1gi0vi66t54vp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.freepartners.kilian",
+            "certificate_hash": "3a133cae79617135634b91349675fd962ace7aa5"
+          }
+        },
+        {
           "client_id": "580390824355-qugqisnb84dlke9lb13f7nf8nincgsfg.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

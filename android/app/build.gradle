@@ -29,6 +29,10 @@ def keystoreProperties = new Properties()
 def keystorePropertiesFile = rootProject.file('key.properties')
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+    println "Fichier ok : " + keystorePropertiesFile.getAbsolutePath()
+}
+else {
+    println "Fichier manquant :" + keystorePropertiesFile.getAbsolutePath()
 }
 
 android {
@@ -55,10 +59,13 @@ android {
 
    signingConfigs {
        release {
+           println "Signing config for release start..."
            keyAlias keystoreProperties['keyAlias']
            keyPassword keystoreProperties['keyPassword']
            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+           // storeFile file('E:/WORK/PROJETS/KEYSTORE/Android/freepartner.jks')
            storePassword keystoreProperties['storePassword']
+           println "Signing config for release build set up."
        }
    }
 
@@ -66,7 +73,9 @@ android {
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+            // signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
+            println "Release build type configured."
         }
     }
 }
@@ -77,4 +86,5 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.10"
+    implementation "com.google.android.gms:play-services-auth:20.2.0"
 }
