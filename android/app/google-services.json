@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "580390824355-rn50oqdhuumqm8u6dip7f8scbcvt185k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.freepartners.kilian",
+            "certificate_hash": "4c61fbfcf57ecbb7679ece34400d5db3cc24297a"
+          }
+        },
+        {
           "client_id": "580390824355-so1n6a06ckdmpp4ut9mbsrjq1tfc53ag.apps.googleusercontent.com",
           "client_type": 3
         }

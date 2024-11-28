@@ -1933,6 +1933,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   16.0),
                                                       child: FFButtonWidget(
                                                         onPressed: () async {
+                                                          // Google account creation
                                                           GoRouter.of(context)
                                                               .prepareAuthEvent();
                                                           final user =
@@ -2108,6 +2109,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                 FFButtonWidget(
                                                               onPressed:
                                                                   () async {
+                                                                // Apple account creation
                                                                 GoRouter.of(
                                                                         context)
                                                                     .prepareAuthEvent();
