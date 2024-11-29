@@ -14,7 +14,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "580390824355-qugqisnb84dlke9lb13f7nf8nincgsfg.apps.googleusercontent.com",
+          "client_id": "580390824355-2e82in2qc2d1brha56bmhhpfqd08sndf.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.freepartners.kilian",
@@ -22,15 +22,15 @@
           }
         },
         {
-          "client_id": "580390824355-rn50oqdhuumqm8u6dip7f8scbcvt185k.apps.googleusercontent.com",
+          "client_id": "580390824355-b573k7mm4q2aldvbh6jir8ud1aktfovn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.freepartners.kilian",
-            "certificate_hash": "4c61fbfcf57ecbb7679ece34400d5db3cc24297a"
+            "certificate_hash": "8bca349f5fc85a5ce4109047f98422d03c865b93"
           }
         },
         {
-          "client_id": "580390824355-so1n6a06ckdmpp4ut9mbsrjq1tfc53ag.apps.googleusercontent.com",
+          "client_id": "580390824355-pm00togehskhb8p4q250m9vf0eoopo0c.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -43,15 +43,8 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "580390824355-so1n6a06ckdmpp4ut9mbsrjq1tfc53ag.apps.googleusercontent.com",
+              "client_id": "580390824355-pm00togehskhb8p4q250m9vf0eoopo0c.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "580390824355-0tq0t68fhc9b74nu25kc87o27e22486j.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.freepartners.kilian"
-              }
             }
           ]
         }
