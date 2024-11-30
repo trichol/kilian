@@ -104,6 +104,26 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                     'isEditMode',
                     ParamType.bool,
                   ),
+                  name: params.getParam(
+                    'name',
+                    ParamType.String,
+                  ),
+                  nickname: params.getParam(
+                    'nickname',
+                    ParamType.String,
+                  ),
+                  phoneNumber: params.getParam(
+                    'phoneNumber',
+                    ParamType.String,
+                  ),
+                  birthday: params.getParam(
+                    'birthday',
+                    ParamType.DateTime,
+                  ),
+                  adress: params.getParam(
+                    'adress',
+                    ParamType.String,
+                  ),
                 ),
         ),
         FFRoute(

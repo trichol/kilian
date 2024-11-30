@@ -1695,9 +1695,6 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   '') {
                                                             if (loggedIn ==
                                                                 true) {
-                                                              context.pushNamed(
-                                                                  'profilePage');
-
                                                               ScaffoldMessenger
                                                                       .of(context)
                                                                   .showSnackBar(
@@ -1720,6 +1717,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                           .warning,
                                                                 ),
                                                               );
+
+                                                              context.pushNamed(
+                                                                  'profilePage');
                                                             } else {
                                                               // test
                                                               unawaited(
@@ -1943,44 +1943,12 @@ class _LoginWidgetState extends State<LoginWidget>
                                                           if (user == null) {
                                                             return;
                                                           }
-                                                          // test
-                                                          unawaited(
-                                                            () async {
-                                                              await showDialog(
-                                                                context:
-                                                                    context,
-                                                                builder:
-                                                                    (alertDialogContext) {
-                                                                  return AlertDialog(
-                                                                    title: const Text(
-                                                                        'info google'),
-                                                                    content: Text(
-                                                                        currentUserDisplayName),
-                                                                    actions: [
-                                                                      TextButton(
-                                                                        onPressed:
-                                                                            () =>
-                                                                                Navigator.pop(alertDialogContext),
-                                                                        child: const Text(
-                                                                            'Ok'),
-                                                                      ),
-                                                                    ],
-                                                                  );
-                                                                },
-                                                              );
-                                                            }(),
-                                                          );
                                                           await Future.delayed(
                                                               const Duration(
                                                                   milliseconds:
                                                                       500));
                                                           if (loggedIn ==
                                                               true) {
-                                                            context.pushNamedAuth(
-                                                                'profilePage',
-                                                                context
-                                                                    .mounted);
-
                                                             ScaffoldMessenger
                                                                     .of(context)
                                                                 .showSnackBar(
@@ -2002,6 +1970,54 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                             context)
                                                                         .warning,
                                                               ),
+                                                            );
+
+                                                            context
+                                                                .pushNamedAuth(
+                                                              'profilePage',
+                                                              context.mounted,
+                                                              queryParameters: {
+                                                                'name':
+                                                                    serializeParam(
+                                                                  valueOrDefault(
+                                                                      currentUserDocument
+                                                                          ?.name,
+                                                                      ''),
+                                                                  ParamType
+                                                                      .String,
+                                                                ),
+                                                                'nickname':
+                                                                    serializeParam(
+                                                                  valueOrDefault(
+                                                                      currentUserDocument
+                                                                          ?.nickname,
+                                                                      ''),
+                                                                  ParamType
+                                                                      .String,
+                                                                ),
+                                                                'phoneNumber':
+                                                                    serializeParam(
+                                                                  currentPhoneNumber,
+                                                                  ParamType
+                                                                      .String,
+                                                                ),
+                                                                'birthday':
+                                                                    serializeParam(
+                                                                  currentUserDocument
+                                                                      ?.birthday,
+                                                                  ParamType
+                                                                      .DateTime,
+                                                                ),
+                                                                'adress':
+                                                                    serializeParam(
+                                                                  valueOrDefault(
+                                                                      currentUserDocument
+                                                                          ?.adress,
+                                                                      ''),
+                                                                  ParamType
+                                                                      .String,
+                                                                ),
+                                                              }.withoutNulls,
                                                             );
                                                           } else {
                                                             // test
@@ -2150,11 +2166,6 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                 }
                                                                 if (loggedIn ==
                                                                     true) {
-                                                                  context.pushNamedAuth(
-                                                                      'profilePage',
-                                                                      context
-                                                                          .mounted);
-
                                                                   ScaffoldMessenger.of(
                                                                           context)
                                                                       .showSnackBar(
@@ -2176,6 +2187,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                               .warning,
                                                                     ),
                                                                   );
+
+                                                                  context.pushNamedAuth(
+                                                                      'profilePage',
+                                                                      context
+                                                                          .mounted);
                                                                 } else {
                                                                   // test
                                                                   unawaited(

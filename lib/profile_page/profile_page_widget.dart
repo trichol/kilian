@@ -1,6 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/components/my_signature_widget.dart';
+import '/components/my_signature/my_signature_widget.dart';
 import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -23,9 +23,19 @@ class ProfilePageWidget extends StatefulWidget {
   const ProfilePageWidget({
     super.key,
     bool? isEditMode,
+    this.name,
+    this.nickname,
+    this.phoneNumber,
+    this.birthday,
+    this.adress,
   }) : isEditMode = isEditMode ?? true;
 
   final bool isEditMode;
+  final String? name;
+  final String? nickname;
+  final String? phoneNumber;
+  final DateTime? birthday;
+  final String? adress;
 
   @override
   State<ProfilePageWidget> createState() => _ProfilePageWidgetState();
