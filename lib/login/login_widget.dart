@@ -1943,6 +1943,33 @@ class _LoginWidgetState extends State<LoginWidget>
                                                           if (user == null) {
                                                             return;
                                                           }
+                                                          // test
+                                                          unawaited(
+                                                            () async {
+                                                              await showDialog(
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (alertDialogContext) {
+                                                                  return AlertDialog(
+                                                                    title: const Text(
+                                                                        'info google'),
+                                                                    content: Text(
+                                                                        currentUserDisplayName),
+                                                                    actions: [
+                                                                      TextButton(
+                                                                        onPressed:
+                                                                            () =>
+                                                                                Navigator.pop(alertDialogContext),
+                                                                        child: const Text(
+                                                                            'Ok'),
+                                                                      ),
+                                                                    ],
+                                                                  );
+                                                                },
+                                                              );
+                                                            }(),
+                                                          );
                                                           await Future.delayed(
                                                               const Duration(
                                                                   milliseconds:
