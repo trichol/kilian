@@ -179,7 +179,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                 text: 'Se connecter',
                               ),
                               Tab(
-                                text: 'S\'inscrires',
+                                text: 'S\'inscrire',
                               ),
                             ],
                             controller: _model.tabBarController,
@@ -2313,6 +2313,17 @@ class _LoginWidgetState extends State<LoginWidget>
                                                               ),
                                                             ),
                                                           ),
+                                                    Text(
+                                                      'Hello World',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily: 'Inter',
+                                                            color: Colors.black,
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    ),
                                                   ],
                                                 ),
                                               ),
