@@ -837,36 +837,269 @@ class _LoginWidgetState extends State<LoginWidget>
                                                         MainAxisSize.max,
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
-                                                            .center,
+                                                            .spaceEvenly,
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
                                                             .center,
                                                     children: [
-                                                      Align(
-                                                        alignment:
-                                                            const AlignmentDirectional(
-                                                                0.0, 0.0),
-                                                        child: Wrap(
-                                                          spacing: 0.0,
-                                                          runSpacing: 0.0,
-                                                          alignment:
-                                                              WrapAlignment
-                                                                  .center,
-                                                          crossAxisAlignment:
-                                                              WrapCrossAlignment
-                                                                  .center,
-                                                          direction:
-                                                              Axis.horizontal,
-                                                          runAlignment:
-                                                              WrapAlignment
-                                                                  .center,
-                                                          verticalDirection:
-                                                              VerticalDirection
-                                                                  .down,
-                                                          clipBehavior:
-                                                              Clip.none,
-                                                          children: [
-                                                            Padding(
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    16.0),
+                                                        child: FFButtonWidget(
+                                                          onPressed: () async {
+                                                            // LOG GOOGLE
+                                                            GoRouter.of(context)
+                                                                .prepareAuthEvent();
+                                                            final user =
+                                                                await authManager
+                                                                    .signInWithGoogle(
+                                                                        context);
+                                                            if (user == null) {
+                                                              return;
+                                                            }
+                                                            if (_model
+                                                                .isAuthLogged!) {
+                                                              if (valueOrDefault<
+                                                                          bool>(
+                                                                      currentUserDocument
+                                                                          ?.isCompleteRegistration,
+                                                                      false) ==
+                                                                  true) {
+                                                                // show snack bar
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .clearSnackBars();
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .showSnackBar(
+                                                                  SnackBar(
+                                                                    content:
+                                                                        Text(
+                                                                      'Authentification réussie',
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primaryText,
+                                                                      ),
+                                                                    ),
+                                                                    duration: const Duration(
+                                                                        milliseconds:
+                                                                            2000),
+                                                                    backgroundColor:
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .success,
+                                                                  ),
+                                                                );
+                                                                // Geolocation
+                                                                _model.userCurrentLocationGoogle =
+                                                                    await GeoJSLocationCall
+                                                                        .call();
+
+                                                                // Update user document
+
+                                                                await currentUserReference!
+                                                                    .update(
+                                                                        createUsersRecordData(
+                                                                  online: true,
+                                                                  location:
+                                                                      updateLocationDataStruct(
+                                                                    LocationDataStruct.maybeFromMap((_model
+                                                                            .userCurrentLocationGoogle
+                                                                            ?.jsonBody ??
+                                                                        '')),
+                                                                    clearUnsetFields:
+                                                                        false,
+                                                                  ),
+                                                                ));
+                                                                // genearate and save firebase token
+                                                                _model.isTokenGenerateAndSaveForGoogle =
+                                                                    await actions
+                                                                        .generateAndSaveDeviceToken(
+                                                                  currentUserUid,
+                                                                );
+                                                                if (_model
+                                                                        .isTokenGenerateAndSaveForGoogle ==
+                                                                    true) {
+                                                                  // info notification OK
+                                                                  ScaffoldMessenger.of(
+                                                                          context)
+                                                                      .showSnackBar(
+                                                                    SnackBar(
+                                                                      content:
+                                                                          Text(
+                                                                        'Notifications activées',
+                                                                        style:
+                                                                            TextStyle(
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).primaryText,
+                                                                        ),
+                                                                      ),
+                                                                      duration: const Duration(
+                                                                          milliseconds:
+                                                                              4000),
+                                                                      backgroundColor:
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .secondary,
+                                                                    ),
+                                                                  );
+                                                                } else {
+                                                                  // info notification NOK
+                                                                  ScaffoldMessenger.of(
+                                                                          context)
+                                                                      .showSnackBar(
+                                                                    SnackBar(
+                                                                      content:
+                                                                          Text(
+                                                                        'Notifications non activées!',
+                                                                        style:
+                                                                            TextStyle(
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).primaryText,
+                                                                        ),
+                                                                      ),
+                                                                      duration: const Duration(
+                                                                          milliseconds:
+                                                                              4000),
+                                                                      backgroundColor:
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .error,
+                                                                    ),
+                                                                  );
+                                                                }
+
+                                                                // go to dashboard
+
+                                                                context.goNamedAuth(
+                                                                    'dashboard',
+                                                                    context
+                                                                        .mounted);
+                                                              } else {
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .clearSnackBars();
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .showSnackBar(
+                                                                  SnackBar(
+                                                                    content:
+                                                                        Text(
+                                                                      'Completer son profil',
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primaryText,
+                                                                      ),
+                                                                    ),
+                                                                    duration: const Duration(
+                                                                        milliseconds:
+                                                                            5000),
+                                                                    backgroundColor:
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .warning,
+                                                                  ),
+                                                                );
+
+                                                                context.goNamedAuth(
+                                                                    'profilePage',
+                                                                    context
+                                                                        .mounted);
+                                                              }
+                                                            } else {
+                                                              ScaffoldMessenger
+                                                                      .of(context)
+                                                                  .clearSnackBars();
+                                                              ScaffoldMessenger
+                                                                      .of(context)
+                                                                  .showSnackBar(
+                                                                SnackBar(
+                                                                  content: Text(
+                                                                    'Identifiants incorrects. Veuillez réessayer.',
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryText,
+                                                                    ),
+                                                                  ),
+                                                                  duration: const Duration(
+                                                                      milliseconds:
+                                                                          4000),
+                                                                  backgroundColor:
+                                                                      FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .error,
+                                                                ),
+                                                              );
+                                                            }
+
+                                                            safeSetState(() {});
+                                                          },
+                                                          text: 'Google',
+                                                          icon: const FaIcon(
+                                                            FontAwesomeIcons
+                                                                .google,
+                                                            size: 20.0,
+                                                          ),
+                                                          options:
+                                                              FFButtonOptions(
+                                                            width: 100.0,
+                                                            height: 44.0,
+                                                            padding:
+                                                                const EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        0.0,
+                                                                        0.0,
+                                                                        0.0),
+                                                            iconPadding:
+                                                                const EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        0.0,
+                                                                        0.0,
+                                                                        0.0),
+                                                            color: Colors.white,
+                                                            textStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Plus Jakarta Sans',
+                                                                      color: const Color(
+                                                                          0xFF101213),
+                                                                      fontSize:
+                                                                          14.0,
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                            elevation: 0.0,
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color: Color(
+                                                                  0xFFF1F4F8),
+                                                              width: 2.0,
+                                                            ),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        40.0),
+                                                            hoverColor: const Color(
+                                                                0xFFF1F4F8),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      isAndroid
+                                                          ? Container()
+                                                          : Padding(
                                                               padding:
                                                                   const EdgeInsetsDirectional
                                                                       .fromSTEB(
@@ -878,13 +1111,13 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   FFButtonWidget(
                                                                 onPressed:
                                                                     () async {
-                                                                  // LOG GOOGLE
+                                                                  // LOG APPLE
                                                                   GoRouter.of(
                                                                           context)
                                                                       .prepareAuthEvent();
                                                                   final user =
                                                                       await authManager
-                                                                          .signInWithGoogle(
+                                                                          .signInWithApple(
                                                                               context);
                                                                   if (user ==
                                                                       null) {
@@ -919,7 +1152,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                         ),
                                                                       );
                                                                       // Geolocation
-                                                                      _model.userCurrentLocationGoogle =
+                                                                      _model.userCurrentLocationApple =
                                                                           await GeoJSLocationCall
                                                                               .call();
 
@@ -932,20 +1165,20 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                             true,
                                                                         location:
                                                                             updateLocationDataStruct(
-                                                                          LocationDataStruct.maybeFromMap((_model.userCurrentLocationGoogle?.jsonBody ??
+                                                                          LocationDataStruct.maybeFromMap((_model.userCurrentLocationApple?.jsonBody ??
                                                                               '')),
                                                                           clearUnsetFields:
                                                                               false,
                                                                         ),
                                                                       ));
                                                                       // genearate and save firebase token
-                                                                      _model.isTokenGenerateAndSaveForGoogle =
+                                                                      _model.isTokenGenerateAndSaveForApple =
                                                                           await actions
                                                                               .generateAndSaveDeviceToken(
                                                                         currentUserUid,
                                                                       );
                                                                       if (_model
-                                                                              .isTokenGenerateAndSaveForGoogle ==
+                                                                              .isTokenGenerateAndSaveForApple ==
                                                                           true) {
                                                                         // info notification OK
                                                                         ScaffoldMessenger.of(context)
@@ -1046,11 +1279,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   safeSetState(
                                                                       () {});
                                                                 },
-                                                                text: 'Google',
-                                                                icon: const FaIcon(
-                                                                  FontAwesomeIcons
-                                                                      .google,
-                                                                  size: 20.0,
+                                                                text: 'Apple',
+                                                                icon: const Icon(
+                                                                  Icons
+                                                                      .apple_sharp,
+                                                                  size: 25.0,
                                                                 ),
                                                                 options:
                                                                     FFButtonOptions(
@@ -1102,193 +1335,6 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                 ),
                                                               ),
                                                             ),
-                                                            isAndroid
-                                                                ? Container()
-                                                                : Padding(
-                                                                    padding: const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            16.0),
-                                                                    child:
-                                                                        FFButtonWidget(
-                                                                      onPressed:
-                                                                          () async {
-                                                                        // LOG APPLE
-                                                                        GoRouter.of(context)
-                                                                            .prepareAuthEvent();
-                                                                        final user =
-                                                                            await authManager.signInWithApple(context);
-                                                                        if (user ==
-                                                                            null) {
-                                                                          return;
-                                                                        }
-                                                                        if (_model
-                                                                            .isAuthLogged!) {
-                                                                          if (valueOrDefault<bool>(currentUserDocument?.isCompleteRegistration, false) ==
-                                                                              true) {
-                                                                            // show snack bar
-                                                                            ScaffoldMessenger.of(context).clearSnackBars();
-                                                                            ScaffoldMessenger.of(context).showSnackBar(
-                                                                              SnackBar(
-                                                                                content: Text(
-                                                                                  'Authentification réussie',
-                                                                                  style: TextStyle(
-                                                                                    color: FlutterFlowTheme.of(context).primaryText,
-                                                                                  ),
-                                                                                ),
-                                                                                duration: const Duration(milliseconds: 2000),
-                                                                                backgroundColor: FlutterFlowTheme.of(context).success,
-                                                                              ),
-                                                                            );
-                                                                            // Geolocation
-                                                                            _model.userCurrentLocationApple =
-                                                                                await GeoJSLocationCall.call();
-
-                                                                            // Update user document
-
-                                                                            await currentUserReference!.update(createUsersRecordData(
-                                                                              online: true,
-                                                                              location: updateLocationDataStruct(
-                                                                                LocationDataStruct.maybeFromMap((_model.userCurrentLocationApple?.jsonBody ?? '')),
-                                                                                clearUnsetFields: false,
-                                                                              ),
-                                                                            ));
-                                                                            // genearate and save firebase token
-                                                                            _model.isTokenGenerateAndSaveForApple =
-                                                                                await actions.generateAndSaveDeviceToken(
-                                                                              currentUserUid,
-                                                                            );
-                                                                            if (_model.isTokenGenerateAndSaveForApple ==
-                                                                                true) {
-                                                                              // info notification OK
-                                                                              ScaffoldMessenger.of(context).showSnackBar(
-                                                                                SnackBar(
-                                                                                  content: Text(
-                                                                                    'Notifications activées',
-                                                                                    style: TextStyle(
-                                                                                      color: FlutterFlowTheme.of(context).primaryText,
-                                                                                    ),
-                                                                                  ),
-                                                                                  duration: const Duration(milliseconds: 4000),
-                                                                                  backgroundColor: FlutterFlowTheme.of(context).secondary,
-                                                                                ),
-                                                                              );
-                                                                            } else {
-                                                                              // info notification NOK
-                                                                              ScaffoldMessenger.of(context).showSnackBar(
-                                                                                SnackBar(
-                                                                                  content: Text(
-                                                                                    'Notifications non activées!',
-                                                                                    style: TextStyle(
-                                                                                      color: FlutterFlowTheme.of(context).primaryText,
-                                                                                    ),
-                                                                                  ),
-                                                                                  duration: const Duration(milliseconds: 4000),
-                                                                                  backgroundColor: FlutterFlowTheme.of(context).error,
-                                                                                ),
-                                                                              );
-                                                                            }
-
-                                                                            // go to dashboard
-
-                                                                            context.goNamedAuth('dashboard',
-                                                                                context.mounted);
-                                                                          } else {
-                                                                            ScaffoldMessenger.of(context).clearSnackBars();
-                                                                            ScaffoldMessenger.of(context).showSnackBar(
-                                                                              SnackBar(
-                                                                                content: Text(
-                                                                                  'Completer son profil',
-                                                                                  style: TextStyle(
-                                                                                    color: FlutterFlowTheme.of(context).primaryText,
-                                                                                  ),
-                                                                                ),
-                                                                                duration: const Duration(milliseconds: 5000),
-                                                                                backgroundColor: FlutterFlowTheme.of(context).warning,
-                                                                              ),
-                                                                            );
-
-                                                                            context.goNamedAuth('profilePage',
-                                                                                context.mounted);
-                                                                          }
-                                                                        } else {
-                                                                          ScaffoldMessenger.of(context)
-                                                                              .clearSnackBars();
-                                                                          ScaffoldMessenger.of(context)
-                                                                              .showSnackBar(
-                                                                            SnackBar(
-                                                                              content: Text(
-                                                                                'Identifiants incorrects. Veuillez réessayer.',
-                                                                                style: TextStyle(
-                                                                                  color: FlutterFlowTheme.of(context).primaryText,
-                                                                                ),
-                                                                              ),
-                                                                              duration: const Duration(milliseconds: 4000),
-                                                                              backgroundColor: FlutterFlowTheme.of(context).error,
-                                                                            ),
-                                                                          );
-                                                                        }
-
-                                                                        safeSetState(
-                                                                            () {});
-                                                                      },
-                                                                      text:
-                                                                          'Apple',
-                                                                      icon:
-                                                                          const Icon(
-                                                                        Icons
-                                                                            .apple_sharp,
-                                                                        size:
-                                                                            25.0,
-                                                                      ),
-                                                                      options:
-                                                                          FFButtonOptions(
-                                                                        width:
-                                                                            100.0,
-                                                                        height:
-                                                                            44.0,
-                                                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                        iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                        color: Colors
-                                                                            .white,
-                                                                        textStyle: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium
-                                                                            .override(
-                                                                              fontFamily: 'Plus Jakarta Sans',
-                                                                              color: const Color(0xFF101213),
-                                                                              fontSize: 14.0,
-                                                                              letterSpacing: 0.0,
-                                                                              fontWeight: FontWeight.bold,
-                                                                            ),
-                                                                        elevation:
-                                                                            0.0,
-                                                                        borderSide:
-                                                                            const BorderSide(
-                                                                          color:
-                                                                              Color(0xFFF1F4F8),
-                                                                          width:
-                                                                              2.0,
-                                                                        ),
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(40.0),
-                                                                        hoverColor:
-                                                                            const Color(0xFFF1F4F8),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                          ],
-                                                        ),
-                                                      ),
                                                     ],
                                                   ),
                                                 ),
