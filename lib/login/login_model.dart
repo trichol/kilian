@@ -61,13 +61,13 @@ class LoginModel extends FlutterFlowModel<LoginWidget> {
   ApiCallResponse? userCurrentLocationPassword;
   // Stores action output result for [Custom Action - generateAndSaveDeviceToken] action in Button widget.
   bool? isTokenGenerateAndSavePassword;
-  // Stores action output result for [Backend Call - API (GeoJSLocation)] action in Button widget.
+  // Stores action output result for [Backend Call - API (GeoJSLocation)] action in BtnGoogle widget.
   ApiCallResponse? userCurrentLocationGoogle;
-  // Stores action output result for [Custom Action - generateAndSaveDeviceToken] action in Button widget.
+  // Stores action output result for [Custom Action - generateAndSaveDeviceToken] action in BtnGoogle widget.
   bool? isTokenGenerateAndSaveForGoogle;
-  // Stores action output result for [Backend Call - API (GeoJSLocation)] action in Button widget.
+  // Stores action output result for [Backend Call - API (GeoJSLocation)] action in BtnApple widget.
   ApiCallResponse? userCurrentLocationApple;
-  // Stores action output result for [Custom Action - generateAndSaveDeviceToken] action in Button widget.
+  // Stores action output result for [Custom Action - generateAndSaveDeviceToken] action in BtnApple widget.
   bool? isTokenGenerateAndSaveForApple;
   // State field(s) for emailAddress_Create widget.
   FocusNode? emailAddressCreateFocusNode;
