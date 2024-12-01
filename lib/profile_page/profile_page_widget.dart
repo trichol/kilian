@@ -23,19 +23,11 @@ class ProfilePageWidget extends StatefulWidget {
   const ProfilePageWidget({
     super.key,
     bool? isEditMode,
-    this.name,
-    this.nickname,
-    this.phoneNumber,
-    this.birthday,
-    this.adress,
+    this.socialNetworkUserData,
   }) : isEditMode = isEditMode ?? true;
 
   final bool isEditMode;
-  final String? name;
-  final String? nickname;
-  final String? phoneNumber;
-  final DateTime? birthday;
-  final String? adress;
+  final SocialNetworkUserDataTypeStruct? socialNetworkUserData;
 
   @override
   State<ProfilePageWidget> createState() => _ProfilePageWidgetState();
@@ -65,10 +57,10 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
     });
 
     _model.nameTextController ??= TextEditingController(
-        text: valueOrDefault<bool>(
-                currentUserDocument?.isCompleteRegistration, false)
-            ? valueOrDefault(currentUserDocument?.name, '')
-            : widget.name);
+        text: widget.socialNetworkUserData?.name != null &&
+                widget.socialNetworkUserData?.name != ''
+            ? widget.socialNetworkUserData?.name
+            : valueOrDefault(currentUserDocument?.name, ''));
     _model.nameFocusNode ??= FocusNode();
 
     _model.nicknameTextController ??= TextEditingController(

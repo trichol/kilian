@@ -108,11 +108,6 @@ final parametersBuilderMap =
   'profilePage': (data) async => ParameterData(
         allParams: {
           'isEditMode': getParameter<bool>(data, 'isEditMode'),
-          'name': getParameter<String>(data, 'name'),
-          'nickname': getParameter<String>(data, 'nickname'),
-          'phoneNumber': getParameter<String>(data, 'phoneNumber'),
-          'birthday': getParameter<DateTime>(data, 'birthday'),
-          'adress': getParameter<String>(data, 'adress'),
         },
       ),
   'dashboard': (data) async => ParameterData(

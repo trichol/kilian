@@ -12,6 +12,7 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'login_model.dart';
 export 'login_model.dart';
 
@@ -96,6 +97,8 @@ class _LoginWidgetState extends State<LoginWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -1933,6 +1936,8 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   16.0),
                                                       child: FFButtonWidget(
                                                         onPressed: () async {
+                                                          await authManager
+                                                              .refreshUser();
                                                           // Google account creation
                                                           GoRouter.of(context)
                                                               .prepareAuthEvent();
@@ -1971,53 +1976,69 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                         .success,
                                                               ),
                                                             );
+                                                            // SET  SOCIAL NETWORK PROFILE
+                                                            FFAppState()
+                                                                .updateSocialNetworkUserDataStruct(
+                                                              (e) => e
+                                                                ..name = valueOrDefault(
+                                                                    currentUserDocument
+                                                                        ?.name,
+                                                                    '')
+                                                                ..nickname =
+                                                                    valueOrDefault(
+                                                                        currentUserDocument
+                                                                            ?.nickname,
+                                                                        '')
+                                                                ..phoneNumber =
+                                                                    currentUserEmailVerified
+                                                                        .toString()
+                                                                ..adress = valueOrDefault(
+                                                                    currentUserDocument
+                                                                        ?.adress,
+                                                                    '')
+                                                                ..birthday =
+                                                                    currentUserDocument
+                                                                        ?.birthday
+                                                                ..gender = valueOrDefault(
+                                                                    currentUserDocument
+                                                                        ?.genre,
+                                                                    ''),
+                                                            );
+                                                            // LOG OUT
+                                                            GoRouter.of(context)
+                                                                .prepareAuthEvent();
+                                                            await authManager
+                                                                .signOut();
+                                                            GoRouter.of(context)
+                                                                .clearRedirectLocation();
 
                                                             context
                                                                 .pushNamedAuth(
                                                               'profilePage',
                                                               context.mounted,
                                                               queryParameters: {
-                                                                'name':
+                                                                'socialNetworkUserData':
                                                                     serializeParam(
-                                                                  valueOrDefault(
-                                                                      currentUserDocument
-                                                                          ?.name,
-                                                                      ''),
+                                                                  FFAppState()
+                                                                      .socialNetworkUserData,
                                                                   ParamType
-                                                                      .String,
-                                                                ),
-                                                                'nickname':
-                                                                    serializeParam(
-                                                                  valueOrDefault(
-                                                                      currentUserDocument
-                                                                          ?.nickname,
-                                                                      ''),
-                                                                  ParamType
-                                                                      .String,
-                                                                ),
-                                                                'phoneNumber':
-                                                                    serializeParam(
-                                                                  currentPhoneNumber,
-                                                                  ParamType
-                                                                      .String,
-                                                                ),
-                                                                'birthday':
-                                                                    serializeParam(
-                                                                  currentUserDocument
-                                                                      ?.birthday,
-                                                                  ParamType
-                                                                      .DateTime,
-                                                                ),
-                                                                'adress':
-                                                                    serializeParam(
-                                                                  valueOrDefault(
-                                                                      currentUserDocument
-                                                                          ?.adress,
-                                                                      ''),
-                                                                  ParamType
-                                                                      .String,
+                                                                      .DataStruct,
                                                                 ),
                                                               }.withoutNulls,
+                                                              extra: <String,
+                                                                  dynamic>{
+                                                                kTransitionInfoKey:
+                                                                    const TransitionInfo(
+                                                                  hasTransition:
+                                                                      true,
+                                                                  transitionType:
+                                                                      PageTransitionType
+                                                                          .fade,
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          0),
+                                                                ),
+                                                              },
                                                             );
                                                           } else {
                                                             // test
@@ -2046,6 +2067,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                 );
                                                               }(),
                                                             );
+                                                            // LOG OUT
                                                             GoRouter.of(context)
                                                                 .prepareAuthEvent();
                                                             await authManager
