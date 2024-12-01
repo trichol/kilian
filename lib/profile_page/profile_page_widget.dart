@@ -16,6 +16,7 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'profile_page_model.dart';
 export 'profile_page_model.dart';
 
@@ -57,10 +58,8 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
     });
 
     _model.nameTextController ??= TextEditingController(
-        text: widget.socialNetworkUserData?.name != null &&
-                widget.socialNetworkUserData?.name != ''
-            ? widget.socialNetworkUserData?.name
-            : valueOrDefault(currentUserDocument?.name, ''));
+        text:
+            'zzzz${FFAppState().socialNetworkUserData.name}:${widget.socialNetworkUserData?.name}:');
     _model.nameFocusNode ??= FocusNode();
 
     _model.nicknameTextController ??= TextEditingController(
@@ -91,6 +90,8 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
