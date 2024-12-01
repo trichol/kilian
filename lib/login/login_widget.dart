@@ -2298,11 +2298,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                                             );
                                                           }
                                                         },
-                                                        text: 'App',
-                                                        icon: const FaIcon(
-                                                          FontAwesomeIcons
-                                                              .google,
-                                                          size: 20.0,
+                                                        text: 'Apple',
+                                                        icon: const Icon(
+                                                          Icons.apple,
+                                                          size: 25.0,
                                                         ),
                                                         options:
                                                             FFButtonOptions(
@@ -2355,17 +2354,6 @@ class _LoginWidgetState extends State<LoginWidget>
                                                               const Color(0xFFF1F4F8),
                                                         ),
                                                       ),
-                                                    ),
-                                                    Text(
-                                                      'Hello World',
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .bodyMedium
-                                                          .override(
-                                                            fontFamily: 'Inter',
-                                                            color: Colors.black,
-                                                            letterSpacing: 0.0,
-                                                          ),
                                                     ),
                                                   ],
                                                 ),
