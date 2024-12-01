@@ -1097,244 +1097,74 @@ class _LoginWidgetState extends State<LoginWidget>
                                                           ),
                                                         ),
                                                       ),
-                                                      isAndroid
-                                                          ? Container()
-                                                          : Padding(
-                                                              padding:
-                                                                  const EdgeInsetsDirectional
-                                                                      .fromSTEB(
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    16.0),
+                                                        child: FFButtonWidget(
+                                                          onPressed:
+                                                              () async {},
+                                                          text: 'Apple',
+                                                          icon: const Icon(
+                                                            Icons.apple_sharp,
+                                                            size: 25.0,
+                                                          ),
+                                                          options:
+                                                              FFButtonOptions(
+                                                            width: 100.0,
+                                                            height: 44.0,
+                                                            padding:
+                                                                const EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        0.0,
+                                                                        0.0,
+                                                                        0.0),
+                                                            iconPadding:
+                                                                const EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        0.0,
+                                                                        0.0,
+                                                                        0.0),
+                                                            color: Colors.white,
+                                                            textStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Plus Jakarta Sans',
+                                                                      color: const Color(
+                                                                          0xFF101213),
+                                                                      fontSize:
+                                                                          14.0,
+                                                                      letterSpacing:
                                                                           0.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          16.0),
-                                                              child:
-                                                                  FFButtonWidget(
-                                                                onPressed:
-                                                                    () async {
-                                                                  // LOG APPLE
-                                                                  GoRouter.of(
-                                                                          context)
-                                                                      .prepareAuthEvent();
-                                                                  final user =
-                                                                      await authManager
-                                                                          .signInWithApple(
-                                                                              context);
-                                                                  if (user ==
-                                                                      null) {
-                                                                    return;
-                                                                  }
-                                                                  if (_model
-                                                                      .isAuthLogged!) {
-                                                                    if (valueOrDefault<bool>(
-                                                                            currentUserDocument?.isCompleteRegistration,
-                                                                            false) ==
-                                                                        true) {
-                                                                      // show snack bar
-                                                                      ScaffoldMessenger.of(
-                                                                              context)
-                                                                          .clearSnackBars();
-                                                                      ScaffoldMessenger.of(
-                                                                              context)
-                                                                          .showSnackBar(
-                                                                        SnackBar(
-                                                                          content:
-                                                                              Text(
-                                                                            'Authentification réussie',
-                                                                            style:
-                                                                                TextStyle(
-                                                                              color: FlutterFlowTheme.of(context).primaryText,
-                                                                            ),
-                                                                          ),
-                                                                          duration:
-                                                                              const Duration(milliseconds: 2000),
-                                                                          backgroundColor:
-                                                                              FlutterFlowTheme.of(context).success,
-                                                                        ),
-                                                                      );
-                                                                      // Geolocation
-                                                                      _model.userCurrentLocationApple =
-                                                                          await GeoJSLocationCall
-                                                                              .call();
-
-                                                                      // Update user document
-
-                                                                      await currentUserReference!
-                                                                          .update(
-                                                                              createUsersRecordData(
-                                                                        online:
-                                                                            true,
-                                                                        location:
-                                                                            updateLocationDataStruct(
-                                                                          LocationDataStruct.maybeFromMap((_model.userCurrentLocationApple?.jsonBody ??
-                                                                              '')),
-                                                                          clearUnsetFields:
-                                                                              false,
-                                                                        ),
-                                                                      ));
-                                                                      // genearate and save firebase token
-                                                                      _model.isTokenGenerateAndSaveForApple =
-                                                                          await actions
-                                                                              .generateAndSaveDeviceToken(
-                                                                        currentUserUid,
-                                                                      );
-                                                                      if (_model
-                                                                              .isTokenGenerateAndSaveForApple ==
-                                                                          true) {
-                                                                        // info notification OK
-                                                                        ScaffoldMessenger.of(context)
-                                                                            .showSnackBar(
-                                                                          SnackBar(
-                                                                            content:
-                                                                                Text(
-                                                                              'Notifications activées',
-                                                                              style: TextStyle(
-                                                                                color: FlutterFlowTheme.of(context).primaryText,
-                                                                              ),
-                                                                            ),
-                                                                            duration:
-                                                                                const Duration(milliseconds: 4000),
-                                                                            backgroundColor:
-                                                                                FlutterFlowTheme.of(context).secondary,
-                                                                          ),
-                                                                        );
-                                                                      } else {
-                                                                        // info notification NOK
-                                                                        ScaffoldMessenger.of(context)
-                                                                            .showSnackBar(
-                                                                          SnackBar(
-                                                                            content:
-                                                                                Text(
-                                                                              'Notifications non activées!',
-                                                                              style: TextStyle(
-                                                                                color: FlutterFlowTheme.of(context).primaryText,
-                                                                              ),
-                                                                            ),
-                                                                            duration:
-                                                                                const Duration(milliseconds: 4000),
-                                                                            backgroundColor:
-                                                                                FlutterFlowTheme.of(context).error,
-                                                                          ),
-                                                                        );
-                                                                      }
-
-                                                                      // go to dashboard
-
-                                                                      context.goNamedAuth(
-                                                                          'dashboard',
-                                                                          context
-                                                                              .mounted);
-                                                                    } else {
-                                                                      ScaffoldMessenger.of(
-                                                                              context)
-                                                                          .clearSnackBars();
-                                                                      ScaffoldMessenger.of(
-                                                                              context)
-                                                                          .showSnackBar(
-                                                                        SnackBar(
-                                                                          content:
-                                                                              Text(
-                                                                            'Completer son profil',
-                                                                            style:
-                                                                                TextStyle(
-                                                                              color: FlutterFlowTheme.of(context).primaryText,
-                                                                            ),
-                                                                          ),
-                                                                          duration:
-                                                                              const Duration(milliseconds: 5000),
-                                                                          backgroundColor:
-                                                                              FlutterFlowTheme.of(context).warning,
-                                                                        ),
-                                                                      );
-
-                                                                      context.goNamedAuth(
-                                                                          'profilePage',
-                                                                          context
-                                                                              .mounted);
-                                                                    }
-                                                                  } else {
-                                                                    ScaffoldMessenger.of(
-                                                                            context)
-                                                                        .clearSnackBars();
-                                                                    ScaffoldMessenger.of(
-                                                                            context)
-                                                                        .showSnackBar(
-                                                                      SnackBar(
-                                                                        content:
-                                                                            Text(
-                                                                          'Identifiants incorrects. Veuillez réessayer.',
-                                                                          style:
-                                                                              TextStyle(
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).primaryText,
-                                                                          ),
-                                                                        ),
-                                                                        duration:
-                                                                            const Duration(milliseconds: 4000),
-                                                                        backgroundColor:
-                                                                            FlutterFlowTheme.of(context).error,
-                                                                      ),
-                                                                    );
-                                                                  }
-
-                                                                  safeSetState(
-                                                                      () {});
-                                                                },
-                                                                text: 'Apple',
-                                                                icon: const Icon(
-                                                                  Icons
-                                                                      .apple_sharp,
-                                                                  size: 25.0,
-                                                                ),
-                                                                options:
-                                                                    FFButtonOptions(
-                                                                  width: 100.0,
-                                                                  height: 44.0,
-                                                                  padding: const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                  iconPadding: const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                  color: Colors
-                                                                      .white,
-                                                                  textStyle: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Plus Jakarta Sans',
-                                                                        color: const Color(
-                                                                            0xFF101213),
-                                                                        fontSize:
-                                                                            14.0,
-                                                                        letterSpacing:
-                                                                            0.0,
-                                                                        fontWeight:
-                                                                            FontWeight.bold,
-                                                                      ),
-                                                                  elevation:
-                                                                      0.0,
-                                                                  borderSide:
-                                                                      const BorderSide(
-                                                                    color: Color(
-                                                                        0xFFF1F4F8),
-                                                                    width: 2.0,
-                                                                  ),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              40.0),
-                                                                  hoverColor: const Color(
-                                                                      0xFFF1F4F8),
-                                                                ),
-                                                              ),
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                            elevation: 0.0,
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color: Color(
+                                                                  0xFFF1F4F8),
+                                                              width: 2.0,
                                                             ),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        40.0),
+                                                            hoverColor: const Color(
+                                                                0xFFF1F4F8),
+                                                          ),
+                                                        ),
+                                                      ),
                                                     ],
                                                   ),
                                                 ),
