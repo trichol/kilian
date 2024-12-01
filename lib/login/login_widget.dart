@@ -179,7 +179,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                 text: 'Se connecter',
                               ),
                               Tab(
-                                text: 'S\'inscrire',
+                                text: 'S\'inscrires',
                               ),
                             ],
                             controller: _model.tabBarController,
