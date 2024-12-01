@@ -1954,7 +1954,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                 .showSnackBar(
                                                               SnackBar(
                                                                 content: Text(
-                                                                  'Complétez votre profil',
+                                                                  '$currentUserDisplayName: Complétez votre profil!',
                                                                   style:
                                                                       TextStyle(
                                                                     color: FlutterFlowTheme.of(
@@ -1968,7 +1968,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                 backgroundColor:
                                                                     FlutterFlowTheme.of(
                                                                             context)
-                                                                        .warning,
+                                                                        .success,
                                                               ),
                                                             );
 
