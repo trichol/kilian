@@ -1980,10 +1980,8 @@ class _LoginWidgetState extends State<LoginWidget>
                                                             FFAppState()
                                                                 .updateSocialNetworkUserDataStruct(
                                                               (e) => e
-                                                                ..name = valueOrDefault(
-                                                                    currentUserDocument
-                                                                        ?.name,
-                                                                    '')
+                                                                ..name =
+                                                                    'tttttt'
                                                                 ..nickname =
                                                                     valueOrDefault(
                                                                         currentUserDocument
