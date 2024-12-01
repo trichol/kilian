@@ -65,7 +65,10 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
     });
 
     _model.nameTextController ??= TextEditingController(
-        text: valueOrDefault(currentUserDocument?.name, ''));
+        text: valueOrDefault<bool>(
+                currentUserDocument?.isCompleteRegistration, false)
+            ? valueOrDefault(currentUserDocument?.name, '')
+            : widget.name);
     _model.nameFocusNode ??= FocusNode();
 
     _model.nicknameTextController ??= TextEditingController(
