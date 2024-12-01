@@ -1924,7 +1924,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                       WrapAlignment.center,
                                                   verticalDirection:
                                                       VerticalDirection.down,
-                                                  clipBehavior: Clip.none,
+                                                  clipBehavior: Clip.antiAlias,
                                                   children: [
                                                     Padding(
                                                       padding:
@@ -2255,10 +2255,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   );
                                                                 }
                                                               },
-                                                              text: 'zzz',
-                                                              icon: const Icon(
-                                                                Icons.ten_k,
-                                                                size: 20.0,
+                                                              text: 'Apple',
+                                                              icon: const FaIcon(
+                                                                FontAwesomeIcons
+                                                                    .apple,
+                                                                size: 25.0,
                                                               ),
                                                               options:
                                                                   FFButtonOptions(
