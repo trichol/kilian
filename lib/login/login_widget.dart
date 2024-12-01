@@ -1936,8 +1936,6 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   16.0),
                                                       child: FFButtonWidget(
                                                         onPressed: () async {
-                                                          await authManager
-                                                              .refreshUser();
                                                           // Google account creation
                                                           GoRouter.of(context)
                                                               .prepareAuthEvent();
@@ -1980,27 +1978,12 @@ class _LoginWidgetState extends State<LoginWidget>
                                                             FFAppState()
                                                                 .updateSocialNetworkUserDataStruct(
                                                               (e) => e
-                                                                ..name =
-                                                                    'tttttt'
-                                                                ..nickname =
-                                                                    valueOrDefault(
-                                                                        currentUserDocument
-                                                                            ?.nickname,
-                                                                        '')
-                                                                ..phoneNumber =
-                                                                    currentUserEmailVerified
-                                                                        .toString()
-                                                                ..adress = valueOrDefault(
-                                                                    currentUserDocument
-                                                                        ?.adress,
-                                                                    '')
-                                                                ..birthday =
-                                                                    currentUserDocument
-                                                                        ?.birthday
-                                                                ..gender = valueOrDefault(
-                                                                    currentUserDocument
-                                                                        ?.genre,
-                                                                    ''),
+                                                                ..name = functions
+                                                                    .extractName(
+                                                                        currentUserDisplayName)
+                                                                ..nickname = functions
+                                                                    .extractNickname(
+                                                                        currentUserDisplayName),
                                                             );
                                                             // LOG OUT
                                                             GoRouter.of(context)
@@ -2272,10 +2255,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   );
                                                                 }
                                                               },
-                                                              text: 'Apple',
-                                                              icon: const FaIcon(
-                                                                FontAwesomeIcons
-                                                                    .apple,
+                                                              text: 'zzz',
+                                                              icon: const Icon(
+                                                                Icons.ten_k,
                                                                 size: 20.0,
                                                               ),
                                                               options:

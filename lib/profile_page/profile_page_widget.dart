@@ -16,7 +16,6 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 import 'profile_page_model.dart';
 export 'profile_page_model.dart';
 
@@ -58,12 +57,21 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
     });
 
     _model.nameTextController ??= TextEditingController(
-        text:
-            'zzzz${FFAppState().socialNetworkUserData.name}:${widget.socialNetworkUserData?.name}:');
+        text: (widget.socialNetworkUserData?.name != null &&
+                    widget.socialNetworkUserData?.name != '') &&
+                !valueOrDefault<bool>(
+                    currentUserDocument?.isCompleteRegistration, false)
+            ? widget.socialNetworkUserData?.name
+            : valueOrDefault(currentUserDocument?.name, ''));
     _model.nameFocusNode ??= FocusNode();
 
     _model.nicknameTextController ??= TextEditingController(
-        text: valueOrDefault(currentUserDocument?.nickname, ''));
+        text: (widget.socialNetworkUserData?.nickname != null &&
+                    widget.socialNetworkUserData?.nickname != '') &&
+                !valueOrDefault<bool>(
+                    currentUserDocument?.isCompleteRegistration, false)
+            ? widget.socialNetworkUserData?.nickname
+            : valueOrDefault(currentUserDocument?.nickname, ''));
     _model.nicknameFocusNode ??= FocusNode();
 
     _model.adressTextController ??= TextEditingController(
@@ -90,8 +98,6 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(

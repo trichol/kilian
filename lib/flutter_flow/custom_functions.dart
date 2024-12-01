@@ -145,3 +145,21 @@ String? fixImproperJson(String? rawJson) {
   // print(fixedJson);
   return fixedJson;
 }
+
+String extractName(String displayName) {
+  // extract the name from a display name
+  // Split the display name by space
+  List<String> nameParts = displayName.split(' ');
+
+  // Return the first part of the display name
+  return nameParts.isNotEmpty ? nameParts[1] : '';
+}
+
+String extractNickname(String displayName) {
+  // extract nickname from display name
+  // Split the display name by space
+  List<String> nameParts = displayName.split(' ');
+
+  // Return the first part as the nickname
+  return nameParts[0];
+}
