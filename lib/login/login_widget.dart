@@ -2077,6 +2077,14 @@ class _LoginWidgetState extends State<LoginWidget>
                                                           ),
                                                         },
                                                       );
+
+                                                      // RESET  SOCIAL NETWORK PROFILE
+                                                      FFAppState()
+                                                              .socialNetworkUserData =
+                                                          SocialNetworkUserDataTypeStruct
+                                                              .fromSerializableMap(
+                                                                  jsonDecode(
+                                                                      '{\"name\":\"\"}'));
                                                     } else {
                                                       // test
                                                       unawaited(
@@ -2192,7 +2200,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   16.0),
                                                       child: FFButtonWidget(
                                                         onPressed: () async {
-                                                          // Google account creation
+                                                          // Apple account creation
                                                           GoRouter.of(context)
                                                               .prepareAuthEvent();
                                                           final user =
@@ -2277,6 +2285,14 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                 ),
                                                               },
                                                             );
+
+                                                            // RESET  SOCIAL NETWORK PROFILE
+                                                            FFAppState()
+                                                                    .socialNetworkUserData =
+                                                                SocialNetworkUserDataTypeStruct
+                                                                    .fromSerializableMap(
+                                                                        jsonDecode(
+                                                                            '{\"name\":\"\"}'));
                                                           } else {
                                                             // test
                                                             unawaited(
