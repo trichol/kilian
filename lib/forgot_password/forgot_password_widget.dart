@@ -43,7 +43,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
       key: scaffoldKey,
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: FlutterFlowTheme.of(context).primary,
         automaticallyImplyLeading: false,
         leading: FlutterFlowIconButton(
           borderColor: Colors.transparent,
@@ -204,37 +204,38 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                                     fontWeight: FontWeight.w500,
                                   ),
                               enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Color(0xFFE5E7EB),
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).secondary,
                                   width: 2.0,
                                 ),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(4.0),
                               ),
                               focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Color(0xFF6F61EF),
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).secondary,
                                   width: 2.0,
                                 ),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(4.0),
                               ),
                               errorBorder: OutlineInputBorder(
                                 borderSide: const BorderSide(
                                   color: Color(0xFFFF5963),
                                   width: 2.0,
                                 ),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(4.0),
                               ),
                               focusedErrorBorder: OutlineInputBorder(
                                 borderSide: const BorderSide(
                                   color: Color(0xFFFF5963),
                                   width: 2.0,
                                 ),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(4.0),
                               ),
                               filled: true,
-                              fillColor: Colors.white,
+                              fillColor: FlutterFlowTheme.of(context).tertiary,
                               contentPadding: const EdgeInsetsDirectional.fromSTEB(
                                   24.0, 24.0, 20.0, 24.0),
+                              hoverColor: FlutterFlowTheme.of(context).accent2,
                             ),
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
@@ -282,25 +283,28 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                       },
                 text: 'Envoi du lien',
                 options: FFButtonOptions(
-                  width: double.infinity,
+                  width: 200.0,
                   height: 50.0,
                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   iconPadding:
                       const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                  color: Colors.black,
+                  color: FlutterFlowTheme.of(context).primary,
                   textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                         fontFamily: 'Plus Jakarta Sans',
-                        color: Colors.white,
+                        color: FlutterFlowTheme.of(context).secondaryText,
                         fontSize: 16.0,
                         letterSpacing: 0.0,
                         fontWeight: FontWeight.w500,
                       ),
                   elevation: 3.0,
-                  borderSide: const BorderSide(
-                    color: Colors.transparent,
+                  borderSide: BorderSide(
+                    color: FlutterFlowTheme.of(context).secondary,
                     width: 1.0,
                   ),
                   borderRadius: BorderRadius.circular(40.0),
+                  disabledColor:
+                      FlutterFlowTheme.of(context).secondaryBackground,
+                  disabledTextColor: FlutterFlowTheme.of(context).secondaryText,
                 ),
               ),
             ),

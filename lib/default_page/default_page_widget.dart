@@ -55,88 +55,42 @@ class _DefaultPageWidgetState extends State<DefaultPageWidget> {
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Colors.white,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(100.0),
-        child: AppBar(
-          backgroundColor: Colors.black,
-          automaticallyImplyLeading: false,
-          actions: const [],
-          flexibleSpace: FlexibleSpaceBar(
-            title: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 14.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              12.0, 0.0, 0.0, 0.0),
-                          child: FlutterFlowIconButton(
-                            borderColor: Colors.transparent,
-                            borderRadius: 30.0,
-                            borderWidth: 1.0,
-                            buttonSize: 50.0,
-                            icon: const Icon(
-                              Icons.arrow_back_rounded,
-                              color: Colors.white,
-                              size: 30.0,
-                            ),
-                            onPressed: () async {
-                              context.pop();
-                            },
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              4.0, 0.0, 0.0, 0.0),
-                          child: Text(
-                            'Back',
-                            style: FlutterFlowTheme.of(context)
-                                .headlineMedium
-                                .override(
-                                  fontFamily: 'Roboto',
-                                  color: Colors.white,
-                                  fontSize: 16.0,
-                                  letterSpacing: 0.0,
-                                ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Align(
-                    alignment: const AlignmentDirectional(-1.0, 0.0),
-                    child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 1.0, 0.0),
-                      child: Text(
-                        'KILIAN',
-                        style: FlutterFlowTheme.of(context)
-                            .headlineMedium
-                            .override(
-                              fontFamily: 'Inter Tight',
-                              color: Colors.white,
-                              fontSize: 28.0,
-                              letterSpacing: 0.0,
-                              fontWeight: FontWeight.w600,
-                            ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            centerTitle: true,
-            expandedTitleScale: 1.0,
+      appBar: AppBar(
+        backgroundColor: FlutterFlowTheme.of(context).primary,
+        automaticallyImplyLeading: false,
+        leading: FlutterFlowIconButton(
+          borderColor: Colors.transparent,
+          borderRadius: 30.0,
+          borderWidth: 1.0,
+          buttonSize: 60.0,
+          icon: Icon(
+            Icons.arrow_back_rounded,
+            color: FlutterFlowTheme.of(context).alternate,
+            size: 30.0,
           ),
-          elevation: 0.0,
+          onPressed: () async {
+            context.pop();
+          },
         ),
+        title: Align(
+          alignment: const AlignmentDirectional(-1.0, 0.0),
+          child: Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 1.0, 0.0),
+            child: Text(
+              'KILIAN',
+              style: FlutterFlowTheme.of(context).headlineMedium.override(
+                    fontFamily: 'Inter Tight',
+                    color: Colors.white,
+                    fontSize: 28.0,
+                    letterSpacing: 0.0,
+                    fontWeight: FontWeight.w600,
+                  ),
+            ),
+          ),
+        ),
+        actions: const [],
+        centerTitle: true,
+        elevation: 0.0,
       ),
       body: Padding(
         padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 22.0),
@@ -160,7 +114,7 @@ class _DefaultPageWidgetState extends State<DefaultPageWidget> {
                               .headlineMedium
                               .override(
                                 fontFamily: 'Outfit',
-                                color: Colors.black,
+                                color: FlutterFlowTheme.of(context).primaryText,
                                 fontSize: 20.0,
                                 letterSpacing: 0.0,
                                 fontWeight: FontWeight.w500,
@@ -243,7 +197,7 @@ class _DefaultPageWidgetState extends State<DefaultPageWidget> {
               'En travaux',
               style: FlutterFlowTheme.of(context).bodyMedium.override(
                     fontFamily: 'Mukta',
-                    color: Colors.black,
+                    color: FlutterFlowTheme.of(context).primaryText,
                     fontSize: 50.0,
                     letterSpacing: 0.0,
                   ),

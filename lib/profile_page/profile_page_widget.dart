@@ -526,7 +526,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                 _model.listSuggested =
                                     await actions.getAddressSuggestions(
                                   _model.adressTextController.text,
-                                  'key=AIzaSyCFJ6RGt08LpY1YhkiBtRZFgWreWasaUPE',
+                                  'AIzaSyCFJ6RGt08LpY1YhkiBtRZFgWreWasaUPE',
                                 );
                                 _model.addressSuggestions = _model
                                     .listSuggested!
@@ -615,7 +615,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                         builder: (context) {
                           final varlist = _model.addressSuggestions
                               .toList()
-                              .take(5)
+                              .take(1)
                               .toList();
 
                           return ListView.builder(
@@ -898,208 +898,169 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
               if ((widget.isEditMode == true) ||
                   !valueOrDefault<bool>(
                       currentUserDocument?.isCompleteRegistration, false))
-                Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                  child: AuthUserStreamWidget(
-                    builder: (context) => FFButtonWidget(
-                      onPressed: ((functions.myCheckLengthString(
-                                      _model.nameTextController.text, 2) ==
-                                  false) ||
-                              (functions.myCheckLengthString(
-                                      _model.nicknameTextController.text, 2) ==
-                                  false) ||
-                              (functions.myCheckLengthString(
-                                      _model.adressTextController.text, 8) ==
-                                  false) ||
-                              (_model.phoneNumberTextController.text ==
-                                      '') ||
-                              (_model.birthdayTextController.text == '') ||
-                              (valueOrDefault(
-                                          currentUserDocument?.signature, '') ==
-                                      ''))
-                          ? null
-                          : () async {
-                              _model.listAlreadyReccorded =
-                                  await queryUsersRecordOnce(
-                                queryBuilder: (usersRecord) => usersRecord
-                                    .where(
-                                      'phone_number',
-                                      isEqualTo:
-                                          _model.phoneNumberTextController.text,
-                                    )
-                                    .where(
-                                      'phone_number',
-                                      isNotEqualTo: currentPhoneNumber,
-                                    ),
+                AuthUserStreamWidget(
+                  builder: (context) => FFButtonWidget(
+                    onPressed: ((functions.myCheckLengthString(
+                                    _model.nameTextController.text, 2) ==
+                                false) ||
+                            (functions.myCheckLengthString(
+                                    _model.nicknameTextController.text, 2) ==
+                                false) ||
+                            (functions.myCheckLengthString(
+                                    _model.adressTextController.text, 8) ==
+                                false) ||
+                            (_model.phoneNumberTextController.text == '') ||
+                            (_model.birthdayTextController.text == '') ||
+                            (valueOrDefault(
+                                        currentUserDocument?.signature, '') ==
+                                    ''))
+                        ? null
+                        : () async {
+                            _model.listAlreadyReccorded =
+                                await queryUsersRecordOnce(
+                              queryBuilder: (usersRecord) => usersRecord
+                                  .where(
+                                    'phone_number',
+                                    isEqualTo:
+                                        _model.phoneNumberTextController.text,
+                                  )
+                                  .where(
+                                    'phone_number',
+                                    isNotEqualTo: currentPhoneNumber,
+                                  ),
+                            );
+                            if (_model.listAlreadyReccorded?.length
+                                    .toString() ==
+                                '0') {
+                              // info notification
+                              await showDialog(
+                                context: context,
+                                builder: (alertDialogContext) {
+                                  return AlertDialog(
+                                    title: const Text('Notifications'),
+                                    content: const Text(
+                                        'Cette application utilise les notifications pour communiquer avec les autres utilisateurs.'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(alertDialogContext),
+                                        child: const Text('Ok'),
+                                      ),
+                                    ],
+                                  );
+                                },
                               );
-                              if (_model.listAlreadyReccorded?.length
-                                      .toString() ==
-                                  '0') {
-                                // info notification
-                                await showDialog(
-                                  context: context,
-                                  builder: (alertDialogContext) {
-                                    return AlertDialog(
-                                      title: const Text('Notifications'),
-                                      content: const Text(
-                                          'Cette application utilise les notifications pour communiquer avec les autres utilisateurs.'),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(alertDialogContext),
-                                          child: const Text('Ok'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                                _model.notificationGranted = await actions
-                                    .requestNotificationPermissionForUser();
-                                if (_model.notificationGranted!) {
-                                  // update user
+                              _model.notificationGranted = await actions
+                                  .requestNotificationPermissionForUser();
+                              if (_model.notificationGranted!) {
+                                // update user
 
+                                await currentUserReference!
+                                    .update(createUsersRecordData(
+                                  genre: _model.selectorGenreValue,
+                                  email: '',
+                                  nickname: _model.nicknameTextController.text,
+                                  displayName: '',
+                                ));
+                                if (valueOrDefault<bool>(
+                                        currentUserDocument
+                                            ?.isCompleteRegistration,
+                                        false) ==
+                                    false) {
                                   await currentUserReference!
                                       .update(createUsersRecordData(
-                                    genre: _model.selectorGenreValue,
-                                    email: '',
-                                    nickname:
-                                        _model.nicknameTextController.text,
-                                    displayName: '',
+                                    isCompleteRegistration: true,
+                                    online: false,
                                   ));
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        'Mise à jour données utilisateur OK!',
-                                        style: TextStyle(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                        ),
-                                      ),
-                                      duration: const Duration(milliseconds: 1000),
-                                      backgroundColor:
-                                          FlutterFlowTheme.of(context)
-                                              .secondary,
-                                    ),
-                                  );
-                                  if (valueOrDefault<bool>(
-                                          currentUserDocument
-                                              ?.isCompleteRegistration,
-                                          false) ==
-                                      false) {
-                                    await currentUserReference!
-                                        .update(createUsersRecordData(
-                                      isCompleteRegistration: true,
-                                      online: false,
-                                    ));
-                                    GoRouter.of(context).prepareAuthEvent();
-                                    await authManager.signOut();
-                                    GoRouter.of(context)
-                                        .clearRedirectLocation();
+                                  // go to dashboard
 
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                          'Deconnexion OK!',
-                                          style: TextStyle(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                          ),
-                                        ),
-                                        duration: const Duration(milliseconds: 1000),
-                                        backgroundColor:
-                                            FlutterFlowTheme.of(context)
-                                                .secondary,
-                                      ),
-                                    );
-
-                                    context.pushNamedAuth(
-                                        'login', context.mounted);
-                                  } else {
-                                    context.safePop();
-                                  }
+                                  context.pushNamed('dashboard');
                                 } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        'Echec permission notification',
-                                        style: TextStyle(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                        ),
-                                      ),
-                                      duration: const Duration(milliseconds: 1000),
-                                      backgroundColor:
-                                          FlutterFlowTheme.of(context).error,
-                                    ),
-                                  );
-                                  await showDialog(
-                                    context: context,
-                                    builder: (alertDialogContext) {
-                                      return AlertDialog(
-                                        title: const Text('Notification'),
-                                        content:
-                                            const Text('Autorisation impossible!'),
-                                        actions: [
-                                          TextButton(
-                                            onPressed: () => Navigator.pop(
-                                                alertDialogContext),
-                                            child: const Text('recommencer'),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
+                                  context.safePop();
                                 }
                               } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'Echec permission notification',
+                                      style: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                      ),
+                                    ),
+                                    duration: const Duration(milliseconds: 1000),
+                                    backgroundColor:
+                                        FlutterFlowTheme.of(context).error,
+                                  ),
+                                );
                                 await showDialog(
                                   context: context,
                                   builder: (alertDialogContext) {
                                     return AlertDialog(
-                                      title: const Text('Opération échoué'),
-                                      content: Text(
-                                          'Le numéro : ${_model.phoneNumberTextController.text} est déjà utilisé'),
+                                      title: const Text('Notification'),
+                                      content: const Text('Autorisation impossible!'),
                                       actions: [
                                         TextButton(
                                           onPressed: () =>
                                               Navigator.pop(alertDialogContext),
-                                          child: const Text('Ok'),
+                                          child: const Text('recommencer'),
                                         ),
                                       ],
                                     );
                                   },
                                 );
                               }
+                            } else {
+                              await showDialog(
+                                context: context,
+                                builder: (alertDialogContext) {
+                                  return AlertDialog(
+                                    title: const Text('Opération échoué'),
+                                    content: Text(
+                                        'Le numéro : ${_model.phoneNumberTextController.text} est déjà utilisé'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(alertDialogContext),
+                                        child: const Text('Ok'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            }
 
-                              safeSetState(() {});
-                            },
-                      text: 'Enregistrer',
-                      options: FFButtonOptions(
-                        width: double.infinity,
-                        height: 50.0,
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        iconPadding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).primary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Roboto',
-                                  color: Colors.white,
-                                  fontSize: 16.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                        elevation: 3.0,
-                        borderSide: const BorderSide(
-                          color: Colors.transparent,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(40.0),
-                        disabledColor:
-                            FlutterFlowTheme.of(context).secondaryBackground,
-                        disabledTextColor:
-                            FlutterFlowTheme.of(context).secondaryText,
+                            safeSetState(() {});
+                          },
+                    text: 'Enregistrer',
+                    options: FFButtonOptions(
+                      width: double.infinity,
+                      height: 50.0,
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      iconPadding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: FlutterFlowTheme.of(context).primary,
+                      textStyle: FlutterFlowTheme.of(context)
+                          .titleSmall
+                          .override(
+                            fontFamily: 'Roboto',
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            fontSize: 16.0,
+                            letterSpacing: 0.0,
+                            fontWeight: FontWeight.w500,
+                            lineHeight: 0.5,
+                          ),
+                      elevation: 3.0,
+                      borderSide: BorderSide(
+                        color: FlutterFlowTheme.of(context).secondary,
+                        width: 1.0,
                       ),
+                      borderRadius: BorderRadius.circular(4.0),
+                      disabledColor:
+                          FlutterFlowTheme.of(context).secondaryBackground,
+                      disabledTextColor:
+                          FlutterFlowTheme.of(context).secondaryText,
                     ),
                   ),
                 ),

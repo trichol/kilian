@@ -118,6 +118,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                       'contractTypeSelected',
                       ParamType.String,
                     ),
+                    isGetStared: params.getParam(
+                      'isGetStared',
+                      ParamType.bool,
+                    ),
                   ),
                 ),
         ),

@@ -170,10 +170,10 @@ class _NavBarPageState extends State<NavBarPage> {
             _currentPage = null;
             _currentPageName = tabs.keys.toList()[i];
           }),
-          backgroundColor: FlutterFlowTheme.of(context).alternate,
-          selectedItemColor: Colors.black,
-          unselectedItemColor: FlutterFlowTheme.of(context).secondaryText,
-          selectedBackgroundColor: FlutterFlowTheme.of(context).alternate,
+          backgroundColor: FlutterFlowTheme.of(context).primary,
+          selectedItemColor: FlutterFlowTheme.of(context).alternate,
+          unselectedItemColor: FlutterFlowTheme.of(context).alternate,
+          selectedBackgroundColor: FlutterFlowTheme.of(context).primary,
           borderRadius: 8.0,
           itemBorderRadius: 8.0,
           margin: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
@@ -188,17 +188,17 @@ class _NavBarPageState extends State<NavBarPage> {
                   Icon(
                     currentIndex == 0 ? Icons.dashboard : Icons.home_outlined,
                     color: currentIndex == 0
-                        ? Colors.black
-                        : FlutterFlowTheme.of(context).secondaryText,
-                    size: currentIndex == 0 ? 24.0 : 24.0,
+                        ? FlutterFlowTheme.of(context).alternate
+                        : FlutterFlowTheme.of(context).alternate,
+                    size: currentIndex == 0 ? 20.0 : 24.0,
                   ),
                   Text(
                     'Accueil',
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       color: currentIndex == 0
-                          ? Colors.black
-                          : FlutterFlowTheme.of(context).secondaryText,
+                          ? FlutterFlowTheme.of(context).alternate
+                          : FlutterFlowTheme.of(context).alternate,
                       fontSize: 11.0,
                     ),
                   ),
@@ -212,16 +212,16 @@ class _NavBarPageState extends State<NavBarPage> {
                   Icon(
                     Icons.person_2,
                     color: currentIndex == 1
-                        ? Colors.black
-                        : FlutterFlowTheme.of(context).secondaryText,
+                        ? FlutterFlowTheme.of(context).alternate
+                        : FlutterFlowTheme.of(context).alternate,
                   ),
                   Text(
                     'Mon compte',
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       color: currentIndex == 1
-                          ? Colors.black
-                          : FlutterFlowTheme.of(context).secondaryText,
+                          ? FlutterFlowTheme.of(context).alternate
+                          : FlutterFlowTheme.of(context).alternate,
                       fontSize: 11.0,
                     ),
                   ),
@@ -235,8 +235,8 @@ class _NavBarPageState extends State<NavBarPage> {
                   Icon(
                     Icons.history_rounded,
                     color: currentIndex == 2
-                        ? Colors.black
-                        : FlutterFlowTheme.of(context).secondaryText,
+                        ? FlutterFlowTheme.of(context).alternate
+                        : FlutterFlowTheme.of(context).alternate,
                     size: 24.0,
                   ),
                   Text(
@@ -244,8 +244,8 @@ class _NavBarPageState extends State<NavBarPage> {
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       color: currentIndex == 2
-                          ? Colors.black
-                          : FlutterFlowTheme.of(context).secondaryText,
+                          ? FlutterFlowTheme.of(context).alternate
+                          : FlutterFlowTheme.of(context).alternate,
                       fontSize: 11.0,
                     ),
                   ),

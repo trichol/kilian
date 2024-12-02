@@ -114,6 +114,7 @@ final parametersBuilderMap =
         allParams: {
           'contractTypeSelected':
               getParameter<String>(data, 'contractTypeSelected'),
+          'isGetStared': getParameter<bool>(data, 'isGetStared'),
         },
       ),
   'generationAdultContract': ParameterData.none(),

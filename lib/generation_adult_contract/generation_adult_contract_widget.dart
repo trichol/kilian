@@ -58,45 +58,38 @@ class _GenerationAdultContractWidgetState
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Colors.white,
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(40.0),
-          child: AppBar(
-            backgroundColor: Colors.black,
-            automaticallyImplyLeading: false,
-            leading: Align(
-              alignment: const AlignmentDirectional(-1.0, -1.0),
-              child: FlutterFlowIconButton(
-                borderColor: Colors.transparent,
-                borderRadius: 30.0,
-                borderWidth: 1.0,
-                buttonSize: 60.0,
-                icon: const Icon(
-                  Icons.arrow_back_rounded,
-                  color: Colors.white,
-                  size: 30.0,
-                ),
-                onPressed: () async {
-                  context.pop();
-                },
-              ),
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).primary,
+          automaticallyImplyLeading: false,
+          leading: FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30.0,
+            borderWidth: 1.0,
+            buttonSize: 60.0,
+            icon: Icon(
+              Icons.arrow_back_rounded,
+              color: FlutterFlowTheme.of(context).alternate,
+              size: 30.0,
             ),
-            title: Align(
-              alignment: const AlignmentDirectional(-1.0, -1.0),
-              child: Text(
-                'KILIAN',
-                style: FlutterFlowTheme.of(context).headlineMedium.override(
-                      fontFamily: 'Roboto',
-                      color: Colors.white,
-                      fontSize: 18.0,
-                      letterSpacing: 0.0,
-                    ),
-              ),
-            ),
-            actions: const [],
-            centerTitle: false,
-            toolbarHeight: 40.0,
-            elevation: 0.0,
+            onPressed: () async {
+              context.pop();
+            },
           ),
+          title: Align(
+            alignment: const AlignmentDirectional(-1.0, -1.0),
+            child: Text(
+              'KILIAN',
+              style: FlutterFlowTheme.of(context).headlineMedium.override(
+                    fontFamily: 'Roboto',
+                    color: Colors.white,
+                    fontSize: 18.0,
+                    letterSpacing: 0.0,
+                  ),
+            ),
+          ),
+          actions: const [],
+          centerTitle: true,
+          elevation: 0.0,
         ),
         body: Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
@@ -108,9 +101,8 @@ class _GenerationAdultContractWidgetState
                 children: [
                   Text(
                     'Pratiques à contractualiser : ',
-                    style: FlutterFlowTheme.of(context).bodyLarge.override(
-                          fontFamily: 'Mukta',
-                          color: Colors.black,
+                    style: FlutterFlowTheme.of(context).titleMedium.override(
+                          fontFamily: 'Roboto',
                           letterSpacing: 0.0,
                         ),
                   ),
@@ -118,79 +110,77 @@ class _GenerationAdultContractWidgetState
               ),
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: FlutterFlowTheme.of(context).primaryBackground,
                   borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(20.0),
-                    bottomRight: Radius.circular(20.0),
-                    topLeft: Radius.circular(20.0),
-                    topRight: Radius.circular(20.0),
+                    bottomLeft: Radius.circular(4.0),
+                    bottomRight: Radius.circular(4.0),
+                    topLeft: Radius.circular(4.0),
+                    topRight: Radius.circular(4.0),
                   ),
                   border: Border.all(
-                    color: Colors.black,
+                    color: FlutterFlowTheme.of(context).secondary,
+                    width: 1.0,
                   ),
                 ),
-                child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 0.0, 0.0),
-                  child: StreamBuilder<List<ObjetContratRecord>>(
-                    stream: queryObjetContratRecord(
-                      queryBuilder: (objetContratRecord) => objetContratRecord
-                          .where(
-                            'categorie',
-                            isEqualTo: 'adulte',
-                          )
-                          .orderBy('titre'),
-                      limit: 10,
-                    ),
-                    builder: (context, snapshot) {
-                      // Customize what your widget looks like when it's loading.
-                      if (!snapshot.hasData) {
-                        return Center(
-                          child: SizedBox(
-                            width: 50.0,
-                            height: 50.0,
-                            child: CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                FlutterFlowTheme.of(context).primary,
-                              ),
+                child: StreamBuilder<List<ObjetContratRecord>>(
+                  stream: queryObjetContratRecord(
+                    queryBuilder: (objetContratRecord) => objetContratRecord
+                        .where(
+                          'categorie',
+                          isEqualTo: 'adulte',
+                        )
+                        .orderBy('titre'),
+                    limit: 10,
+                  ),
+                  builder: (context, snapshot) {
+                    // Customize what your widget looks like when it's loading.
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: SizedBox(
+                          width: 50.0,
+                          height: 50.0,
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              FlutterFlowTheme.of(context).primary,
                             ),
                           ),
-                        );
-                      }
-                      List<ObjetContratRecord>
-                          checkboxGroupObjetContratRecordList = snapshot.data!;
-
-                      return FlutterFlowCheckboxGroup(
-                        options: checkboxGroupObjetContratRecordList
-                            .map((e) => e.titre)
-                            .toList(),
-                        onChanged: (val) => safeSetState(
-                            () => _model.checkboxGroupValues = val),
-                        controller: _model.checkboxGroupValueController ??=
-                            FormFieldController<List<String>>(
-                          [],
                         ),
-                        activeColor: Colors.black,
-                        checkColor: FlutterFlowTheme.of(context).info,
-                        checkboxBorderColor:
-                            FlutterFlowTheme.of(context).secondaryText,
-                        textStyle:
-                            FlutterFlowTheme.of(context).bodyMedium.override(
-                                  fontFamily: 'Mukta',
-                                  color: Colors.black,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                        unselectedTextStyle:
-                            FlutterFlowTheme.of(context).bodyMedium.override(
-                                  fontFamily: 'Mukta',
-                                  color: Colors.black,
-                                  letterSpacing: 0.0,
-                                ),
-                        checkboxBorderRadius: BorderRadius.circular(8.0),
-                        initialized: _model.checkboxGroupValues != null,
                       );
-                    },
-                  ),
+                    }
+                    List<ObjetContratRecord>
+                        checkboxGroupObjetContratRecordList = snapshot.data!;
+
+                    return FlutterFlowCheckboxGroup(
+                      options: checkboxGroupObjetContratRecordList
+                          .map((e) => e.titre)
+                          .toList(),
+                      onChanged: (val) =>
+                          safeSetState(() => _model.checkboxGroupValues = val),
+                      controller: _model.checkboxGroupValueController ??=
+                          FormFieldController<List<String>>(
+                        [],
+                      ),
+                      activeColor: FlutterFlowTheme.of(context).primary,
+                      checkColor: FlutterFlowTheme.of(context).secondaryText,
+                      checkboxBorderColor:
+                          FlutterFlowTheme.of(context).secondaryText,
+                      textStyle:
+                          FlutterFlowTheme.of(context).bodyMedium.override(
+                                fontFamily: 'Mukta',
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                letterSpacing: 0.0,
+                                fontWeight: FontWeight.w600,
+                              ),
+                      unselectedTextStyle:
+                          FlutterFlowTheme.of(context).bodyMedium.override(
+                                fontFamily: 'Mukta',
+                                color: Colors.black,
+                                letterSpacing: 0.0,
+                              ),
+                      checkboxBorderRadius: BorderRadius.circular(5.0),
+                      initialized: _model.checkboxGroupValues != null,
+                    );
+                  },
                 ),
               ),
               Row(
@@ -219,52 +209,56 @@ class _GenerationAdultContractWidgetState
                         obscureText: false,
                         decoration: InputDecoration(
                           isDense: true,
-                          labelStyle:
-                              FlutterFlowTheme.of(context).labelMedium.override(
-                                    fontFamily: 'Mukta',
-                                    color: Colors.black,
-                                    letterSpacing: 0.0,
-                                  ),
+                          labelStyle: FlutterFlowTheme.of(context)
+                              .labelMedium
+                              .override(
+                                fontFamily: 'Mukta',
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                letterSpacing: 0.0,
+                                lineHeight: 0.5,
+                              ),
                           hintStyle:
                               FlutterFlowTheme.of(context).labelMedium.override(
                                     fontFamily: 'Mukta',
                                     letterSpacing: 0.0,
+                                    lineHeight: 0.5,
                                   ),
                           enabledBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                              color: Colors.black,
+                            borderSide: BorderSide(
+                              color: FlutterFlowTheme.of(context).secondary,
                               width: 2.0,
                             ),
-                            borderRadius: BorderRadius.circular(8.0),
+                            borderRadius: BorderRadius.circular(4.0),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                              color: Colors.black,
+                            borderSide: BorderSide(
+                              color: FlutterFlowTheme.of(context).accent2,
                               width: 2.0,
                             ),
-                            borderRadius: BorderRadius.circular(8.0),
+                            borderRadius: BorderRadius.circular(4.0),
                           ),
                           errorBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: FlutterFlowTheme.of(context).error,
                               width: 2.0,
                             ),
-                            borderRadius: BorderRadius.circular(8.0),
+                            borderRadius: BorderRadius.circular(4.0),
                           ),
                           focusedErrorBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: FlutterFlowTheme.of(context).error,
                               width: 2.0,
                             ),
-                            borderRadius: BorderRadius.circular(8.0),
+                            borderRadius: BorderRadius.circular(4.0),
                           ),
                           filled: true,
-                          fillColor: FlutterFlowTheme.of(context).alternate,
+                          fillColor: FlutterFlowTheme.of(context).tertiary,
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Mukta',
-                              color: Colors.black,
+                              color: FlutterFlowTheme.of(context).primaryText,
                               letterSpacing: 0.0,
+                              lineHeight: 0.5,
                             ),
                         maxLength: 10,
                         maxLengthEnforcement: MaxLengthEnforcement.enforced,
@@ -273,7 +267,7 @@ class _GenerationAdultContractWidgetState
                                 required isFocused,
                                 maxLength}) =>
                             null,
-                        cursorColor: Colors.black,
+                        cursorColor: FlutterFlowTheme.of(context).primaryText,
                         validator: _model.currentPhoneTxtTextControllerValidator
                             .asValidator(context),
                         inputFormatters: [_model.currentPhoneTxtMask],
@@ -281,13 +275,14 @@ class _GenerationAdultContractWidgetState
                     ),
                   ),
                   FlutterFlowIconButton(
-                    borderRadius: 20.0,
+                    borderColor: FlutterFlowTheme.of(context).secondary,
+                    borderRadius: 8.0,
                     buttonSize: 40.0,
-                    fillColor: Colors.black,
+                    fillColor: FlutterFlowTheme.of(context).primary,
                     icon: Icon(
                       Icons.add_circle,
-                      color: FlutterFlowTheme.of(context).info,
-                      size: 24.0,
+                      color: FlutterFlowTheme.of(context).secondaryText,
+                      size: 20.0,
                     ),
                     onPressed: () async {
                       if (_model.currentPhoneTxtTextController.text !=
@@ -421,12 +416,14 @@ class _GenerationAdultContractWidgetState
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryText,
                                   borderRadius: const BorderRadius.only(
-                                    bottomLeft: Radius.circular(6.0),
-                                    bottomRight: Radius.circular(6.0),
-                                    topLeft: Radius.circular(6.0),
-                                    topRight: Radius.circular(6.0),
+                                    bottomLeft: Radius.circular(0.0),
+                                    bottomRight: Radius.circular(0.0),
+                                    topLeft: Radius.circular(0.0),
+                                    topRight: Radius.circular(0.0),
                                   ),
                                   border: Border.all(
+                                    color:
+                                        FlutterFlowTheme.of(context).secondary,
                                     width: 1.0,
                                   ),
                                 ),
@@ -463,9 +460,15 @@ class _GenerationAdultContractWidgetState
                                             MainAxisAlignment.start,
                                         children: [
                                           FlutterFlowIconButton(
-                                            borderRadius: 8.0,
+                                            borderColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondary,
+                                            borderRadius: 4.0,
+                                            borderWidth: 1.0,
                                             buttonSize: 40.0,
-                                            fillColor: Colors.black,
+                                            fillColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primary,
                                             icon: FaIcon(
                                               FontAwesomeIcons.eye,
                                               color:
@@ -511,10 +514,15 @@ class _GenerationAdultContractWidgetState
                                             alignment:
                                                 const AlignmentDirectional(1.0, 0.0),
                                             child: FlutterFlowIconButton(
-                                              borderColor: Colors.transparent,
-                                              borderRadius: 8.0,
+                                              borderColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondary,
+                                              borderRadius: 4.0,
+                                              borderWidth: 1.0,
                                               buttonSize: 40.0,
-                                              fillColor: Colors.black,
+                                              fillColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
                                               icon: FaIcon(
                                                 FontAwesomeIcons.trashAlt,
                                                 color:
@@ -545,257 +553,254 @@ class _GenerationAdultContractWidgetState
                   ),
                 ),
               if ((_model.listPhoneContractantValide.isNotEmpty) == true)
-                Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                  child: FFButtonWidget(
-                    onPressed: () async {
-                      if (_model.checkboxGroupValues?.length == 0) {
-                        // Formulaire incomplet
-                        await showDialog(
-                          context: context,
-                          builder: (alertDialogContext) {
-                            return AlertDialog(
-                              title: const Text('Formulaire incomplet'),
-                              content:
-                                  const Text('Vous devez séléctioner une pratique.'),
-                              actions: [
-                                TextButton(
-                                  onPressed: () =>
-                                      Navigator.pop(alertDialogContext),
-                                  child: const Text('OK'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      } else {
-                        // clean page state variable
-                        _model.listObjetContrat = [];
-                        _model.listContractants = [];
-                        safeSetState(() {});
-                        // reset loop increment
-                        FFAppState().iLoop = 0;
-                        safeSetState(() {});
-                        while (FFAppState().iLoop <
-                            _model.listPhoneContractantValide.length) {
-                          // create objetContrat
-                          _model.addToListObjetContrat(ObjetContratStruct(
-                            titre:
-                                _model.checkboxGroupValues?[FFAppState().iLoop],
-                            categorie: 'adulte',
-                          ));
-                          safeSetState(() {});
-                          // increment
-                          FFAppState().iLoop = FFAppState().iLoop + 1;
-                          safeSetState(() {});
-                        }
-                        // reset loop increment
-                        FFAppState().iLoop = 0;
-                        safeSetState(() {});
-                        while (FFAppState().iLoop <
-                            _model.listPhoneContractantValide.length) {
-                          // find contractant
-                          _model.currentUserDoc = await queryUsersRecordOnce(
-                            queryBuilder: (usersRecord) => usersRecord.where(
-                              'phone_number',
-                              isEqualTo: _model.listPhoneContractantValide[
-                                  FFAppState().iLoop],
-                            ),
-                            singleRecord: true,
-                          ).then((s) => s.firstOrNull);
-                          // Add contractant
-                          _model.addToListContractants(ContractantDataStruct(
-                            nom: _model.currentUserDoc?.name,
-                            prenom: _model.currentUserDoc?.nickname,
-                            phoneNumber: _model.currentUserDoc?.phoneNumber,
-                            status: 'En attente',
-                          ));
-                          safeSetState(() {});
-                          // increment
-                          FFAppState().iLoop = FFAppState().iLoop + 1;
-                          safeSetState(() {});
-                        }
-                        // Add current user
-                        _model.addToListContractants(ContractantDataStruct(
-                          nom: valueOrDefault(currentUserDocument?.name, ''),
-                          prenom:
-                              valueOrDefault(currentUserDocument?.nickname, ''),
+                FFButtonWidget(
+                  onPressed: () async {
+                    if (_model.checkboxGroupValues?.length == 0) {
+                      // Formulaire incomplet
+                      await showDialog(
+                        context: context,
+                        builder: (alertDialogContext) {
+                          return AlertDialog(
+                            title: const Text('Formulaire incomplet'),
+                            content:
+                                const Text('Vous devez séléctioner une pratique.'),
+                            actions: [
+                              TextButton(
+                                onPressed: () =>
+                                    Navigator.pop(alertDialogContext),
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    } else {
+                      // clean page state variable
+                      _model.listObjetContrat = [];
+                      _model.listContractants = [];
+                      safeSetState(() {});
+                      // reset loop increment
+                      FFAppState().iLoop = 0;
+                      safeSetState(() {});
+                      while (FFAppState().iLoop <
+                          _model.listPhoneContractantValide.length) {
+                        // create objetContrat
+                        _model.addToListObjetContrat(ObjetContratStruct(
+                          titre:
+                              _model.checkboxGroupValues?[FFAppState().iLoop],
+                          categorie: 'adulte',
                         ));
                         safeSetState(() {});
-                        // fill contratData
-                        _model.updateContratDataStruct(
-                          (e) => e
-                            ..objetsContrat = _model.listObjetContrat.toList()
-                            ..title =
-                                'contrat consentement adulte ${dateTimeFormat(
-                              "d/M/y",
-                              getCurrentTimestamp,
-                              locale: FFLocalizations.of(context).languageCode,
-                            )}'
-                            ..type = 'adulte'
-                            ..status = 'en attente de signature'
-                            ..contractantsData =
-                                _model.listContractants.toList()
-                            ..dateCreation = getCurrentTimestamp
-                            ..auteur =
-                                '${valueOrDefault(currentUserDocument?.genre, '')}$currentUserDisplayName'
-                            ..location = currentUserDocument?.location.city,
-                        );
+                        // increment
+                        FFAppState().iLoop = FFAppState().iLoop + 1;
                         safeSetState(() {});
-                        // fill postedContratData
-                        _model.updatePostedContratDataStruct(
-                          (e) => e
-                            ..modeleHtmlContrat =
-                                'MODELE/modele_contrat_adulte.html'
-                            ..contratPDF =
-                                'users/$currentUserUid/contrats/adulte/en_cours/${random_data.randomString(
-                              6,
-                              8,
-                              true,
-                              true,
-                              true,
-                            )}.pdf'
-                            ..contratData = _model.contratData,
-                        );
+                      }
+                      // reset loop increment
+                      FFAppState().iLoop = 0;
+                      safeSetState(() {});
+                      while (FFAppState().iLoop <
+                          _model.listPhoneContractantValide.length) {
+                        // find contractant
+                        _model.currentUserDoc = await queryUsersRecordOnce(
+                          queryBuilder: (usersRecord) => usersRecord.where(
+                            'phone_number',
+                            isEqualTo: _model
+                                .listPhoneContractantValide[FFAppState().iLoop],
+                          ),
+                          singleRecord: true,
+                        ).then((s) => s.firstOrNull);
+                        // Add contractant
+                        _model.addToListContractants(ContractantDataStruct(
+                          nom: _model.currentUserDoc?.name,
+                          prenom: _model.currentUserDoc?.nickname,
+                          phoneNumber: _model.currentUserDoc?.phoneNumber,
+                          status: 'En attente',
+                        ));
                         safeSetState(() {});
-                        // Call HTTP build PDF
-                        _model.resultBuidPDF =
-                            await actions.callPostedContratFunction(
-                          _model.postedContratData?.modeleHtmlContrat,
-                          _model.postedContratData?.contratPDF,
-                          functions.fixImproperJson(
-                              (_model.postedContratData?.contratData.toMap())
-                                  ?.toString()),
-                        );
-                        // Return resultat
-                        _model.resultat = _model.resultBuidPDF;
+                        // increment
+                        FFAppState().iLoop = FFAppState().iLoop + 1;
                         safeSetState(() {});
-                        if (_model.resultat == null || _model.resultat == '') {
-                          // continuer
-                          var confirmDialogResponse = await showDialog<bool>(
-                                context: context,
-                                builder: (alertDialogContext) {
-                                  return AlertDialog(
-                                    title: const Text('Contrat '),
-                                    content: const Text(
-                                        'Le contrat a été généré. Voulez-vous continuer?'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () => Navigator.pop(
-                                            alertDialogContext, false),
-                                        child: const Text('Annuler'),
-                                      ),
-                                      TextButton(
-                                        onPressed: () => Navigator.pop(
-                                            alertDialogContext, true),
-                                        child: const Text('Continuer'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              ) ??
-                              false;
-                          if (confirmDialogResponse) {
-                            // convert pdf location in URL
-                            _model.urlContratPDFDraft =
-                                await actions.getDownloadUrl(
-                              _model.postedContratData?.contratPDF,
-                            );
-                            // set URL PDF to postedContratdata
-                            _model.updatePostedContratDataStruct(
-                              (e) => e
-                                ..updateContratData(
-                                  (e) =>
-                                      e..url = '${_model.urlContratPDFDraft}',
-                                ),
-                            );
-                            safeSetState(() {});
-                            // Dialog end operation
-                            await showDialog(
+                      }
+                      // Add current user
+                      _model.addToListContractants(ContractantDataStruct(
+                        nom: valueOrDefault(currentUserDocument?.name, ''),
+                        prenom:
+                            valueOrDefault(currentUserDocument?.nickname, ''),
+                      ));
+                      safeSetState(() {});
+                      // fill contratData
+                      _model.updateContratDataStruct(
+                        (e) => e
+                          ..objetsContrat = _model.listObjetContrat.toList()
+                          ..title =
+                              'contrat consentement adulte ${dateTimeFormat(
+                            "d/M/y",
+                            getCurrentTimestamp,
+                            locale: FFLocalizations.of(context).languageCode,
+                          )}'
+                          ..type = 'adulte'
+                          ..status = 'en attente de signature'
+                          ..contractantsData = _model.listContractants.toList()
+                          ..dateCreation = getCurrentTimestamp
+                          ..auteur =
+                              '${valueOrDefault(currentUserDocument?.genre, '')}$currentUserDisplayName'
+                          ..location = currentUserDocument?.location.city,
+                      );
+                      safeSetState(() {});
+                      // fill postedContratData
+                      _model.updatePostedContratDataStruct(
+                        (e) => e
+                          ..modeleHtmlContrat =
+                              'MODELE/modele_contrat_adulte.html'
+                          ..contratPDF =
+                              'users/$currentUserUid/contrats/adulte/en_cours/${random_data.randomString(
+                            6,
+                            8,
+                            true,
+                            true,
+                            true,
+                          )}.pdf'
+                          ..contratData = _model.contratData,
+                      );
+                      safeSetState(() {});
+                      // Call HTTP build PDF
+                      _model.resultBuidPDF =
+                          await actions.callPostedContratFunction(
+                        _model.postedContratData?.modeleHtmlContrat,
+                        _model.postedContratData?.contratPDF,
+                        functions.fixImproperJson(
+                            (_model.postedContratData?.contratData.toMap())
+                                ?.toString()),
+                      );
+                      // Return resultat
+                      _model.resultat = _model.resultBuidPDF;
+                      safeSetState(() {});
+                      if (_model.resultat == null || _model.resultat == '') {
+                        // continuer
+                        var confirmDialogResponse = await showDialog<bool>(
                               context: context,
                               builder: (alertDialogContext) {
                                 return AlertDialog(
-                                  title: const Text('Operation terminée!'),
-                                  content: const Text('Le contrat a été construit.'),
+                                  title: const Text('Contrat '),
+                                  content: const Text(
+                                      'Le contrat a été généré. Voulez-vous continuer?'),
                                   actions: [
                                     TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(alertDialogContext),
-                                      child: const Text('Voir'),
+                                      onPressed: () => Navigator.pop(
+                                          alertDialogContext, false),
+                                      child: const Text('Annuler'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(
+                                          alertDialogContext, true),
+                                      child: const Text('Continuer'),
                                     ),
                                   ],
                                 );
                               },
-                            );
-
-                            context.pushNamed(
-                              'successPageBuildPDF',
-                              queryParameters: {
-                                'postedContrat': serializeParam(
-                                  _model.postedContratData,
-                                  ParamType.DataStruct,
-                                ),
-                              }.withoutNulls,
-                            );
-                          } else {
-                            // Return resultat
-                            _model.resultat = 'Opération annulée!';
-                            safeSetState(() {});
-                            _model.resultDeletionPDF =
-                                await actions.callDeleteBucketFile(
-                              _model.postedContratData?.contratPDF,
-                            );
-                            // Return resultat
-                            _model.resultat = _model.resultDeletionPDF;
-                            safeSetState(() {});
-                          }
-                        } else {
-                          // Return resultat
+                            ) ??
+                            false;
+                        if (confirmDialogResponse) {
+                          // convert pdf location in URL
+                          _model.urlContratPDFDraft =
+                              await actions.getDownloadUrl(
+                            _model.postedContratData?.contratPDF,
+                          );
+                          // set URL PDF to postedContratdata
+                          _model.updatePostedContratDataStruct(
+                            (e) => e
+                              ..updateContratData(
+                                (e) => e..url = '${_model.urlContratPDFDraft}',
+                              ),
+                          );
+                          safeSetState(() {});
+                          // Dialog end operation
                           await showDialog(
                             context: context,
                             builder: (alertDialogContext) {
                               return AlertDialog(
-                                title: const Text('Création contrat impossible'),
-                                content: const Text('L\'opération n\'a pas aboutie!'),
+                                title: const Text('Operation terminée!'),
+                                content: const Text('Le contrat a été construit.'),
                                 actions: [
                                   TextButton(
                                     onPressed: () =>
                                         Navigator.pop(alertDialogContext),
-                                    child: const Text('continuer'),
+                                    child: const Text('Voir'),
                                   ),
                                 ],
                               );
                             },
                           );
-                        }
-                      }
 
-                      safeSetState(() {});
-                    },
-                    text: 'Générer le contrat',
-                    icon: const Icon(
-                      Icons.build,
-                      size: 15.0,
-                    ),
-                    options: FFButtonOptions(
-                      width: double.infinity,
-                      height: 50.0,
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      iconPadding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: Colors.black,
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                fontFamily: 'Roboto',
-                                color: Colors.white,
-                                fontSize: 16.0,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.w600,
+                          context.pushNamed(
+                            'successPageBuildPDF',
+                            queryParameters: {
+                              'postedContrat': serializeParam(
+                                _model.postedContratData,
+                                ParamType.DataStruct,
                               ),
-                      elevation: 2.0,
-                      borderRadius: BorderRadius.circular(8.0),
+                            }.withoutNulls,
+                          );
+                        } else {
+                          // Return resultat
+                          _model.resultat = 'Opération annulée!';
+                          safeSetState(() {});
+                          _model.resultDeletionPDF =
+                              await actions.callDeleteBucketFile(
+                            _model.postedContratData?.contratPDF,
+                          );
+                          // Return resultat
+                          _model.resultat = _model.resultDeletionPDF;
+                          safeSetState(() {});
+                        }
+                      } else {
+                        // Return resultat
+                        await showDialog(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: const Text('Création contrat impossible'),
+                              content: const Text('L\'opération n\'a pas aboutie!'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext),
+                                  child: const Text('continuer'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      }
+                    }
+
+                    safeSetState(() {});
+                  },
+                  text: 'Générer le contrat',
+                  icon: const Icon(
+                    Icons.build,
+                    size: 15.0,
+                  ),
+                  options: FFButtonOptions(
+                    width: double.infinity,
+                    height: 45.0,
+                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    iconPadding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: FlutterFlowTheme.of(context).primary,
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          fontFamily: 'Roboto',
+                          color: FlutterFlowTheme.of(context).secondaryText,
+                          fontSize: 16.0,
+                          letterSpacing: 0.0,
+                          fontWeight: FontWeight.w600,
+                        ),
+                    elevation: 2.0,
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).secondary,
+                      width: 1.0,
                     ),
+                    borderRadius: BorderRadius.circular(4.0),
                   ),
                 ),
               if (_model.resultat != null && _model.resultat != '')

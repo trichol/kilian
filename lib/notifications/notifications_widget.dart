@@ -41,7 +41,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
       key: scaffoldKey,
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: FlutterFlowTheme.of(context).primary,
         automaticallyImplyLeading: false,
         leading: FlutterFlowIconButton(
           borderColor: Colors.transparent,
@@ -215,78 +215,104 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                             child: Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 10.0),
-                              child: Container(
-                                height: 50.0,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context).alternate,
-                                  borderRadius: const BorderRadius.only(
-                                    bottomLeft: Radius.circular(20.0),
-                                    bottomRight: Radius.circular(20.0),
-                                    topLeft: Radius.circular(20.0),
-                                    topRight: Radius.circular(20.0),
-                                  ),
-                                  border: Border.all(
-                                    color: Colors.black,
-                                    width: 1.0,
+                              child: Material(
+                                color: Colors.transparent,
+                                elevation: 2.0,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(4.0),
+                                    bottomRight: Radius.circular(4.0),
+                                    topLeft: Radius.circular(4.0),
+                                    topRight: Radius.circular(4.0),
                                   ),
                                 ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      '${listViewContratsRecord.contratData.title} (${dateTimeFormat(
-                                        "yMd",
-                                        listViewContratsRecord
-                                            .contratData.dateCreation,
-                                        locale: FFLocalizations.of(context)
-                                            .languageCode,
-                                      )} )',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Mukta',
-                                            color: Colors.black,
-                                            letterSpacing: 0.0,
-                                          ),
+                                child: Container(
+                                  height: 50.0,
+                                  decoration: BoxDecoration(
+                                    color:
+                                        FlutterFlowTheme.of(context).tertiary,
+                                    borderRadius: const BorderRadius.only(
+                                      bottomLeft: Radius.circular(4.0),
+                                      bottomRight: Radius.circular(4.0),
+                                      topLeft: Radius.circular(4.0),
+                                      topRight: Radius.circular(4.0),
                                     ),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        FlutterFlowIconButton(
-                                          borderColor: Colors.transparent,
-                                          borderRadius: 8.0,
-                                          buttonSize: 40.0,
-                                          fillColor: Colors.black,
-                                          icon: Icon(
-                                            Icons.download,
-                                            color: FlutterFlowTheme.of(context)
-                                                .info,
-                                            size: 24.0,
-                                          ),
-                                          onPressed: () {
-                                            print('IconButton pressed ...');
-                                          },
-                                        ),
-                                        FlutterFlowIconButton(
-                                          borderColor: Colors.transparent,
-                                          borderRadius: 8.0,
-                                          buttonSize: 40.0,
-                                          fillColor: Colors.black,
-                                          icon: Icon(
-                                            Icons.visibility,
-                                            color: FlutterFlowTheme.of(context)
-                                                .info,
-                                            size: 24.0,
-                                          ),
-                                          onPressed: () {
-                                            print('IconButton pressed ...');
-                                          },
-                                        ),
-                                      ],
+                                    border: Border.all(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondary,
+                                      width: 1.0,
                                     ),
-                                  ],
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        '${listViewContratsRecord.contratData.title} (${dateTimeFormat(
+                                          "yMd",
+                                          listViewContratsRecord
+                                              .contratData.dateCreation,
+                                          locale: FFLocalizations.of(context)
+                                              .languageCode,
+                                        )} )',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Mukta',
+                                              color: Colors.black,
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          FlutterFlowIconButton(
+                                            borderColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondary,
+                                            borderRadius: 4.0,
+                                            borderWidth: 1.0,
+                                            buttonSize: 40.0,
+                                            fillColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primary,
+                                            icon: Icon(
+                                              Icons.download,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .info,
+                                              size: 24.0,
+                                            ),
+                                            onPressed: () {
+                                              print('IconButton pressed ...');
+                                            },
+                                          ),
+                                          FlutterFlowIconButton(
+                                            borderColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondary,
+                                            borderRadius: 4.0,
+                                            borderWidth: 1.0,
+                                            buttonSize: 40.0,
+                                            fillColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primary,
+                                            icon: Icon(
+                                              Icons.visibility,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .info,
+                                              size: 24.0,
+                                            ),
+                                            onPressed: () {
+                                              print('IconButton pressed ...');
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),

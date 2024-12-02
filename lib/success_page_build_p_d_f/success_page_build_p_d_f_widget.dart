@@ -56,7 +56,7 @@ class _SuccessPageBuildPDFWidgetState extends State<SuccessPageBuildPDFWidget> {
       key: scaffoldKey,
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: FlutterFlowTheme.of(context).primary,
         automaticallyImplyLeading: false,
         leading: FlutterFlowIconButton(
           borderColor: Colors.transparent,
@@ -107,6 +107,8 @@ class _SuccessPageBuildPDFWidgetState extends State<SuccessPageBuildPDFWidget> {
           children: [
             Row(
               mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
@@ -116,7 +118,7 @@ class _SuccessPageBuildPDFWidgetState extends State<SuccessPageBuildPDFWidget> {
                       style:
                           FlutterFlowTheme.of(context).headlineMedium.override(
                                 fontFamily: 'Outfit',
-                                color: Colors.black,
+                                color: FlutterFlowTheme.of(context).primaryText,
                                 fontSize: 20.0,
                                 letterSpacing: 0.0,
                                 fontWeight: FontWeight.w500,
@@ -168,18 +170,19 @@ class _SuccessPageBuildPDFWidgetState extends State<SuccessPageBuildPDFWidget> {
                         badgeContent: Text(
                           badgeCount.toString(),
                           textAlign: TextAlign.center,
-                          style:
-                              FlutterFlowTheme.of(context).titleSmall.override(
-                                    fontFamily: 'Roboto',
-                                    color: Colors.black,
-                                    fontSize: 18.0,
-                                    letterSpacing: 0.0,
-                                  ),
+                          style: FlutterFlowTheme.of(context)
+                              .titleSmall
+                              .override(
+                                fontFamily: 'Roboto',
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                fontSize: 18.0,
+                                letterSpacing: 0.0,
+                              ),
                         ),
                         showBadge: true,
                         shape: badges.BadgeShape.circle,
                         badgeColor: const Color(0xFFFF0707),
-                        elevation: 0.0,
+                        elevation: 2.0,
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 5.0),
                         position: badges.BadgePosition.topStart(),
@@ -198,7 +201,7 @@ class _SuccessPageBuildPDFWidgetState extends State<SuccessPageBuildPDFWidget> {
                 Align(
                   alignment: const AlignmentDirectional(0.0, 0.0),
                   child: Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 5.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
                     child: FFButtonWidget(
                       onPressed: () async {
                         // demande signature
@@ -411,23 +414,29 @@ class _SuccessPageBuildPDFWidgetState extends State<SuccessPageBuildPDFWidget> {
                             16.0, 0.0, 16.0, 0.0),
                         iconPadding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: Colors.black,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Roboto',
-                                  color: Colors.white,
-                                  letterSpacing: 0.0,
-                                ),
-                        elevation: 0.0,
+                        color: FlutterFlowTheme.of(context).primary,
+                        textStyle: FlutterFlowTheme.of(context)
+                            .titleSmall
+                            .override(
+                              fontFamily: 'Roboto',
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                              letterSpacing: 0.0,
+                            ),
+                        elevation: 4.0,
+                        borderSide: BorderSide(
+                          color: FlutterFlowTheme.of(context).secondary,
+                        ),
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
                   ),
                 ),
                 FlutterFlowIconButton(
-                  borderRadius: 8.0,
+                  borderColor: FlutterFlowTheme.of(context).secondary,
+                  borderRadius: 4.0,
+                  borderWidth: 1.0,
                   buttonSize: 40.0,
-                  fillColor: Colors.black,
+                  fillColor: FlutterFlowTheme.of(context).primary,
                   icon: Icon(
                     Icons.download_for_offline,
                     color: FlutterFlowTheme.of(context).info,
