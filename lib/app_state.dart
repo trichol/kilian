@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
-import 'flutter_flow/flutter_flow_util.dart';
 
 class FFAppState extends ChangeNotifier {
   static FFAppState _instance = FFAppState._internal();
@@ -27,19 +24,5 @@ class FFAppState extends ChangeNotifier {
   int get iLoop => _iLoop;
   set iLoop(int value) {
     _iLoop = value;
-  }
-
-  SocialNetworkUserDataTypeStruct _socialNetworkUserData =
-      SocialNetworkUserDataTypeStruct.fromSerializableMap(
-          jsonDecode('{\"name\":\"\"}'));
-  SocialNetworkUserDataTypeStruct get socialNetworkUserData =>
-      _socialNetworkUserData;
-  set socialNetworkUserData(SocialNetworkUserDataTypeStruct value) {
-    _socialNetworkUserData = value;
-  }
-
-  void updateSocialNetworkUserDataStruct(
-      Function(SocialNetworkUserDataTypeStruct) updateFn) {
-    updateFn(_socialNetworkUserData);
   }
 }

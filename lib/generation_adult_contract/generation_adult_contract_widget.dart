@@ -85,7 +85,7 @@ class _GenerationAdultContractWidgetState
               child: Text(
                 'KILIAN',
                 style: FlutterFlowTheme.of(context).headlineMedium.override(
-                      fontFamily: 'Inter Tight',
+                      fontFamily: 'Roboto',
                       color: Colors.white,
                       fontSize: 18.0,
                       letterSpacing: 0.0,
@@ -109,7 +109,7 @@ class _GenerationAdultContractWidgetState
                   Text(
                     'Pratiques à contractualiser : ',
                     style: FlutterFlowTheme.of(context).bodyLarge.override(
-                          fontFamily: 'Inter',
+                          fontFamily: 'Mukta',
                           color: Colors.black,
                           letterSpacing: 0.0,
                         ),
@@ -175,14 +175,14 @@ class _GenerationAdultContractWidgetState
                             FlutterFlowTheme.of(context).secondaryText,
                         textStyle:
                             FlutterFlowTheme.of(context).bodyMedium.override(
-                                  fontFamily: 'Inter',
+                                  fontFamily: 'Mukta',
                                   color: Colors.black,
                                   letterSpacing: 0.0,
                                   fontWeight: FontWeight.w600,
                                 ),
                         unselectedTextStyle:
                             FlutterFlowTheme.of(context).bodyMedium.override(
-                                  fontFamily: 'Inter',
+                                  fontFamily: 'Mukta',
                                   color: Colors.black,
                                   letterSpacing: 0.0,
                                 ),
@@ -199,7 +199,7 @@ class _GenerationAdultContractWidgetState
                   Text(
                     'Numéro de téléphone des contractants : ',
                     style: FlutterFlowTheme.of(context).bodyLarge.override(
-                          fontFamily: 'Inter',
+                          fontFamily: 'Mukta',
                           color: Colors.black,
                           letterSpacing: 0.0,
                         ),
@@ -221,13 +221,13 @@ class _GenerationAdultContractWidgetState
                           isDense: true,
                           labelStyle:
                               FlutterFlowTheme.of(context).labelMedium.override(
-                                    fontFamily: 'Inter',
+                                    fontFamily: 'Mukta',
                                     color: Colors.black,
                                     letterSpacing: 0.0,
                                   ),
                           hintStyle:
                               FlutterFlowTheme.of(context).labelMedium.override(
-                                    fontFamily: 'Inter',
+                                    fontFamily: 'Mukta',
                                     letterSpacing: 0.0,
                                   ),
                           enabledBorder: OutlineInputBorder(
@@ -262,7 +262,7 @@ class _GenerationAdultContractWidgetState
                           fillColor: FlutterFlowTheme.of(context).alternate,
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Inter',
+                              fontFamily: 'Mukta',
                               color: Colors.black,
                               letterSpacing: 0.0,
                             ),
@@ -448,7 +448,7 @@ class _GenerationAdultContractWidgetState
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
-                                                fontFamily: 'Inter',
+                                                fontFamily: 'Mukta',
                                                 color: Colors.black,
                                                 letterSpacing: 0.0,
                                               ),
@@ -787,7 +787,7 @@ class _GenerationAdultContractWidgetState
                       color: Colors.black,
                       textStyle:
                           FlutterFlowTheme.of(context).titleSmall.override(
-                                fontFamily: 'Inter Tight',
+                                fontFamily: 'Roboto',
                                 color: Colors.white,
                                 fontSize: 16.0,
                                 letterSpacing: 0.0,
@@ -827,7 +827,7 @@ class _GenerationAdultContractWidgetState
                           ),
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Inter',
+                                    fontFamily: 'Mukta',
                                     fontSize: 28.0,
                                     letterSpacing: 0.0,
                                   ),

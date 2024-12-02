@@ -55,20 +55,12 @@ class LoginModel extends FlutterFlowModel<LoginWidget> {
     return null;
   }
 
-  // Stores action output result for [Custom Action - myLoginWithErrorHandling] action in Button widget.
-  bool? isAuthLogged;
   // Stores action output result for [Backend Call - API (GeoJSLocation)] action in Button widget.
   ApiCallResponse? userCurrentLocationPassword;
-  // Stores action output result for [Custom Action - generateAndSaveDeviceToken] action in Button widget.
-  bool? isTokenGenerateAndSavePassword;
   // Stores action output result for [Backend Call - API (GeoJSLocation)] action in BtnGoogle widget.
   ApiCallResponse? userCurrentLocationGoogle;
-  // Stores action output result for [Custom Action - generateAndSaveDeviceToken] action in BtnGoogle widget.
-  bool? isTokenGenerateAndSaveForGoogle;
   // Stores action output result for [Backend Call - API (GeoJSLocation)] action in BtnApple widget.
   ApiCallResponse? userCurrentLocationApple;
-  // Stores action output result for [Custom Action - generateAndSaveDeviceToken] action in BtnApple widget.
-  bool? isTokenGenerateAndSaveForApple;
   // State field(s) for emailAddress_Create widget.
   FocusNode? emailAddressCreateFocusNode;
   TextEditingController? emailAddressCreateTextController;
@@ -138,6 +130,18 @@ class LoginModel extends FlutterFlowModel<LoginWidget> {
 
   // Stores action output result for [Custom Action - createAccountWithErrorHandling] action in Button widget.
   String? isAccountPasswordCreated;
+  // Stores action output result for [Backend Call - API (GeoJSLocation)] action in Button widget.
+  ApiCallResponse? userCurrentLocationCreatePassword;
+  // Stores action output result for [Custom Action - generateAndSaveDeviceToken] action in Button widget.
+  bool? isTokenGenerateAndSaveBtnCreatePassword;
+  // Stores action output result for [Backend Call - API (GeoJSLocation)] action in BtnGoogleCreate widget.
+  ApiCallResponse? userCurrentLocationCreateGoogle;
+  // Stores action output result for [Custom Action - generateAndSaveDeviceToken] action in BtnGoogleCreate widget.
+  bool? isTokenGenerateAndSaveBtnCreateGoogle;
+  // Stores action output result for [Backend Call - API (GeoJSLocation)] action in BtnAppleCreate widget.
+  ApiCallResponse? userCurrentLocationCreateApple;
+  // Stores action output result for [Custom Action - generateAndSaveDeviceToken] action in BtnAppleCreate widget.
+  bool? isTokenGenerateAndSaveBtnCreateApple;
 
   @override
   void initState(BuildContext context) {

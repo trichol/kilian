@@ -143,7 +143,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                       'Tableau de bord',
                       style:
                           FlutterFlowTheme.of(context).headlineMedium.override(
-                                fontFamily: 'Inter Tight',
+                                fontFamily: 'Roboto',
                                 color: Colors.black,
                                 fontSize: 24.0,
                                 letterSpacing: 0.0,
@@ -166,7 +166,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .headlineMedium
                                   .override(
-                                    fontFamily: 'Inter Tight',
+                                    fontFamily: 'Roboto',
                                     color: Colors.black,
                                     fontSize: 20.0,
                                     letterSpacing: 0.0,
@@ -223,7 +223,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .titleSmall
                                       .override(
-                                        fontFamily: 'Inter Tight',
+                                        fontFamily: 'Roboto',
                                         color: Colors.black,
                                         fontSize: 18.0,
                                         letterSpacing: 0.0,
@@ -272,7 +272,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                             textStyle: FlutterFlowTheme.of(context)
                                 .titleSmall
                                 .override(
-                                  fontFamily: 'Inter Tight',
+                                  fontFamily: 'Roboto',
                                   color: Colors.white,
                                   letterSpacing: 0.0,
                                 ),
@@ -314,7 +314,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyLarge
                                           .override(
-                                            fontFamily: 'Inter',
+                                            fontFamily: 'Mukta',
                                             color: Colors.black,
                                             letterSpacing: 0.0,
                                           ),
@@ -349,7 +349,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
                                                       .override(
-                                                        fontFamily: 'Inter',
+                                                        fontFamily: 'Mukta',
                                                         color: Colors.white,
                                                         letterSpacing: 0.0,
                                                       ),
@@ -368,7 +368,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                   FlutterFlowTheme.of(context)
                                                       .bodySmall
                                                       .override(
-                                                        fontFamily: 'Inter',
+                                                        fontFamily: 'Mukta',
                                                         color: Colors.black,
                                                         letterSpacing: 0.0,
                                                       ),
@@ -462,7 +462,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                 FlutterFlowTheme.of(context)
                                                     .titleSmall
                                                     .override(
-                                                      fontFamily: 'Inter Tight',
+                                                      fontFamily: 'Roboto',
                                                       color: Colors.white,
                                                       fontSize: 16.0,
                                                       letterSpacing: 0.0,

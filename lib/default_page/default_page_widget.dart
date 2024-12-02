@@ -100,7 +100,7 @@ class _DefaultPageWidgetState extends State<DefaultPageWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .headlineMedium
                                 .override(
-                                  fontFamily: 'Inter Tight',
+                                  fontFamily: 'Roboto',
                                   color: Colors.white,
                                   fontSize: 16.0,
                                   letterSpacing: 0.0,
@@ -216,7 +216,7 @@ class _DefaultPageWidgetState extends State<DefaultPageWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .titleSmall
                                   .override(
-                                    fontFamily: 'Inter Tight',
+                                    fontFamily: 'Roboto',
                                     color: Colors.black,
                                     fontSize: 18.0,
                                     letterSpacing: 0.0,
@@ -242,7 +242,7 @@ class _DefaultPageWidgetState extends State<DefaultPageWidget> {
             Text(
               'En travaux',
               style: FlutterFlowTheme.of(context).bodyMedium.override(
-                    fontFamily: 'Inter',
+                    fontFamily: 'Mukta',
                     color: Colors.black,
                     fontSize: 50.0,
                     letterSpacing: 0.0,

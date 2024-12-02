@@ -60,7 +60,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
         title: Text(
           'KILIAN',
           style: FlutterFlowTheme.of(context).headlineMedium.override(
-                fontFamily: 'Inter Tight',
+                fontFamily: 'Roboto',
                 color: Colors.white,
                 fontSize: 28.0,
                 letterSpacing: 0.0,
@@ -151,7 +151,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .titleSmall
                                       .override(
-                                        fontFamily: 'Inter Tight',
+                                        fontFamily: 'Roboto',
                                         color: Colors.black,
                                         fontSize: 18.0,
                                         letterSpacing: 0.0,
@@ -246,7 +246,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
-                                            fontFamily: 'Inter',
+                                            fontFamily: 'Mukta',
                                             color: Colors.black,
                                             letterSpacing: 0.0,
                                           ),
@@ -321,7 +321,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                           'Aucun contrat archivé!',
                           style:
                               FlutterFlowTheme.of(context).titleLarge.override(
-                                    fontFamily: 'Inter Tight',
+                                    fontFamily: 'Roboto',
                                     color: Colors.black,
                                     letterSpacing: 0.0,
                                   ),

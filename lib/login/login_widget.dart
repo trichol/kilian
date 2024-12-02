@@ -12,7 +12,6 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
 import 'login_model.dart';
 export 'login_model.dart';
 
@@ -97,35 +96,29 @@ class _LoginWidgetState extends State<LoginWidget>
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Colors.white,
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(45.0),
-          child: AppBar(
-            backgroundColor: Colors.black,
-            automaticallyImplyLeading: false,
-            title: Align(
-              alignment: const AlignmentDirectional(-1.0, -1.0),
-              child: Text(
-                'KILIAN',
-                style: FlutterFlowTheme.of(context).headlineMedium.override(
-                      fontFamily: 'Inter Tight',
-                      color: Colors.white,
-                      fontSize: 22.0,
-                      letterSpacing: 0.0,
-                    ),
-              ),
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).primary,
+          automaticallyImplyLeading: false,
+          title: Align(
+            alignment: const AlignmentDirectional(-1.0, 0.0),
+            child: Text(
+              'KILIAN',
+              style: FlutterFlowTheme.of(context).headlineMedium.override(
+                    fontFamily: 'Roboto',
+                    color: Colors.white,
+                    fontSize: 22.0,
+                    letterSpacing: 0.0,
+                  ),
             ),
-            actions: const [],
-            centerTitle: false,
-            toolbarHeight: 25.0,
-            elevation: 0.0,
           ),
+          actions: const [],
+          centerTitle: false,
+          elevation: 0.0,
         ),
         body: SafeArea(
           top: true,
@@ -137,8 +130,8 @@ class _LoginWidgetState extends State<LoginWidget>
                 Container(
                   width: double.infinity,
                   height: 610.0,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).primaryBackground,
                   ),
                   child: Padding(
                     padding:
@@ -146,10 +139,10 @@ class _LoginWidgetState extends State<LoginWidget>
                     child: Column(
                       children: [
                         Align(
-                          alignment: const Alignment(-1.0, 0),
+                          alignment: const Alignment(0.0, 0),
                           child: TabBar(
                             isScrollable: true,
-                            labelColor: const Color(0xFF101213),
+                            labelColor: FlutterFlowTheme.of(context).primary,
                             unselectedLabelColor: const Color(0xFF57636C),
                             labelPadding: const EdgeInsets.all(16.0),
                             labelStyle: FlutterFlowTheme.of(context)
@@ -157,7 +150,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                 .override(
                                   fontFamily: 'Plus Jakarta Sans',
                                   color: const Color(0xFF101213),
-                                  fontSize: 25.0,
+                                  fontSize: 20.0,
                                   letterSpacing: 0.0,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -166,14 +159,15 @@ class _LoginWidgetState extends State<LoginWidget>
                                 .override(
                                   fontFamily: 'Plus Jakarta Sans',
                                   color: const Color(0xFF101213),
-                                  fontSize: 25.0,
+                                  fontSize: 20.0,
                                   letterSpacing: 0.0,
                                   fontWeight: FontWeight.normal,
                                 ),
-                            indicatorColor: Colors.black,
+                            indicatorColor:
+                                FlutterFlowTheme.of(context).primary,
                             indicatorWeight: 4.0,
                             padding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 12.0, 16.0, 0.0),
+                                0.0, 5.0, 0.0, 0.0),
                             tabs: const [
                               Tab(
                                 text: 'Se connecter',
@@ -246,19 +240,22 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   color: const Color(
                                                                       0xFF57636C),
                                                                   fontSize:
-                                                                      14.0,
+                                                                      12.0,
                                                                   letterSpacing:
                                                                       0.0,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w500,
+                                                                  lineHeight:
+                                                                      1.0,
                                                                 ),
                                                         enabledBorder:
                                                             OutlineInputBorder(
                                                           borderSide:
-                                                              const BorderSide(
-                                                            color: Color(
-                                                                0xFFE0E3E7),
+                                                              BorderSide(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primary,
                                                             width: 2.0,
                                                           ),
                                                           borderRadius:
@@ -269,9 +266,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                                         focusedBorder:
                                                             OutlineInputBorder(
                                                           borderSide:
-                                                              const BorderSide(
-                                                            color: Color(
-                                                                0xFF4B39EF),
+                                                              BorderSide(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .accent2,
                                                             width: 2.0,
                                                           ),
                                                           borderRadius:
@@ -306,7 +304,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                       40.0),
                                                         ),
                                                         filled: true,
-                                                        fillColor: Colors.white,
+                                                        fillColor:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .tertiary,
                                                         contentPadding:
                                                             const EdgeInsets.all(
                                                                 24.0),
@@ -317,13 +318,14 @@ class _LoginWidgetState extends State<LoginWidget>
                                                           .override(
                                                             fontFamily:
                                                                 'Plus Jakarta Sans',
-                                                            color: const Color(
-                                                                0xFF101213),
-                                                            fontSize: 14.0,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryText,
+                                                            fontSize: 12.0,
                                                             letterSpacing: 0.0,
                                                             fontWeight:
                                                                 FontWeight.w500,
-                                                            lineHeight: 1.0,
+                                                            lineHeight: 0.5,
                                                           ),
                                                       keyboardType:
                                                           TextInputType
@@ -382,9 +384,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                                         enabledBorder:
                                                             OutlineInputBorder(
                                                           borderSide:
-                                                              const BorderSide(
-                                                            color: Color(
-                                                                0xFFE0E3E7),
+                                                              BorderSide(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primary,
                                                             width: 2.0,
                                                           ),
                                                           borderRadius:
@@ -395,9 +398,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                                         focusedBorder:
                                                             OutlineInputBorder(
                                                           borderSide:
-                                                              const BorderSide(
-                                                            color: Color(
-                                                                0xFF4B39EF),
+                                                              BorderSide(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .accent2,
                                                             width: 2.0,
                                                           ),
                                                           borderRadius:
@@ -432,7 +436,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                       40.0),
                                                         ),
                                                         filled: true,
-                                                        fillColor: Colors.white,
+                                                        fillColor:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .tertiary,
                                                         contentPadding:
                                                             const EdgeInsets.all(
                                                                 24.0),
@@ -465,12 +472,14 @@ class _LoginWidgetState extends State<LoginWidget>
                                                           .override(
                                                             fontFamily:
                                                                 'Plus Jakarta Sans',
-                                                            color: const Color(
-                                                                0xFF101213),
-                                                            fontSize: 14.0,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryText,
+                                                            fontSize: 12.0,
                                                             letterSpacing: 0.0,
                                                             fontWeight:
                                                                 FontWeight.w500,
+                                                            lineHeight: 0.5,
                                                           ),
                                                       cursorColor:
                                                           FlutterFlowTheme.of(
@@ -506,9 +515,8 @@ class _LoginWidgetState extends State<LoginWidget>
                                                             ? null
                                                             : () async {
                                                                 // LOGIN
-                                                                _model.isAuthLogged =
-                                                                    await actions
-                                                                        .myLoginWithErrorHandling(
+                                                                await actions
+                                                                    .myLoginWithErrorHandling(
                                                                   _model
                                                                       .emailAddressTextController
                                                                       .text,
@@ -516,19 +524,52 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                       .passwordTextController
                                                                       .text,
                                                                 );
-                                                                // ATTENTE
-                                                                await Future.delayed(
-                                                                    const Duration(
-                                                                        milliseconds:
-                                                                            1000));
-                                                                if (_model
-                                                                    .isAuthLogged!) {
+                                                                if (loggedIn) {
                                                                   if (valueOrDefault<
                                                                               bool>(
                                                                           currentUserDocument
                                                                               ?.isCompleteRegistration,
                                                                           false) ==
                                                                       true) {
+                                                                    // Geolocation
+                                                                    _model.userCurrentLocationPassword =
+                                                                        await GeoJSLocationCall
+                                                                            .call();
+
+                                                                    // Update user document
+
+                                                                    await currentUserReference!
+                                                                        .update(
+                                                                            createUsersRecordData(
+                                                                      online:
+                                                                          true,
+                                                                      location:
+                                                                          updateLocationDataStruct(
+                                                                        LocationDataStruct.maybeFromMap((_model.userCurrentLocationPassword?.jsonBody ??
+                                                                            '')),
+                                                                        clearUnsetFields:
+                                                                            false,
+                                                                      ),
+                                                                    ));
+                                                                    // go to dashboard
+
+                                                                    context
+                                                                        .goNamed(
+                                                                      'dashboard',
+                                                                      extra: <String,
+                                                                          dynamic>{
+                                                                        kTransitionInfoKey:
+                                                                            const TransitionInfo(
+                                                                          hasTransition:
+                                                                              true,
+                                                                          transitionType:
+                                                                              PageTransitionType.fade,
+                                                                          duration:
+                                                                              Duration(milliseconds: 0),
+                                                                        ),
+                                                                      },
+                                                                    );
+
                                                                     // show snack bar
                                                                     ScaffoldMessenger.of(
                                                                             context)
@@ -552,131 +593,68 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                             FlutterFlowTheme.of(context).success,
                                                                       ),
                                                                     );
-                                                                    // Geolocation
-                                                                    _model.userCurrentLocationPassword =
-                                                                        await GeoJSLocationCall
-                                                                            .call();
-
-                                                                    // Update user document
-
-                                                                    await currentUserReference!
-                                                                        .update(
-                                                                            createUsersRecordData(
-                                                                      online:
-                                                                          true,
-                                                                      location:
-                                                                          updateLocationDataStruct(
-                                                                        LocationDataStruct.maybeFromMap((_model.userCurrentLocationPassword?.jsonBody ??
-                                                                            '')),
-                                                                        clearUnsetFields:
-                                                                            false,
-                                                                      ),
-                                                                    ));
-                                                                    // genearate and save firebase token
-                                                                    _model.isTokenGenerateAndSavePassword =
-                                                                        await actions
-                                                                            .generateAndSaveDeviceToken(
-                                                                      currentUserUid,
-                                                                    );
-                                                                    if (_model
-                                                                            .isTokenGenerateAndSavePassword ==
-                                                                        true) {
-                                                                      // info notification OK
-                                                                      ScaffoldMessenger.of(
-                                                                              context)
-                                                                          .showSnackBar(
-                                                                        SnackBar(
-                                                                          content:
-                                                                              Text(
-                                                                            'Notifications activées',
-                                                                            style:
-                                                                                TextStyle(
-                                                                              color: FlutterFlowTheme.of(context).primaryText,
-                                                                            ),
-                                                                          ),
-                                                                          duration:
-                                                                              const Duration(milliseconds: 4000),
-                                                                          backgroundColor:
-                                                                              FlutterFlowTheme.of(context).secondary,
-                                                                        ),
-                                                                      );
-                                                                    } else {
-                                                                      // info notification NOK
-                                                                      ScaffoldMessenger.of(
-                                                                              context)
-                                                                          .showSnackBar(
-                                                                        SnackBar(
-                                                                          content:
-                                                                              Text(
-                                                                            'Notifications non activées!',
-                                                                            style:
-                                                                                TextStyle(
-                                                                              color: FlutterFlowTheme.of(context).primaryText,
-                                                                            ),
-                                                                          ),
-                                                                          duration:
-                                                                              const Duration(milliseconds: 4000),
-                                                                          backgroundColor:
-                                                                              FlutterFlowTheme.of(context).error,
-                                                                        ),
-                                                                      );
-                                                                    }
-
-                                                                    // go to dashboard
-
-                                                                    context.goNamed(
-                                                                        'dashboard');
                                                                   } else {
-                                                                    ScaffoldMessenger.of(
-                                                                            context)
-                                                                        .clearSnackBars();
-                                                                    ScaffoldMessenger.of(
-                                                                            context)
-                                                                        .showSnackBar(
-                                                                      SnackBar(
-                                                                        content:
-                                                                            Text(
-                                                                          'Completer son profil',
-                                                                          style:
-                                                                              TextStyle(
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).primaryText,
-                                                                          ),
-                                                                        ),
-                                                                        duration:
-                                                                            const Duration(milliseconds: 5000),
-                                                                        backgroundColor:
-                                                                            FlutterFlowTheme.of(context).warning,
-                                                                      ),
+                                                                    // Profil to complete
+                                                                    await showDialog(
+                                                                      context:
+                                                                          context,
+                                                                      builder:
+                                                                          (alertDialogContext) {
+                                                                        return AlertDialog(
+                                                                          title:
+                                                                              const Text('Profil'),
+                                                                          content:
+                                                                              const Text('Completer votre profil.'),
+                                                                          actions: [
+                                                                            TextButton(
+                                                                              onPressed: () => Navigator.pop(alertDialogContext),
+                                                                              child: const Text('Continuer'),
+                                                                            ),
+                                                                          ],
+                                                                        );
+                                                                      },
                                                                     );
+                                                                    // Go to profile page
 
-                                                                    context.goNamed(
-                                                                        'profilePage');
+                                                                    context
+                                                                        .goNamed(
+                                                                      'profilePage',
+                                                                      extra: <String,
+                                                                          dynamic>{
+                                                                        kTransitionInfoKey:
+                                                                            const TransitionInfo(
+                                                                          hasTransition:
+                                                                              true,
+                                                                          transitionType:
+                                                                              PageTransitionType.fade,
+                                                                          duration:
+                                                                              Duration(milliseconds: 0),
+                                                                        ),
+                                                                      },
+                                                                    );
                                                                   }
                                                                 } else {
-                                                                  ScaffoldMessenger.of(
-                                                                          context)
-                                                                      .clearSnackBars();
-                                                                  ScaffoldMessenger.of(
-                                                                          context)
-                                                                      .showSnackBar(
-                                                                    SnackBar(
-                                                                      content:
-                                                                          Text(
-                                                                        'Identifiants incorrects. Veuillez réessayer.',
-                                                                        style:
-                                                                            TextStyle(
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).primaryText,
-                                                                        ),
-                                                                      ),
-                                                                      duration: const Duration(
-                                                                          milliseconds:
-                                                                              4000),
-                                                                      backgroundColor:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .error,
-                                                                    ),
+                                                                  // Identifiants incorrect
+                                                                  await showDialog(
+                                                                    context:
+                                                                        context,
+                                                                    builder:
+                                                                        (alertDialogContext) {
+                                                                      return AlertDialog(
+                                                                        title: const Text(
+                                                                            'Connexion'),
+                                                                        content:
+                                                                            const Text('Identifiants incorrects. Veuillez réessayer!'),
+                                                                        actions: [
+                                                                          TextButton(
+                                                                            onPressed: () =>
+                                                                                Navigator.pop(alertDialogContext),
+                                                                            child:
+                                                                                const Text('Continuer'),
+                                                                          ),
+                                                                        ],
+                                                                      );
+                                                                    },
                                                                   );
                                                                 }
 
@@ -702,7 +680,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                       0.0,
                                                                       0.0,
                                                                       0.0),
-                                                          color: Colors.black,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primary,
                                                           textStyle:
                                                               FlutterFlowTheme.of(
                                                                       context)
@@ -732,6 +712,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   .circular(
                                                                       40.0),
                                                           disabledColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .secondaryBackground,
+                                                          disabledTextColor:
                                                               FlutterFlowTheme.of(
                                                                       context)
                                                                   .secondaryText,
@@ -770,7 +754,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                                         const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 0.0,
                                                                 0.0, 0.0),
-                                                    color: Colors.white,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryBackground,
                                                     textStyle: FlutterFlowTheme
                                                             .of(context)
                                                         .bodyMedium
@@ -785,8 +771,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                                               FontWeight.w500,
                                                         ),
                                                     elevation: 0.0,
-                                                    borderSide: const BorderSide(
-                                                      color: Colors.white,
+                                                    borderSide: BorderSide(
+                                                      color: FlutterFlowTheme
+                                                              .of(context)
+                                                          .primaryBackground,
                                                       width: 2.0,
                                                     ),
                                                     borderRadius:
@@ -818,8 +806,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                                           .override(
                                                             fontFamily:
                                                                 'Plus Jakarta Sans',
-                                                            color: const Color(
-                                                                0xFF57636C),
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryText,
                                                             fontSize: 14.0,
                                                             letterSpacing: 0.0,
                                                             fontWeight:
@@ -862,14 +851,57 @@ class _LoginWidgetState extends State<LoginWidget>
                                                             if (user == null) {
                                                               return;
                                                             }
-                                                            if (_model
-                                                                .isAuthLogged!) {
+                                                            if (loggedIn) {
                                                               if (valueOrDefault<
                                                                           bool>(
                                                                       currentUserDocument
                                                                           ?.isCompleteRegistration,
                                                                       false) ==
                                                                   true) {
+                                                                // Geolocation
+                                                                _model.userCurrentLocationGoogle =
+                                                                    await GeoJSLocationCall
+                                                                        .call();
+
+                                                                // Update user document
+
+                                                                await currentUserReference!
+                                                                    .update(
+                                                                        createUsersRecordData(
+                                                                  online: true,
+                                                                  location:
+                                                                      updateLocationDataStruct(
+                                                                    LocationDataStruct.maybeFromMap((_model
+                                                                            .userCurrentLocationGoogle
+                                                                            ?.jsonBody ??
+                                                                        '')),
+                                                                    clearUnsetFields:
+                                                                        false,
+                                                                  ),
+                                                                ));
+                                                                // go to dashboard
+
+                                                                context
+                                                                    .goNamedAuth(
+                                                                  'dashboard',
+                                                                  context
+                                                                      .mounted,
+                                                                  extra: <String,
+                                                                      dynamic>{
+                                                                    kTransitionInfoKey:
+                                                                        const TransitionInfo(
+                                                                      hasTransition:
+                                                                          true,
+                                                                      transitionType:
+                                                                          PageTransitionType
+                                                                              .fade,
+                                                                      duration: Duration(
+                                                                          milliseconds:
+                                                                              0),
+                                                                    ),
+                                                                  },
+                                                                );
+
                                                                 // show snack bar
                                                                 ScaffoldMessenger.of(
                                                                         context)
@@ -895,145 +927,75 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                             .success,
                                                                   ),
                                                                 );
-                                                                // Geolocation
-                                                                _model.userCurrentLocationGoogle =
-                                                                    await GeoJSLocationCall
-                                                                        .call();
-
-                                                                // Update user document
-
-                                                                await currentUserReference!
-                                                                    .update(
-                                                                        createUsersRecordData(
-                                                                  online: true,
-                                                                  location:
-                                                                      updateLocationDataStruct(
-                                                                    LocationDataStruct.maybeFromMap((_model
-                                                                            .userCurrentLocationGoogle
-                                                                            ?.jsonBody ??
-                                                                        '')),
-                                                                    clearUnsetFields:
-                                                                        false,
-                                                                  ),
-                                                                ));
-                                                                // genearate and save firebase token
-                                                                _model.isTokenGenerateAndSaveForGoogle =
-                                                                    await actions
-                                                                        .generateAndSaveDeviceToken(
-                                                                  currentUserUid,
-                                                                );
-                                                                if (_model
-                                                                        .isTokenGenerateAndSaveForGoogle ==
-                                                                    true) {
-                                                                  // info notification OK
-                                                                  ScaffoldMessenger.of(
-                                                                          context)
-                                                                      .showSnackBar(
-                                                                    SnackBar(
-                                                                      content:
-                                                                          Text(
-                                                                        'Notifications activées',
-                                                                        style:
-                                                                            TextStyle(
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).primaryText,
-                                                                        ),
-                                                                      ),
-                                                                      duration: const Duration(
-                                                                          milliseconds:
-                                                                              4000),
-                                                                      backgroundColor:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .secondary,
-                                                                    ),
-                                                                  );
-                                                                } else {
-                                                                  // info notification NOK
-                                                                  ScaffoldMessenger.of(
-                                                                          context)
-                                                                      .showSnackBar(
-                                                                    SnackBar(
-                                                                      content:
-                                                                          Text(
-                                                                        'Notifications non activées!',
-                                                                        style:
-                                                                            TextStyle(
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).primaryText,
-                                                                        ),
-                                                                      ),
-                                                                      duration: const Duration(
-                                                                          milliseconds:
-                                                                              4000),
-                                                                      backgroundColor:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .error,
-                                                                    ),
-                                                                  );
-                                                                }
-
-                                                                // go to dashboard
-
-                                                                context.goNamedAuth(
-                                                                    'dashboard',
-                                                                    context
-                                                                        .mounted);
                                                               } else {
-                                                                ScaffoldMessenger.of(
-                                                                        context)
-                                                                    .clearSnackBars();
-                                                                ScaffoldMessenger.of(
-                                                                        context)
-                                                                    .showSnackBar(
-                                                                  SnackBar(
-                                                                    content:
-                                                                        Text(
-                                                                      'Completer son profil',
-                                                                      style:
-                                                                          TextStyle(
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .primaryText,
-                                                                      ),
-                                                                    ),
-                                                                    duration: const Duration(
-                                                                        milliseconds:
-                                                                            5000),
-                                                                    backgroundColor:
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .warning,
-                                                                  ),
+                                                                // Profil to complete
+                                                                await showDialog(
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (alertDialogContext) {
+                                                                    return AlertDialog(
+                                                                      title: const Text(
+                                                                          'Profil'),
+                                                                      content: const Text(
+                                                                          'Completer votre profil.'),
+                                                                      actions: [
+                                                                        TextButton(
+                                                                          onPressed: () =>
+                                                                              Navigator.pop(alertDialogContext),
+                                                                          child:
+                                                                              const Text('Continuer'),
+                                                                        ),
+                                                                      ],
+                                                                    );
+                                                                  },
                                                                 );
+                                                                // Go to profile page
 
-                                                                context.goNamedAuth(
-                                                                    'profilePage',
-                                                                    context
-                                                                        .mounted);
+                                                                context
+                                                                    .goNamedAuth(
+                                                                  'profilePage',
+                                                                  context
+                                                                      .mounted,
+                                                                  extra: <String,
+                                                                      dynamic>{
+                                                                    kTransitionInfoKey:
+                                                                        const TransitionInfo(
+                                                                      hasTransition:
+                                                                          true,
+                                                                      transitionType:
+                                                                          PageTransitionType
+                                                                              .fade,
+                                                                      duration: Duration(
+                                                                          milliseconds:
+                                                                              0),
+                                                                    ),
+                                                                  },
+                                                                );
                                                               }
                                                             } else {
-                                                              ScaffoldMessenger
-                                                                      .of(context)
-                                                                  .clearSnackBars();
-                                                              ScaffoldMessenger
-                                                                      .of(context)
-                                                                  .showSnackBar(
-                                                                SnackBar(
-                                                                  content: Text(
-                                                                    'Identifiants incorrects. Veuillez réessayer.',
-                                                                    style:
-                                                                        TextStyle(
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primaryText,
-                                                                    ),
-                                                                  ),
-                                                                  duration: const Duration(
-                                                                      milliseconds:
-                                                                          4000),
-                                                                  backgroundColor:
-                                                                      FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .error,
-                                                                ),
+                                                              // Identifiants incorrect
+                                                              await showDialog(
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (alertDialogContext) {
+                                                                  return AlertDialog(
+                                                                    title: const Text(
+                                                                        'Connexion'),
+                                                                    content: const Text(
+                                                                        'Identifiants incorrects. Veuillez réessayer!'),
+                                                                    actions: [
+                                                                      TextButton(
+                                                                        onPressed:
+                                                                            () =>
+                                                                                Navigator.pop(alertDialogContext),
+                                                                        child: const Text(
+                                                                            'Continuer'),
+                                                                      ),
+                                                                    ],
+                                                                  );
+                                                                },
                                                               );
                                                             }
 
@@ -1063,7 +1025,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                         0.0,
                                                                         0.0,
                                                                         0.0),
-                                                            color: Colors.white,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .secondary,
                                                             textStyle:
                                                                 FlutterFlowTheme.of(
                                                                         context)
@@ -1083,17 +1047,31 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                     ),
                                                             elevation: 0.0,
                                                             borderSide:
-                                                                const BorderSide(
-                                                              color: Color(
-                                                                  0xFFF1F4F8),
+                                                                BorderSide(
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .accent1,
                                                               width: 2.0,
                                                             ),
                                                             borderRadius:
                                                                 BorderRadius
                                                                     .circular(
                                                                         40.0),
-                                                            hoverColor: const Color(
-                                                                0xFFF1F4F8),
+                                                            hoverColor:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondary,
+                                                            hoverBorderSide:
+                                                                BorderSide(
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .accent1,
+                                                              width: 2.0,
+                                                            ),
+                                                            hoverTextColor:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryText,
                                                           ),
                                                         ),
                                                       ),
@@ -1123,12 +1101,52 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                       null) {
                                                                     return;
                                                                   }
-                                                                  if (_model
-                                                                      .isAuthLogged!) {
+                                                                  if (loggedIn) {
                                                                     if (valueOrDefault<bool>(
                                                                             currentUserDocument?.isCompleteRegistration,
                                                                             false) ==
                                                                         true) {
+                                                                      // Geolocation
+                                                                      _model.userCurrentLocationApple =
+                                                                          await GeoJSLocationCall
+                                                                              .call();
+
+                                                                      // Update user document
+
+                                                                      await currentUserReference!
+                                                                          .update(
+                                                                              createUsersRecordData(
+                                                                        online:
+                                                                            true,
+                                                                        location:
+                                                                            updateLocationDataStruct(
+                                                                          LocationDataStruct.maybeFromMap((_model.userCurrentLocationApple?.jsonBody ??
+                                                                              '')),
+                                                                          clearUnsetFields:
+                                                                              false,
+                                                                        ),
+                                                                      ));
+                                                                      // go to dashboard
+
+                                                                      context
+                                                                          .goNamedAuth(
+                                                                        'dashboard',
+                                                                        context
+                                                                            .mounted,
+                                                                        extra: <String,
+                                                                            dynamic>{
+                                                                          kTransitionInfoKey:
+                                                                              const TransitionInfo(
+                                                                            hasTransition:
+                                                                                true,
+                                                                            transitionType:
+                                                                                PageTransitionType.fade,
+                                                                            duration:
+                                                                                Duration(milliseconds: 0),
+                                                                          ),
+                                                                        },
+                                                                      );
+
                                                                       // show snack bar
                                                                       ScaffoldMessenger.of(
                                                                               context)
@@ -1151,128 +1169,68 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                               FlutterFlowTheme.of(context).success,
                                                                         ),
                                                                       );
-                                                                      // Geolocation
-                                                                      _model.userCurrentLocationApple =
-                                                                          await GeoJSLocationCall
-                                                                              .call();
-
-                                                                      // Update user document
-
-                                                                      await currentUserReference!
-                                                                          .update(
-                                                                              createUsersRecordData(
-                                                                        online:
-                                                                            true,
-                                                                        location:
-                                                                            updateLocationDataStruct(
-                                                                          LocationDataStruct.maybeFromMap((_model.userCurrentLocationApple?.jsonBody ??
-                                                                              '')),
-                                                                          clearUnsetFields:
-                                                                              false,
-                                                                        ),
-                                                                      ));
-                                                                      // genearate and save firebase token
-                                                                      _model.isTokenGenerateAndSaveForApple =
-                                                                          await actions
-                                                                              .generateAndSaveDeviceToken(
-                                                                        currentUserUid,
-                                                                      );
-                                                                      if (_model
-                                                                              .isTokenGenerateAndSaveForApple ==
-                                                                          true) {
-                                                                        // info notification OK
-                                                                        ScaffoldMessenger.of(context)
-                                                                            .showSnackBar(
-                                                                          SnackBar(
-                                                                            content:
-                                                                                Text(
-                                                                              'Notifications activées',
-                                                                              style: TextStyle(
-                                                                                color: FlutterFlowTheme.of(context).primaryText,
-                                                                              ),
-                                                                            ),
-                                                                            duration:
-                                                                                const Duration(milliseconds: 4000),
-                                                                            backgroundColor:
-                                                                                FlutterFlowTheme.of(context).secondary,
-                                                                          ),
-                                                                        );
-                                                                      } else {
-                                                                        // info notification NOK
-                                                                        ScaffoldMessenger.of(context)
-                                                                            .showSnackBar(
-                                                                          SnackBar(
-                                                                            content:
-                                                                                Text(
-                                                                              'Notifications non activées!',
-                                                                              style: TextStyle(
-                                                                                color: FlutterFlowTheme.of(context).primaryText,
-                                                                              ),
-                                                                            ),
-                                                                            duration:
-                                                                                const Duration(milliseconds: 4000),
-                                                                            backgroundColor:
-                                                                                FlutterFlowTheme.of(context).error,
-                                                                          ),
-                                                                        );
-                                                                      }
-
-                                                                      // go to dashboard
-
-                                                                      context.goNamedAuth(
-                                                                          'dashboard',
-                                                                          context
-                                                                              .mounted);
                                                                     } else {
-                                                                      ScaffoldMessenger.of(
-                                                                              context)
-                                                                          .clearSnackBars();
-                                                                      ScaffoldMessenger.of(
-                                                                              context)
-                                                                          .showSnackBar(
-                                                                        SnackBar(
-                                                                          content:
-                                                                              Text(
-                                                                            'Completer son profil',
-                                                                            style:
-                                                                                TextStyle(
-                                                                              color: FlutterFlowTheme.of(context).primaryText,
-                                                                            ),
-                                                                          ),
-                                                                          duration:
-                                                                              const Duration(milliseconds: 5000),
-                                                                          backgroundColor:
-                                                                              FlutterFlowTheme.of(context).warning,
-                                                                        ),
+                                                                      // Profil to complete
+                                                                      await showDialog(
+                                                                        context:
+                                                                            context,
+                                                                        builder:
+                                                                            (alertDialogContext) {
+                                                                          return AlertDialog(
+                                                                            title:
+                                                                                const Text('Profil'),
+                                                                            content:
+                                                                                const Text('Completer votre profil.'),
+                                                                            actions: [
+                                                                              TextButton(
+                                                                                onPressed: () => Navigator.pop(alertDialogContext),
+                                                                                child: const Text('Continuer'),
+                                                                              ),
+                                                                            ],
+                                                                          );
+                                                                        },
                                                                       );
+                                                                      // Go to profile page
 
-                                                                      context.goNamedAuth(
-                                                                          'profilePage',
-                                                                          context
-                                                                              .mounted);
+                                                                      context
+                                                                          .goNamedAuth(
+                                                                        'profilePage',
+                                                                        context
+                                                                            .mounted,
+                                                                        extra: <String,
+                                                                            dynamic>{
+                                                                          kTransitionInfoKey:
+                                                                              const TransitionInfo(
+                                                                            hasTransition:
+                                                                                true,
+                                                                            transitionType:
+                                                                                PageTransitionType.fade,
+                                                                            duration:
+                                                                                Duration(milliseconds: 0),
+                                                                          ),
+                                                                        },
+                                                                      );
                                                                     }
                                                                   } else {
-                                                                    ScaffoldMessenger.of(
-                                                                            context)
-                                                                        .clearSnackBars();
-                                                                    ScaffoldMessenger.of(
-                                                                            context)
-                                                                        .showSnackBar(
-                                                                      SnackBar(
-                                                                        content:
-                                                                            Text(
-                                                                          'Identifiants incorrects. Veuillez réessayer.',
-                                                                          style:
-                                                                              TextStyle(
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).primaryText,
-                                                                          ),
-                                                                        ),
-                                                                        duration:
-                                                                            const Duration(milliseconds: 4000),
-                                                                        backgroundColor:
-                                                                            FlutterFlowTheme.of(context).error,
-                                                                      ),
+                                                                    // Identifiants incorrect
+                                                                    await showDialog(
+                                                                      context:
+                                                                          context,
+                                                                      builder:
+                                                                          (alertDialogContext) {
+                                                                        return AlertDialog(
+                                                                          title:
+                                                                              const Text('Connexion'),
+                                                                          content:
+                                                                              const Text('Identifiants incorrects. Veuillez réessayer!'),
+                                                                          actions: [
+                                                                            TextButton(
+                                                                              onPressed: () => Navigator.pop(alertDialogContext),
+                                                                              child: const Text('Continuer'),
+                                                                            ),
+                                                                          ],
+                                                                        );
+                                                                      },
                                                                     );
                                                                   }
 
@@ -1301,8 +1259,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                           0.0,
                                                                           0.0,
                                                                           0.0),
-                                                                  color: Colors
-                                                                      .white,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondary,
                                                                   textStyle: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyMedium
@@ -1321,17 +1280,30 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   elevation:
                                                                       0.0,
                                                                   borderSide:
-                                                                      const BorderSide(
-                                                                    color: Color(
-                                                                        0xFFF1F4F8),
+                                                                      BorderSide(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .accent1,
                                                                     width: 2.0,
                                                                   ),
                                                                   borderRadius:
                                                                       BorderRadius
                                                                           .circular(
                                                                               40.0),
-                                                                  hoverColor: const Color(
-                                                                      0xFFF1F4F8),
+                                                                  hoverColor: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondary,
+                                                                  hoverBorderSide:
+                                                                      BorderSide(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .accent1,
+                                                                    width: 2.0,
+                                                                  ),
+                                                                  hoverTextColor:
+                                                                      FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryText,
                                                                 ),
                                                               ),
                                                             ),
@@ -1340,7 +1312,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                 ),
                                               ],
                                             ),
-                                          ].addToStart(const SizedBox(height: 10.0)),
+                                          ],
                                         ).animateOnPageLoad(animationsMap[
                                             'columnOnPageLoadAnimation']!),
                                       ),
@@ -1351,7 +1323,7 @@ class _LoginWidgetState extends State<LoginWidget>
                               KeepAliveWidgetWrapper(
                                 builder: (context) => Padding(
                                   padding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 12.0, 0.0, 0.0),
+                                      0.0, 10.0, 0.0, 0.0),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
@@ -1389,7 +1361,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                                         fontFamily:
                                                             'Plus Jakarta Sans',
                                                         color:
-                                                            const Color(0xFF57636C),
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
                                                         fontSize: 14.0,
                                                         letterSpacing: 0.0,
                                                         fontWeight:
@@ -1397,8 +1371,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                       ),
                                                   enabledBorder:
                                                       OutlineInputBorder(
-                                                    borderSide: const BorderSide(
-                                                      color: Color(0xFFE0E3E7),
+                                                    borderSide: BorderSide(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
                                                       width: 2.0,
                                                     ),
                                                     borderRadius:
@@ -1407,8 +1384,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                   ),
                                                   focusedBorder:
                                                       OutlineInputBorder(
-                                                    borderSide: const BorderSide(
-                                                      color: Color(0xFF4B39EF),
+                                                    borderSide: BorderSide(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .accent2,
                                                       width: 2.0,
                                                     ),
                                                     borderRadius:
@@ -1436,7 +1416,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                                             40.0),
                                                   ),
                                                   filled: true,
-                                                  fillColor: Colors.white,
+                                                  fillColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .tertiary,
                                                   contentPadding:
                                                       const EdgeInsets.all(24.0),
                                                 ),
@@ -1446,12 +1429,14 @@ class _LoginWidgetState extends State<LoginWidget>
                                                         .override(
                                                           fontFamily:
                                                               'Plus Jakarta Sans',
-                                                          color:
-                                                              const Color(0xFF101213),
-                                                          fontSize: 14.0,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                          fontSize: 12.0,
                                                           letterSpacing: 0.0,
                                                           fontWeight:
                                                               FontWeight.w500,
+                                                          lineHeight: 0.5,
                                                         ),
                                                 keyboardType:
                                                     TextInputType.emailAddress,
@@ -1490,7 +1475,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                                         fontFamily:
                                                             'Plus Jakarta Sans',
                                                         color:
-                                                            const Color(0xFF57636C),
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
                                                         fontSize: 14.0,
                                                         letterSpacing: 0.0,
                                                         fontWeight:
@@ -1498,8 +1485,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                       ),
                                                   enabledBorder:
                                                       OutlineInputBorder(
-                                                    borderSide: const BorderSide(
-                                                      color: Color(0xFFE0E3E7),
+                                                    borderSide: BorderSide(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
                                                       width: 2.0,
                                                     ),
                                                     borderRadius:
@@ -1508,8 +1498,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                   ),
                                                   focusedBorder:
                                                       OutlineInputBorder(
-                                                    borderSide: const BorderSide(
-                                                      color: Color(0xFF4B39EF),
+                                                    borderSide: BorderSide(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .accent2,
                                                       width: 2.0,
                                                     ),
                                                     borderRadius:
@@ -1537,7 +1530,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                                             40.0),
                                                   ),
                                                   filled: true,
-                                                  fillColor: Colors.white,
+                                                  fillColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .tertiary,
                                                   contentPadding:
                                                       const EdgeInsets.all(24.0),
                                                   suffixIcon: InkWell(
@@ -1568,10 +1564,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                               'Plus Jakarta Sans',
                                                           color:
                                                               const Color(0xFF101213),
-                                                          fontSize: 14.0,
+                                                          fontSize: 12.0,
                                                           letterSpacing: 0.0,
                                                           fontWeight:
                                                               FontWeight.w500,
+                                                          lineHeight: 0.5,
                                                         ),
                                                 cursorColor: const Color(0xFF4B39EF),
                                                 validator: _model
@@ -1608,7 +1605,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                                         fontFamily:
                                                             'Plus Jakarta Sans',
                                                         color:
-                                                            const Color(0xFF57636C),
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
                                                         fontSize: 14.0,
                                                         letterSpacing: 0.0,
                                                         fontWeight:
@@ -1616,8 +1615,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                       ),
                                                   enabledBorder:
                                                       OutlineInputBorder(
-                                                    borderSide: const BorderSide(
-                                                      color: Color(0xFFE0E3E7),
+                                                    borderSide: BorderSide(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
                                                       width: 2.0,
                                                     ),
                                                     borderRadius:
@@ -1626,8 +1628,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                   ),
                                                   focusedBorder:
                                                       OutlineInputBorder(
-                                                    borderSide: const BorderSide(
-                                                      color: Color(0xFF4B39EF),
+                                                    borderSide: BorderSide(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .accent2,
                                                       width: 2.0,
                                                     ),
                                                     borderRadius:
@@ -1655,7 +1660,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                                             40.0),
                                                   ),
                                                   filled: true,
-                                                  fillColor: Colors.white,
+                                                  fillColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .tertiary,
                                                   contentPadding:
                                                       const EdgeInsets.all(24.0),
                                                   suffixIcon: InkWell(
@@ -1686,10 +1694,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                               'Plus Jakarta Sans',
                                                           color:
                                                               const Color(0xFF101213),
-                                                          fontSize: 14.0,
+                                                          fontSize: 12.0,
                                                           letterSpacing: 0.0,
                                                           fontWeight:
                                                               FontWeight.w500,
+                                                          lineHeight: 0.5,
                                                         ),
                                                 minLines: 1,
                                                 cursorColor: const Color(0xFF4B39EF),
@@ -1744,6 +1753,83 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   '') {
                                                             if (loggedIn ==
                                                                 true) {
+                                                              // Geolocation
+                                                              _model.userCurrentLocationCreatePassword =
+                                                                  await GeoJSLocationCall
+                                                                      .call();
+
+                                                              // Update user document
+
+                                                              await currentUserReference!
+                                                                  .update(
+                                                                      createUsersRecordData(
+                                                                online: true,
+                                                                location:
+                                                                    updateLocationDataStruct(
+                                                                  LocationDataStruct
+                                                                      .maybeFromMap((_model
+                                                                              .userCurrentLocationCreatePassword
+                                                                              ?.jsonBody ??
+                                                                          '')),
+                                                                  clearUnsetFields:
+                                                                      false,
+                                                                ),
+                                                              ));
+                                                              // genearate and save firebase token
+                                                              _model.isTokenGenerateAndSaveBtnCreatePassword =
+                                                                  await actions
+                                                                      .generateAndSaveDeviceToken(
+                                                                currentUserUid,
+                                                              );
+                                                              if (!_model
+                                                                  .isTokenGenerateAndSaveBtnCreatePassword!) {
+                                                                // info notification NOK
+                                                                await showDialog(
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (alertDialogContext) {
+                                                                    return AlertDialog(
+                                                                      title: const Text(
+                                                                          'Notifications'),
+                                                                      content: const Text(
+                                                                          'Le jeton n\'a pu être généré'),
+                                                                      actions: [
+                                                                        TextButton(
+                                                                          onPressed: () =>
+                                                                              Navigator.pop(alertDialogContext),
+                                                                          child:
+                                                                              const Text('Continuer'),
+                                                                        ),
+                                                                      ],
+                                                                    );
+                                                                  },
+                                                                );
+                                                              }
+                                                              // GO TO PROFILE PAGE
+
+                                                              context
+                                                                  .pushNamedAuth(
+                                                                'profilePage',
+                                                                context.mounted,
+                                                                extra: <String,
+                                                                    dynamic>{
+                                                                  kTransitionInfoKey:
+                                                                      const TransitionInfo(
+                                                                    hasTransition:
+                                                                        true,
+                                                                    transitionType:
+                                                                        PageTransitionType
+                                                                            .fade,
+                                                                    duration: Duration(
+                                                                        milliseconds:
+                                                                            0),
+                                                                  ),
+                                                                },
+                                                                ignoreRedirect:
+                                                                    true,
+                                                              );
+
                                                               ScaffoldMessenger
                                                                       .of(context)
                                                                   .showSnackBar(
@@ -1765,35 +1851,6 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                               context)
                                                                           .success,
                                                                 ),
-                                                              );
-                                                              // LOG OUT
-                                                              GoRouter.of(
-                                                                      context)
-                                                                  .prepareAuthEvent();
-                                                              await authManager
-                                                                  .signOut();
-                                                              GoRouter.of(
-                                                                      context)
-                                                                  .clearRedirectLocation();
-
-                                                              context
-                                                                  .pushNamedAuth(
-                                                                'profilePage',
-                                                                context.mounted,
-                                                                extra: <String,
-                                                                    dynamic>{
-                                                                  kTransitionInfoKey:
-                                                                      const TransitionInfo(
-                                                                    hasTransition:
-                                                                        true,
-                                                                    transitionType:
-                                                                        PageTransitionType
-                                                                            .fade,
-                                                                    duration: Duration(
-                                                                        milliseconds:
-                                                                            0),
-                                                                  ),
-                                                                },
                                                               );
                                                             } else {
                                                               // test
@@ -1828,7 +1885,8 @@ class _LoginWidgetState extends State<LoginWidget>
                                                               // LOG OUT
                                                               GoRouter.of(
                                                                       context)
-                                                                  .prepareAuthEvent();
+                                                                  .prepareAuthEvent(
+                                                                      true);
                                                               await authManager
                                                                   .signOut();
                                                               GoRouter.of(
@@ -1860,30 +1918,26 @@ class _LoginWidgetState extends State<LoginWidget>
                                                             }
                                                           } else {
                                                             // test
-                                                            unawaited(
-                                                              () async {
-                                                                await showDialog(
-                                                                  context:
-                                                                      context,
-                                                                  builder:
-                                                                      (alertDialogContext) {
-                                                                    return AlertDialog(
-                                                                      title: const Text(
-                                                                          'Echec'),
-                                                                      content: Text(
-                                                                          'Le compte n\' a pu etre creé : ${_model.emailAddressCreateTextController.text}'),
-                                                                      actions: [
-                                                                        TextButton(
-                                                                          onPressed: () =>
+                                                            await showDialog(
+                                                              context: context,
+                                                              builder:
+                                                                  (alertDialogContext) {
+                                                                return AlertDialog(
+                                                                  title: const Text(
+                                                                      'Echec'),
+                                                                  content: Text(
+                                                                      'Le compte n\' a pu etre creé : ${_model.emailAddressCreateTextController.text}'),
+                                                                  actions: [
+                                                                    TextButton(
+                                                                      onPressed:
+                                                                          () =>
                                                                               Navigator.pop(alertDialogContext),
-                                                                          child:
-                                                                              const Text('Continuer'),
-                                                                        ),
-                                                                      ],
-                                                                    );
-                                                                  },
+                                                                      child: const Text(
+                                                                          'Continuer'),
+                                                                    ),
+                                                                  ],
                                                                 );
-                                                              }(),
+                                                              },
                                                             );
                                                             ScaffoldMessenger
                                                                     .of(context)
@@ -1923,7 +1977,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                                         const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 0.0,
                                                                 0.0, 0.0),
-                                                    color: Colors.black,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary,
                                                     textStyle: FlutterFlowTheme
                                                             .of(context)
                                                         .titleSmall
@@ -1945,6 +2001,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                                         BorderRadius.circular(
                                                             40.0),
                                                     disabledColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .secondaryBackground,
+                                                    disabledTextColor:
                                                         FlutterFlowTheme.of(
                                                                 context)
                                                             .secondaryText,
@@ -1974,8 +2034,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                                         .override(
                                                           fontFamily:
                                                               'Plus Jakarta Sans',
-                                                          color:
-                                                              const Color(0xFF57636C),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
                                                           fontSize: 14.0,
                                                           letterSpacing: 0.0,
                                                           fontWeight:
@@ -1999,7 +2060,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                   onPressed: () async {
                                                     // Google account creation
                                                     GoRouter.of(context)
-                                                        .prepareAuthEvent();
+                                                        .prepareAuthEvent(true);
                                                     final user =
                                                         await authManager
                                                             .signInWithGoogle(
@@ -2007,10 +2068,72 @@ class _LoginWidgetState extends State<LoginWidget>
                                                     if (user == null) {
                                                       return;
                                                     }
+                                                    // Delay
                                                     await Future.delayed(
                                                         const Duration(
                                                             milliseconds: 500));
                                                     if (loggedIn == true) {
+                                                      // Geolocation
+                                                      _model.userCurrentLocationCreateGoogle =
+                                                          await GeoJSLocationCall
+                                                              .call();
+
+                                                      // UPDATE AUTHENTICATED USER
+
+                                                      await currentUserReference!
+                                                          .update(
+                                                              createUsersRecordData(
+                                                        name: functions.extractName(
+                                                            currentUserDisplayName),
+                                                        nickname: functions
+                                                            .extractNickname(
+                                                                currentUserDisplayName),
+                                                        online: true,
+                                                        location:
+                                                            updateLocationDataStruct(
+                                                          LocationDataStruct
+                                                              .maybeFromMap((_model
+                                                                      .userCurrentLocationCreateGoogle
+                                                                      ?.jsonBody ??
+                                                                  '')),
+                                                          clearUnsetFields:
+                                                              false,
+                                                        ),
+                                                      ));
+                                                      // genearate and save firebase token
+                                                      _model.isTokenGenerateAndSaveBtnCreateGoogle =
+                                                          await actions
+                                                              .generateAndSaveDeviceToken(
+                                                        currentUserUid,
+                                                      );
+                                                      if (!_model
+                                                          .isTokenGenerateAndSaveBtnCreateGoogle!) {
+                                                        // info notification NOK
+                                                        await showDialog(
+                                                          context: context,
+                                                          builder:
+                                                              (alertDialogContext) {
+                                                            return AlertDialog(
+                                                              title: const Text(
+                                                                  'Notifications'),
+                                                              content: const Text(
+                                                                  'Le jeton n\'a pu être généré'),
+                                                              actions: [
+                                                                TextButton(
+                                                                  onPressed: () =>
+                                                                      Navigator.pop(
+                                                                          alertDialogContext),
+                                                                  child: const Text(
+                                                                      'Continuer'),
+                                                                ),
+                                                              ],
+                                                            );
+                                                          },
+                                                        );
+                                                      }
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .clearSnackBars();
                                                       ScaffoldMessenger.of(
                                                               context)
                                                           .showSnackBar(
@@ -2032,37 +2155,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   .success,
                                                         ),
                                                       );
-                                                      // SET  SOCIAL NETWORK PROFILE
-                                                      FFAppState()
-                                                          .updateSocialNetworkUserDataStruct(
-                                                        (e) => e
-                                                          ..name = functions
-                                                              .extractName(
-                                                                  currentUserDisplayName)
-                                                          ..nickname = functions
-                                                              .extractNickname(
-                                                                  currentUserDisplayName),
-                                                      );
-                                                      // LOG OUT
-                                                      GoRouter.of(context)
-                                                          .prepareAuthEvent();
-                                                      await authManager
-                                                          .signOut();
-                                                      GoRouter.of(context)
-                                                          .clearRedirectLocation();
+                                                      // GO TO PROFILE PAGE
 
                                                       context.pushNamedAuth(
                                                         'profilePage',
                                                         context.mounted,
-                                                        queryParameters: {
-                                                          'socialNetworkUserData':
-                                                              serializeParam(
-                                                            FFAppState()
-                                                                .socialNetworkUserData,
-                                                            ParamType
-                                                                .DataStruct,
-                                                          ),
-                                                        }.withoutNulls,
                                                         extra: <String,
                                                             dynamic>{
                                                           kTransitionInfoKey:
@@ -2076,15 +2173,8 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                     0),
                                                           ),
                                                         },
+                                                        ignoreRedirect: true,
                                                       );
-
-                                                      // RESET  SOCIAL NETWORK PROFILE
-                                                      FFAppState()
-                                                              .socialNetworkUserData =
-                                                          SocialNetworkUserDataTypeStruct
-                                                              .fromSerializableMap(
-                                                                  jsonDecode(
-                                                                      '{\"name\":\"\"}'));
                                                     } else {
                                                       // test
                                                       unawaited(
@@ -2114,7 +2204,8 @@ class _LoginWidgetState extends State<LoginWidget>
                                                       );
                                                       // LOG OUT
                                                       GoRouter.of(context)
-                                                          .prepareAuthEvent();
+                                                          .prepareAuthEvent(
+                                                              true);
                                                       await authManager
                                                           .signOut();
                                                       GoRouter.of(context)
@@ -2122,28 +2213,9 @@ class _LoginWidgetState extends State<LoginWidget>
 
                                                       await authManager
                                                           .deleteUser(context);
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .showSnackBar(
-                                                        SnackBar(
-                                                          content: Text(
-                                                            'Echec création de votre compte',
-                                                            style: TextStyle(
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primaryText,
-                                                            ),
-                                                          ),
-                                                          duration: const Duration(
-                                                              milliseconds:
-                                                                  4000),
-                                                          backgroundColor:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .error,
-                                                        ),
-                                                      );
                                                     }
+
+                                                    safeSetState(() {});
                                                   },
                                                   text: 'Google',
                                                   icon: const FaIcon(
@@ -2161,7 +2233,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                                         const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 0.0,
                                                                 0.0, 0.0),
-                                                    color: Colors.white,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondary,
                                                     textStyle: FlutterFlowTheme
                                                             .of(context)
                                                         .bodyMedium
@@ -2176,15 +2250,31 @@ class _LoginWidgetState extends State<LoginWidget>
                                                               FontWeight.bold,
                                                         ),
                                                     elevation: 0.0,
-                                                    borderSide: const BorderSide(
-                                                      color: Color(0xFFF1F4F8),
+                                                    borderSide: BorderSide(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .accent1,
                                                       width: 2.0,
                                                     ),
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             40.0),
                                                     hoverColor:
-                                                        const Color(0xFFF1F4F8),
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .secondary,
+                                                    hoverBorderSide: BorderSide(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .accent1,
+                                                      width: 2.0,
+                                                    ),
+                                                    hoverTextColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryText,
                                                   ),
                                                 ),
                                               ),
@@ -2202,7 +2292,8 @@ class _LoginWidgetState extends State<LoginWidget>
                                                         onPressed: () async {
                                                           // Apple account creation
                                                           GoRouter.of(context)
-                                                              .prepareAuthEvent();
+                                                              .prepareAuthEvent(
+                                                                  true);
                                                           final user =
                                                               await authManager
                                                                   .signInWithApple(
@@ -2210,12 +2301,76 @@ class _LoginWidgetState extends State<LoginWidget>
                                                           if (user == null) {
                                                             return;
                                                           }
+                                                          // Delay
                                                           await Future.delayed(
                                                               const Duration(
                                                                   milliseconds:
                                                                       500));
                                                           if (loggedIn ==
                                                               true) {
+                                                            // Geolocation
+                                                            _model.userCurrentLocationCreateApple =
+                                                                await GeoJSLocationCall
+                                                                    .call();
+
+                                                            // UPDATE AUTHENTICATED USER
+
+                                                            await currentUserReference!
+                                                                .update(
+                                                                    createUsersRecordData(
+                                                              name: functions
+                                                                  .extractName(
+                                                                      currentUserDisplayName),
+                                                              nickname: functions
+                                                                  .extractNickname(
+                                                                      currentUserDisplayName),
+                                                              online: true,
+                                                              location:
+                                                                  updateLocationDataStruct(
+                                                                LocationDataStruct
+                                                                    .maybeFromMap((_model
+                                                                            .userCurrentLocationCreateApple
+                                                                            ?.jsonBody ??
+                                                                        '')),
+                                                                clearUnsetFields:
+                                                                    false,
+                                                              ),
+                                                            ));
+                                                            // genearate and save firebase token
+                                                            _model.isTokenGenerateAndSaveBtnCreateApple =
+                                                                await actions
+                                                                    .generateAndSaveDeviceToken(
+                                                              currentUserUid,
+                                                            );
+                                                            if (!_model
+                                                                .isTokenGenerateAndSaveBtnCreateApple!) {
+                                                              // info notification NOK
+                                                              await showDialog(
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (alertDialogContext) {
+                                                                  return AlertDialog(
+                                                                    title: const Text(
+                                                                        'Notifications'),
+                                                                    content: const Text(
+                                                                        'Le jeton n\'a pu être généré'),
+                                                                    actions: [
+                                                                      TextButton(
+                                                                        onPressed:
+                                                                            () =>
+                                                                                Navigator.pop(alertDialogContext),
+                                                                        child: const Text(
+                                                                            'Continuer'),
+                                                                      ),
+                                                                    ],
+                                                                  );
+                                                                },
+                                                              );
+                                                            }
+                                                            ScaffoldMessenger
+                                                                    .of(context)
+                                                                .clearSnackBars();
                                                             ScaffoldMessenger
                                                                     .of(context)
                                                                 .showSnackBar(
@@ -2238,38 +2393,12 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                         .success,
                                                               ),
                                                             );
-                                                            // SET  SOCIAL NETWORK PROFILE
-                                                            FFAppState()
-                                                                .updateSocialNetworkUserDataStruct(
-                                                              (e) => e
-                                                                ..name = functions
-                                                                    .extractName(
-                                                                        currentUserDisplayName)
-                                                                ..nickname = functions
-                                                                    .extractNickname(
-                                                                        currentUserDisplayName),
-                                                            );
-                                                            // LOG OUT
-                                                            GoRouter.of(context)
-                                                                .prepareAuthEvent();
-                                                            await authManager
-                                                                .signOut();
-                                                            GoRouter.of(context)
-                                                                .clearRedirectLocation();
+                                                            // GO TO PROFILE PAGE
 
                                                             context
                                                                 .pushNamedAuth(
                                                               'profilePage',
                                                               context.mounted,
-                                                              queryParameters: {
-                                                                'socialNetworkUserData':
-                                                                    serializeParam(
-                                                                  FFAppState()
-                                                                      .socialNetworkUserData,
-                                                                  ParamType
-                                                                      .DataStruct,
-                                                                ),
-                                                              }.withoutNulls,
                                                               extra: <String,
                                                                   dynamic>{
                                                                 kTransitionInfoKey:
@@ -2284,15 +2413,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                           0),
                                                                 ),
                                                               },
+                                                              ignoreRedirect:
+                                                                  true,
                                                             );
-
-                                                            // RESET  SOCIAL NETWORK PROFILE
-                                                            FFAppState()
-                                                                    .socialNetworkUserData =
-                                                                SocialNetworkUserDataTypeStruct
-                                                                    .fromSerializableMap(
-                                                                        jsonDecode(
-                                                                            '{\"name\":\"\"}'));
                                                           } else {
                                                             // test
                                                             unawaited(
@@ -2322,7 +2445,8 @@ class _LoginWidgetState extends State<LoginWidget>
                                                             );
                                                             // LOG OUT
                                                             GoRouter.of(context)
-                                                                .prepareAuthEvent();
+                                                                .prepareAuthEvent(
+                                                                    true);
                                                             await authManager
                                                                 .signOut();
                                                             GoRouter.of(context)
@@ -2331,29 +2455,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                                             await authManager
                                                                 .deleteUser(
                                                                     context);
-                                                            ScaffoldMessenger
-                                                                    .of(context)
-                                                                .showSnackBar(
-                                                              SnackBar(
-                                                                content: Text(
-                                                                  'Echec création de votre compte',
-                                                                  style:
-                                                                      TextStyle(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryText,
-                                                                  ),
-                                                                ),
-                                                                duration: const Duration(
-                                                                    milliseconds:
-                                                                        4000),
-                                                                backgroundColor:
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .error,
-                                                              ),
-                                                            );
                                                           }
+
+                                                          safeSetState(() {});
                                                         },
                                                         text: 'Apple',
                                                         icon: const Icon(
@@ -2378,7 +2482,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                       0.0,
                                                                       0.0,
                                                                       0.0),
-                                                          color: Colors.white,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondary,
                                                           textStyle:
                                                               FlutterFlowTheme.of(
                                                                       context)
@@ -2398,9 +2504,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   ),
                                                           elevation: 0.0,
                                                           borderSide:
-                                                              const BorderSide(
-                                                            color: Color(
-                                                                0xFFF1F4F8),
+                                                              BorderSide(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .accent1,
                                                             width: 2.0,
                                                           ),
                                                           borderRadius:
@@ -2408,7 +2515,20 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   .circular(
                                                                       40.0),
                                                           hoverColor:
-                                                              const Color(0xFFF1F4F8),
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .secondary,
+                                                          hoverBorderSide:
+                                                              BorderSide(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .accent1,
+                                                            width: 2.0,
+                                                          ),
+                                                          hoverTextColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .primaryText,
                                                         ),
                                                       ),
                                                     ),
@@ -2416,7 +2536,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                           ),
                                         ],
                                       ),
-                                    ].addToStart(const SizedBox(height: 10.0)),
+                                    ],
                                   ),
                                 ),
                               ),

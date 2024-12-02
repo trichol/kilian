@@ -104,13 +104,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                     'isEditMode',
                     ParamType.bool,
                   ),
-                  socialNetworkUserData: params.getParam(
-                    'socialNetworkUserData',
-                    ParamType.DataStruct,
-                    isList: false,
-                    structBuilder:
-                        SocialNetworkUserDataTypeStruct.fromSerializableMap,
-                  ),
                 ),
         ),
         FFRoute(

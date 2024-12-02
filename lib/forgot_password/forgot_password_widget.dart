@@ -62,7 +62,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
         title: Text(
           'KILIAN',
           style: FlutterFlowTheme.of(context).headlineMedium.override(
-                fontFamily: 'Inter Tight',
+                fontFamily: 'Roboto',
                 color: Colors.white,
                 fontSize: 28.0,
                 letterSpacing: 0.0,

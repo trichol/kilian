@@ -7,6 +7,19 @@ import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class ProfilePageModel extends FlutterFlowModel<ProfilePageWidget> {
+  ///  Local state fields for this page.
+
+  List<String> addressSuggestions = [];
+  void addToAddressSuggestions(String item) => addressSuggestions.add(item);
+  void removeFromAddressSuggestions(String item) =>
+      addressSuggestions.remove(item);
+  void removeAtIndexFromAddressSuggestions(int index) =>
+      addressSuggestions.removeAt(index);
+  void insertAtIndexInAddressSuggestions(int index, String item) =>
+      addressSuggestions.insert(index, item);
+  void updateAddressSuggestionsAtIndex(int index, Function(String) updateFn) =>
+      addressSuggestions[index] = updateFn(addressSuggestions[index]);
+
   ///  State fields for stateful widgets in this page.
 
   final formKey = GlobalKey<FormState>();
@@ -42,18 +55,6 @@ class ProfilePageModel extends FlutterFlowModel<ProfilePageWidget> {
   FocusNode? nicknameFocusNode;
   TextEditingController? nicknameTextController;
   String? Function(BuildContext, String?)? nicknameTextControllerValidator;
-  String? _nicknameTextControllerValidator(BuildContext context, String? val) {
-    if (val == null || val.isEmpty) {
-      return 'Champ obligatoire';
-    }
-
-    if (val.length < 2) {
-      return 'Minimum 2 caractères';
-    }
-
-    return null;
-  }
-
   // State field(s) for adress widget.
   FocusNode? adressFocusNode;
   TextEditingController? adressTextController;
@@ -70,6 +71,8 @@ class ProfilePageModel extends FlutterFlowModel<ProfilePageWidget> {
     return null;
   }
 
+  // Stores action output result for [Custom Action - getAddressSuggestions] action in adress widget.
+  List<String>? listSuggested;
   // State field(s) for phone_number widget.
   FocusNode? phoneNumberFocusNode;
   TextEditingController? phoneNumberTextController;
@@ -122,7 +125,6 @@ class ProfilePageModel extends FlutterFlowModel<ProfilePageWidget> {
   @override
   void initState(BuildContext context) {
     nameTextControllerValidator = _nameTextControllerValidator;
-    nicknameTextControllerValidator = _nicknameTextControllerValidator;
     adressTextControllerValidator = _adressTextControllerValidator;
     phoneNumberTextControllerValidator = _phoneNumberTextControllerValidator;
     birthdayTextControllerValidator = _birthdayTextControllerValidator;

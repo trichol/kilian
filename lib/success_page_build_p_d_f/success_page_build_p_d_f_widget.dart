@@ -170,7 +170,7 @@ class _SuccessPageBuildPDFWidgetState extends State<SuccessPageBuildPDFWidget> {
                           textAlign: TextAlign.center,
                           style:
                               FlutterFlowTheme.of(context).titleSmall.override(
-                                    fontFamily: 'Inter Tight',
+                                    fontFamily: 'Roboto',
                                     color: Colors.black,
                                     fontSize: 18.0,
                                     letterSpacing: 0.0,
@@ -414,7 +414,7 @@ class _SuccessPageBuildPDFWidgetState extends State<SuccessPageBuildPDFWidget> {
                         color: Colors.black,
                         textStyle:
                             FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Inter Tight',
+                                  fontFamily: 'Roboto',
                                   color: Colors.white,
                                   letterSpacing: 0.0,
                                 ),

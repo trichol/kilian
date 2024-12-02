@@ -157,7 +157,7 @@ class _MySignatureWidgetState extends State<MySignatureWidget> {
                 iconPadding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                 color: Colors.black,
                 textStyle: FlutterFlowTheme.of(context).labelSmall.override(
-                      fontFamily: 'Inter',
+                      fontFamily: 'Mukta',
                       color: FlutterFlowTheme.of(context).info,
                       letterSpacing: 0.0,
                     ),

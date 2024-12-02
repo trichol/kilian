@@ -23,11 +23,9 @@ class ProfilePageWidget extends StatefulWidget {
   const ProfilePageWidget({
     super.key,
     bool? isEditMode,
-    this.socialNetworkUserData,
   }) : isEditMode = isEditMode ?? true;
 
   final bool isEditMode;
-  final SocialNetworkUserDataTypeStruct? socialNetworkUserData;
 
   @override
   State<ProfilePageWidget> createState() => _ProfilePageWidgetState();
@@ -57,21 +55,11 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
     });
 
     _model.nameTextController ??= TextEditingController(
-        text: (widget.socialNetworkUserData?.name != null &&
-                    widget.socialNetworkUserData?.name != '') &&
-                !valueOrDefault<bool>(
-                    currentUserDocument?.isCompleteRegistration, false)
-            ? widget.socialNetworkUserData?.name
-            : valueOrDefault(currentUserDocument?.name, ''));
+        text: valueOrDefault(currentUserDocument?.name, ''));
     _model.nameFocusNode ??= FocusNode();
 
     _model.nicknameTextController ??= TextEditingController(
-        text: (widget.socialNetworkUserData?.nickname != null &&
-                    widget.socialNetworkUserData?.nickname != '') &&
-                !valueOrDefault<bool>(
-                    currentUserDocument?.isCompleteRegistration, false)
-            ? widget.socialNetworkUserData?.nickname
-            : valueOrDefault(currentUserDocument?.nickname, ''));
+        text: valueOrDefault(currentUserDocument?.nickname, ''));
     _model.nicknameFocusNode ??= FocusNode();
 
     _model.adressTextController ??= TextEditingController(
@@ -104,7 +92,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
         key: scaffoldKey,
         backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Colors.black,
+          backgroundColor: FlutterFlowTheme.of(context).primary,
           automaticallyImplyLeading: false,
           leading: FlutterFlowIconButton(
             borderColor: Colors.transparent,
@@ -135,7 +123,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
               child: Text(
                 'KILIAN',
                 style: FlutterFlowTheme.of(context).headlineMedium.override(
-                      fontFamily: 'Inter Tight',
+                      fontFamily: 'Roboto',
                       color: Colors.white,
                       fontSize: 18.0,
                       letterSpacing: 0.0,
@@ -175,7 +163,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .headlineSmall
                                       .override(
-                                        fontFamily: 'Inter Tight',
+                                        fontFamily: 'Roboto',
                                         color: FlutterFlowTheme.of(context)
                                             .secondaryBackground,
                                         fontSize: 20.0,
@@ -225,36 +213,46 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                         }
                                       },
                                       selectedChipStyle: ChipStyle(
-                                        backgroundColor: Colors.black,
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .primary,
                                         textStyle: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily: 'Inter',
+                                              fontFamily: 'Mukta',
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .info,
                                               letterSpacing: 0.0,
                                             ),
-                                        iconColor:
-                                            FlutterFlowTheme.of(context).info,
+                                        iconColor: FlutterFlowTheme.of(context)
+                                            .tertiary,
                                         iconSize: 16.0,
                                         elevation: 0.0,
+                                        borderColor:
+                                            FlutterFlowTheme.of(context)
+                                                .accent1,
                                         borderRadius:
                                             BorderRadius.circular(8.0),
                                       ),
                                       unselectedChipStyle: ChipStyle(
-                                        backgroundColor: Colors.white,
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .tertiary,
                                         textStyle: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily: 'Inter',
+                                              fontFamily: 'Mukta',
                                               color: Colors.black,
                                               letterSpacing: 0.0,
                                             ),
-                                        iconColor: Colors.black,
+                                        iconColor: FlutterFlowTheme.of(context)
+                                            .primary,
                                         iconSize: 16.0,
                                         elevation: 0.0,
-                                        borderColor: Colors.black,
+                                        borderColor:
+                                            FlutterFlowTheme.of(context)
+                                                .accent1,
                                         borderRadius:
                                             BorderRadius.circular(8.0),
                                       ),
@@ -291,28 +289,32 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                               options: const ['M.', 'Me.'],
                               onChanged: (val) => safeSetState(
                                   () => _model.selectorGenreValue = val),
-                              width: 100.0,
+                              width: 70.0,
                               height: 45.0,
                               textStyle: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: 'Inter',
-                                    color: Colors.white,
+                                    fontFamily: 'Mukta',
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    fontSize: 12.0,
                                     letterSpacing: 0.0,
+                                    lineHeight: 1.0,
                                   ),
-                              hintText: 'Genre...',
+                              hintText: 'M.',
                               icon: const Icon(
                                 Icons.keyboard_arrow_down_rounded,
                                 color: Colors.white,
                                 size: 20.0,
                               ),
-                              fillColor: Colors.black,
+                              fillColor: FlutterFlowTheme.of(context).primary,
                               elevation: 2.0,
-                              borderColor: Colors.black,
+                              borderColor:
+                                  FlutterFlowTheme.of(context).alternate,
                               borderWidth: 0.0,
                               borderRadius: 20.0,
                               margin: const EdgeInsetsDirectional.fromSTEB(
-                                  12.0, 0.0, 12.0, 0.0),
+                                  10.0, 0.0, 10.0, 0.0),
                               hidesUnderline: true,
                               isOverButton: false,
                               isSearchable: false,
@@ -336,67 +338,78 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                   readOnly: widget.isEditMode == false,
                                   obscureText: false,
                                   decoration: InputDecoration(
-                                    labelText: 'Nom complet',
+                                    labelText: 'Nom',
                                     labelStyle: FlutterFlowTheme.of(context)
                                         .labelMedium
                                         .override(
-                                          fontFamily: 'Inter',
+                                          fontFamily: 'Mukta',
                                           color: const Color(0xFF606A85),
-                                          fontSize: 14.0,
+                                          fontSize: 12.0,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.w500,
+                                          lineHeight: 0.5,
                                         ),
                                     hintText: valueOrDefault(
                                         currentUserDocument?.name, ''),
                                     hintStyle: FlutterFlowTheme.of(context)
                                         .labelMedium
                                         .override(
-                                          fontFamily: 'Inter',
-                                          color: const Color(0xFF606A85),
-                                          fontSize: 14.0,
+                                          fontFamily: 'Mukta',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          fontSize: 12.0,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.w500,
+                                          lineHeight: 0.5,
                                         ),
                                     enabledBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Color(0xFFE5E7EB),
+                                      borderSide: BorderSide(
+                                        color: FlutterFlowTheme.of(context)
+                                            .accent1,
                                         width: 1.0,
                                       ),
-                                      borderRadius: BorderRadius.circular(40.0),
+                                      borderRadius: BorderRadius.circular(4.0),
                                     ),
                                     focusedBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Color(0x00000000),
+                                      borderSide: BorderSide(
+                                        color: FlutterFlowTheme.of(context)
+                                            .accent2,
                                         width: 1.0,
                                       ),
-                                      borderRadius: BorderRadius.circular(40.0),
+                                      borderRadius: BorderRadius.circular(4.0),
                                     ),
                                     errorBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Color(0x00000000),
+                                      borderSide: BorderSide(
+                                        color:
+                                            FlutterFlowTheme.of(context).error,
                                         width: 1.0,
                                       ),
-                                      borderRadius: BorderRadius.circular(40.0),
+                                      borderRadius: BorderRadius.circular(4.0),
                                     ),
                                     focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Color(0x00000000),
+                                      borderSide: BorderSide(
+                                        color:
+                                            FlutterFlowTheme.of(context).error,
                                         width: 1.0,
                                       ),
-                                      borderRadius: BorderRadius.circular(40.0),
+                                      borderRadius: BorderRadius.circular(4.0),
                                     ),
                                     filled: true,
-                                    fillColor: Colors.white,
+                                    fillColor:
+                                        FlutterFlowTheme.of(context).tertiary,
                                     contentPadding:
                                         const EdgeInsetsDirectional.fromSTEB(
-                                            24.0, 24.0, 20.0, 24.0),
+                                            10.0, 0.0, 10.0, 0.0),
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: 'Inter',
-                                        color: const Color(0xFF15161E),
+                                        fontFamily: 'Mukta',
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                        fontSize: 12.0,
                                         letterSpacing: 0.0,
+                                        lineHeight: 0.5,
                                       ),
                                   keyboardType: TextInputType.name,
                                   validator: _model.nameTextControllerValidator
@@ -405,106 +418,100 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                               ),
                             ),
                           ),
-                        ],
-                      ),
-                      AuthUserStreamWidget(
-                        builder: (context) => SizedBox(
-                          width: double.infinity,
-                          child: TextFormField(
-                            controller: _model.nicknameTextController,
-                            focusNode: _model.nicknameFocusNode,
-                            onChanged: (_) => EasyDebounce.debounce(
-                              '_model.nicknameTextController',
-                              const Duration(milliseconds: 500),
-                              () => safeSetState(() {}),
-                            ),
-                            onFieldSubmitted: (_) async {
-                              if (valueOrDefault<bool>(
-                                      currentUserDocument
-                                          ?.isCompleteRegistration,
-                                      false) ==
-                                  true) {
-                                context.safePop();
-                              } else {
-                                await authManager.deleteUser(context);
-                                GoRouter.of(context).prepareAuthEvent();
-                                await authManager.signOut();
-                                GoRouter.of(context).clearRedirectLocation();
-
-                                context.goNamedAuth('login', context.mounted);
-                              }
-                            },
-                            autofocus: false,
-                            textInputAction: TextInputAction.next,
-                            readOnly: widget.isEditMode == false,
-                            obscureText: false,
-                            decoration: InputDecoration(
-                              labelText: 'Prenom',
-                              labelStyle: FlutterFlowTheme.of(context)
-                                  .labelMedium
-                                  .override(
-                                    fontFamily: 'Inter',
-                                    color: const Color(0xFF606A85),
-                                    fontSize: 14.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w500,
+                          Expanded(
+                            child: AuthUserStreamWidget(
+                              builder: (context) => SizedBox(
+                                width: double.infinity,
+                                child: TextFormField(
+                                  controller: _model.nicknameTextController,
+                                  focusNode: _model.nicknameFocusNode,
+                                  onChanged: (_) => EasyDebounce.debounce(
+                                    '_model.nicknameTextController',
+                                    const Duration(milliseconds: 500),
+                                    () => safeSetState(() {}),
                                   ),
-                              hintText: valueOrDefault(
-                                  currentUserDocument?.nickname, ''),
-                              hintStyle: FlutterFlowTheme.of(context)
-                                  .labelMedium
-                                  .override(
-                                    fontFamily: 'Inter',
-                                    color: const Color(0xFF606A85),
-                                    fontSize: 14.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w500,
+                                  autofocus: false,
+                                  textInputAction: TextInputAction.next,
+                                  readOnly: widget.isEditMode == false,
+                                  obscureText: false,
+                                  decoration: InputDecoration(
+                                    labelText: 'Prenom',
+                                    labelStyle: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .override(
+                                          fontFamily: 'Mukta',
+                                          color: const Color(0xFF606A85),
+                                          fontSize: 14.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                    hintText: valueOrDefault(
+                                        currentUserDocument?.nickname, ''),
+                                    hintStyle: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .override(
+                                          fontFamily: 'Mukta',
+                                          color: const Color(0xFF606A85),
+                                          fontSize: 14.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: FlutterFlowTheme.of(context)
+                                            .accent1,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(4.0),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: FlutterFlowTheme.of(context)
+                                            .accent1,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(4.0),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color:
+                                            FlutterFlowTheme.of(context).error,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(4.0),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color:
+                                            FlutterFlowTheme.of(context).error,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(4.0),
+                                    ),
+                                    filled: true,
+                                    fillColor:
+                                        FlutterFlowTheme.of(context).tertiary,
+                                    contentPadding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            10.0, 0.0, 10.0, 0.0),
                                   ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Color(0xFFE5E7EB),
-                                  width: 1.0,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Mukta',
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                        letterSpacing: 0.0,
+                                      ),
+                                  keyboardType: TextInputType.name,
+                                  validator: _model
+                                      .nicknameTextControllerValidator
+                                      .asValidator(context),
                                 ),
-                                borderRadius: BorderRadius.circular(40.0),
                               ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Color(0x00000000),
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(40.0),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Color(0x00000000),
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(40.0),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Color(0x00000000),
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(40.0),
-                              ),
-                              filled: true,
-                              fillColor: Colors.white,
-                              contentPadding: const EdgeInsetsDirectional.fromSTEB(
-                                  24.0, 24.0, 20.0, 24.0),
                             ),
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Inter',
-                                  color: const Color(0xFF15161E),
-                                  letterSpacing: 0.0,
-                                ),
-                            keyboardType: TextInputType.name,
-                            validator: _model.nicknameTextControllerValidator
-                                .asValidator(context),
                           ),
-                        ),
+                        ].divide(const SizedBox(width: 5.0)),
                       ),
                       AuthUserStreamWidget(
                         builder: (context) => SizedBox(
@@ -515,7 +522,20 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                             onChanged: (_) => EasyDebounce.debounce(
                               '_model.adressTextController',
                               const Duration(milliseconds: 500),
-                              () => safeSetState(() {}),
+                              () async {
+                                _model.listSuggested =
+                                    await actions.getAddressSuggestions(
+                                  _model.adressTextController.text,
+                                  'key=AIzaSyCFJ6RGt08LpY1YhkiBtRZFgWreWasaUPE',
+                                );
+                                _model.addressSuggestions = _model
+                                    .listSuggested!
+                                    .toList()
+                                    .cast<String>();
+                                safeSetState(() {});
+
+                                safeSetState(() {});
+                              },
                             ),
                             autofocus: false,
                             textInputAction: TextInputAction.next,
@@ -526,60 +546,62 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                               labelStyle: FlutterFlowTheme.of(context)
                                   .labelMedium
                                   .override(
-                                    fontFamily: 'Inter',
+                                    fontFamily: 'Mukta',
                                     color: const Color(0xFF606A85),
-                                    fontSize: 14.0,
+                                    fontSize: 12.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w500,
+                                    lineHeight: 0.5,
                                   ),
                               hintText: valueOrDefault(
                                   currentUserDocument?.adress, ''),
                               hintStyle: FlutterFlowTheme.of(context)
                                   .labelMedium
                                   .override(
-                                    fontFamily: 'Inter',
+                                    fontFamily: 'Mukta',
                                     color: const Color(0xFF606A85),
-                                    fontSize: 14.0,
+                                    fontSize: 12.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w500,
+                                    lineHeight: 0.5,
                                   ),
                               enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Color(0xFFE5E7EB),
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).accent1,
                                   width: 1.0,
                                 ),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(4.0),
                               ),
                               focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Color(0x00000000),
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).accent2,
                                   width: 1.0,
                                 ),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(4.0),
                               ),
                               errorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Color(0x00000000),
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
                                   width: 1.0,
                                 ),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(4.0),
                               ),
                               focusedErrorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Color(0x00000000),
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
                                   width: 1.0,
                                 ),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(4.0),
                               ),
                               filled: true,
-                              fillColor: Colors.white,
+                              fillColor: FlutterFlowTheme.of(context).tertiary,
                               contentPadding: const EdgeInsetsDirectional.fromSTEB(
-                                  24.0, 24.0, 20.0, 24.0),
+                                  10.0, 0.0, 10.0, 0.0),
                             ),
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: 'Inter',
+                                  fontFamily: 'Mukta',
                                   color: const Color(0xFF15161E),
                                   letterSpacing: 0.0,
                                 ),
@@ -588,6 +610,26 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                 .asValidator(context),
                           ),
                         ),
+                      ),
+                      Builder(
+                        builder: (context) {
+                          final varlist = _model.addressSuggestions
+                              .toList()
+                              .take(5)
+                              .toList();
+
+                          return ListView.builder(
+                            padding: EdgeInsets.zero,
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            itemCount: varlist.length,
+                            itemBuilder: (context, varlistIndex) {
+                              final varlistItem = varlist[varlistIndex];
+                              return Container(
+                                  width: 100, height: 100, color: Colors.green);
+                            },
+                          );
+                        },
                       ),
                       AuthUserStreamWidget(
                         builder: (context) => SizedBox(
@@ -609,52 +651,56 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                               labelStyle: FlutterFlowTheme.of(context)
                                   .labelMedium
                                   .override(
-                                    fontFamily: 'Inter',
-                                    color: const Color(0xFF606A85),
-                                    fontSize: 14.0,
+                                    fontFamily: 'Mukta',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    fontSize: 12.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w500,
+                                    lineHeight: 0.5,
                                   ),
                               hintText: currentPhoneNumber,
                               hintStyle: FlutterFlowTheme.of(context)
                                   .labelMedium
                                   .override(
-                                    fontFamily: 'Inter',
-                                    color: const Color(0xFF606A85),
-                                    fontSize: 14.0,
+                                    fontFamily: 'Mukta',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    fontSize: 12.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w500,
+                                    lineHeight: 0.5,
                                   ),
                               enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Color(0xFFE5E7EB),
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).accent1,
                                   width: 1.0,
                                 ),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(4.0),
                               ),
                               focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Color(0x00000000),
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).accent2,
                                   width: 1.0,
                                 ),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(4.0),
                               ),
                               errorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Color(0x00000000),
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
                                   width: 1.0,
                                 ),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(4.0),
                               ),
                               focusedErrorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Color(0x00000000),
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
                                   width: 1.0,
                                 ),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(4.0),
                               ),
                               filled: true,
-                              fillColor: Colors.white,
+                              fillColor: FlutterFlowTheme.of(context).tertiary,
                               contentPadding: const EdgeInsetsDirectional.fromSTEB(
                                   24.0, 24.0, 20.0, 24.0),
                               prefixIcon: const Icon(
@@ -665,9 +711,10 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: 'Inter',
+                                  fontFamily: 'Mukta',
                                   color: const Color(0xFF15161E),
                                   letterSpacing: 0.0,
+                                  lineHeight: 0.5,
                                 ),
                             maxLength: 10,
                             maxLengthEnforcement: MaxLengthEnforcement.enforced,
@@ -693,11 +740,13 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                               labelStyle: FlutterFlowTheme.of(context)
                                   .labelMedium
                                   .override(
-                                    fontFamily: 'Inter',
-                                    color: const Color(0xFF606A85),
-                                    fontSize: 14.0,
+                                    fontFamily: 'Mukta',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    fontSize: 12.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w500,
+                                    lineHeight: 0.5,
                                   ),
                               hintText: dateTimeFormat(
                                 "d/M/y",
@@ -708,51 +757,56 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                               hintStyle: FlutterFlowTheme.of(context)
                                   .labelMedium
                                   .override(
-                                    fontFamily: 'Inter',
-                                    color: const Color(0xFF606A85),
-                                    fontSize: 14.0,
+                                    fontFamily: 'Mukta',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    fontSize: 12.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w500,
+                                    lineHeight: 0.5,
                                   ),
                               enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Color(0xFFE5E7EB),
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).accent1,
                                   width: 1.0,
                                 ),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(4.0),
                               ),
                               focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Color(0x00000000),
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).accent2,
                                   width: 1.0,
                                 ),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(4.0),
                               ),
                               errorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Color(0x00000000),
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
                                   width: 1.0,
                                 ),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(4.0),
                               ),
                               focusedErrorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Color(0x00000000),
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
                                   width: 1.0,
                                 ),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(4.0),
                               ),
                               filled: true,
-                              fillColor: Colors.white,
+                              fillColor: FlutterFlowTheme.of(context).tertiary,
                               contentPadding: const EdgeInsetsDirectional.fromSTEB(
-                                  24.0, 24.0, 20.0, 24.0),
+                                  10.0, 0.0, 10.0, 0.0),
                             ),
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: 'Inter',
-                                  color: const Color(0xFF15161E),
+                                  fontFamily: 'Mukta',
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  fontSize: 12.0,
                                   letterSpacing: 0.0,
+                                  lineHeight: 0.5,
                                 ),
                             maxLength: 10,
                             maxLengthEnforcement: MaxLengthEnforcement.enforced,
@@ -765,7 +819,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                       ),
                       Column(
                         mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
                             'Signature',
@@ -773,7 +827,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .labelMedium
                                 .override(
-                                  fontFamily: 'Inter',
+                                  fontFamily: 'Mukta',
                                   color: const Color(0xFF606A85),
                                   fontSize: 14.0,
                                   letterSpacing: 0.0,
@@ -824,7 +878,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                       valueOrDefault<String>(
                                         valueOrDefault(
                                             currentUserDocument?.signature, ''),
-                                        'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/kilian-h9p44p/assets/a9st7613umz2/signature.png',
+                                        'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/kilian-h9p44p/assets/w2lchkl2fid2/chatgpt_signature.png',
                                       ),
                                       width: 210.0,
                                       height: 140.0,
@@ -837,7 +891,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                           ),
                         ].divide(const SizedBox(height: 5.0)),
                       ),
-                    ].divide(const SizedBox(height: 4.0)),
+                    ].divide(const SizedBox(height: 8.0)),
                   ),
                 ),
               ),
@@ -906,18 +960,11 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
 
                                   await currentUserReference!
                                       .update(createUsersRecordData(
-                                    name: _model.nameTextController.text,
-                                    adress: _model.adressTextController.text,
+                                    genre: _model.selectorGenreValue,
+                                    email: '',
                                     nickname:
                                         _model.nicknameTextController.text,
-                                    phoneNumber:
-                                        _model.phoneNumberTextController.text,
-                                    displayName: functions.displayName(
-                                        _model.nameTextController.text,
-                                        _model.nicknameTextController.text),
-                                    birthday: functions.myParseDateFromString(
-                                        _model.birthdayTextController.text),
-                                    genre: _model.selectorGenreValue,
+                                    displayName: '',
                                   ));
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
@@ -1033,10 +1080,10 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                             const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         iconPadding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: Colors.black,
+                        color: FlutterFlowTheme.of(context).primary,
                         textStyle:
                             FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Inter Tight',
+                                  fontFamily: 'Roboto',
                                   color: Colors.white,
                                   fontSize: 16.0,
                                   letterSpacing: 0.0,
@@ -1049,6 +1096,8 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                         ),
                         borderRadius: BorderRadius.circular(40.0),
                         disabledColor:
+                            FlutterFlowTheme.of(context).secondaryBackground,
+                        disabledTextColor:
                             FlutterFlowTheme.of(context).secondaryText,
                       ),
                     ),
