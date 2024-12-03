@@ -1783,189 +1783,150 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                 .logAction(
                                                               'login :  apres creation compte',
                                                             );
-                                                            if (true) {
-                                                              if (loggedIn ==
-                                                                  true) {
-                                                                // LOG
-                                                                await actions
-                                                                    .logAction(
-                                                                  'login :  avant geolocalisation',
-                                                                );
-                                                                // Geolocation
-                                                                _model.userCurrentLocationCreatePassword =
-                                                                    await GeoJSLocationCall
-                                                                        .call();
+                                                            if (loggedIn ==
+                                                                true) {
+                                                              // LOG
+                                                              await actions
+                                                                  .logAction(
+                                                                'login :  avant geolocalisation',
+                                                              );
+                                                              // Geolocation
+                                                              _model.userCurrentLocationCreatePassword =
+                                                                  await GeoJSLocationCall
+                                                                      .call();
 
-                                                                // LOG
-                                                                await actions
-                                                                    .logAction(
-                                                                  'login : avant mise à jour document',
-                                                                );
-                                                                // Update user document
+                                                              // LOG
+                                                              await actions
+                                                                  .logAction(
+                                                                'login : avant mise à jour document',
+                                                              );
+                                                              _model.fcmToken =
+                                                                  await actions
+                                                                      .getFcmToken();
+                                                              // Update user document
 
-                                                                await currentUserReference!
-                                                                    .update(
-                                                                        createUsersRecordData(
-                                                                  online: true,
-                                                                  location:
-                                                                      updateLocationDataStruct(
-                                                                    LocationDataStruct.maybeFromMap((_model
-                                                                            .userCurrentLocationCreatePassword
-                                                                            ?.jsonBody ??
-                                                                        '')),
-                                                                    clearUnsetFields:
-                                                                        false,
-                                                                  ),
-                                                                ));
-                                                                // LOG
-                                                                await actions
-                                                                    .logAction(
-                                                                  'login :  avant navigation vers profile',
-                                                                );
-                                                                // GO TO PROFILE PAGE
+                                                              await currentUserReference!
+                                                                  .update(
+                                                                      createUsersRecordData(
+                                                                online: true,
+                                                                location:
+                                                                    updateLocationDataStruct(
+                                                                  LocationDataStruct
+                                                                      .maybeFromMap((_model
+                                                                              .userCurrentLocationCreatePassword
+                                                                              ?.jsonBody ??
+                                                                          '')),
+                                                                  clearUnsetFields:
+                                                                      false,
+                                                                ),
+                                                                fcmToken: _model
+                                                                    .fcmToken,
+                                                              ));
+                                                              // LOG
+                                                              await actions
+                                                                  .logAction(
+                                                                'login :  avant navigation vers profile',
+                                                              );
+                                                              // GO TO PROFILE PAGE
 
-                                                                context
-                                                                    .pushNamedAuth(
-                                                                  'profilePage',
-                                                                  context
-                                                                      .mounted,
-                                                                  extra: <String,
-                                                                      dynamic>{
-                                                                    kTransitionInfoKey:
-                                                                        const TransitionInfo(
-                                                                      hasTransition:
-                                                                          true,
-                                                                      transitionType:
-                                                                          PageTransitionType
-                                                                              .fade,
-                                                                      duration: Duration(
-                                                                          milliseconds:
-                                                                              0),
-                                                                    ),
-                                                                  },
-                                                                );
-
-                                                                // LOG
-                                                                await actions
-                                                                    .logAction(
-                                                                  'login :  apres navigation vers profile',
-                                                                );
-                                                                ScaffoldMessenger.of(
-                                                                        context)
-                                                                    .showSnackBar(
-                                                                  SnackBar(
-                                                                    content:
-                                                                        Text(
-                                                                      'Complétez votre profil',
-                                                                      style:
-                                                                          TextStyle(
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .primaryText,
-                                                                      ),
-                                                                    ),
-                                                                    duration: const Duration(
+                                                              context
+                                                                  .pushNamedAuth(
+                                                                'profilePage',
+                                                                context.mounted,
+                                                                extra: <String,
+                                                                    dynamic>{
+                                                                  kTransitionInfoKey:
+                                                                      const TransitionInfo(
+                                                                    hasTransition:
+                                                                        true,
+                                                                    transitionType:
+                                                                        PageTransitionType
+                                                                            .fade,
+                                                                    duration: Duration(
                                                                         milliseconds:
-                                                                            5000),
-                                                                    backgroundColor:
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .success,
+                                                                            0),
                                                                   ),
-                                                                );
-                                                                // LOG
-                                                                await actions
-                                                                    .logAction(
-                                                                  'login :  apres snap bar final',
-                                                                );
-                                                              } else {
-                                                                // test
-                                                                unawaited(
-                                                                  () async {
-                                                                    await showDialog(
-                                                                      context:
-                                                                          context,
-                                                                      builder:
-                                                                          (alertDialogContext) {
-                                                                        return AlertDialog(
-                                                                          title:
-                                                                              const Text('Echec création compte'),
-                                                                          content:
-                                                                              Text('Compte crée mais impossible de se logger   : ${_model.emailAddressCreateTextController.text}'),
-                                                                          actions: [
-                                                                            TextButton(
-                                                                              onPressed: () => Navigator.pop(alertDialogContext),
-                                                                              child: const Text('Ok'),
-                                                                            ),
-                                                                          ],
-                                                                        );
-                                                                      },
-                                                                    );
-                                                                  }(),
-                                                                );
-                                                                await authManager
-                                                                    .deleteUser(
-                                                                        context);
-                                                                // LOG OUT
-                                                                GoRouter.of(
-                                                                        context)
-                                                                    .prepareAuthEvent();
-                                                                await authManager
-                                                                    .signOut();
-                                                                GoRouter.of(
-                                                                        context)
-                                                                    .clearRedirectLocation();
-
-                                                                ScaffoldMessenger.of(
-                                                                        context)
-                                                                    .showSnackBar(
-                                                                  SnackBar(
-                                                                    content:
-                                                                        Text(
-                                                                      'Echec création de votre compte',
-                                                                      style:
-                                                                          TextStyle(
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .primaryText,
-                                                                      ),
-                                                                    ),
-                                                                    duration: const Duration(
-                                                                        milliseconds:
-                                                                            4000),
-                                                                    backgroundColor:
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .error,
-                                                                  ),
-                                                                );
-                                                              }
-                                                            } else {
-                                                              // test
-                                                              await showDialog(
-                                                                context:
-                                                                    context,
-                                                                builder:
-                                                                    (alertDialogContext) {
-                                                                  return AlertDialog(
-                                                                    title: const Text(
-                                                                        'Echec'),
-                                                                    content: Text(
-                                                                        'Le compte n\' a pu etre creé : ${_model.emailAddressCreateTextController.text}'),
-                                                                    actions: [
-                                                                      TextButton(
-                                                                        onPressed:
-                                                                            () =>
-                                                                                Navigator.pop(alertDialogContext),
-                                                                        child: const Text(
-                                                                            'Continuer'),
-                                                                      ),
-                                                                    ],
-                                                                  );
                                                                 },
+                                                              );
+
+                                                              // LOG
+                                                              await actions
+                                                                  .logAction(
+                                                                'login :  apres navigation vers profile',
                                                               );
                                                               ScaffoldMessenger
                                                                       .of(context)
                                                                   .showSnackBar(
                                                                 SnackBar(
                                                                   content: Text(
-                                                                    'Echec creation du compte ',
+                                                                    'Complétez votre profil',
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryText,
+                                                                    ),
+                                                                  ),
+                                                                  duration: const Duration(
+                                                                      milliseconds:
+                                                                          5000),
+                                                                  backgroundColor:
+                                                                      FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .success,
+                                                                ),
+                                                              );
+                                                              // LOG
+                                                              await actions
+                                                                  .logAction(
+                                                                'login :  apres snap bar final',
+                                                              );
+                                                            } else {
+                                                              // test
+                                                              unawaited(
+                                                                () async {
+                                                                  await showDialog(
+                                                                    context:
+                                                                        context,
+                                                                    builder:
+                                                                        (alertDialogContext) {
+                                                                      return AlertDialog(
+                                                                        title: const Text(
+                                                                            'Echec création compte'),
+                                                                        content:
+                                                                            Text('Compte crée mais impossible de se logger   : ${_model.emailAddressCreateTextController.text}'),
+                                                                        actions: [
+                                                                          TextButton(
+                                                                            onPressed: () =>
+                                                                                Navigator.pop(alertDialogContext),
+                                                                            child:
+                                                                                const Text('Ok'),
+                                                                          ),
+                                                                        ],
+                                                                      );
+                                                                    },
+                                                                  );
+                                                                }(),
+                                                              );
+                                                              await authManager
+                                                                  .deleteUser(
+                                                                      context);
+                                                              // LOG OUT
+                                                              GoRouter.of(
+                                                                      context)
+                                                                  .prepareAuthEvent();
+                                                              await authManager
+                                                                  .signOut();
+                                                              GoRouter.of(
+                                                                      context)
+                                                                  .clearRedirectLocation();
+
+                                                              ScaffoldMessenger
+                                                                      .of(context)
+                                                                  .showSnackBar(
+                                                                SnackBar(
+                                                                  content: Text(
+                                                                    'Echec création de votre compte',
                                                                     style:
                                                                         TextStyle(
                                                                       color: FlutterFlowTheme.of(

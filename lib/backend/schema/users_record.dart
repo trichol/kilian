@@ -100,6 +100,11 @@ class UsersRecord extends FirestoreRecord {
   String get genre => _genre ?? '';
   bool hasGenre() => _genre != null;
 
+  // "fcm_token" field.
+  String? _fcmToken;
+  String get fcmToken => _fcmToken ?? '';
+  bool hasFcmToken() => _fcmToken != null;
+
   void _initializeFields() {
     _adress = snapshotData['adress'] as String?;
     _birthday = snapshotData['birthday'] as DateTime?;
@@ -118,6 +123,7 @@ class UsersRecord extends FirestoreRecord {
     _location = LocationDataStruct.maybeFromMap(snapshotData['location']);
     _deviceToken = snapshotData['deviceToken'] as String?;
     _genre = snapshotData['genre'] as String?;
+    _fcmToken = snapshotData['fcm_token'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -170,6 +176,7 @@ Map<String, dynamic> createUsersRecordData({
   LocationDataStruct? location,
   String? deviceToken,
   String? genre,
+  String? fcmToken,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -189,6 +196,7 @@ Map<String, dynamic> createUsersRecordData({
       'location': LocationDataStruct().toMap(),
       'deviceToken': deviceToken,
       'genre': genre,
+      'fcm_token': fcmToken,
     }.withoutNulls,
   );
 
@@ -220,7 +228,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         listEquality.equals(e1?.contrats, e2?.contrats) &&
         e1?.location == e2?.location &&
         e1?.deviceToken == e2?.deviceToken &&
-        e1?.genre == e2?.genre;
+        e1?.genre == e2?.genre &&
+        e1?.fcmToken == e2?.fcmToken;
   }
 
   @override
@@ -241,7 +250,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.contrats,
         e?.location,
         e?.deviceToken,
-        e?.genre
+        e?.genre,
+        e?.fcmToken
       ]);
 
   @override

@@ -130,6 +130,8 @@ class LoginModel extends FlutterFlowModel<LoginWidget> {
 
   // Stores action output result for [Backend Call - API (GeoJSLocation)] action in Button widget.
   ApiCallResponse? userCurrentLocationCreatePassword;
+  // Stores action output result for [Custom Action - getFcmToken] action in Button widget.
+  String? fcmToken;
   // Stores action output result for [Backend Call - API (GeoJSLocation)] action in BtnGoogleCreate widget.
   ApiCallResponse? userCurrentLocationCreateGoogle;
   // Stores action output result for [Custom Action - generateAndSaveDeviceToken] action in BtnGoogleCreate widget.
