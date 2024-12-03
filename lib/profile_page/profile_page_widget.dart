@@ -1096,7 +1096,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                             );
                             // go to dashboard
 
-                            context.pushNamed('dashboard');
+                            context.goNamed('dashboard');
 
                             await actions.logAction(
                               valueOrDefault<bool>(
