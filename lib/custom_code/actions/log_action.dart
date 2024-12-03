@@ -12,5 +12,5 @@ import 'package:flutter/material.dart';
 Future logAction(String? input) async {
   // log the input
   DateTime now = DateTime.now();
-  print('$now: $input');
+  print('####### KILIAN   $now : $input');
 }

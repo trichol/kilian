@@ -1833,8 +1833,14 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                     .logAction(
                                                                   'apres \"generateband save devicetoken\"',
                                                                 );
-                                                                if (!_model
+                                                                if (_model
                                                                     .isTokenGenerateAndSaveBtnCreatePassword!) {
+                                                                  // LOG
+                                                                  await actions
+                                                                      .logAction(
+                                                                    'login : DEVICE TOKEN OK',
+                                                                  );
+                                                                } else {
                                                                   // info notification NOK
                                                                   await showDialog(
                                                                     context:
@@ -1858,6 +1864,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                     },
                                                                   );
                                                                 }
+
                                                                 // LOG
                                                                 await actions
                                                                     .logAction(
