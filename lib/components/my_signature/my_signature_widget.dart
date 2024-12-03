@@ -53,7 +53,7 @@ class _MySignatureWidgetState extends State<MySignatureWidget> {
         width: 220.0,
         height: 190.0,
         decoration: BoxDecoration(
-          color: FlutterFlowTheme.of(context).secondaryBackground,
+          color: FlutterFlowTheme.of(context).secondary,
           borderRadius: BorderRadius.circular(8.0),
           border: Border.all(
             color: FlutterFlowTheme.of(context).primary,
@@ -64,23 +64,49 @@ class _MySignatureWidgetState extends State<MySignatureWidget> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            ClipRect(
-              child: Signature(
-                controller: _model.signatureController ??= SignatureController(
-                  penStrokeWidth: 2.0,
-                  penColor: FlutterFlowTheme.of(context).primaryText,
-                  exportBackgroundColor: Colors.white,
+            Material(
+              color: Colors.transparent,
+              elevation: 5.0,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(4.0),
+                  bottomRight: Radius.circular(4.0),
+                  topLeft: Radius.circular(4.0),
+                  topRight: Radius.circular(4.0),
                 ),
-                backgroundColor:
-                    FlutterFlowTheme.of(context).secondaryBackground,
-                width: 210.0,
-                height: 140.0,
+              ),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(4.0),
+                    bottomRight: Radius.circular(4.0),
+                    topLeft: Radius.circular(4.0),
+                    topRight: Radius.circular(4.0),
+                  ),
+                  border: Border.all(
+                    color: FlutterFlowTheme.of(context).secondary,
+                    width: 1.0,
+                  ),
+                ),
+                child: ClipRect(
+                  child: Signature(
+                    controller: _model.signatureControllerController ??=
+                        SignatureController(
+                      penStrokeWidth: 2.0,
+                      penColor: FlutterFlowTheme.of(context).primaryText,
+                      exportBackgroundColor: const Color(0x00000000),
+                    ),
+                    backgroundColor: FlutterFlowTheme.of(context).accent3,
+                    width: 210.0,
+                    height: 140.0,
+                  ),
+                ),
               ),
             ),
             FFButtonWidget(
               onPressed: () async {
                 final signatureImage =
-                    await _model.signatureController!.toPngBytes();
+                    await _model.signatureControllerController!.toPngBytes();
                 if (signatureImage == null) {
                   showUploadMessage(
                     context,
@@ -132,7 +158,7 @@ class _MySignatureWidgetState extends State<MySignatureWidget> {
                 borderSide: BorderSide(
                   color: FlutterFlowTheme.of(context).secondary,
                 ),
-                borderRadius: BorderRadius.circular(15.0),
+                borderRadius: BorderRadius.circular(4.0),
               ),
             ),
           ].divide(const SizedBox(height: 2.0)),

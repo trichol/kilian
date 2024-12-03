@@ -11,6 +11,7 @@ import '/flutter_flow/form_field_controller.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:aligned_dialog/aligned_dialog.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:collection/collection.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +44,10 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      // LOG
+      await actions.logAction(
+        'profile  : onload :${valueOrDefault<bool>(currentUserDocument?.isCompleteRegistration, false).toString()}',
+      );
       if (valueOrDefault<bool>(
               currentUserDocument?.isCompleteRegistration, false) !=
           false) {
@@ -50,6 +55,10 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
           valueOrDefault<bool>(
               currentUserDocument?.isCompleteRegistration, false),
           widget.isEditMode,
+        );
+        // LOG
+        await actions.logAction(
+          'profile  : onload 2 inverse:${valueOrDefault<bool>(currentUserDocument?.isCompleteRegistration, false).toString()}',
         );
       }
     });
@@ -135,14 +144,14 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
           centerTitle: false,
           elevation: 0.0,
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
-                child: Form(
+        body: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Form(
                   key: _model.formKey,
                   autovalidateMode: AutovalidateMode.always,
                   child: Column(
@@ -312,7 +321,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                               borderColor:
                                   FlutterFlowTheme.of(context).alternate,
                               borderWidth: 0.0,
-                              borderRadius: 20.0,
+                              borderRadius: 4.0,
                               margin: const EdgeInsetsDirectional.fromSTEB(
                                   10.0, 0.0, 10.0, 0.0),
                               hidesUnderline: true,
@@ -343,8 +352,9 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                         .labelMedium
                                         .override(
                                           fontFamily: 'Mukta',
-                                          color: const Color(0xFF606A85),
-                                          fontSize: 12.0,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          fontSize: 14.0,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.w500,
                                           lineHeight: 0.5,
@@ -357,7 +367,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                           fontFamily: 'Mukta',
                                           color: FlutterFlowTheme.of(context)
                                               .primaryText,
-                                          fontSize: 12.0,
+                                          fontSize: 14.0,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.w500,
                                           lineHeight: 0.5,
@@ -407,11 +417,13 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                         fontFamily: 'Mukta',
                                         color: FlutterFlowTheme.of(context)
                                             .primaryText,
-                                        fontSize: 12.0,
+                                        fontSize: 14.0,
                                         letterSpacing: 0.0,
                                         lineHeight: 0.5,
                                       ),
                                   keyboardType: TextInputType.name,
+                                  cursorColor:
+                                      FlutterFlowTheme.of(context).primaryText,
                                   validator: _model.nameTextControllerValidator
                                       .asValidator(context),
                                 ),
@@ -440,10 +452,12 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                         .labelMedium
                                         .override(
                                           fontFamily: 'Mukta',
-                                          color: const Color(0xFF606A85),
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
                                           fontSize: 14.0,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.w500,
+                                          lineHeight: 0.5,
                                         ),
                                     hintText: valueOrDefault(
                                         currentUserDocument?.nickname, ''),
@@ -451,10 +465,12 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                         .labelMedium
                                         .override(
                                           fontFamily: 'Mukta',
-                                          color: const Color(0xFF606A85),
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
                                           fontSize: 14.0,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.w500,
+                                          lineHeight: 0.5,
                                         ),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
@@ -467,7 +483,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: FlutterFlowTheme.of(context)
-                                            .accent1,
+                                            .accent2,
                                         width: 1.0,
                                       ),
                                       borderRadius: BorderRadius.circular(4.0),
@@ -502,8 +518,11 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                         color: FlutterFlowTheme.of(context)
                                             .primaryText,
                                         letterSpacing: 0.0,
+                                        lineHeight: 0.5,
                                       ),
                                   keyboardType: TextInputType.name,
+                                  cursorColor:
+                                      FlutterFlowTheme.of(context).primaryText,
                                   validator: _model
                                       .nicknameTextControllerValidator
                                       .asValidator(context),
@@ -547,8 +566,9 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                   .labelMedium
                                   .override(
                                     fontFamily: 'Mukta',
-                                    color: const Color(0xFF606A85),
-                                    fontSize: 12.0,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    fontSize: 14.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w500,
                                     lineHeight: 0.5,
@@ -560,7 +580,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                   .override(
                                     fontFamily: 'Mukta',
                                     color: const Color(0xFF606A85),
-                                    fontSize: 12.0,
+                                    fontSize: 14.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w500,
                                     lineHeight: 0.5,
@@ -602,35 +622,110 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                 .bodyMedium
                                 .override(
                                   fontFamily: 'Mukta',
-                                  color: const Color(0xFF15161E),
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
                                   letterSpacing: 0.0,
+                                  lineHeight: 0.5,
                                 ),
                             keyboardType: TextInputType.streetAddress,
+                            cursorColor:
+                                FlutterFlowTheme.of(context).primaryText,
                             validator: _model.adressTextControllerValidator
                                 .asValidator(context),
                           ),
                         ),
                       ),
-                      Builder(
-                        builder: (context) {
-                          final varlist = _model.addressSuggestions
-                              .toList()
-                              .take(1)
-                              .toList();
+                      if (((_model.addressSuggestions.isNotEmpty) == true) &&
+                          (_model.adressFocusNode?.hasFocus ?? false))
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 1.0),
+                          child: Builder(
+                            builder: (context) {
+                              final itemAdress = _model.addressSuggestions
+                                  .toList()
+                                  .take(4)
+                                  .toList();
 
-                          return ListView.builder(
-                            padding: EdgeInsets.zero,
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            itemCount: varlist.length,
-                            itemBuilder: (context, varlistIndex) {
-                              final varlistItem = varlist[varlistIndex];
-                              return Container(
-                                  width: 100, height: 100, color: Colors.green);
+                              return ListView.builder(
+                                padding: EdgeInsets.zero,
+                                shrinkWrap: true,
+                                scrollDirection: Axis.vertical,
+                                itemCount: itemAdress.length,
+                                itemBuilder: (context, itemAdressIndex) {
+                                  final itemAdressItem =
+                                      itemAdress[itemAdressIndex];
+                                  return Material(
+                                    color: Colors.transparent,
+                                    elevation: 2.0,
+                                    child: Container(
+                                      width: 250.0,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .alternate,
+                                        border: Border.all(
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondary,
+                                          width: 1.0,
+                                        ),
+                                      ),
+                                      alignment:
+                                          const AlignmentDirectional(-1.0, 0.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Flex(
+                                            direction: Axis.horizontal,
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        5.0, 0.0, 0.0, 0.0),
+                                                child: InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    // update field adress
+                                                    safeSetState(() {
+                                                      _model.adressTextController
+                                                              ?.text =
+                                                          itemAdressItem;
+                                                    });
+                                                  },
+                                                  child: AutoSizeText(
+                                                    itemAdressItem
+                                                        .maybeHandleOverflow(
+                                                      maxChars: 50,
+                                                    ),
+                                                    minFontSize: 10.0,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Mukta',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
                             },
-                          );
-                        },
-                      ),
+                          ),
+                        ),
                       AuthUserStreamWidget(
                         builder: (context) => SizedBox(
                           width: double.infinity,
@@ -666,7 +761,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                     fontFamily: 'Mukta',
                                     color: FlutterFlowTheme.of(context)
                                         .primaryText,
-                                    fontSize: 12.0,
+                                    fontSize: 14.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w500,
                                     lineHeight: 0.5,
@@ -712,13 +807,16 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                 .bodyMedium
                                 .override(
                                   fontFamily: 'Mukta',
-                                  color: const Color(0xFF15161E),
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
                                   letterSpacing: 0.0,
                                   lineHeight: 0.5,
                                 ),
                             maxLength: 10,
                             maxLengthEnforcement: MaxLengthEnforcement.enforced,
                             keyboardType: TextInputType.phone,
+                            cursorColor:
+                                FlutterFlowTheme.of(context).primaryText,
                             validator: _model.phoneNumberTextControllerValidator
                                 .asValidator(context),
                             inputFormatters: [_model.phoneNumberMask],
@@ -760,7 +858,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                     fontFamily: 'Mukta',
                                     color: FlutterFlowTheme.of(context)
                                         .primaryText,
-                                    fontSize: 12.0,
+                                    fontSize: 14.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w500,
                                     lineHeight: 0.5,
@@ -804,13 +902,15 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                   fontFamily: 'Mukta',
                                   color:
                                       FlutterFlowTheme.of(context).primaryText,
-                                  fontSize: 12.0,
+                                  fontSize: 14.0,
                                   letterSpacing: 0.0,
                                   lineHeight: 0.5,
                                 ),
                             maxLength: 10,
                             maxLengthEnforcement: MaxLengthEnforcement.enforced,
                             keyboardType: TextInputType.datetime,
+                            cursorColor:
+                                FlutterFlowTheme.of(context).primaryText,
                             validator: _model.birthdayTextControllerValidator
                                 .asValidator(context),
                             inputFormatters: [_model.birthdayMask],
@@ -883,188 +983,199 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                       width: 210.0,
                                       height: 140.0,
                                       fit: BoxFit.cover,
+                                      errorBuilder:
+                                          (context, error, stackTrace) =>
+                                              Image.asset(
+                                        'assets/images/error_image.png',
+                                        width: 210.0,
+                                        height: 140.0,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
                           ),
-                        ].divide(const SizedBox(height: 5.0)),
+                        ],
                       ),
                     ].divide(const SizedBox(height: 8.0)),
                   ),
                 ),
-              ),
-              if ((widget.isEditMode == true) ||
-                  !valueOrDefault<bool>(
-                      currentUserDocument?.isCompleteRegistration, false))
-                AuthUserStreamWidget(
-                  builder: (context) => FFButtonWidget(
-                    onPressed: ((functions.myCheckLengthString(
-                                    _model.nameTextController.text, 2) ==
-                                false) ||
-                            (functions.myCheckLengthString(
-                                    _model.nicknameTextController.text, 2) ==
-                                false) ||
-                            (functions.myCheckLengthString(
-                                    _model.adressTextController.text, 8) ==
-                                false) ||
-                            (_model.phoneNumberTextController.text == '') ||
-                            (_model.birthdayTextController.text == '') ||
+                if ((widget.isEditMode == true) ||
+                    !valueOrDefault<bool>(
+                        currentUserDocument?.isCompleteRegistration, false))
+                  AuthUserStreamWidget(
+                    builder: (context) => FFButtonWidget(
+                      onPressed: () async {
+                        if ((_model.nameTextController.text != '') &&
+                            (_model.nicknameTextController.text != '') &&
+                            (_model.adressTextController.text != '') &&
+                            (_model.phoneNumberTextController.text != '') &&
+                            (_model.birthdayTextController.text != '') &&
                             (valueOrDefault(
-                                        currentUserDocument?.signature, '') ==
-                                    ''))
-                        ? null
-                        : () async {
-                            _model.listAlreadyReccorded =
-                                await queryUsersRecordOnce(
-                              queryBuilder: (usersRecord) => usersRecord
-                                  .where(
-                                    'phone_number',
-                                    isEqualTo:
-                                        _model.phoneNumberTextController.text,
-                                  )
-                                  .where(
-                                    'phone_number',
-                                    isNotEqualTo: currentPhoneNumber,
-                                  ),
-                            );
-                            if (_model.listAlreadyReccorded?.length
-                                    .toString() ==
-                                '0') {
-                              // info notification
-                              await showDialog(
-                                context: context,
-                                builder: (alertDialogContext) {
-                                  return AlertDialog(
-                                    title: const Text('Notifications'),
-                                    content: const Text(
-                                        'Cette application utilise les notifications pour communiquer avec les autres utilisateurs.'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(alertDialogContext),
-                                        child: const Text('Ok'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                              _model.notificationGranted = await actions
-                                  .requestNotificationPermissionForUser();
-                              if (_model.notificationGranted!) {
-                                // update user
-
-                                await currentUserReference!
-                                    .update(createUsersRecordData(
-                                  genre: _model.selectorGenreValue,
-                                  email: '',
-                                  nickname: _model.nicknameTextController.text,
-                                  displayName: '',
-                                ));
-                                if (valueOrDefault<bool>(
-                                        currentUserDocument
-                                            ?.isCompleteRegistration,
-                                        false) ==
-                                    false) {
-                                  await currentUserReference!
-                                      .update(createUsersRecordData(
-                                    isCompleteRegistration: true,
-                                    online: false,
-                                  ));
-                                  // go to dashboard
-
-                                  context.pushNamed('dashboard');
-                                } else {
-                                  context.safePop();
-                                }
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      'Echec permission notification',
-                                      style: TextStyle(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                      ),
+                                        currentUserDocument?.signature, '') !=
+                                    '')) {
+                          _model.listAlreadyReccorded =
+                              await queryUsersRecordOnce(
+                            queryBuilder: (usersRecord) => usersRecord
+                                .where(
+                                  'phone_number',
+                                  isEqualTo:
+                                      _model.phoneNumberTextController.text,
+                                )
+                                .where(
+                                  'phone_number',
+                                  isNotEqualTo: currentPhoneNumber,
+                                ),
+                          );
+                          if (_model.listAlreadyReccorded?.length.toString() ==
+                              '0') {
+                            // info notification
+                            await showDialog(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  title: const Text('Notifications'),
+                                  content: const Text(
+                                      'Cette application utilise les notifications pour communiquer avec les autres utilisateurs.'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(alertDialogContext),
+                                      child: const Text('Ok'),
                                     ),
-                                    duration: const Duration(milliseconds: 1000),
-                                    backgroundColor:
-                                        FlutterFlowTheme.of(context).error,
-                                  ),
+                                  ],
                                 );
-                                await showDialog(
-                                  context: context,
-                                  builder: (alertDialogContext) {
-                                    return AlertDialog(
-                                      title: const Text('Notification'),
-                                      content: const Text('Autorisation impossible!'),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(alertDialogContext),
-                                          child: const Text('recommencer'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                              }
-                            } else {
+                              },
+                            );
+                            _model.notificationGranted = await actions
+                                .requestNotificationPermissionForUser();
+                            if (!_model.notificationGranted!) {
                               await showDialog(
                                 context: context,
                                 builder: (alertDialogContext) {
                                   return AlertDialog(
-                                    title: const Text('Opération échoué'),
-                                    content: Text(
-                                        'Le numéro : ${_model.phoneNumberTextController.text} est déjà utilisé'),
+                                    title: const Text('Notification'),
+                                    content: const Text('Autorisation impossible!'),
                                     actions: [
                                       TextButton(
                                         onPressed: () =>
                                             Navigator.pop(alertDialogContext),
-                                        child: const Text('Ok'),
+                                        child: const Text('recommencer'),
                                       ),
                                     ],
                                   );
                                 },
                               );
                             }
+                            // update user
 
-                            safeSetState(() {});
-                          },
-                    text: 'Enregistrer',
-                    options: FFButtonOptions(
-                      width: double.infinity,
-                      height: 50.0,
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      iconPadding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).primary,
-                      textStyle: FlutterFlowTheme.of(context)
-                          .titleSmall
-                          .override(
-                            fontFamily: 'Roboto',
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                            fontSize: 16.0,
-                            letterSpacing: 0.0,
-                            fontWeight: FontWeight.w500,
-                            lineHeight: 0.5,
-                          ),
-                      elevation: 3.0,
-                      borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).secondary,
-                        width: 1.0,
+                            await currentUserReference!
+                                .update(createUsersRecordData(
+                              genre: _model.selectorGenreValue,
+                              nickname: _model.nicknameTextController.text,
+                              displayName: functions.displayName(
+                                  _model.nameTextController.text,
+                                  _model.nicknameTextController.text),
+                              name: _model.nameTextController.text,
+                              adress: _model.adressTextController.text,
+                              birthday: functions.myParseDateFromString(
+                                  _model.birthdayTextController.text),
+                              phoneNumber:
+                                  _model.phoneNumberTextController.text,
+                              online: true,
+                              isCompleteRegistration: true,
+                            ));
+                            await actions.logAction(
+                              valueOrDefault<bool>(
+                                      currentUserDocument
+                                          ?.isCompleteRegistration,
+                                      false)
+                                  .toString(),
+                            );
+                            // go to dashboard
+
+                            context.pushNamed('dashboard');
+
+                            await actions.logAction(
+                              valueOrDefault<bool>(
+                                      currentUserDocument
+                                          ?.isCompleteRegistration,
+                                      false)
+                                  .toString(),
+                            );
+                          } else {
+                            await showDialog(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  title: const Text('Opération échoué'),
+                                  content: Text(
+                                      'Le numéro : ${_model.phoneNumberTextController.text} est déjà utilisé'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(alertDialogContext),
+                                      child: const Text('Ok'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
+                        } else {
+                          await showDialog(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return AlertDialog(
+                                title: const Text('Formulaire incorrect'),
+                                content: const Text(
+                                    'Tous les champs doivent être renseignées correctement !'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext),
+                                    child: const Text('Recommencer'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        }
+
+                        safeSetState(() {});
+                      },
+                      text: 'Enregistrer',
+                      options: FFButtonOptions(
+                        width: double.infinity,
+                        height: 50.0,
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        iconPadding:
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: FlutterFlowTheme.of(context).primary,
+                        textStyle: FlutterFlowTheme.of(context)
+                            .titleSmall
+                            .override(
+                              fontFamily: 'Roboto',
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                              fontSize: 16.0,
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.w500,
+                              lineHeight: 0.5,
+                            ),
+                        elevation: 3.0,
+                        borderSide: BorderSide(
+                          color: FlutterFlowTheme.of(context).secondary,
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(4.0),
                       ),
-                      borderRadius: BorderRadius.circular(4.0),
-                      disabledColor:
-                          FlutterFlowTheme.of(context).secondaryBackground,
-                      disabledTextColor:
-                          FlutterFlowTheme.of(context).secondaryText,
                     ),
                   ),
-                ),
-            ].divide(const SizedBox(height: 0.0)).addToStart(const SizedBox(height: 5.0)),
+              ].divide(const SizedBox(height: 0.0)).addToStart(const SizedBox(height: 5.0)),
+            ),
           ),
         ),
       ),

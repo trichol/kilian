@@ -128,8 +128,6 @@ class LoginModel extends FlutterFlowModel<LoginWidget> {
     return null;
   }
 
-  // Stores action output result for [Custom Action - createAccountWithErrorHandling] action in Button widget.
-  String? isAccountPasswordCreated;
   // Stores action output result for [Backend Call - API (GeoJSLocation)] action in Button widget.
   ApiCallResponse? userCurrentLocationCreatePassword;
   // Stores action output result for [Custom Action - generateAndSaveDeviceToken] action in Button widget.

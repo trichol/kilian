@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -46,10 +47,19 @@ class _DashboardWidgetState extends State<DashboardWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      // LOG
+      await actions.logAction(
+        'dashboard :  onload init :${valueOrDefault<bool>(currentUserDocument?.isCompleteRegistration, false).toString()}',
+      );
       if (valueOrDefault<bool>(
               currentUserDocument?.isCompleteRegistration, false) ==
           false) {
-        context.pushNamed(
+        // LOG
+        await actions.logAction(
+          'dashboard :  onload false complete registration : ${valueOrDefault<bool>(currentUserDocument?.isCompleteRegistration, false).toString()}',
+        );
+
+        context.goNamed(
           'profilePage',
           queryParameters: {
             'isEditMode': serializeParam(
@@ -57,13 +67,11 @@ class _DashboardWidgetState extends State<DashboardWidget> {
               ParamType.bool,
             ),
           }.withoutNulls,
-          extra: <String, dynamic>{
-            kTransitionInfoKey: const TransitionInfo(
-              hasTransition: true,
-              transitionType: PageTransitionType.fade,
-              duration: Duration(milliseconds: 0),
-            ),
-          },
+        );
+
+        // LOG
+        await actions.logAction(
+          'dashboard :  onload false complete registration : ${valueOrDefault<bool>(currentUserDocument?.isCompleteRegistration, false).toString()}',
         );
       }
     });

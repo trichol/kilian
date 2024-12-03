@@ -6,8 +6,8 @@ import 'package:signature/signature.dart';
 class MySignatureModel extends FlutterFlowModel<MySignatureWidget> {
   ///  State fields for stateful widgets in this component.
 
-  // State field(s) for Signature widget.
-  SignatureController? signatureController;
+  // State field(s) for SignatureController widget.
+  SignatureController? signatureControllerController;
   String uploadedSignatureUrl = '';
 
   @override
@@ -15,6 +15,6 @@ class MySignatureModel extends FlutterFlowModel<MySignatureWidget> {
 
   @override
   void dispose() {
-    signatureController?.dispose();
+    signatureControllerController?.dispose();
   }
 }

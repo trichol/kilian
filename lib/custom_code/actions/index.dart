@@ -11,3 +11,4 @@ export 'get_download_url.dart' show getDownloadUrl;
 export 'download_pdf.dart' show downloadPdf;
 export 'download_pdf_web.dart' show downloadPdfWeb;
 export 'get_address_suggestions.dart' show getAddressSuggestions;
+export 'log_action.dart' show logAction;

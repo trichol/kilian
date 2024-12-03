@@ -28,6 +28,9 @@ Future<String> createAccountWithErrorHandling(
       password: password!,
     );
 
+    await Future.delayed(Duration(seconds: 2));
+    print("fin  : Appel createAccountWithErrorHandling");
+
     // Access the created user's details
     User? user = userCredential.user;
     if (user != null) {
@@ -36,11 +39,16 @@ Future<String> createAccountWithErrorHandling(
       // Get the created user's UID
       String uid = userCredential.user!.uid;
 
+      print("Document user en cours d initialisation");
+
       // Add user details to Firestore
       await FirebaseFirestore.instance.collection('users').doc(uid).set({
         'email': email,
         'created_time': FieldValue.serverTimestamp(),
       });
+
+      await Future.delayed(Duration(seconds: 2));
+      print("fin  : Document user firebase initialisé: ${user.email}");
 
       return "";
     } else {

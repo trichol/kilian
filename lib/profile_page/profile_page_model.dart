@@ -36,21 +36,6 @@ class ProfilePageModel extends FlutterFlowModel<ProfilePageWidget> {
   FocusNode? nameFocusNode;
   TextEditingController? nameTextController;
   String? Function(BuildContext, String?)? nameTextControllerValidator;
-  String? _nameTextControllerValidator(BuildContext context, String? val) {
-    if (val == null || val.isEmpty) {
-      return 'Champ obligatoire';
-    }
-
-    if (val.length < 2) {
-      return '2 caractères minimum';
-    }
-
-    if (!RegExp(kTextValidatorUsernameRegex).hasMatch(val)) {
-      return 'Must start with a letter and can only contain letters, digits and - or _.';
-    }
-    return null;
-  }
-
   // State field(s) for nickname widget.
   FocusNode? nicknameFocusNode;
   TextEditingController? nicknameTextController;
@@ -59,18 +44,6 @@ class ProfilePageModel extends FlutterFlowModel<ProfilePageWidget> {
   FocusNode? adressFocusNode;
   TextEditingController? adressTextController;
   String? Function(BuildContext, String?)? adressTextControllerValidator;
-  String? _adressTextControllerValidator(BuildContext context, String? val) {
-    if (val == null || val.isEmpty) {
-      return 'Champ obligatoire';
-    }
-
-    if (val.length < 8) {
-      return 'Minimum 8 caractères';
-    }
-
-    return null;
-  }
-
   // Stores action output result for [Custom Action - getAddressSuggestions] action in adress widget.
   List<String>? listSuggested;
   // State field(s) for phone_number widget.
@@ -81,11 +54,11 @@ class ProfilePageModel extends FlutterFlowModel<ProfilePageWidget> {
   String? _phoneNumberTextControllerValidator(
       BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
-      return 'Champ obligatoire (10 caractères)';
+      return 'Format attendu :  10 chiffres';
     }
 
     if (val.length < 10) {
-      return ' 10 caractères';
+      return 'Format attendu :  10 chiffres';
     }
 
     if (!RegExp('^\\d{10}\$').hasMatch(val)) {
@@ -105,14 +78,14 @@ class ProfilePageModel extends FlutterFlowModel<ProfilePageWidget> {
     }
 
     if (val.length < 10) {
-      return 'Mauvais format';
+      return 'Format attendu jj/mm/aaaa';
     }
     if (val.length > 10) {
-      return 'Mauvais format';
+      return 'Format attendu jj/mm/aaaa';
     }
     if (!RegExp('^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}\$')
         .hasMatch(val)) {
-      return 'format attendu jj/mm/aaaa';
+      return 'Format attendu jj/mm/aaaa';
     }
     return null;
   }
@@ -124,8 +97,6 @@ class ProfilePageModel extends FlutterFlowModel<ProfilePageWidget> {
 
   @override
   void initState(BuildContext context) {
-    nameTextControllerValidator = _nameTextControllerValidator;
-    adressTextControllerValidator = _adressTextControllerValidator;
     phoneNumberTextControllerValidator = _phoneNumberTextControllerValidator;
     birthdayTextControllerValidator = _birthdayTextControllerValidator;
   }
