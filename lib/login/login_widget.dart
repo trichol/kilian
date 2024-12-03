@@ -1820,54 +1820,6 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                 // LOG
                                                                 await actions
                                                                     .logAction(
-                                                                  'avant \"generateband save devicetoken\"',
-                                                                );
-                                                                // genearate and save firebase token
-                                                                _model.isTokenGenerateAndSaveBtnCreatePassword =
-                                                                    await actions
-                                                                        .generateAndSaveDeviceToken(
-                                                                  currentUserUid,
-                                                                );
-                                                                // LOG
-                                                                await actions
-                                                                    .logAction(
-                                                                  'apres \"generateband save devicetoken\"',
-                                                                );
-                                                                if (_model
-                                                                    .isTokenGenerateAndSaveBtnCreatePassword!) {
-                                                                  // LOG
-                                                                  await actions
-                                                                      .logAction(
-                                                                    'login : DEVICE TOKEN OK',
-                                                                  );
-                                                                } else {
-                                                                  // info notification NOK
-                                                                  await showDialog(
-                                                                    context:
-                                                                        context,
-                                                                    builder:
-                                                                        (alertDialogContext) {
-                                                                      return AlertDialog(
-                                                                        title: const Text(
-                                                                            'Notifications'),
-                                                                        content:
-                                                                            const Text('Le jeton n\'a pu être généré'),
-                                                                        actions: [
-                                                                          TextButton(
-                                                                            onPressed: () =>
-                                                                                Navigator.pop(alertDialogContext),
-                                                                            child:
-                                                                                const Text('Continuer'),
-                                                                          ),
-                                                                        ],
-                                                                      );
-                                                                    },
-                                                                  );
-                                                                }
-
-                                                                // LOG
-                                                                await actions
-                                                                    .logAction(
                                                                   'login :  avant navigation vers profile',
                                                                 );
                                                                 // GO TO PROFILE PAGE
