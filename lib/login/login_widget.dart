@@ -1732,6 +1732,8 @@ class _LoginWidgetState extends State<LoginWidget>
                                                               false))
                                                       ? null
                                                       : () async {
+                                                          Function() navigate =
+                                                              () {};
                                                           if (_model
                                                                   .passwordCreateTextController
                                                                   .text ==
@@ -1778,6 +1780,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                               return;
                                                             }
 
+                                                            navigate = () =>
+                                                                context.goNamedAuth(
+                                                                    'dashboard',
+                                                                    context
+                                                                        .mounted);
                                                             // LOG
                                                             await actions
                                                                 .logAction(
@@ -1822,65 +1829,6 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                 fcmToken: _model
                                                                     .fcmToken,
                                                               ));
-                                                              // LOG
-                                                              await actions
-                                                                  .logAction(
-                                                                'login :  avant navigation vers profile',
-                                                              );
-                                                              // GO TO PROFILE PAGE
-
-                                                              context
-                                                                  .pushNamedAuth(
-                                                                'profilePage',
-                                                                context.mounted,
-                                                                extra: <String,
-                                                                    dynamic>{
-                                                                  kTransitionInfoKey:
-                                                                      const TransitionInfo(
-                                                                    hasTransition:
-                                                                        true,
-                                                                    transitionType:
-                                                                        PageTransitionType
-                                                                            .fade,
-                                                                    duration: Duration(
-                                                                        milliseconds:
-                                                                            0),
-                                                                  ),
-                                                                },
-                                                              );
-
-                                                              // LOG
-                                                              await actions
-                                                                  .logAction(
-                                                                'login :  apres navigation vers profile',
-                                                              );
-                                                              ScaffoldMessenger
-                                                                      .of(context)
-                                                                  .showSnackBar(
-                                                                SnackBar(
-                                                                  content: Text(
-                                                                    'Complétez votre profil',
-                                                                    style:
-                                                                        TextStyle(
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primaryText,
-                                                                    ),
-                                                                  ),
-                                                                  duration: const Duration(
-                                                                      milliseconds:
-                                                                          5000),
-                                                                  backgroundColor:
-                                                                      FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .success,
-                                                                ),
-                                                              );
-                                                              // LOG
-                                                              await actions
-                                                                  .logAction(
-                                                                'login :  apres snap bar final',
-                                                              );
                                                             } else {
                                                               // test
                                                               unawaited(
@@ -1921,6 +1869,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                       context)
                                                                   .clearRedirectLocation();
 
+                                                              navigate = () =>
+                                                                  context.goNamedAuth(
+                                                                      'login',
+                                                                      context
+                                                                          .mounted);
                                                               ScaffoldMessenger
                                                                       .of(context)
                                                                   .showSnackBar(
@@ -1968,6 +1921,8 @@ class _LoginWidgetState extends State<LoginWidget>
                                                               },
                                                             );
                                                           }
+
+                                                          navigate();
 
                                                           safeSetState(() {});
                                                         },
