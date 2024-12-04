@@ -1,12 +1,9 @@
 import '/auth/firebase_auth/auth_util.dart';
-import '/backend/api_requests/api_calls.dart';
-import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:async';
-import '/custom_code/actions/index.dart' as actions;
+import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
@@ -514,9 +511,18 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                     false))
                                                             ? null
                                                             : () async {
+                                                                Function()
+                                                                    navigate =
+                                                                    () {};
                                                                 // LOGIN
-                                                                await actions
-                                                                    .myLoginWithErrorHandling(
+                                                                GoRouter.of(
+                                                                        context)
+                                                                    .prepareAuthEvent();
+
+                                                                final user =
+                                                                    await authManager
+                                                                        .signInWithEmail(
+                                                                  context,
                                                                   _model
                                                                       .emailAddressTextController
                                                                       .text,
@@ -524,115 +530,45 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                       .passwordTextController
                                                                       .text,
                                                                 );
+                                                                if (user ==
+                                                                    null) {
+                                                                  return;
+                                                                }
+
+                                                                navigate = () =>
+                                                                    context.goNamedAuth(
+                                                                        'dashboard',
+                                                                        context
+                                                                            .mounted);
                                                                 if (loggedIn) {
-                                                                  if (valueOrDefault<
-                                                                              bool>(
-                                                                          currentUserDocument
-                                                                              ?.isCompleteRegistration,
-                                                                          false) ==
-                                                                      true) {
-                                                                    // Geolocation
-                                                                    _model.userCurrentLocationPassword =
-                                                                        await GeoJSLocationCall
-                                                                            .call();
-
-                                                                    // Update user document
-
-                                                                    await currentUserReference!
-                                                                        .update(
-                                                                            createUsersRecordData(
-                                                                      online:
-                                                                          true,
-                                                                      location:
-                                                                          updateLocationDataStruct(
-                                                                        LocationDataStruct.maybeFromMap((_model.userCurrentLocationPassword?.jsonBody ??
-                                                                            '')),
-                                                                        clearUnsetFields:
-                                                                            false,
+                                                                  await action_blocks
+                                                                      .setGeoLocation(
+                                                                          context);
+                                                                  // show snack bar
+                                                                  ScaffoldMessenger.of(
+                                                                          context)
+                                                                      .clearSnackBars();
+                                                                  ScaffoldMessenger.of(
+                                                                          context)
+                                                                      .showSnackBar(
+                                                                    SnackBar(
+                                                                      content:
+                                                                          Text(
+                                                                        'Authentification réussie',
+                                                                        style:
+                                                                            TextStyle(
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).primaryText,
+                                                                        ),
                                                                       ),
-                                                                    ));
-                                                                    // go to dashboard
-
-                                                                    context
-                                                                        .goNamed(
-                                                                      'dashboard',
-                                                                      extra: <String,
-                                                                          dynamic>{
-                                                                        kTransitionInfoKey:
-                                                                            const TransitionInfo(
-                                                                          hasTransition:
-                                                                              true,
-                                                                          transitionType:
-                                                                              PageTransitionType.fade,
-                                                                          duration:
-                                                                              Duration(milliseconds: 0),
-                                                                        ),
-                                                                      },
-                                                                    );
-
-                                                                    // show snack bar
-                                                                    ScaffoldMessenger.of(
-                                                                            context)
-                                                                        .clearSnackBars();
-                                                                    ScaffoldMessenger.of(
-                                                                            context)
-                                                                        .showSnackBar(
-                                                                      SnackBar(
-                                                                        content:
-                                                                            Text(
-                                                                          'Authentification réussie',
-                                                                          style:
-                                                                              TextStyle(
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).primaryText,
-                                                                          ),
-                                                                        ),
-                                                                        duration:
-                                                                            const Duration(milliseconds: 2000),
-                                                                        backgroundColor:
-                                                                            FlutterFlowTheme.of(context).success,
-                                                                      ),
-                                                                    );
-                                                                  } else {
-                                                                    // Profil to complete
-                                                                    await showDialog(
-                                                                      context:
-                                                                          context,
-                                                                      builder:
-                                                                          (alertDialogContext) {
-                                                                        return AlertDialog(
-                                                                          title:
-                                                                              const Text('Profil'),
-                                                                          content:
-                                                                              const Text('Completer votre profil.'),
-                                                                          actions: [
-                                                                            TextButton(
-                                                                              onPressed: () => Navigator.pop(alertDialogContext),
-                                                                              child: const Text('Continuer'),
-                                                                            ),
-                                                                          ],
-                                                                        );
-                                                                      },
-                                                                    );
-                                                                    // Go to profile page
-
-                                                                    context
-                                                                        .goNamed(
-                                                                      'profilePage',
-                                                                      extra: <String,
-                                                                          dynamic>{
-                                                                        kTransitionInfoKey:
-                                                                            const TransitionInfo(
-                                                                          hasTransition:
-                                                                              true,
-                                                                          transitionType:
-                                                                              PageTransitionType.fade,
-                                                                          duration:
-                                                                              Duration(milliseconds: 0),
-                                                                        ),
-                                                                      },
-                                                                    );
-                                                                  }
+                                                                      duration: const Duration(
+                                                                          milliseconds:
+                                                                              2000),
+                                                                      backgroundColor:
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .success,
+                                                                    ),
+                                                                  );
                                                                 } else {
                                                                   // Identifiants incorrect
                                                                   await showDialog(
@@ -658,8 +594,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   );
                                                                 }
 
-                                                                safeSetState(
-                                                                    () {});
+                                                                navigate();
                                                               },
                                                         text: 'continuer',
                                                         options:
@@ -841,6 +776,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                     16.0),
                                                         child: FFButtonWidget(
                                                           onPressed: () async {
+                                                            Function()
+                                                                navigate =
+                                                                () {};
                                                             // LOG GOOGLE
                                                             GoRouter.of(context)
                                                                 .prepareAuthEvent();
@@ -851,128 +789,41 @@ class _LoginWidgetState extends State<LoginWidget>
                                                             if (user == null) {
                                                               return;
                                                             }
+                                                            navigate = () =>
+                                                                context.goNamedAuth(
+                                                                    'dashboard',
+                                                                    context
+                                                                        .mounted);
                                                             if (loggedIn) {
-                                                              if (valueOrDefault<
-                                                                          bool>(
-                                                                      currentUserDocument
-                                                                          ?.isCompleteRegistration,
-                                                                      false) ==
-                                                                  true) {
-                                                                // Geolocation
-                                                                _model.userCurrentLocationGoogle =
-                                                                    await GeoJSLocationCall
-                                                                        .call();
-
-                                                                // Update user document
-
-                                                                await currentUserReference!
-                                                                    .update(
-                                                                        createUsersRecordData(
-                                                                  online: true,
-                                                                  location:
-                                                                      updateLocationDataStruct(
-                                                                    LocationDataStruct.maybeFromMap((_model
-                                                                            .userCurrentLocationGoogle
-                                                                            ?.jsonBody ??
-                                                                        '')),
-                                                                    clearUnsetFields:
-                                                                        false,
+                                                              await action_blocks
+                                                                  .setGeoLocation(
+                                                                      context);
+                                                              // show snack bar
+                                                              ScaffoldMessenger
+                                                                      .of(context)
+                                                                  .clearSnackBars();
+                                                              ScaffoldMessenger
+                                                                      .of(context)
+                                                                  .showSnackBar(
+                                                                SnackBar(
+                                                                  content: Text(
+                                                                    'Authentification réussie',
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryText,
+                                                                    ),
                                                                   ),
-                                                                ));
-                                                                // go to dashboard
-
-                                                                context
-                                                                    .goNamedAuth(
-                                                                  'dashboard',
-                                                                  context
-                                                                      .mounted,
-                                                                  extra: <String,
-                                                                      dynamic>{
-                                                                    kTransitionInfoKey:
-                                                                        const TransitionInfo(
-                                                                      hasTransition:
-                                                                          true,
-                                                                      transitionType:
-                                                                          PageTransitionType
-                                                                              .fade,
-                                                                      duration: Duration(
-                                                                          milliseconds:
-                                                                              0),
-                                                                    ),
-                                                                  },
-                                                                );
-
-                                                                // show snack bar
-                                                                ScaffoldMessenger.of(
-                                                                        context)
-                                                                    .clearSnackBars();
-                                                                ScaffoldMessenger.of(
-                                                                        context)
-                                                                    .showSnackBar(
-                                                                  SnackBar(
-                                                                    content:
-                                                                        Text(
-                                                                      'Authentification réussie',
-                                                                      style:
-                                                                          TextStyle(
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .primaryText,
-                                                                      ),
-                                                                    ),
-                                                                    duration: const Duration(
-                                                                        milliseconds:
-                                                                            2000),
-                                                                    backgroundColor:
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .success,
-                                                                  ),
-                                                                );
-                                                              } else {
-                                                                // Profil to complete
-                                                                await showDialog(
-                                                                  context:
-                                                                      context,
-                                                                  builder:
-                                                                      (alertDialogContext) {
-                                                                    return AlertDialog(
-                                                                      title: const Text(
-                                                                          'Profil'),
-                                                                      content: const Text(
-                                                                          'Completer votre profil.'),
-                                                                      actions: [
-                                                                        TextButton(
-                                                                          onPressed: () =>
-                                                                              Navigator.pop(alertDialogContext),
-                                                                          child:
-                                                                              const Text('Continuer'),
-                                                                        ),
-                                                                      ],
-                                                                    );
-                                                                  },
-                                                                );
-                                                                // Go to profile page
-
-                                                                context
-                                                                    .goNamedAuth(
-                                                                  'profilePage',
-                                                                  context
-                                                                      .mounted,
-                                                                  extra: <String,
-                                                                      dynamic>{
-                                                                    kTransitionInfoKey:
-                                                                        const TransitionInfo(
-                                                                      hasTransition:
-                                                                          true,
-                                                                      transitionType:
-                                                                          PageTransitionType
-                                                                              .fade,
-                                                                      duration: Duration(
-                                                                          milliseconds:
-                                                                              0),
-                                                                    ),
-                                                                  },
-                                                                );
-                                                              }
+                                                                  duration: const Duration(
+                                                                      milliseconds:
+                                                                          2000),
+                                                                  backgroundColor:
+                                                                      FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .success,
+                                                                ),
+                                                              );
                                                             } else {
                                                               // Identifiants incorrect
                                                               await showDialog(
@@ -999,7 +850,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                               );
                                                             }
 
-                                                            safeSetState(() {});
+                                                            navigate();
                                                           },
                                                           text: 'Google',
                                                           icon: const FaIcon(
@@ -1089,6 +940,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   FFButtonWidget(
                                                                 onPressed:
                                                                     () async {
+                                                                  Function()
+                                                                      navigate =
+                                                                      () {};
                                                                   // LOG APPLE
                                                                   GoRouter.of(
                                                                           context)
@@ -1101,116 +955,38 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                       null) {
                                                                     return;
                                                                   }
+                                                                  navigate = () =>
+                                                                      context.goNamedAuth(
+                                                                          'dashboard',
+                                                                          context
+                                                                              .mounted);
                                                                   if (loggedIn) {
-                                                                    if (valueOrDefault<bool>(
-                                                                            currentUserDocument?.isCompleteRegistration,
-                                                                            false) ==
-                                                                        true) {
-                                                                      // Geolocation
-                                                                      _model.userCurrentLocationApple =
-                                                                          await GeoJSLocationCall
-                                                                              .call();
-
-                                                                      // Update user document
-
-                                                                      await currentUserReference!
-                                                                          .update(
-                                                                              createUsersRecordData(
-                                                                        online:
-                                                                            true,
-                                                                        location:
-                                                                            updateLocationDataStruct(
-                                                                          LocationDataStruct.maybeFromMap((_model.userCurrentLocationApple?.jsonBody ??
-                                                                              '')),
-                                                                          clearUnsetFields:
-                                                                              false,
+                                                                    await action_blocks
+                                                                        .setGeoLocation(
+                                                                            context);
+                                                                    // show snack bar
+                                                                    ScaffoldMessenger.of(
+                                                                            context)
+                                                                        .clearSnackBars();
+                                                                    ScaffoldMessenger.of(
+                                                                            context)
+                                                                        .showSnackBar(
+                                                                      SnackBar(
+                                                                        content:
+                                                                            Text(
+                                                                          'Authentification réussie',
+                                                                          style:
+                                                                              TextStyle(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primaryText,
+                                                                          ),
                                                                         ),
-                                                                      ));
-                                                                      // go to dashboard
-
-                                                                      context
-                                                                          .goNamedAuth(
-                                                                        'dashboard',
-                                                                        context
-                                                                            .mounted,
-                                                                        extra: <String,
-                                                                            dynamic>{
-                                                                          kTransitionInfoKey:
-                                                                              const TransitionInfo(
-                                                                            hasTransition:
-                                                                                true,
-                                                                            transitionType:
-                                                                                PageTransitionType.fade,
-                                                                            duration:
-                                                                                Duration(milliseconds: 0),
-                                                                          ),
-                                                                        },
-                                                                      );
-
-                                                                      // show snack bar
-                                                                      ScaffoldMessenger.of(
-                                                                              context)
-                                                                          .clearSnackBars();
-                                                                      ScaffoldMessenger.of(
-                                                                              context)
-                                                                          .showSnackBar(
-                                                                        SnackBar(
-                                                                          content:
-                                                                              Text(
-                                                                            'Authentification réussie',
-                                                                            style:
-                                                                                TextStyle(
-                                                                              color: FlutterFlowTheme.of(context).primaryText,
-                                                                            ),
-                                                                          ),
-                                                                          duration:
-                                                                              const Duration(milliseconds: 2000),
-                                                                          backgroundColor:
-                                                                              FlutterFlowTheme.of(context).success,
-                                                                        ),
-                                                                      );
-                                                                    } else {
-                                                                      // Profil to complete
-                                                                      await showDialog(
-                                                                        context:
-                                                                            context,
-                                                                        builder:
-                                                                            (alertDialogContext) {
-                                                                          return AlertDialog(
-                                                                            title:
-                                                                                const Text('Profil'),
-                                                                            content:
-                                                                                const Text('Completer votre profil.'),
-                                                                            actions: [
-                                                                              TextButton(
-                                                                                onPressed: () => Navigator.pop(alertDialogContext),
-                                                                                child: const Text('Continuer'),
-                                                                              ),
-                                                                            ],
-                                                                          );
-                                                                        },
-                                                                      );
-                                                                      // Go to profile page
-
-                                                                      context
-                                                                          .goNamedAuth(
-                                                                        'profilePage',
-                                                                        context
-                                                                            .mounted,
-                                                                        extra: <String,
-                                                                            dynamic>{
-                                                                          kTransitionInfoKey:
-                                                                              const TransitionInfo(
-                                                                            hasTransition:
-                                                                                true,
-                                                                            transitionType:
-                                                                                PageTransitionType.fade,
-                                                                            duration:
-                                                                                Duration(milliseconds: 0),
-                                                                          ),
-                                                                        },
-                                                                      );
-                                                                    }
+                                                                        duration:
+                                                                            const Duration(milliseconds: 2000),
+                                                                        backgroundColor:
+                                                                            FlutterFlowTheme.of(context).success,
+                                                                      ),
+                                                                    );
                                                                   } else {
                                                                     // Identifiants incorrect
                                                                     await showDialog(
@@ -1234,8 +1010,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                     );
                                                                   }
 
-                                                                  safeSetState(
-                                                                      () {});
+                                                                  navigate();
                                                                 },
                                                                 text: 'Apple',
                                                                 icon: const Icon(
@@ -1732,19 +1507,13 @@ class _LoginWidgetState extends State<LoginWidget>
                                                               false))
                                                       ? null
                                                       : () async {
-                                                          Function() navigate =
-                                                              () {};
                                                           if (_model
                                                                   .passwordCreateTextController
                                                                   .text ==
                                                               _model
                                                                   .passwordConfirmTextController
                                                                   .text) {
-                                                            // LOG
-                                                            await actions
-                                                                .logAction(
-                                                              'login :  avant creation compte',
-                                                            );
+                                                            // Creation account
                                                             GoRouter.of(context)
                                                                 .prepareAuthEvent();
                                                             if (_model
@@ -1780,123 +1549,24 @@ class _LoginWidgetState extends State<LoginWidget>
                                                               return;
                                                             }
 
-                                                            navigate = () =>
-                                                                context.goNamedAuth(
-                                                                    'dashboard',
-                                                                    context
-                                                                        .mounted);
-                                                            // LOG
-                                                            await actions
-                                                                .logAction(
-                                                              'login :  apres creation compte',
+                                                            await action_blocks
+                                                                .postAccountCreation(
+                                                                    context);
+                                                            // GO TO PROFILE PAGE
+
+                                                            context
+                                                                .pushNamedAuth(
+                                                              'profilePage',
+                                                              context.mounted,
+                                                              queryParameters: {
+                                                                'isEditMode':
+                                                                    serializeParam(
+                                                                  true,
+                                                                  ParamType
+                                                                      .bool,
+                                                                ),
+                                                              }.withoutNulls,
                                                             );
-                                                            if (loggedIn ==
-                                                                true) {
-                                                              // LOG
-                                                              await actions
-                                                                  .logAction(
-                                                                'login :  avant geolocalisation',
-                                                              );
-                                                              // Geolocation
-                                                              _model.userCurrentLocationCreatePassword =
-                                                                  await GeoJSLocationCall
-                                                                      .call();
-
-                                                              // LOG
-                                                              await actions
-                                                                  .logAction(
-                                                                'login : avant mise à jour document',
-                                                              );
-                                                              _model.fcmToken =
-                                                                  await actions
-                                                                      .getFcmToken();
-                                                              // Update user document
-
-                                                              await currentUserReference!
-                                                                  .update(
-                                                                      createUsersRecordData(
-                                                                online: true,
-                                                                location:
-                                                                    updateLocationDataStruct(
-                                                                  LocationDataStruct
-                                                                      .maybeFromMap((_model
-                                                                              .userCurrentLocationCreatePassword
-                                                                              ?.jsonBody ??
-                                                                          '')),
-                                                                  clearUnsetFields:
-                                                                      false,
-                                                                ),
-                                                                fcmToken: _model
-                                                                    .fcmToken,
-                                                              ));
-                                                            } else {
-                                                              // test
-                                                              unawaited(
-                                                                () async {
-                                                                  await showDialog(
-                                                                    context:
-                                                                        context,
-                                                                    builder:
-                                                                        (alertDialogContext) {
-                                                                      return AlertDialog(
-                                                                        title: const Text(
-                                                                            'Echec création compte'),
-                                                                        content:
-                                                                            Text('Compte crée mais impossible de se logger   : ${_model.emailAddressCreateTextController.text}'),
-                                                                        actions: [
-                                                                          TextButton(
-                                                                            onPressed: () =>
-                                                                                Navigator.pop(alertDialogContext),
-                                                                            child:
-                                                                                const Text('Ok'),
-                                                                          ),
-                                                                        ],
-                                                                      );
-                                                                    },
-                                                                  );
-                                                                }(),
-                                                              );
-                                                              await authManager
-                                                                  .deleteUser(
-                                                                      context);
-                                                              // LOG OUT
-                                                              GoRouter.of(
-                                                                      context)
-                                                                  .prepareAuthEvent();
-                                                              await authManager
-                                                                  .signOut();
-                                                              GoRouter.of(
-                                                                      context)
-                                                                  .clearRedirectLocation();
-
-                                                              navigate = () =>
-                                                                  context.goNamedAuth(
-                                                                      'login',
-                                                                      context
-                                                                          .mounted);
-                                                              ScaffoldMessenger
-                                                                      .of(context)
-                                                                  .showSnackBar(
-                                                                SnackBar(
-                                                                  content: Text(
-                                                                    'Echec création de votre compte',
-                                                                    style:
-                                                                        TextStyle(
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primaryText,
-                                                                    ),
-                                                                  ),
-                                                                  duration: const Duration(
-                                                                      milliseconds:
-                                                                          4000),
-                                                                  backgroundColor:
-                                                                      FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .error,
-                                                                ),
-                                                              );
-                                                            }
                                                           } else {
                                                             // Mot de passe differents
                                                             await showDialog(
@@ -1921,10 +1591,6 @@ class _LoginWidgetState extends State<LoginWidget>
                                                               },
                                                             );
                                                           }
-
-                                                          navigate();
-
-                                                          safeSetState(() {});
                                                         },
                                                   text: 'Créer un compte',
                                                   options: FFButtonOptions(
@@ -2021,7 +1687,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                   onPressed: () async {
                                                     // Google account creation
                                                     GoRouter.of(context)
-                                                        .prepareAuthEvent(true);
+                                                        .prepareAuthEvent();
                                                     final user =
                                                         await authManager
                                                             .signInWithGoogle(
@@ -2029,154 +1695,22 @@ class _LoginWidgetState extends State<LoginWidget>
                                                     if (user == null) {
                                                       return;
                                                     }
-                                                    // Delay
-                                                    await Future.delayed(
-                                                        const Duration(
-                                                            milliseconds: 500));
-                                                    if (loggedIn == true) {
-                                                      // Geolocation
-                                                      _model.userCurrentLocationCreateGoogle =
-                                                          await GeoJSLocationCall
-                                                              .call();
+                                                    await action_blocks
+                                                        .postAccountCreation(
+                                                            context);
+                                                    // GO TO PROFILE
 
-                                                      // UPDATE AUTHENTICATED USER
-
-                                                      await currentUserReference!
-                                                          .update(
-                                                              createUsersRecordData(
-                                                        name: functions.extractName(
-                                                            currentUserDisplayName),
-                                                        nickname: functions
-                                                            .extractNickname(
-                                                                currentUserDisplayName),
-                                                        online: true,
-                                                        location:
-                                                            updateLocationDataStruct(
-                                                          LocationDataStruct
-                                                              .maybeFromMap((_model
-                                                                      .userCurrentLocationCreateGoogle
-                                                                      ?.jsonBody ??
-                                                                  '')),
-                                                          clearUnsetFields:
-                                                              false,
+                                                    context.pushNamedAuth(
+                                                      'profilePage',
+                                                      context.mounted,
+                                                      queryParameters: {
+                                                        'isEditMode':
+                                                            serializeParam(
+                                                          true,
+                                                          ParamType.bool,
                                                         ),
-                                                      ));
-                                                      // genearate and save firebase token
-                                                      _model.isTokenGenerateAndSaveBtnCreateGoogle =
-                                                          await actions
-                                                              .generateAndSaveDeviceToken(
-                                                        currentUserUid,
-                                                      );
-                                                      if (!_model
-                                                          .isTokenGenerateAndSaveBtnCreateGoogle!) {
-                                                        // info notification NOK
-                                                        await showDialog(
-                                                          context: context,
-                                                          builder:
-                                                              (alertDialogContext) {
-                                                            return AlertDialog(
-                                                              title: const Text(
-                                                                  'Notifications'),
-                                                              content: const Text(
-                                                                  'Le jeton n\'a pu être généré'),
-                                                              actions: [
-                                                                TextButton(
-                                                                  onPressed: () =>
-                                                                      Navigator.pop(
-                                                                          alertDialogContext),
-                                                                  child: const Text(
-                                                                      'Continuer'),
-                                                                ),
-                                                              ],
-                                                            );
-                                                          },
-                                                        );
-                                                      }
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .clearSnackBars();
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .showSnackBar(
-                                                        SnackBar(
-                                                          content: Text(
-                                                            '$currentUserDisplayName: Complétez votre profil!',
-                                                            style: TextStyle(
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primaryText,
-                                                            ),
-                                                          ),
-                                                          duration: const Duration(
-                                                              milliseconds:
-                                                                  5000),
-                                                          backgroundColor:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .success,
-                                                        ),
-                                                      );
-                                                      // GO TO PROFILE PAGE
-
-                                                      context.pushNamedAuth(
-                                                        'profilePage',
-                                                        context.mounted,
-                                                        extra: <String,
-                                                            dynamic>{
-                                                          kTransitionInfoKey:
-                                                              const TransitionInfo(
-                                                            hasTransition: true,
-                                                            transitionType:
-                                                                PageTransitionType
-                                                                    .fade,
-                                                            duration: Duration(
-                                                                milliseconds:
-                                                                    0),
-                                                          ),
-                                                        },
-                                                        ignoreRedirect: true,
-                                                      );
-                                                    } else {
-                                                      // test
-                                                      unawaited(
-                                                        () async {
-                                                          await showDialog(
-                                                            context: context,
-                                                            builder:
-                                                                (alertDialogContext) {
-                                                              return AlertDialog(
-                                                                title: const Text(
-                                                                    'Echec création compte'),
-                                                                content: Text(
-                                                                    'Compte crée mais impossible de se logger   : ${_model.emailAddressCreateTextController.text}'),
-                                                                actions: [
-                                                                  TextButton(
-                                                                    onPressed: () =>
-                                                                        Navigator.pop(
-                                                                            alertDialogContext),
-                                                                    child: const Text(
-                                                                        'Ok'),
-                                                                  ),
-                                                                ],
-                                                              );
-                                                            },
-                                                          );
-                                                        }(),
-                                                      );
-                                                      // LOG OUT
-                                                      GoRouter.of(context)
-                                                          .prepareAuthEvent(
-                                                              true);
-                                                      await authManager
-                                                          .signOut();
-                                                      GoRouter.of(context)
-                                                          .clearRedirectLocation();
-
-                                                      await authManager
-                                                          .deleteUser(context);
-                                                    }
-
-                                                    safeSetState(() {});
+                                                      }.withoutNulls,
+                                                    );
                                                   },
                                                   text: 'Google',
                                                   icon: const FaIcon(
@@ -2253,8 +1787,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                         onPressed: () async {
                                                           // Apple account creation
                                                           GoRouter.of(context)
-                                                              .prepareAuthEvent(
-                                                                  true);
+                                                              .prepareAuthEvent();
                                                           final user =
                                                               await authManager
                                                                   .signInWithApple(
@@ -2262,163 +1795,21 @@ class _LoginWidgetState extends State<LoginWidget>
                                                           if (user == null) {
                                                             return;
                                                           }
-                                                          // Delay
-                                                          await Future.delayed(
-                                                              const Duration(
-                                                                  milliseconds:
-                                                                      500));
-                                                          if (loggedIn ==
-                                                              true) {
-                                                            // Geolocation
-                                                            _model.userCurrentLocationCreateApple =
-                                                                await GeoJSLocationCall
-                                                                    .call();
+                                                          await action_blocks
+                                                              .postAccountCreation(
+                                                                  context);
 
-                                                            // UPDATE AUTHENTICATED USER
-
-                                                            await currentUserReference!
-                                                                .update(
-                                                                    createUsersRecordData(
-                                                              name: functions
-                                                                  .extractName(
-                                                                      currentUserDisplayName),
-                                                              nickname: functions
-                                                                  .extractNickname(
-                                                                      currentUserDisplayName),
-                                                              online: true,
-                                                              location:
-                                                                  updateLocationDataStruct(
-                                                                LocationDataStruct
-                                                                    .maybeFromMap((_model
-                                                                            .userCurrentLocationCreateApple
-                                                                            ?.jsonBody ??
-                                                                        '')),
-                                                                clearUnsetFields:
-                                                                    false,
+                                                          context.pushNamedAuth(
+                                                            'profilePage',
+                                                            context.mounted,
+                                                            queryParameters: {
+                                                              'isEditMode':
+                                                                  serializeParam(
+                                                                true,
+                                                                ParamType.bool,
                                                               ),
-                                                            ));
-                                                            // genearate and save firebase token
-                                                            _model.isTokenGenerateAndSaveBtnCreateApple =
-                                                                await actions
-                                                                    .generateAndSaveDeviceToken(
-                                                              currentUserUid,
-                                                            );
-                                                            if (!_model
-                                                                .isTokenGenerateAndSaveBtnCreateApple!) {
-                                                              // info notification NOK
-                                                              await showDialog(
-                                                                context:
-                                                                    context,
-                                                                builder:
-                                                                    (alertDialogContext) {
-                                                                  return AlertDialog(
-                                                                    title: const Text(
-                                                                        'Notifications'),
-                                                                    content: const Text(
-                                                                        'Le jeton n\'a pu être généré'),
-                                                                    actions: [
-                                                                      TextButton(
-                                                                        onPressed:
-                                                                            () =>
-                                                                                Navigator.pop(alertDialogContext),
-                                                                        child: const Text(
-                                                                            'Continuer'),
-                                                                      ),
-                                                                    ],
-                                                                  );
-                                                                },
-                                                              );
-                                                            }
-                                                            ScaffoldMessenger
-                                                                    .of(context)
-                                                                .clearSnackBars();
-                                                            ScaffoldMessenger
-                                                                    .of(context)
-                                                                .showSnackBar(
-                                                              SnackBar(
-                                                                content: Text(
-                                                                  '$currentUserDisplayName: Complétez votre profil!',
-                                                                  style:
-                                                                      TextStyle(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryText,
-                                                                  ),
-                                                                ),
-                                                                duration: const Duration(
-                                                                    milliseconds:
-                                                                        5000),
-                                                                backgroundColor:
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .success,
-                                                              ),
-                                                            );
-                                                            // GO TO PROFILE PAGE
-
-                                                            context
-                                                                .pushNamedAuth(
-                                                              'profilePage',
-                                                              context.mounted,
-                                                              extra: <String,
-                                                                  dynamic>{
-                                                                kTransitionInfoKey:
-                                                                    const TransitionInfo(
-                                                                  hasTransition:
-                                                                      true,
-                                                                  transitionType:
-                                                                      PageTransitionType
-                                                                          .fade,
-                                                                  duration: Duration(
-                                                                      milliseconds:
-                                                                          0),
-                                                                ),
-                                                              },
-                                                              ignoreRedirect:
-                                                                  true,
-                                                            );
-                                                          } else {
-                                                            // test
-                                                            unawaited(
-                                                              () async {
-                                                                await showDialog(
-                                                                  context:
-                                                                      context,
-                                                                  builder:
-                                                                      (alertDialogContext) {
-                                                                    return AlertDialog(
-                                                                      title: const Text(
-                                                                          'Echec création compte'),
-                                                                      content: Text(
-                                                                          'Compte crée mais impossible de se logger   : ${_model.emailAddressCreateTextController.text}'),
-                                                                      actions: [
-                                                                        TextButton(
-                                                                          onPressed: () =>
-                                                                              Navigator.pop(alertDialogContext),
-                                                                          child:
-                                                                              const Text('Ok'),
-                                                                        ),
-                                                                      ],
-                                                                    );
-                                                                  },
-                                                                );
-                                                              }(),
-                                                            );
-                                                            // LOG OUT
-                                                            GoRouter.of(context)
-                                                                .prepareAuthEvent(
-                                                                    true);
-                                                            await authManager
-                                                                .signOut();
-                                                            GoRouter.of(context)
-                                                                .clearRedirectLocation();
-
-                                                            await authManager
-                                                                .deleteUser(
-                                                                    context);
-                                                          }
-
-                                                          safeSetState(() {});
+                                                            }.withoutNulls,
+                                                          );
                                                         },
                                                         text: 'Apple',
                                                         icon: const Icon(

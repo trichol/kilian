@@ -13,3 +13,4 @@ export 'download_pdf_web.dart' show downloadPdfWeb;
 export 'get_address_suggestions.dart' show getAddressSuggestions;
 export 'log_action.dart' show logAction;
 export 'get_fcm_token.dart' show getFcmToken;
+export 'delete_firebase_user_data.dart' show deleteFirebaseUserData;

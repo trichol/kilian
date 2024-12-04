@@ -54,11 +54,6 @@ class _DashboardWidgetState extends State<DashboardWidget> {
       if (valueOrDefault<bool>(
               currentUserDocument?.isCompleteRegistration, false) ==
           false) {
-        // LOG
-        await actions.logAction(
-          'dashboard :  onload false complete registration : ${valueOrDefault<bool>(currentUserDocument?.isCompleteRegistration, false).toString()}',
-        );
-
         context.goNamed(
           'profilePage',
           queryParameters: {
@@ -72,6 +67,11 @@ class _DashboardWidgetState extends State<DashboardWidget> {
         // LOG
         await actions.logAction(
           'dashboard :  onload false complete registration : ${valueOrDefault<bool>(currentUserDocument?.isCompleteRegistration, false).toString()}',
+        );
+      } else {
+        // LOG
+        await actions.logAction(
+          'dashboard :  onload init :${valueOrDefault<bool>(currentUserDocument?.isCompleteRegistration, false).toString()}NO FURTHER NAVIGATION REQUIRED',
         );
       }
     });
@@ -499,10 +499,10 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                             BorderRadius.circular(8.0),
                                         disabledColor:
                                             FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
+                                                .primary,
                                         disabledTextColor:
                                             FlutterFlowTheme.of(context)
-                                                .alternate,
+                                                .secondaryText,
                                       ),
                                     ),
                                   ].divide(const SizedBox(height: 16.0)),

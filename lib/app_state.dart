@@ -25,4 +25,10 @@ class FFAppState extends ChangeNotifier {
   set iLoop(int value) {
     _iLoop = value;
   }
+
+  String _signInType = '';
+  String get signInType => _signInType;
+  set signInType(String value) {
+    _signInType = value;
+  }
 }

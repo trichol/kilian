@@ -1,6 +1,7 @@
 // Automatic FlutterFlow imports
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
+import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'index.dart'; // Imports other custom actions
@@ -16,44 +17,44 @@ import 'package:universal_io/io.dart';
 
 Future<bool> requestNotificationPermissionForUser() async {
   // Add your function code here!
+  try {
+    if (!Platform.isAndroid && !Platform.isIOS) {
+      print("Notifications are not supported on this platform.");
+      return true;
+    }
+    // Request notification permissions
+    print('Request notification permissions');
+    NotificationSettings settings =
+        await FirebaseMessaging.instance.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      sound: true,
+    );
 
-  if (!Platform.isAndroid && !Platform.isIOS) {
-    print("Notifications are not supported on this platform.");
-    return true;
-  }
-  // Request notification permissions
-  print('Request notification permissions');
-  NotificationSettings settings =
-      await FirebaseMessaging.instance.requestPermission(
-    alert: true,
-    announcement: false,
-    badge: true,
-    sound: true,
-  );
+    print('Authorization status: ${settings.authorizationStatus}');
 
-  print('Authorization status: ${settings.authorizationStatus}');
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      print('Notification permission granted.');
+    } else if (settings.authorizationStatus == AuthorizationStatus.denied) {
+      print('Notification permission denied.');
+    } else if (settings.authorizationStatus ==
+        AuthorizationStatus.provisional) {
+      print('Provisional notification permission granted.');
+    } else {
+      print('Notification permission status: ${settings.authorizationStatus}');
+    }
 
-  if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-    print('Notification permission granted.');
-  } else if (settings.authorizationStatus == AuthorizationStatus.denied) {
-    print('Notification permission denied.');
-  } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
-    print('Provisional notification permission granted.');
-  } else {
-    print('Notification permission status: ${settings.authorizationStatus}');
-  }
-
+/*  SET TOKEN
   if (settings.authorizationStatus == AuthorizationStatus.authorized ||
       settings.authorizationStatus == AuthorizationStatus.provisional) {
     // Get the FCM token
     print('Get the FCM token');
     String? token = await FirebaseMessaging.instance.getToken();
-
     if (token != null) {
       // Get the current authenticated user
       print('Get the current authenticated user.');
       User? currentUser = FirebaseAuth.instance.currentUser;
-
       if (currentUser != null) {
         // Update Firestore with the token
         print('Update Firestore with the token.');
@@ -73,6 +74,14 @@ Future<bool> requestNotificationPermissionForUser() async {
     }
   } else {
     print('Notification permission denied.');
+    return false;
+  }
+
+  */
+
+    return true;
+  } catch (e) {
+    print("###### KILIAN ERROR : requestNotificationPermissionForUser : $e");
     return false;
   }
 }

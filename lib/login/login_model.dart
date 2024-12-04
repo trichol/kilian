@@ -1,4 +1,3 @@
-import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'login_widget.dart' show LoginWidget;
 import 'package:flutter/material.dart';
@@ -55,12 +54,6 @@ class LoginModel extends FlutterFlowModel<LoginWidget> {
     return null;
   }
 
-  // Stores action output result for [Backend Call - API (GeoJSLocation)] action in Button widget.
-  ApiCallResponse? userCurrentLocationPassword;
-  // Stores action output result for [Backend Call - API (GeoJSLocation)] action in BtnGoogle widget.
-  ApiCallResponse? userCurrentLocationGoogle;
-  // Stores action output result for [Backend Call - API (GeoJSLocation)] action in BtnApple widget.
-  ApiCallResponse? userCurrentLocationApple;
   // State field(s) for emailAddress_Create widget.
   FocusNode? emailAddressCreateFocusNode;
   TextEditingController? emailAddressCreateTextController;
@@ -127,19 +120,6 @@ class LoginModel extends FlutterFlowModel<LoginWidget> {
 
     return null;
   }
-
-  // Stores action output result for [Backend Call - API (GeoJSLocation)] action in Button widget.
-  ApiCallResponse? userCurrentLocationCreatePassword;
-  // Stores action output result for [Custom Action - getFcmToken] action in Button widget.
-  String? fcmToken;
-  // Stores action output result for [Backend Call - API (GeoJSLocation)] action in BtnGoogleCreate widget.
-  ApiCallResponse? userCurrentLocationCreateGoogle;
-  // Stores action output result for [Custom Action - generateAndSaveDeviceToken] action in BtnGoogleCreate widget.
-  bool? isTokenGenerateAndSaveBtnCreateGoogle;
-  // Stores action output result for [Backend Call - API (GeoJSLocation)] action in BtnAppleCreate widget.
-  ApiCallResponse? userCurrentLocationCreateApple;
-  // Stores action output result for [Custom Action - generateAndSaveDeviceToken] action in BtnAppleCreate widget.
-  bool? isTokenGenerateAndSaveBtnCreateApple;
 
   @override
   void initState(BuildContext context) {

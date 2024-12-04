@@ -1,8 +1,6 @@
-import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'profile_page_widget.dart' show ProfilePageWidget;
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
@@ -89,11 +87,6 @@ class ProfilePageModel extends FlutterFlowModel<ProfilePageWidget> {
     }
     return null;
   }
-
-  // Stores action output result for [Firestore Query - Query a collection] action in btnProfile widget.
-  List<UsersRecord>? listAlreadyReccorded;
-  // Stores action output result for [Custom Action - requestNotificationPermissionForUser] action in btnProfile widget.
-  bool? notificationGranted;
 
   @override
   void initState(BuildContext context) {

@@ -8,11 +8,11 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/actions/actions.dart' as action_blocks;
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:collection/collection.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -119,9 +119,8 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                   true) {
                 context.safePop();
               } else {
-                context.goNamed('login');
-
-                await authManager.deleteUser(context);
+                // Delete user
+                await action_blocks.fullUserDeletion(context);
               }
             },
           ),
@@ -1016,114 +1015,25 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                             (valueOrDefault(
                                         currentUserDocument?.signature, '') !=
                                     '')) {
-                          _model.listAlreadyReccorded =
-                              await queryUsersRecordOnce(
-                            queryBuilder: (usersRecord) => usersRecord
-                                .where(
-                                  'phone_number',
-                                  isEqualTo:
-                                      _model.phoneNumberTextController.text,
-                                )
-                                .where(
-                                  'phone_number',
-                                  isNotEqualTo: currentPhoneNumber,
-                                ),
-                          );
-                          if (_model.listAlreadyReccorded?.length.toString() ==
-                              '0') {
-                            // info notification
-                            await showDialog(
-                              context: context,
-                              builder: (alertDialogContext) {
-                                return AlertDialog(
-                                  title: const Text('Notifications'),
-                                  content: const Text(
-                                      'Cette application utilise les notifications pour communiquer avec les autres utilisateurs.'),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(alertDialogContext),
-                                      child: const Text('Ok'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                            _model.notificationGranted = await actions
-                                .requestNotificationPermissionForUser();
-                            if (!_model.notificationGranted!) {
-                              await showDialog(
-                                context: context,
-                                builder: (alertDialogContext) {
-                                  return AlertDialog(
-                                    title: const Text('Notification'),
-                                    content: const Text('Autorisation impossible!'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(alertDialogContext),
-                                        child: const Text('recommencer'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            }
-                            // update user
+                          // update user
 
-                            await currentUserReference!
-                                .update(createUsersRecordData(
-                              genre: _model.selectorGenreValue,
-                              nickname: _model.nicknameTextController.text,
-                              displayName: functions.displayName(
-                                  _model.nameTextController.text,
-                                  _model.nicknameTextController.text),
-                              name: _model.nameTextController.text,
-                              adress: _model.adressTextController.text,
-                              birthday: functions.myParseDateFromString(
-                                  _model.birthdayTextController.text),
-                              phoneNumber:
-                                  _model.phoneNumberTextController.text,
-                              online: true,
-                              isCompleteRegistration: true,
-                            ));
-                            await actions.logAction(
-                              valueOrDefault<bool>(
-                                      currentUserDocument
-                                          ?.isCompleteRegistration,
-                                      false)
-                                  .toString(),
-                            );
-                            // go to dashboard
+                          await currentUserReference!
+                              .update(createUsersRecordData(
+                            genre: _model.selectorGenreValue,
+                            nickname: _model.nicknameTextController.text,
+                            displayName: functions.displayName(
+                                _model.nameTextController.text,
+                                _model.nicknameTextController.text),
+                            name: _model.nameTextController.text,
+                            adress: _model.adressTextController.text,
+                            birthday: functions.myParseDateFromString(
+                                _model.birthdayTextController.text),
+                            phoneNumber: _model.phoneNumberTextController.text,
+                            online: true,
+                            isCompleteRegistration: true,
+                          ));
 
-                            context.goNamed('dashboard');
-
-                            await actions.logAction(
-                              valueOrDefault<bool>(
-                                      currentUserDocument
-                                          ?.isCompleteRegistration,
-                                      false)
-                                  .toString(),
-                            );
-                          } else {
-                            await showDialog(
-                              context: context,
-                              builder: (alertDialogContext) {
-                                return AlertDialog(
-                                  title: const Text('Opération échoué'),
-                                  content: Text(
-                                      'Le numéro : ${_model.phoneNumberTextController.text} est déjà utilisé'),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(alertDialogContext),
-                                      child: const Text('Ok'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          }
+                          context.goNamed('dashboard');
                         } else {
                           await showDialog(
                             context: context,
@@ -1143,8 +1053,6 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                             },
                           );
                         }
-
-                        safeSetState(() {});
                       },
                       text: 'Enregistrer',
                       options: FFButtonOptions(
