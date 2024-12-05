@@ -541,6 +541,10 @@ class _DashboardWidgetState extends State<DashboardWidget> {
               ),
               FFButtonWidget(
                 onPressed: () async {
+                  FFAppState().phoneNumberTo = '0652408309';
+                  FFAppState().smsFrom = 'M. Thierry RICHOL';
+                  FFAppState().smsTo = 'gggggggg';
+                  safeSetState(() {});
                   await action_blocks.sendInvitation(context);
                 },
                 text: 'Button',
