@@ -120,10 +120,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                 context.safePop();
               } else {
                 await actions.logAction(
-                  'Suppression :  /users$currentUserUid',
-                );
-                await actions.callDeleteBucketFile(
-                  'users/$currentUserUid',
+                  'Suppression :  users/$currentUserUid',
                 );
                 // Delete user
                 await action_blocks.fullUserDeletion(context);

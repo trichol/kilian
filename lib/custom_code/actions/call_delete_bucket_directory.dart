@@ -12,13 +12,13 @@ import 'package:flutter/material.dart';
 
 import 'package:cloud_functions/cloud_functions.dart';
 
-Future<String> callDeleteBucketFile(String? bucketFile) async {
+Future<String> callDeleteBucketDirectory(String? bucketFile) async {
   // Add your function code here!
-  print('###### KILIAN callDeleteBucketFile : $bucketFile');
+  print('###### KILIAN callDeleteBucketDirectory : $bucketFile');
   try {
     final HttpsCallable callable =
         FirebaseFunctions.instanceFor(region: 'europe-west1')
-            .httpsCallable('deleteBucketFile');
+            .httpsCallable('deleteBucketDirectory');
 
     final result = await callable.call({
       'bucketFile': bucketFile,
@@ -27,7 +27,7 @@ Future<String> callDeleteBucketFile(String? bucketFile) async {
     print(result.data['message']);
     return result.data['message'];
   } catch (e) {
-    print('Error calling callDeleteBucketFile: $e');
-    throw Exception('Failed to call Cloud callDeleteBucketFile');
+    print('###### KILIAN Error calling callDeleteBucketDirectory: $e');
+    throw Exception('Failed to call Cloud callDeleteBucketDirectory');
   }
 }

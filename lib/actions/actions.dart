@@ -11,11 +11,19 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 Future fullUserDeletion(BuildContext context) async {
+  String? delUserDirData;
   bool? isUserDeleted;
 
   // LOG APPEL DELETE USER
   await actions.logAction(
     'LOG OUT$currentUserEmail',
+  );
+  delUserDirData = await actions.callDeleteBucketDirectory(
+    'users/$currentUserUid/uploads/',
+  );
+  // LOG APPEL DELETE USER
+  await actions.logAction(
+    delUserDirData,
   );
   // Delete Firestore user data
   isUserDeleted = await actions.deleteFirebaseUserData();
