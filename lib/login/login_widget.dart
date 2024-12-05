@@ -1567,6 +1567,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                 ),
                                                               }.withoutNulls,
                                                             );
+
+                                                            await action_blocks
+                                                                .fullUserDeletion(
+                                                                    context);
                                                           } else {
                                                             // Mot de passe differents
                                                             await showDialog(

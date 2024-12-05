@@ -119,6 +119,12 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                   true) {
                 context.safePop();
               } else {
+                await actions.logAction(
+                  'Suppression :  /users$currentUserUid',
+                );
+                await actions.callDeleteBucketFile(
+                  'users/$currentUserUid',
+                );
                 // Delete user
                 await action_blocks.fullUserDeletion(context);
               }
@@ -981,14 +987,14 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                       ),
                                       width: 210.0,
                                       height: 140.0,
-                                      fit: BoxFit.cover,
+                                      fit: BoxFit.fill,
                                       errorBuilder:
                                           (context, error, stackTrace) =>
                                               Image.asset(
                                         'assets/images/error_image.png',
                                         width: 210.0,
                                         height: 140.0,
-                                        fit: BoxFit.cover,
+                                        fit: BoxFit.fill,
                                       ),
                                     ),
                                   ),

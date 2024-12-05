@@ -4,6 +4,7 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/actions/actions.dart' as action_blocks;
 import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 
 Future fullUserDeletion(BuildContext context) async {
@@ -136,6 +137,7 @@ Future postAccountCreation(BuildContext context) async {
     await action_blocks.setGeoLocation(context);
     // set Fcm Token
     await action_blocks.setFcmToken(context);
+    await action_blocks.initFromDisplayName(context);
   } else {
     await showDialog(
       context: context,
@@ -155,4 +157,21 @@ Future postAccountCreation(BuildContext context) async {
     // Delete user
     await action_blocks.fullUserDeletion(context);
   }
+}
+
+Future initFromDisplayName(BuildContext context) async {
+  // LOG
+  await actions.logAction(
+    'APPEL INIT FROM DISPLAY NAME',
+  );
+  // Update Name and Nickname
+
+  await currentUserReference!.update(createUsersRecordData(
+    name: currentUserDisplayName != ''
+        ? functions.extractName(currentUserDisplayName)
+        : '',
+    nickname: currentUserDisplayName != ''
+        ? functions.extractNickname(currentUserDisplayName)
+        : '',
+  ));
 }
