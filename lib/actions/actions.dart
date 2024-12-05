@@ -1,11 +1,14 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
+import '/backend/push_notifications/push_notifications_util.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/actions/actions.dart' as action_blocks;
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 Future fullUserDeletion(BuildContext context) async {
   bool? isUserDeleted;
@@ -174,4 +177,41 @@ Future initFromDisplayName(BuildContext context) async {
         ? functions.extractNickname(currentUserDisplayName)
         : '',
   ));
+}
+
+Future sendInvitation(BuildContext context) async {
+  UsersRecord? destinataire;
+
+  destinataire = await queryUsersRecordOnce(
+    queryBuilder: (usersRecord) => usersRecord.where(
+      'phone_number',
+      isEqualTo: FFAppState().phoneNumberTo,
+    ),
+    singleRecord: true,
+  ).then((s) => s.firstOrNull);
+  if (destinataire?.reference != null) {
+    triggerPushNotification(
+      notificationTitle: 'Invitation de ${FFAppState().smsFrom}',
+      notificationText:
+          'Consulter vos contrat, une proposition vient de vous être faite!',
+      notificationSound: 'default',
+      userRefs: [destinataire!.reference],
+      initialPageName: 'dashboard',
+      parameterData: {},
+    );
+  } else {
+    if (isiOS) {
+      await launchUrl(Uri.parse(
+          "sms:${FFAppState().phoneNumberTo}&body=${Uri.encodeComponent('Bonjour ${FFAppState().smsTo},\\n${FFAppState().smsFrom} vous invite à installer le logiciel Kilian. Cliquer sur le lien correspondant à votre mobil.\\nIOS : ${FFAppConstants.urlInstallationKilianIos}\\nAndroid : ${FFAppConstants.urlInstallationKilianAndroid}.')}"));
+    } else {
+      await launchUrl(Uri(
+        scheme: 'sms',
+        path: FFAppState().phoneNumberTo,
+        queryParameters: <String, String>{
+          'body':
+              'Bonjour ${FFAppState().smsTo},\\n${FFAppState().smsFrom} vous invite à installer le logiciel Kilian. Cliquer sur le lien correspondant à votre mobil.\\nIOS : ${FFAppConstants.urlInstallationKilianIos}\\nAndroid : ${FFAppConstants.urlInstallationKilianAndroid}.',
+        },
+      ));
+    }
+  }
 }

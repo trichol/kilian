@@ -31,4 +31,22 @@ class FFAppState extends ChangeNotifier {
   set signInType(String value) {
     _signInType = value;
   }
+
+  String _smsTo = '';
+  String get smsTo => _smsTo;
+  set smsTo(String value) {
+    _smsTo = value;
+  }
+
+  String _smsFrom = '';
+  String get smsFrom => _smsFrom;
+  set smsFrom(String value) {
+    _smsFrom = value;
+  }
+
+  String _phoneNumberTo = '';
+  String get phoneNumberTo => _phoneNumberTo;
+  set phoneNumberTo(String value) {
+    _phoneNumberTo = value;
+  }
 }
