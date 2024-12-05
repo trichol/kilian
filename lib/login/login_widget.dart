@@ -234,10 +234,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                 .override(
                                                                   fontFamily:
                                                                       'Plus Jakarta Sans',
-                                                                  color: const Color(
-                                                                      0xFF57636C),
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryText,
                                                                   fontSize:
-                                                                      12.0,
+                                                                      14.0,
                                                                   letterSpacing:
                                                                       0.0,
                                                                   fontWeight:
@@ -258,7 +259,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(
-                                                                      40.0),
+                                                                      8.0),
                                                         ),
                                                         focusedBorder:
                                                             OutlineInputBorder(
@@ -272,7 +273,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(
-                                                                      40.0),
+                                                                      8.0),
                                                         ),
                                                         errorBorder:
                                                             OutlineInputBorder(
@@ -285,7 +286,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(
-                                                                      40.0),
+                                                                      8.0),
                                                         ),
                                                         focusedErrorBorder:
                                                             OutlineInputBorder(
@@ -298,7 +299,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(
-                                                                      40.0),
+                                                                      8.0),
                                                         ),
                                                         filled: true,
                                                         fillColor:
@@ -318,7 +319,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                             color: FlutterFlowTheme
                                                                     .of(context)
                                                                 .primaryText,
-                                                            fontSize: 12.0,
+                                                            fontSize: 14.0,
                                                             letterSpacing: 0.0,
                                                             fontWeight:
                                                                 FontWeight.w500,
@@ -368,8 +369,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                 .override(
                                                                   fontFamily:
                                                                       'Plus Jakarta Sans',
-                                                                  color: const Color(
-                                                                      0xFF57636C),
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryText,
                                                                   fontSize:
                                                                       14.0,
                                                                   letterSpacing:
@@ -390,7 +392,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(
-                                                                      40.0),
+                                                                      8.0),
                                                         ),
                                                         focusedBorder:
                                                             OutlineInputBorder(
@@ -404,7 +406,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(
-                                                                      40.0),
+                                                                      8.0),
                                                         ),
                                                         errorBorder:
                                                             OutlineInputBorder(
@@ -417,7 +419,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(
-                                                                      40.0),
+                                                                      8.0),
                                                         ),
                                                         focusedErrorBorder:
                                                             OutlineInputBorder(
@@ -430,7 +432,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(
-                                                                      40.0),
+                                                                      8.0),
                                                         ),
                                                         filled: true,
                                                         fillColor:
@@ -472,7 +474,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                             color: FlutterFlowTheme
                                                                     .of(context)
                                                                 .primaryText,
-                                                            fontSize: 12.0,
+                                                            fontSize: 14.0,
                                                             letterSpacing: 0.0,
                                                             fontWeight:
                                                                 FontWeight.w500,
@@ -1155,7 +1157,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                     ),
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            40.0),
+                                                            8.0),
                                                   ),
                                                   focusedBorder:
                                                       OutlineInputBorder(
@@ -1168,7 +1170,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                     ),
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            40.0),
+                                                            8.0),
                                                   ),
                                                   errorBorder:
                                                       OutlineInputBorder(
@@ -1178,7 +1180,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                     ),
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            40.0),
+                                                            8.0),
                                                   ),
                                                   focusedErrorBorder:
                                                       OutlineInputBorder(
@@ -1188,7 +1190,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                     ),
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            40.0),
+                                                            8.0),
                                                   ),
                                                   filled: true,
                                                   fillColor:
@@ -1207,7 +1209,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .primaryText,
-                                                          fontSize: 12.0,
+                                                          fontSize: 14.0,
                                                           letterSpacing: 0.0,
                                                           fontWeight:
                                                               FontWeight.w500,
@@ -1269,7 +1271,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                     ),
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            40.0),
+                                                            8.0),
                                                   ),
                                                   focusedBorder:
                                                       OutlineInputBorder(
@@ -1282,7 +1284,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                     ),
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            40.0),
+                                                            8.0),
                                                   ),
                                                   errorBorder:
                                                       OutlineInputBorder(
@@ -1292,7 +1294,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                     ),
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            40.0),
+                                                            8.0),
                                                   ),
                                                   focusedErrorBorder:
                                                       OutlineInputBorder(
@@ -1302,7 +1304,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                     ),
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            40.0),
+                                                            8.0),
                                                   ),
                                                   filled: true,
                                                   fillColor:
@@ -1339,7 +1341,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                               'Plus Jakarta Sans',
                                                           color:
                                                               const Color(0xFF101213),
-                                                          fontSize: 12.0,
+                                                          fontSize: 14.0,
                                                           letterSpacing: 0.0,
                                                           fontWeight:
                                                               FontWeight.w500,
@@ -1399,7 +1401,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                     ),
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            40.0),
+                                                            8.0),
                                                   ),
                                                   focusedBorder:
                                                       OutlineInputBorder(
@@ -1412,7 +1414,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                     ),
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            40.0),
+                                                            8.0),
                                                   ),
                                                   errorBorder:
                                                       OutlineInputBorder(
@@ -1422,7 +1424,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                     ),
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            40.0),
+                                                            8.0),
                                                   ),
                                                   focusedErrorBorder:
                                                       OutlineInputBorder(
@@ -1432,7 +1434,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                     ),
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            40.0),
+                                                            8.0),
                                                   ),
                                                   filled: true,
                                                   fillColor:
@@ -1467,9 +1469,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                                         .override(
                                                           fontFamily:
                                                               'Plus Jakarta Sans',
-                                                          color:
-                                                              const Color(0xFF101213),
-                                                          fontSize: 12.0,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                          fontSize: 14.0,
                                                           letterSpacing: 0.0,
                                                           fontWeight:
                                                               FontWeight.w500,
