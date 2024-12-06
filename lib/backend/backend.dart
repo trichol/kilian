@@ -11,6 +11,7 @@ import 'schema/contrats_record.dart';
 import 'schema/contractants_record.dart';
 import 'schema/location_record.dart';
 import 'schema/objet_contrat_record.dart';
+import 'schema/info_appli_kilian_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -25,6 +26,7 @@ export 'schema/contrats_record.dart';
 export 'schema/contractants_record.dart';
 export 'schema/location_record.dart';
 export 'schema/objet_contrat_record.dart';
+export 'schema/info_appli_kilian_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -243,6 +245,43 @@ Future<List<ObjetContratRecord>> queryObjetContratRecordOnce({
     queryCollectionOnce(
       ObjetContratRecord.collection,
       ObjetContratRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query InfoAppliKilianRecords (as a Stream and as a Future).
+Future<int> queryInfoAppliKilianRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      InfoAppliKilianRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<InfoAppliKilianRecord>> queryInfoAppliKilianRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      InfoAppliKilianRecord.collection,
+      InfoAppliKilianRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<InfoAppliKilianRecord>> queryInfoAppliKilianRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      InfoAppliKilianRecord.collection,
+      InfoAppliKilianRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

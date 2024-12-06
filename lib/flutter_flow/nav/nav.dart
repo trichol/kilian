@@ -184,6 +184,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => params.isEmpty
               ? const NavBarPage(initialPage: 'notifications')
               : const NotificationsWidget(),
+        ),
+        FFRoute(
+          name: 'infoApplication',
+          path: '/infoApplication',
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'infoApplication')
+              : const InfoApplicationWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -373,7 +380,7 @@ class FFRoute {
               ? isWeb
                   ? Container()
                   : Container(
-                      color: Colors.transparent,
+                      color: Colors.black,
                       child: Image.asset(
                         'assets/images/Splash.png',
                         fit: BoxFit.cover,

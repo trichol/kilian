@@ -73,7 +73,7 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
       ? isWeb
           ? Container()
           : Container(
-              color: Colors.transparent,
+              color: Colors.black,
               child: Image.asset(
                 'assets/images/Splash.png',
                 fit: BoxFit.cover,
@@ -135,6 +135,7 @@ final parametersBuilderMap =
         },
       ),
   'notifications': ParameterData.none(),
+  'infoApplication': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

@@ -5,3 +5,4 @@ export 'contrat_data_struct.dart';
 export 'location_data_struct.dart';
 export 'objet_contrat_struct.dart';
 export 'posted_contrat_data_struct.dart';
+export 'data_label_value_struct.dart';
