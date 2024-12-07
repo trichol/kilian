@@ -2,7 +2,6 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'info_application_model.dart';
 export 'info_application_model.dart';
@@ -90,73 +89,6 @@ class _InfoApplicationWidgetState extends State<InfoApplicationWidget> {
                                 fontWeight: FontWeight.w500,
                               ),
                         ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(50.0, 0.0, 0.0, 0.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: Image.asset(
-                          'assets/images/notification.png',
-                          width: 25.0,
-                          height: 25.0,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: const AlignmentDirectional(-1.0, 0.0),
-                      child: FutureBuilder<int>(
-                        future: queryNotificationRecordCount(
-                          queryBuilder: (notificationRecord) =>
-                              notificationRecord.where(
-                            'user',
-                            isEqualTo: currentUserReference,
-                            isNull: (currentUserReference) == null,
-                          ),
-                        ),
-                        builder: (context, snapshot) {
-                          // Customize what your widget looks like when it's loading.
-                          if (!snapshot.hasData) {
-                            return Center(
-                              child: SizedBox(
-                                width: 50.0,
-                                height: 50.0,
-                                child: CircularProgressIndicator(
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    FlutterFlowTheme.of(context).primary,
-                                  ),
-                                ),
-                              ),
-                            );
-                          }
-                          int badgeCount = snapshot.data!;
-
-                          return badges.Badge(
-                            badgeContent: Text(
-                              badgeCount.toString(),
-                              textAlign: TextAlign.center,
-                              style: FlutterFlowTheme.of(context)
-                                  .titleSmall
-                                  .override(
-                                    fontFamily: 'Roboto',
-                                    color: Colors.black,
-                                    fontSize: 18.0,
-                                    letterSpacing: 0.0,
-                                  ),
-                            ),
-                            showBadge: true,
-                            shape: badges.BadgeShape.circle,
-                            badgeColor: const Color(0xFFFF0707),
-                            elevation: 0.0,
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                5.0, 0.0, 0.0, 5.0),
-                            position: badges.BadgePosition.topStart(),
-                            animationType: badges.BadgeAnimationType.scale,
-                            toAnimate: true,
-                          );
-                        },
                       ),
                     ),
                   ],

@@ -585,7 +585,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                     fontSize: 14.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w500,
-                                    lineHeight: 0.5,
+                                    lineHeight: 1.0,
                                   ),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
@@ -627,7 +627,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                   color:
                                       FlutterFlowTheme.of(context).primaryText,
                                   letterSpacing: 0.0,
-                                  lineHeight: 0.5,
+                                  lineHeight: 1.0,
                                 ),
                             keyboardType: TextInputType.streetAddress,
                             cursorColor:

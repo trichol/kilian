@@ -1,5 +1,4 @@
 import '/auth/firebase_auth/auth_util.dart';
-import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -16,13 +15,6 @@ import 'dashboard_model.dart';
 export 'dashboard_model.dart';
 
 class DashboardWidget extends StatefulWidget {
-  ///  complete with a button:
-  /// named "historic",
-  /// label "Historique des contrat",
-  /// background color : black
-  /// text color : white
-  /// radius corner:  8
-  ///
   const DashboardWidget({
     super.key,
     this.contractTypeSelected,
@@ -74,6 +66,11 @@ class _DashboardWidgetState extends State<DashboardWidget> {
         await actions.logAction(
           'dashboard :  onload init :${valueOrDefault<bool>(currentUserDocument?.isCompleteRegistration, false).toString()}NO FURTHER NAVIGATION REQUIRED',
         );
+        _model.computeCountNotification = await actions.getNotificationCount(
+          'users/$currentUserUid',
+        );
+        _model.countNotification = _model.computeCountNotification;
+        safeSetState(() {});
       }
     });
 
@@ -201,59 +198,78 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                     ),
                     Row(
                       mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        AuthUserStreamWidget(
-                          builder: (context) => Text(
-                            currentUserDisplayName,
-                            style: FlutterFlowTheme.of(context)
-                                .titleMedium
-                                .override(
-                                  fontFamily: 'Roboto',
-                                  letterSpacing: 0.0,
-                                ),
-                          ),
-                        ),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Image.asset(
-                            'assets/images/notification.png',
-                            width: 25.0,
-                            height: 25.0,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        Align(
-                          alignment: const AlignmentDirectional(-1.0, 0.0),
-                          child: FutureBuilder<int>(
-                            future: queryNotificationRecordCount(
-                              queryBuilder: (notificationRecord) =>
-                                  notificationRecord.where(
-                                'user',
-                                isEqualTo: currentUserReference,
-                                isNull: (currentUserReference) == null,
-                              ),
-                            ),
-                            builder: (context, snapshot) {
-                              // Customize what your widget looks like when it's loading.
-                              if (!snapshot.hasData) {
-                                return Center(
-                                  child: SizedBox(
-                                    width: 50.0,
-                                    height: 50.0,
-                                    child: CircularProgressIndicator(
-                                      valueColor: AlwaysStoppedAnimation<Color>(
-                                        FlutterFlowTheme.of(context).primary,
-                                      ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            if (currentUserPhoto != '')
+                              AuthUserStreamWidget(
+                                builder: (context) => ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: Image.network(
+                                    currentUserPhoto,
+                                    width: 25.0,
+                                    height: 25.0,
+                                    fit: BoxFit.cover,
+                                    errorBuilder:
+                                        (context, error, stackTrace) =>
+                                            Image.asset(
+                                      'assets/images/error_image.png',
+                                      width: 25.0,
+                                      height: 25.0,
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
-                                );
-                              }
-                              int badgeCount = snapshot.data!;
-
-                              return badges.Badge(
+                                ),
+                              ),
+                            AuthUserStreamWidget(
+                              builder: (context) => Text(
+                                '${valueOrDefault(currentUserDocument?.genre, '')} $currentUserDisplayName',
+                                style: FlutterFlowTheme.of(context)
+                                    .titleMedium
+                                    .override(
+                                      fontFamily: 'Roboto',
+                                      letterSpacing: 0.0,
+                                    ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              width: 20.0,
+                              height: 20.0,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context).primary,
+                                borderRadius: const BorderRadius.only(
+                                  bottomLeft: Radius.circular(8.0),
+                                  bottomRight: Radius.circular(8.0),
+                                  topLeft: Radius.circular(8.0),
+                                  topRight: Radius.circular(8.0),
+                                ),
+                                shape: BoxShape.rectangle,
+                                border: Border.all(
+                                  color: FlutterFlowTheme.of(context).secondary,
+                                ),
+                              ),
+                              child: Align(
+                                alignment: const AlignmentDirectional(0.0, 0.0),
+                                child: Icon(
+                                  Icons.notification_add,
+                                  color: FlutterFlowTheme.of(context).alternate,
+                                  size: 15.0,
+                                ),
+                              ),
+                            ),
+                            Align(
+                              alignment: const AlignmentDirectional(-1.0, 0.0),
+                              child: badges.Badge(
                                 badgeContent: Text(
-                                  badgeCount.toString(),
+                                  _model.countNotification!.toString(),
                                   textAlign: TextAlign.center,
                                   style: FlutterFlowTheme.of(context)
                                       .titleSmall
@@ -274,11 +290,11 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                 position: badges.BadgePosition.topStart(),
                                 animationType: badges.BadgeAnimationType.scale,
                                 toAnimate: true,
-                              );
-                            },
-                          ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ].divide(const SizedBox(width: 10.0)),
                     ),
                     FFButtonWidget(
                       onPressed: () async {
@@ -376,6 +392,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                       .labelLarge
                                                       .override(
                                                         fontFamily: 'Mukta',
+                                                        fontSize: 15.0,
                                                         letterSpacing: 0.0,
                                                         lineHeight: 2.0,
                                                       ),
@@ -386,7 +403,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                               labelPadding:
                                                   const EdgeInsetsDirectional
                                                       .fromSTEB(
-                                                          0.0, 0.0, 0.0, 0.0),
+                                                          2.0, 0.0, 2.0, 0.0),
                                               elevation: 20.0,
                                               borderColor:
                                                   FlutterFlowTheme.of(context)
@@ -402,6 +419,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                       .bodyLarge
                                                       .override(
                                                         fontFamily: 'Mukta',
+                                                        fontSize: 15.0,
                                                         letterSpacing: 0.0,
                                                       ),
                                               iconColor:
@@ -411,7 +429,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                               labelPadding:
                                                   const EdgeInsetsDirectional
                                                       .fromSTEB(
-                                                          0.0, 0.0, 0.0, 0.0),
+                                                          2.0, 0.0, 2.0, 0.0),
                                               elevation: 0.0,
                                               borderColor:
                                                   FlutterFlowTheme.of(context)
@@ -518,7 +536,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                 BorderRadius.circular(8.0),
                                             disabledColor:
                                                 FlutterFlowTheme.of(context)
-                                                    .primary,
+                                                    .secondaryBackground,
                                             disabledTextColor:
                                                 FlutterFlowTheme.of(context)
                                                     .secondaryText,
@@ -539,31 +557,63 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                       .addToStart(const SizedBox(height: 10.0)),
                 ),
               ),
-              FFButtonWidget(
-                onPressed: () async {
-                  FFAppState().phoneNumberTo = '0652408309';
-                  FFAppState().smsFrom = 'M. Thierry RICHOL';
-                  FFAppState().smsTo = 'gggggggg';
-                  safeSetState(() {});
-                  await action_blocks.sendInvitation(context);
-                },
-                text: 'Button',
-                options: FFButtonOptions(
-                  height: 40.0,
-                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                  iconPadding:
-                      const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                  color: FlutterFlowTheme.of(context).primary,
-                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                        fontFamily: 'Roboto',
-                        color: Colors.white,
-                        letterSpacing: 0.0,
-                      ),
-                  elevation: 0.0,
-                  borderRadius: BorderRadius.circular(8.0),
+              Align(
+                alignment: const AlignmentDirectional(0.0, 0.0),
+                child: FFButtonWidget(
+                  onPressed: () async {
+                    FFAppState().phoneNumberTo = '0652408309';
+                    FFAppState().smsFrom = 'M. Thierry RICHOL';
+                    FFAppState().smsTo = 'Me Steffia';
+                    safeSetState(() {});
+                    await action_blocks.sendInvitation(context);
+                  },
+                  text: 'from me to steffia',
+                  options: FFButtonOptions(
+                    height: 40.0,
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                    iconPadding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: FlutterFlowTheme.of(context).primary,
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          fontFamily: 'Roboto',
+                          color: Colors.white,
+                          letterSpacing: 0.0,
+                        ),
+                    elevation: 0.0,
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
                 ),
               ),
-            ],
+              Align(
+                alignment: const AlignmentDirectional(0.0, 0.0),
+                child: FFButtonWidget(
+                  onPressed: () async {
+                    FFAppState().phoneNumberTo = '0652408309';
+                    FFAppState().smsFrom = 'M. Thierry RICHOL';
+                    FFAppState().smsTo = 'Me Steffia';
+                    safeSetState(() {});
+                    await action_blocks.sendInvitation(context);
+                  },
+                  text: 'from steffia to me',
+                  options: FFButtonOptions(
+                    height: 40.0,
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                    iconPadding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: FlutterFlowTheme.of(context).primary,
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          fontFamily: 'Roboto',
+                          color: Colors.white,
+                          letterSpacing: 0.0,
+                        ),
+                    elevation: 0.0,
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
+              ),
+            ].divide(const SizedBox(height: 2.0)),
           ),
         ),
       ),

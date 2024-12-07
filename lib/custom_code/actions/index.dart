@@ -12,3 +12,4 @@ export 'log_action.dart' show logAction;
 export 'get_fcm_token.dart' show getFcmToken;
 export 'delete_firebase_user_data.dart' show deleteFirebaseUserData;
 export 'call_delete_bucket_directory.dart' show callDeleteBucketDirectory;
+export 'get_notification_count.dart' show getNotificationCount;
