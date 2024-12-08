@@ -105,6 +105,18 @@ class UsersRecord extends FirestoreRecord {
   String get fcmToken => _fcmToken ?? '';
   bool hasFcmToken() => _fcmToken != null;
 
+  // "nombre_notifications_applicqation" field.
+  int? _nombreNotificationsApplicqation;
+  int get nombreNotificationsApplicqation =>
+      _nombreNotificationsApplicqation ?? 0;
+  bool hasNombreNotificationsApplicqation() =>
+      _nombreNotificationsApplicqation != null;
+
+  // "nombre_notifications_contrat" field.
+  int? _nombreNotificationsContrat;
+  int get nombreNotificationsContrat => _nombreNotificationsContrat ?? 0;
+  bool hasNombreNotificationsContrat() => _nombreNotificationsContrat != null;
+
   void _initializeFields() {
     _adress = snapshotData['adress'] as String?;
     _birthday = snapshotData['birthday'] as DateTime?;
@@ -124,6 +136,10 @@ class UsersRecord extends FirestoreRecord {
     _deviceToken = snapshotData['deviceToken'] as String?;
     _genre = snapshotData['genre'] as String?;
     _fcmToken = snapshotData['fcm_token'] as String?;
+    _nombreNotificationsApplicqation =
+        castToType<int>(snapshotData['nombre_notifications_applicqation']);
+    _nombreNotificationsContrat =
+        castToType<int>(snapshotData['nombre_notifications_contrat']);
   }
 
   static CollectionReference get collection =>
@@ -177,6 +193,8 @@ Map<String, dynamic> createUsersRecordData({
   String? deviceToken,
   String? genre,
   String? fcmToken,
+  int? nombreNotificationsApplicqation,
+  int? nombreNotificationsContrat,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -197,6 +215,8 @@ Map<String, dynamic> createUsersRecordData({
       'deviceToken': deviceToken,
       'genre': genre,
       'fcm_token': fcmToken,
+      'nombre_notifications_applicqation': nombreNotificationsApplicqation,
+      'nombre_notifications_contrat': nombreNotificationsContrat,
     }.withoutNulls,
   );
 
@@ -229,7 +249,10 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.location == e2?.location &&
         e1?.deviceToken == e2?.deviceToken &&
         e1?.genre == e2?.genre &&
-        e1?.fcmToken == e2?.fcmToken;
+        e1?.fcmToken == e2?.fcmToken &&
+        e1?.nombreNotificationsApplicqation ==
+            e2?.nombreNotificationsApplicqation &&
+        e1?.nombreNotificationsContrat == e2?.nombreNotificationsContrat;
   }
 
   @override
@@ -251,7 +274,9 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.location,
         e?.deviceToken,
         e?.genre,
-        e?.fcmToken
+        e?.fcmToken,
+        e?.nombreNotificationsApplicqation,
+        e?.nombreNotificationsContrat
       ]);
 
   @override

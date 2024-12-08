@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_pdf_viewer.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/actions/actions.dart' as action_blocks;
 import '/custom_code/actions/index.dart' as actions;
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
@@ -229,34 +230,30 @@ class _SuccessPageBuildPDFWidgetState extends State<SuccessPageBuildPDFWidget> {
                             ).then((s) => s.firstOrNull);
                             if (currentUserUid !=
                                 _model.currentDocUser?.reference.id) {
-                              await showDialog(
-                                context: context,
-                                builder: (alertDialogContext) {
-                                  return AlertDialog(
-                                    title: const Text('testloop1'),
-                                    content: Text(currentUserDisplayName),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(alertDialogContext),
-                                        child: const Text('loop'),
-                                      ),
-                                    ],
-                                  );
-                                },
+                              await actions.logAction(
+                                'Envoi de notification à ${_model.currentDocUser?.displayName}',
                               );
+                              FFAppState().phoneNumberTo =
+                                  _model.currentDocUser!.phoneNumber;
+                              FFAppState().smsFrom = currentUserDisplayName;
+                              FFAppState().smsTo =
+                                  _model.currentDocUser!.displayName;
+                              safeSetState(() {});
+                              // Send notification
+                              await action_blocks.sendInvitation(context);
+                              // Dialog box
                               await showDialog(
                                 context: context,
                                 builder: (alertDialogContext) {
                                   return AlertDialog(
-                                    title: const Text('testloop2'),
+                                    title: const Text('Notificatioon'),
                                     content: Text(
-                                        _model.currentDocUser!.displayName),
+                                        'Vous allez envoyer une invitation en signer ce contrat à ${_model.currentDocUser?.displayName}'),
                                     actions: [
                                       TextButton(
                                         onPressed: () =>
                                             Navigator.pop(alertDialogContext),
-                                        child: const Text('loop'),
+                                        child: const Text('Continuer'),
                                       ),
                                     ],
                                   );
@@ -270,7 +267,8 @@ class _SuccessPageBuildPDFWidgetState extends State<SuccessPageBuildPDFWidget> {
                                 context: context,
                                 builder: (alertDialogContext) {
                                   return AlertDialog(
-                                    title: const Text('notification non envoyé'),
+                                    title: const Text(
+                                        'Erreur notification non envoyé à'),
                                     content: Text(currentUserDisplayName),
                                     actions: [
                                       TextButton(
@@ -445,7 +443,7 @@ class _SuccessPageBuildPDFWidgetState extends State<SuccessPageBuildPDFWidget> {
                     safeSetState(() {});
                   },
                 ),
-              ].divide(const SizedBox(width: 30.0)),
+              ].divide(const SizedBox(width: 5.0)),
             ),
             FlutterFlowPdfViewer(
               networkPath: getJsonField(

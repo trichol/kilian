@@ -210,14 +210,14 @@ Future sendInvitation(BuildContext context) async {
   } else {
     if (isiOS) {
       await launchUrl(Uri.parse(
-          "sms:${FFAppState().phoneNumberTo}&body=${Uri.encodeComponent('Bonjour ${FFAppState().smsTo},\\n${FFAppState().smsFrom} vous invite à installer le logiciel Kilian. Cliquer sur le lien correspondant à votre mobil.\\nIOS : ${FFAppConstants.urlInstallationKilianIos}\\nAndroid : ${FFAppConstants.urlInstallationKilianAndroid}.')}"));
+          "sms:${FFAppState().phoneNumberTo}&body=${Uri.encodeComponent('Bonjour ${FFAppState().smsTo},${FFAppState().smsFrom} vous invite à installer le logiciel Kilian. Cliquer sur le lien correspondant à votre mobil.\\nIOS : ${FFAppConstants.urlInstallationKilianIos}\\nAndroid : ${FFAppConstants.urlInstallationKilianAndroid}.')}"));
     } else {
       await launchUrl(Uri(
         scheme: 'sms',
         path: FFAppState().phoneNumberTo,
         queryParameters: <String, String>{
           'body':
-              'Bonjour ${FFAppState().smsTo},\\n${FFAppState().smsFrom} vous invite à installer le logiciel Kilian. Cliquer sur le lien correspondant à votre mobil.\\nIOS : ${FFAppConstants.urlInstallationKilianIos}\\nAndroid : ${FFAppConstants.urlInstallationKilianAndroid}.',
+              'Bonjour ${FFAppState().smsTo},${FFAppState().smsFrom} vous invite à installer le logiciel Kilian. Cliquer sur le lien correspondant à votre mobil.\\nIOS : ${FFAppConstants.urlInstallationKilianIos}\\nAndroid : ${FFAppConstants.urlInstallationKilianAndroid}.',
         },
       ));
     }

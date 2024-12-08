@@ -281,6 +281,9 @@ class _GenerationAdultContractWidgetState
                       size: 25.0,
                     ),
                     onPressed: () async {
+                      await actions.logAction(
+                        'APPEL LISTE CONTACT',
+                      );
                       // get list phone number and set
                       _model.selectedPhoneNumber =
                           await actions.pickPhoneNumber();

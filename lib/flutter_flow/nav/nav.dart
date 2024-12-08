@@ -387,9 +387,9 @@ class FFRoute {
               ? isWeb
                   ? Container()
                   : Container(
-                      color: Colors.black,
+                      color: Colors.transparent,
                       child: Image.asset(
-                        'assets/images/Splash.png',
+                        'assets/images/kilianSplashImageViolet.png',
                         fit: BoxFit.cover,
                       ),
                     )

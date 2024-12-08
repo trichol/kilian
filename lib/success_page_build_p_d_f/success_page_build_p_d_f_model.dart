@@ -7,9 +7,9 @@ class SuccessPageBuildPDFModel
     extends FlutterFlowModel<SuccessPageBuildPDFWidget> {
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Backend Call - Create Document] action in Button widget.
+  // Stores action output result for [Backend Call - Create Document] action in BtnSendContrat widget.
   ContratsRecord? contratCourant;
-  // Stores action output result for [Firestore Query - Query a collection] action in Button widget.
+  // Stores action output result for [Firestore Query - Query a collection] action in BtnSendContrat widget.
   UsersRecord? currentDocUser;
   // Stores action output result for [Custom Action - downloadPdf] action in IconButton widget.
   bool? pdfApp;

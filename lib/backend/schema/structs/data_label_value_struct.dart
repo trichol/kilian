@@ -10,9 +10,11 @@ class DataLabelValueStruct extends FFFirebaseStruct {
   DataLabelValueStruct({
     String? label,
     String? value,
+    String? valueBis,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _label = label,
         _value = value,
+        _valueBis = valueBis,
         super(firestoreUtilData);
 
   // "label" field.
@@ -29,10 +31,18 @@ class DataLabelValueStruct extends FFFirebaseStruct {
 
   bool hasValue() => _value != null;
 
+  // "value_bis" field.
+  String? _valueBis;
+  String get valueBis => _valueBis ?? '';
+  set valueBis(String? val) => _valueBis = val;
+
+  bool hasValueBis() => _valueBis != null;
+
   static DataLabelValueStruct fromMap(Map<String, dynamic> data) =>
       DataLabelValueStruct(
         label: data['label'] as String?,
         value: data['value'] as String?,
+        valueBis: data['value_bis'] as String?,
       );
 
   static DataLabelValueStruct? maybeFromMap(dynamic data) => data is Map
@@ -42,6 +52,7 @@ class DataLabelValueStruct extends FFFirebaseStruct {
   Map<String, dynamic> toMap() => {
         'label': _label,
         'value': _value,
+        'value_bis': _valueBis,
       }.withoutNulls;
 
   @override
@@ -52,6 +63,10 @@ class DataLabelValueStruct extends FFFirebaseStruct {
         ),
         'value': serializeParam(
           _value,
+          ParamType.String,
+        ),
+        'value_bis': serializeParam(
+          _valueBis,
           ParamType.String,
         ),
       }.withoutNulls;
@@ -68,6 +83,11 @@ class DataLabelValueStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
+        valueBis: deserializeParam(
+          data['value_bis'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -77,16 +97,18 @@ class DataLabelValueStruct extends FFFirebaseStruct {
   bool operator ==(Object other) {
     return other is DataLabelValueStruct &&
         label == other.label &&
-        value == other.value;
+        value == other.value &&
+        valueBis == other.valueBis;
   }
 
   @override
-  int get hashCode => const ListEquality().hash([label, value]);
+  int get hashCode => const ListEquality().hash([label, value, valueBis]);
 }
 
 DataLabelValueStruct createDataLabelValueStruct({
   String? label,
   String? value,
+  String? valueBis,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -95,6 +117,7 @@ DataLabelValueStruct createDataLabelValueStruct({
     DataLabelValueStruct(
       label: label,
       value: value,
+      valueBis: valueBis,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,
