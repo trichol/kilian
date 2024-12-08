@@ -94,7 +94,8 @@ class _MySignatureWidgetState extends State<MySignatureWidget> {
                         SignatureController(
                       penStrokeWidth: 2.0,
                       penColor: FlutterFlowTheme.of(context).primaryText,
-                      exportBackgroundColor: const Color(0x00000000),
+                      exportBackgroundColor:
+                          FlutterFlowTheme.of(context).accent3,
                     ),
                     backgroundColor: FlutterFlowTheme.of(context).accent3,
                     width: 210.0,

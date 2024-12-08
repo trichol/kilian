@@ -101,17 +101,14 @@ class _LoginWidgetState extends State<LoginWidget>
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primary,
           automaticallyImplyLeading: false,
-          title: Align(
-            alignment: const AlignmentDirectional(-1.0, 0.0),
-            child: Text(
-              'KILIAN',
-              style: FlutterFlowTheme.of(context).headlineMedium.override(
-                    fontFamily: 'Roboto',
-                    color: Colors.white,
-                    fontSize: 22.0,
-                    letterSpacing: 0.0,
-                  ),
-            ),
+          title: Text(
+            'Kilian',
+            style: FlutterFlowTheme.of(context).displaySmall.override(
+                  fontFamily: 'Roboto',
+                  color: FlutterFlowTheme.of(context).alternate,
+                  fontSize: 20.0,
+                  letterSpacing: 0.0,
+                ),
           ),
           actions: const [],
           centerTitle: false,

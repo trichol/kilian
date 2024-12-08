@@ -63,6 +63,8 @@ class GenerationAdultContractModel
 
   String? resultat;
 
+  String? phoneNumberController;
+
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for CheckboxGroup widget.
@@ -77,6 +79,8 @@ class GenerationAdultContractModel
   final currentPhoneTxtMask = MaskTextInputFormatter(mask: '##########');
   String? Function(BuildContext, String?)?
       currentPhoneTxtTextControllerValidator;
+  // Stores action output result for [Custom Action - pickPhoneNumber] action in IconButton widget.
+  String? selectedPhoneNumber;
   // Stores action output result for [Firestore Query - Query a collection] action in IconButton widget.
   List<UsersRecord>? userByPhoneFoundList;
   // Stores action output result for [Firestore Query - Query a collection] action in IconButton widget.

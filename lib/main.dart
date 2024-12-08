@@ -141,6 +141,7 @@ class _NavBarPageState extends State<NavBarPage> {
       'profilePage': const ProfilePageWidget(),
       'notifications': const NotificationsWidget(),
       'infoApplication': const InfoApplicationWidget(),
+      'quitter': const QuitterWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -262,6 +263,30 @@ class _NavBarPageState extends State<NavBarPage> {
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       color: currentIndex == 3
+                          ? FlutterFlowTheme.of(context).alternate
+                          : FlutterFlowTheme.of(context).alternate,
+                      fontSize: 11.0,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            FloatingNavbarItem(
+              customWidget: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.logout_sharp,
+                    color: currentIndex == 4
+                        ? FlutterFlowTheme.of(context).alternate
+                        : FlutterFlowTheme.of(context).alternate,
+                    size: 24.0,
+                  ),
+                  Text(
+                    'Quitter',
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: currentIndex == 4
                           ? FlutterFlowTheme.of(context).alternate
                           : FlutterFlowTheme.of(context).alternate,
                       fontSize: 11.0,

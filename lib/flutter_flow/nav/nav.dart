@@ -191,6 +191,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => params.isEmpty
               ? const NavBarPage(initialPage: 'infoApplication')
               : const InfoApplicationWidget(),
+        ),
+        FFRoute(
+          name: 'quitter',
+          path: '/quitter',
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'quitter')
+              : const QuitterWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

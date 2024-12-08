@@ -65,30 +65,27 @@ class _GenerationAdultContractWidgetState
             borderColor: Colors.transparent,
             borderRadius: 30.0,
             borderWidth: 1.0,
-            buttonSize: 60.0,
+            buttonSize: 50.0,
             icon: Icon(
               Icons.arrow_back_rounded,
               color: FlutterFlowTheme.of(context).alternate,
-              size: 30.0,
+              size: 20.0,
             ),
             onPressed: () async {
               context.pop();
             },
           ),
-          title: Align(
-            alignment: const AlignmentDirectional(-1.0, -1.0),
-            child: Text(
-              'KILIAN',
-              style: FlutterFlowTheme.of(context).headlineMedium.override(
-                    fontFamily: 'Roboto',
-                    color: Colors.white,
-                    fontSize: 18.0,
-                    letterSpacing: 0.0,
-                  ),
-            ),
+          title: Text(
+            'Kilian',
+            style: FlutterFlowTheme.of(context).displaySmall.override(
+                  fontFamily: 'Roboto',
+                  color: FlutterFlowTheme.of(context).alternate,
+                  fontSize: 20.0,
+                  letterSpacing: 0.0,
+                ),
           ),
           actions: const [],
-          centerTitle: true,
+          centerTitle: false,
           elevation: 0.0,
         ),
         body: Padding(
@@ -273,6 +270,26 @@ class _GenerationAdultContractWidgetState
                         inputFormatters: [_model.currentPhoneTxtMask],
                       ),
                     ),
+                  ),
+                  FlutterFlowIconButton(
+                    borderRadius: 8.0,
+                    buttonSize: 40.0,
+                    fillColor: FlutterFlowTheme.of(context).primary,
+                    icon: Icon(
+                      Icons.contact_phone,
+                      color: FlutterFlowTheme.of(context).info,
+                      size: 25.0,
+                    ),
+                    onPressed: () async {
+                      // get list phone number and set
+                      _model.selectedPhoneNumber =
+                          await actions.pickPhoneNumber();
+                      // update text field
+                      _model.phoneNumberController = _model.selectedPhoneNumber;
+                      safeSetState(() {});
+
+                      safeSetState(() {});
+                    },
                   ),
                   FlutterFlowIconButton(
                     borderColor: FlutterFlowTheme.of(context).secondary,

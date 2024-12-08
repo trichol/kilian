@@ -3,6 +3,7 @@ import '/backend/backend.dart';
 import '/components/my_signature/my_signature_widget.dart';
 import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
+import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -75,13 +76,13 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
         text: valueOrDefault(currentUserDocument?.adress, ''));
     _model.adressFocusNode ??= FocusNode();
 
-    _model.phoneNumberTextController ??=
-        TextEditingController(text: currentPhoneNumber);
-    _model.phoneNumberFocusNode ??= FocusNode();
-
     _model.birthdayTextController ??= TextEditingController(
         text: functions.myStringFromDate(currentUserDocument?.birthday));
     _model.birthdayFocusNode ??= FocusNode();
+
+    _model.phoneNumberTextController ??=
+        TextEditingController(text: currentPhoneNumber);
+    _model.phoneNumberFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -732,103 +733,6 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                         builder: (context) => SizedBox(
                           width: double.infinity,
                           child: TextFormField(
-                            controller: _model.phoneNumberTextController,
-                            focusNode: _model.phoneNumberFocusNode,
-                            onChanged: (_) => EasyDebounce.debounce(
-                              '_model.phoneNumberTextController',
-                              const Duration(milliseconds: 500),
-                              () => safeSetState(() {}),
-                            ),
-                            autofocus: false,
-                            textInputAction: TextInputAction.next,
-                            readOnly: widget.isEditMode == false,
-                            obscureText: false,
-                            decoration: InputDecoration(
-                              labelText: 'Téléphone (10 chiffres)',
-                              labelStyle: FlutterFlowTheme.of(context)
-                                  .labelMedium
-                                  .override(
-                                    fontFamily: 'Mukta',
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    fontSize: 12.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w500,
-                                    lineHeight: 0.5,
-                                  ),
-                              hintText: currentPhoneNumber,
-                              hintStyle: FlutterFlowTheme.of(context)
-                                  .labelMedium
-                                  .override(
-                                    fontFamily: 'Mukta',
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    fontSize: 14.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w500,
-                                    lineHeight: 0.5,
-                                  ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).accent1,
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(4.0),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).accent2,
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(4.0),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).error,
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(4.0),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).error,
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(4.0),
-                              ),
-                              filled: true,
-                              fillColor: FlutterFlowTheme.of(context).tertiary,
-                              contentPadding: const EdgeInsetsDirectional.fromSTEB(
-                                  24.0, 24.0, 20.0, 24.0),
-                              prefixIcon: const Icon(
-                                Icons.phone,
-                                color: Colors.black,
-                              ),
-                            ),
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Mukta',
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  letterSpacing: 0.0,
-                                  lineHeight: 0.5,
-                                ),
-                            maxLength: 10,
-                            maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                            keyboardType: TextInputType.phone,
-                            cursorColor:
-                                FlutterFlowTheme.of(context).primaryText,
-                            validator: _model.phoneNumberTextControllerValidator
-                                .asValidator(context),
-                            inputFormatters: [_model.phoneNumberMask],
-                          ),
-                        ),
-                      ),
-                      AuthUserStreamWidget(
-                        builder: (context) => SizedBox(
-                          width: double.infinity,
-                          child: TextFormField(
                             controller: _model.birthdayTextController,
                             focusNode: _model.birthdayFocusNode,
                             autofocus: false,
@@ -919,87 +823,246 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                           ),
                         ),
                       ),
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Signature',
-                            textAlign: TextAlign.start,
-                            style: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: 'Mukta',
-                                  color: const Color(0xFF606A85),
-                                  fontSize: 14.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.w500,
+                      Container(
+                        decoration: const BoxDecoration(),
+                        child: AuthUserStreamWidget(
+                          builder: (context) => SizedBox(
+                            width: double.infinity,
+                            child: TextFormField(
+                              controller: _model.phoneNumberTextController,
+                              focusNode: _model.phoneNumberFocusNode,
+                              onChanged: (_) => EasyDebounce.debounce(
+                                '_model.phoneNumberTextController',
+                                const Duration(milliseconds: 500),
+                                () => safeSetState(() {}),
+                              ),
+                              autofocus: false,
+                              textInputAction: TextInputAction.next,
+                              readOnly: widget.isEditMode == false,
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                labelText: 'Téléphone (10 chiffres)',
+                                labelStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .override(
+                                      fontFamily: 'Mukta',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      fontSize: 12.0,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.w500,
+                                      lineHeight: 0.5,
+                                    ),
+                                hintText: currentPhoneNumber,
+                                hintStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .override(
+                                      fontFamily: 'Mukta',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      fontSize: 14.0,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.w500,
+                                      lineHeight: 0.5,
+                                    ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context).accent1,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(4.0),
                                 ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context).accent2,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(4.0),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context).error,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(4.0),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context).error,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(4.0),
+                                ),
+                                filled: true,
+                                fillColor:
+                                    FlutterFlowTheme.of(context).tertiary,
+                                contentPadding: const EdgeInsetsDirectional.fromSTEB(
+                                    24.0, 24.0, 20.0, 24.0),
+                                prefixIcon: const Icon(
+                                  Icons.phone,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Mukta',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    letterSpacing: 0.0,
+                                    lineHeight: 0.5,
+                                  ),
+                              maxLength: 10,
+                              maxLengthEnforcement:
+                                  MaxLengthEnforcement.enforced,
+                              keyboardType: TextInputType.phone,
+                              cursorColor:
+                                  FlutterFlowTheme.of(context).primaryText,
+                              validator: _model
+                                  .phoneNumberTextControllerValidator
+                                  .asValidator(context),
+                              inputFormatters: [_model.phoneNumberMask],
+                            ),
                           ),
-                          Builder(
-                            builder: (context) => Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 10.0),
-                              child: AuthUserStreamWidget(
-                                builder: (context) => InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    if (widget.isEditMode == true) {
-                                      await showAlignedDialog(
-                                        context: context,
-                                        isGlobal: false,
-                                        avoidOverflow: false,
-                                        targetAnchor:
-                                            const AlignmentDirectional(0.0, 0.0)
-                                                .resolve(
-                                                    Directionality.of(context)),
-                                        followerAnchor:
-                                            const AlignmentDirectional(0.0, -1.0)
-                                                .resolve(
-                                                    Directionality.of(context)),
-                                        builder: (dialogContext) {
-                                          return Material(
-                                            color: Colors.transparent,
-                                            child: GestureDetector(
-                                              onTap: () =>
-                                                  FocusScope.of(dialogContext)
-                                                      .unfocus(),
-                                              child: const MySignatureWidget(),
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Signature :',
+                              textAlign: TextAlign.start,
+                              style: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Mukta',
+                                    color: const Color(0xFF606A85),
+                                    fontSize: 14.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
+                                borderRadius: const BorderRadius.only(
+                                  bottomLeft: Radius.circular(0.0),
+                                  bottomRight: Radius.circular(0.0),
+                                  topLeft: Radius.circular(0.0),
+                                  topRight: Radius.circular(0.0),
+                                ),
+                              ),
+                              child: Builder(
+                                builder: (context) => AuthUserStreamWidget(
+                                  builder: (context) => InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      if (widget.isEditMode == true) {
+                                        await showAlignedDialog(
+                                          context: context,
+                                          isGlobal: false,
+                                          avoidOverflow: false,
+                                          targetAnchor: const AlignmentDirectional(
+                                                  0.0, 0.0)
+                                              .resolve(
+                                                  Directionality.of(context)),
+                                          followerAnchor: const AlignmentDirectional(
+                                                  0.0, -1.0)
+                                              .resolve(
+                                                  Directionality.of(context)),
+                                          builder: (dialogContext) {
+                                            return Material(
+                                              color: Colors.transparent,
+                                              child: GestureDetector(
+                                                onTap: () =>
+                                                    FocusScope.of(dialogContext)
+                                                        .unfocus(),
+                                                child: const MySignatureWidget(),
+                                              ),
+                                            );
+                                          },
+                                        );
+                                      }
+                                      await Navigator.push(
+                                        context,
+                                        PageTransition(
+                                          type: PageTransitionType.fade,
+                                          child: FlutterFlowExpandedImageView(
+                                            image: Image.network(
+                                              valueOrDefault<String>(
+                                                valueOrDefault(
+                                                    currentUserDocument
+                                                        ?.signature,
+                                                    ''),
+                                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/kilian-h9p44p/assets/w2lchkl2fid2/chatgpt_signature.png',
+                                              ),
+                                              fit: BoxFit.contain,
+                                              alignment: const Alignment(0.0, 0.0),
+                                              errorBuilder: (context, error,
+                                                      stackTrace) =>
+                                                  Image.asset(
+                                                'assets/images/error_image.png',
+                                                fit: BoxFit.contain,
+                                                alignment: const Alignment(0.0, 0.0),
+                                              ),
                                             ),
-                                          );
-                                        },
+                                            allowRotation: false,
+                                            tag: valueOrDefault<String>(
+                                              valueOrDefault(
+                                                  currentUserDocument
+                                                      ?.signature,
+                                                  ''),
+                                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/kilian-h9p44p/assets/w2lchkl2fid2/chatgpt_signature.png',
+                                            ),
+                                            useHeroAnimation: true,
+                                          ),
+                                        ),
                                       );
-                                    }
-                                  },
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    child: Image.network(
-                                      valueOrDefault<String>(
+                                    },
+                                    child: Hero(
+                                      tag: valueOrDefault<String>(
                                         valueOrDefault(
                                             currentUserDocument?.signature, ''),
                                         'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/kilian-h9p44p/assets/w2lchkl2fid2/chatgpt_signature.png',
                                       ),
-                                      width: 210.0,
-                                      height: 140.0,
-                                      fit: BoxFit.fill,
-                                      errorBuilder:
-                                          (context, error, stackTrace) =>
-                                              Image.asset(
-                                        'assets/images/error_image.png',
-                                        width: 210.0,
-                                        height: 140.0,
-                                        fit: BoxFit.fill,
+                                      transitionOnUserGestures: true,
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                        child: Image.network(
+                                          valueOrDefault<String>(
+                                            valueOrDefault(
+                                                currentUserDocument?.signature,
+                                                ''),
+                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/kilian-h9p44p/assets/w2lchkl2fid2/chatgpt_signature.png',
+                                          ),
+                                          fit: BoxFit.fill,
+                                          alignment: const Alignment(0.0, 0.0),
+                                          errorBuilder:
+                                              (context, error, stackTrace) =>
+                                                  Image.asset(
+                                            'assets/images/error_image.png',
+                                            fit: BoxFit.fill,
+                                            alignment: const Alignment(0.0, 0.0),
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ].divide(const SizedBox(width: 20.0)),
+                        ),
                       ),
                     ].divide(const SizedBox(height: 8.0)),
                   ),

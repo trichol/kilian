@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -41,21 +42,28 @@ class _InfoApplicationWidgetState extends State<InfoApplicationWidget> {
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).primary,
         automaticallyImplyLeading: false,
-        title: Align(
-          alignment: const AlignmentDirectional(-1.0, 0.0),
-          child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 1.0, 0.0),
-            child: Text(
-              'KILIAN',
-              style: FlutterFlowTheme.of(context).headlineMedium.override(
-                    fontFamily: 'Inter Tight',
-                    color: Colors.white,
-                    fontSize: 28.0,
-                    letterSpacing: 0.0,
-                    fontWeight: FontWeight.w600,
-                  ),
-            ),
+        leading: FlutterFlowIconButton(
+          borderColor: Colors.transparent,
+          borderRadius: 30.0,
+          borderWidth: 1.0,
+          buttonSize: 50.0,
+          icon: Icon(
+            Icons.arrow_back_rounded,
+            color: FlutterFlowTheme.of(context).alternate,
+            size: 20.0,
           ),
+          onPressed: () async {
+            context.pop();
+          },
+        ),
+        title: Text(
+          'Kilian',
+          style: FlutterFlowTheme.of(context).displaySmall.override(
+                fontFamily: 'Roboto',
+                color: FlutterFlowTheme.of(context).alternate,
+                fontSize: 20.0,
+                letterSpacing: 0.0,
+              ),
         ),
         actions: const [],
         centerTitle: false,

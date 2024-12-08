@@ -1,6 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_choice_chips.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -44,6 +43,10 @@ class _DashboardWidgetState extends State<DashboardWidget> {
       await actions.logAction(
         'dashboard :  onload init :${valueOrDefault<bool>(currentUserDocument?.isCompleteRegistration, false).toString()}',
       );
+      if (!valueOrDefault<bool>(
+          currentUserDocument?.isCompleteRegistration, false)) {
+        await Future.delayed(const Duration(milliseconds: 2000));
+      }
       if (valueOrDefault<bool>(
               currentUserDocument?.isCompleteRegistration, false) ==
           false) {
@@ -57,6 +60,21 @@ class _DashboardWidgetState extends State<DashboardWidget> {
           }.withoutNulls,
         );
 
+        await showDialog(
+          context: context,
+          builder: (alertDialogContext) {
+            return AlertDialog(
+              title: const Text('Information'),
+              content: const Text('Enregistrement incomplet'),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(alertDialogContext),
+                  child: const Text('Finaliser.'),
+                ),
+              ],
+            );
+          },
+        );
         // LOG
         await actions.logAction(
           'dashboard :  onload false complete registration : ${valueOrDefault<bool>(currentUserDocument?.isCompleteRegistration, false).toString()}',
@@ -94,49 +112,17 @@ class _DashboardWidgetState extends State<DashboardWidget> {
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primary,
           automaticallyImplyLeading: false,
-          title: Align(
-            alignment: const AlignmentDirectional(-1.0, 0.0),
-            child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 1.0, 0.0),
-              child: Text(
-                'KILIAN',
-                style: FlutterFlowTheme.of(context).headlineMedium.override(
-                      fontFamily: 'Inter Tight',
-                      color: Colors.white,
-                      fontSize: 28.0,
-                      letterSpacing: 0.0,
-                      fontWeight: FontWeight.w600,
-                    ),
-              ),
-            ),
-          ),
-          actions: [
-            Align(
-              alignment: const AlignmentDirectional(0.0, 0.0),
-              child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 15.0, 0.0),
-                child: FlutterFlowIconButton(
-                  borderRadius: 4.0,
-                  buttonSize: 40.0,
-                  fillColor: FlutterFlowTheme.of(context).primary,
-                  hoverColor: FlutterFlowTheme.of(context).primary,
-                  hoverIconColor: FlutterFlowTheme.of(context).alternate,
-                  icon: Icon(
-                    Icons.login_outlined,
-                    color: FlutterFlowTheme.of(context).alternate,
-                  ),
-                  onPressed: () async {
-                    GoRouter.of(context).prepareAuthEvent();
-                    await authManager.signOut();
-                    GoRouter.of(context).clearRedirectLocation();
-
-                    context.goNamedAuth('login', context.mounted);
-                  },
+          title: Text(
+            'Kilian',
+            style: FlutterFlowTheme.of(context).displaySmall.override(
+                  fontFamily: 'Roboto',
+                  color: FlutterFlowTheme.of(context).alternate,
+                  fontSize: 20.0,
+                  letterSpacing: 0.0,
                 ),
-              ),
-            ),
-          ],
-          centerTitle: true,
+          ),
+          actions: const [],
+          centerTitle: false,
           elevation: 0.0,
         ),
         body: SafeArea(

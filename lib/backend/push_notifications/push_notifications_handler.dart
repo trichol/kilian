@@ -136,6 +136,7 @@ final parametersBuilderMap =
       ),
   'notifications': ParameterData.none(),
   'infoApplication': ParameterData.none(),
+  'quitter': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

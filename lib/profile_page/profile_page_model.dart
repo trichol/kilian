@@ -44,27 +44,6 @@ class ProfilePageModel extends FlutterFlowModel<ProfilePageWidget> {
   String? Function(BuildContext, String?)? adressTextControllerValidator;
   // Stores action output result for [Custom Action - getAddressSuggestions] action in adress widget.
   List<String>? listSuggested;
-  // State field(s) for phone_number widget.
-  FocusNode? phoneNumberFocusNode;
-  TextEditingController? phoneNumberTextController;
-  final phoneNumberMask = MaskTextInputFormatter(mask: '##########');
-  String? Function(BuildContext, String?)? phoneNumberTextControllerValidator;
-  String? _phoneNumberTextControllerValidator(
-      BuildContext context, String? val) {
-    if (val == null || val.isEmpty) {
-      return 'Format attendu :  10 chiffres';
-    }
-
-    if (val.length < 10) {
-      return 'Format attendu :  10 chiffres';
-    }
-
-    if (!RegExp('^\\d{10}\$').hasMatch(val)) {
-      return 'Format attendu :  10 chiffres';
-    }
-    return null;
-  }
-
   // State field(s) for birthday widget.
   FocusNode? birthdayFocusNode;
   TextEditingController? birthdayTextController;
@@ -88,10 +67,31 @@ class ProfilePageModel extends FlutterFlowModel<ProfilePageWidget> {
     return null;
   }
 
+  // State field(s) for phone_number widget.
+  FocusNode? phoneNumberFocusNode;
+  TextEditingController? phoneNumberTextController;
+  final phoneNumberMask = MaskTextInputFormatter(mask: '##########');
+  String? Function(BuildContext, String?)? phoneNumberTextControllerValidator;
+  String? _phoneNumberTextControllerValidator(
+      BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Format attendu :  10 chiffres';
+    }
+
+    if (val.length < 10) {
+      return 'Format attendu :  10 chiffres';
+    }
+
+    if (!RegExp('^\\d{10}\$').hasMatch(val)) {
+      return 'Format attendu :  10 chiffres';
+    }
+    return null;
+  }
+
   @override
   void initState(BuildContext context) {
-    phoneNumberTextControllerValidator = _phoneNumberTextControllerValidator;
     birthdayTextControllerValidator = _birthdayTextControllerValidator;
+    phoneNumberTextControllerValidator = _phoneNumberTextControllerValidator;
   }
 
   @override
@@ -105,10 +105,10 @@ class ProfilePageModel extends FlutterFlowModel<ProfilePageWidget> {
     adressFocusNode?.dispose();
     adressTextController?.dispose();
 
-    phoneNumberFocusNode?.dispose();
-    phoneNumberTextController?.dispose();
-
     birthdayFocusNode?.dispose();
     birthdayTextController?.dispose();
+
+    phoneNumberFocusNode?.dispose();
+    phoneNumberTextController?.dispose();
   }
 }

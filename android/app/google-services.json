@@ -28,6 +28,10 @@
             "package_name": "com.freepartners.kilian",
             "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
           }
+        },
+        {
+          "client_id": "580390824355-le83ra9o3obncfkg38vfhsbkse3csnt8.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
       "api_key": [
@@ -38,6 +42,10 @@
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
+            {
+              "client_id": "580390824355-le83ra9o3obncfkg38vfhsbkse3csnt8.apps.googleusercontent.com",
+              "client_type": 3
+            },
             {
               "client_id": "580390824355-ccrv4l1n866tomv895v8oe2qqjh5t2k2.apps.googleusercontent.com",
               "client_type": 2,

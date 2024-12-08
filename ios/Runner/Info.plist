@@ -58,6 +58,12 @@
     <string>Autoriser la géolocalisation de votre appareil</string>
 	<key>NSPhotoLibraryUsageDescription</key>
     <string>Autoriser la prise de photos</string>
+	<key>NSContactsUsageDescription</key>
+    <string>Autoriser l'accès à vos contacts pour communiquer avec  un de vos contacts au travers de l'application</string>
+	<key>PermissionGroupNotification</key>
+    <string>Autoriser l'envoi et la réception de notifications de l'application</string>
+	<key>NSMicrophoneUsageDescription</key>
+    <string>Autoriser l'utilisation de votre micro par l'application</string>
     <key>UIBackgroundModes</key>
     <array>
         <string>fetch</string>
