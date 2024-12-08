@@ -145,7 +145,7 @@ class _LoginWidgetState extends State<LoginWidget>
                             labelStyle: FlutterFlowTheme.of(context)
                                 .displaySmall
                                 .override(
-                                  fontFamily: 'Plus Jakarta Sans',
+                                  fontFamily: 'Roboto',
                                   color: const Color(0xFF101213),
                                   fontSize: 20.0,
                                   letterSpacing: 0.0,
