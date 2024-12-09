@@ -287,9 +287,62 @@ class _GenerationAdultContractWidgetState
                       // get list phone number and set
                       _model.selectedPhoneNumber =
                           await actions.pickPhoneNumber();
-                      // update text field
-                      _model.phoneNumberController = _model.selectedPhoneNumber;
-                      safeSetState(() {});
+                      if (_model.selectedPhoneNumber == '!!!!!') {
+                        await showDialog(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: const Text(
+                                  'L\'application n\'a pas accès à votre liste de contacts.'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext),
+                                  child: const Text('Continuer'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      } else if (_model.selectedPhoneNumber == '#####') {
+                        await showDialog(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: const Text('Votre liste de contacts est vide!'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext),
+                                  child: const Text('Continuer'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      } else if (_model.selectedPhoneNumber == '-----') {
+                        await showDialog(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: const Text(
+                                  'L\'application n\'a pas accès aux contacts'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext),
+                                  child: const Text('Continuer'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      } else {
+                        // update text field
+                        _model.phoneNumberController =
+                            _model.selectedPhoneNumber;
+                        safeSetState(() {});
+                      }
 
                       safeSetState(() {});
                     },

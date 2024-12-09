@@ -35,12 +35,15 @@ Future<String> pickPhoneNumber() async {
         return selectedContact.phones!.first.value ?? '';
       } else {
         print("######## KILIAN pickPhoneNumber : no first phone number");
+        return '-----';
       }
     } else {
       print("######## KILIAN pickPhoneNumber : contact empty");
+      return '#####';
     }
   } else {
     print("######## KILIAN pickPhoneNumber : no permission to access contacts");
+    return '!!!!!';
   }
   // Return empty string if no contact is selected or permission denied
   return '';
