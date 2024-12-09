@@ -255,7 +255,7 @@ class ThemeTypography extends Typography {
         'Mukta',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
-        fontSize: 14.0,
+        fontSize: 15.0,
       );
   String get bodySmallFamily => 'Mukta';
   TextStyle get bodySmall => GoogleFonts.getFont(

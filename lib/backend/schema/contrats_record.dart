@@ -15,18 +15,12 @@ class ContratsRecord extends FirestoreRecord {
     _initializeFields();
   }
 
-  // "uid" field.
-  String? _uid;
-  String get uid => _uid ?? '';
-  bool hasUid() => _uid != null;
-
   // "contratData" field.
   ContratDataStruct? _contratData;
   ContratDataStruct get contratData => _contratData ?? ContratDataStruct();
   bool hasContratData() => _contratData != null;
 
   void _initializeFields() {
-    _uid = snapshotData['uid'] as String?;
     _contratData = ContratDataStruct.maybeFromMap(snapshotData['contratData']);
   }
 
@@ -65,12 +59,10 @@ class ContratsRecord extends FirestoreRecord {
 }
 
 Map<String, dynamic> createContratsRecordData({
-  String? uid,
   ContratDataStruct? contratData,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
-      'uid': uid,
       'contratData': ContratDataStruct().toMap(),
     }.withoutNulls,
   );
@@ -86,12 +78,11 @@ class ContratsRecordDocumentEquality implements Equality<ContratsRecord> {
 
   @override
   bool equals(ContratsRecord? e1, ContratsRecord? e2) {
-    return e1?.uid == e2?.uid && e1?.contratData == e2?.contratData;
+    return e1?.contratData == e2?.contratData;
   }
 
   @override
-  int hash(ContratsRecord? e) =>
-      const ListEquality().hash([e?.uid, e?.contratData]);
+  int hash(ContratsRecord? e) => const ListEquality().hash([e?.contratData]);
 
   @override
   bool isValidKey(Object? o) => o is ContratsRecord;

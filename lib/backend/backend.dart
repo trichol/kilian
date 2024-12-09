@@ -12,6 +12,7 @@ import 'schema/location_record.dart';
 import 'schema/objet_contrat_record.dart';
 import 'schema/info_appli_kilian_record.dart';
 import 'schema/notifications_record.dart';
+import 'schema/user_in_waiting_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -27,6 +28,7 @@ export 'schema/location_record.dart';
 export 'schema/objet_contrat_record.dart';
 export 'schema/info_appli_kilian_record.dart';
 export 'schema/notifications_record.dart';
+export 'schema/user_in_waiting_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -282,6 +284,43 @@ Future<List<NotificationsRecord>> queryNotificationsRecordOnce({
     queryCollectionOnce(
       NotificationsRecord.collection,
       NotificationsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query UserInWaitingRecords (as a Stream and as a Future).
+Future<int> queryUserInWaitingRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      UserInWaitingRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<UserInWaitingRecord>> queryUserInWaitingRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      UserInWaitingRecord.collection,
+      UserInWaitingRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<UserInWaitingRecord>> queryUserInWaitingRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      UserInWaitingRecord.collection,
+      UserInWaitingRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

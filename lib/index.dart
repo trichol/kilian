@@ -8,7 +8,7 @@ export '/generation_adult_contract/generation_adult_contract_widget.dart'
 export '/default_page/default_page_widget.dart' show DefaultPageWidget;
 export '/success_page_build_p_d_f/success_page_build_p_d_f_widget.dart'
     show SuccessPageBuildPDFWidget;
-export '/notifications/notifications_widget.dart' show NotificationsWidget;
+export '/mes_contrats/mes_contrats_widget.dart' show MesContratsWidget;
 export '/info_application/info_application_widget.dart'
     show InfoApplicationWidget;
 export '/quitter/quitter_widget.dart' show QuitterWidget;

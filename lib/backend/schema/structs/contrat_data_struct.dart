@@ -19,6 +19,10 @@ class ContratDataStruct extends FFFirebaseStruct {
     String? auteur,
     String? location,
     String? url,
+    String? uid,
+    String? contratPDF,
+    String? modeleHtmlContrat,
+    String? auteurId,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _title = title,
         _type = type,
@@ -30,6 +34,10 @@ class ContratDataStruct extends FFFirebaseStruct {
         _auteur = auteur,
         _location = location,
         _url = url,
+        _uid = uid,
+        _contratPDF = contratPDF,
+        _modeleHtmlContrat = modeleHtmlContrat,
+        _auteurId = auteurId,
         super(firestoreUtilData);
 
   // "title" field.
@@ -112,6 +120,34 @@ class ContratDataStruct extends FFFirebaseStruct {
 
   bool hasUrl() => _url != null;
 
+  // "uid" field.
+  String? _uid;
+  String get uid => _uid ?? '';
+  set uid(String? val) => _uid = val;
+
+  bool hasUid() => _uid != null;
+
+  // "contratPDF" field.
+  String? _contratPDF;
+  String get contratPDF => _contratPDF ?? '';
+  set contratPDF(String? val) => _contratPDF = val;
+
+  bool hasContratPDF() => _contratPDF != null;
+
+  // "modeleHtmlContrat" field.
+  String? _modeleHtmlContrat;
+  String get modeleHtmlContrat => _modeleHtmlContrat ?? '';
+  set modeleHtmlContrat(String? val) => _modeleHtmlContrat = val;
+
+  bool hasModeleHtmlContrat() => _modeleHtmlContrat != null;
+
+  // "auteurId" field.
+  String? _auteurId;
+  String get auteurId => _auteurId ?? '';
+  set auteurId(String? val) => _auteurId = val;
+
+  bool hasAuteurId() => _auteurId != null;
+
   static ContratDataStruct fromMap(Map<String, dynamic> data) =>
       ContratDataStruct(
         title: data['title'] as String?,
@@ -130,6 +166,10 @@ class ContratDataStruct extends FFFirebaseStruct {
         auteur: data['auteur'] as String?,
         location: data['location'] as String?,
         url: data['url'] as String?,
+        uid: data['uid'] as String?,
+        contratPDF: data['contratPDF'] as String?,
+        modeleHtmlContrat: data['modeleHtmlContrat'] as String?,
+        auteurId: data['auteurId'] as String?,
       );
 
   static ContratDataStruct? maybeFromMap(dynamic data) => data is Map
@@ -147,6 +187,10 @@ class ContratDataStruct extends FFFirebaseStruct {
         'auteur': _auteur,
         'location': _location,
         'url': _url,
+        'uid': _uid,
+        'contratPDF': _contratPDF,
+        'modeleHtmlContrat': _modeleHtmlContrat,
+        'auteurId': _auteurId,
       }.withoutNulls;
 
   @override
@@ -191,6 +235,22 @@ class ContratDataStruct extends FFFirebaseStruct {
         ),
         'url': serializeParam(
           _url,
+          ParamType.String,
+        ),
+        'uid': serializeParam(
+          _uid,
+          ParamType.String,
+        ),
+        'contratPDF': serializeParam(
+          _contratPDF,
+          ParamType.String,
+        ),
+        'modeleHtmlContrat': serializeParam(
+          _modeleHtmlContrat,
+          ParamType.String,
+        ),
+        'auteurId': serializeParam(
+          _auteurId,
           ParamType.String,
         ),
       }.withoutNulls;
@@ -249,6 +309,26 @@ class ContratDataStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
+        uid: deserializeParam(
+          data['uid'],
+          ParamType.String,
+          false,
+        ),
+        contratPDF: deserializeParam(
+          data['contratPDF'],
+          ParamType.String,
+          false,
+        ),
+        modeleHtmlContrat: deserializeParam(
+          data['modeleHtmlContrat'],
+          ParamType.String,
+          false,
+        ),
+        auteurId: deserializeParam(
+          data['auteurId'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -267,7 +347,11 @@ class ContratDataStruct extends FFFirebaseStruct {
         listEquality.equals(objetsContrat, other.objetsContrat) &&
         auteur == other.auteur &&
         location == other.location &&
-        url == other.url;
+        url == other.url &&
+        uid == other.uid &&
+        contratPDF == other.contratPDF &&
+        modeleHtmlContrat == other.modeleHtmlContrat &&
+        auteurId == other.auteurId;
   }
 
   @override
@@ -281,7 +365,11 @@ class ContratDataStruct extends FFFirebaseStruct {
         objetsContrat,
         auteur,
         location,
-        url
+        url,
+        uid,
+        contratPDF,
+        modeleHtmlContrat,
+        auteurId
       ]);
 }
 
@@ -294,6 +382,10 @@ ContratDataStruct createContratDataStruct({
   String? auteur,
   String? location,
   String? url,
+  String? uid,
+  String? contratPDF,
+  String? modeleHtmlContrat,
+  String? auteurId,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -308,6 +400,10 @@ ContratDataStruct createContratDataStruct({
       auteur: auteur,
       location: location,
       url: url,
+      uid: uid,
+      contratPDF: contratPDF,
+      modeleHtmlContrat: modeleHtmlContrat,
+      auteurId: auteurId,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

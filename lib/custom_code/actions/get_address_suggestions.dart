@@ -20,7 +20,7 @@ Future<List<String>> getAddressSuggestions(String input, String apiKey) async {
 
   try {
     final url = Uri.parse(
-        'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$input&key=$apiKey');
+        'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$input&components=country:fr&key=$apiKey');
 
     final response = await http.get(url);
     print("API call completed with status: ${response.statusCode}");

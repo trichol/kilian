@@ -139,7 +139,7 @@ class _NavBarPageState extends State<NavBarPage> {
     final tabs = {
       'dashboard': const DashboardWidget(),
       'profilePage': const ProfilePageWidget(),
-      'notifications': const NotificationsWidget(),
+      'mesContrats': const MesContratsWidget(),
       'infoApplication': const InfoApplicationWidget(),
       'quitter': const QuitterWidget(),
     };

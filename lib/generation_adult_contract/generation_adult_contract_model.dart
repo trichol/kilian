@@ -91,6 +91,8 @@ class GenerationAdultContractModel
   String? resultBuidPDF;
   // Stores action output result for [Custom Action - getDownloadUrl] action in BtnValidation widget.
   String? urlContratPDFDraft;
+  // Stores action output result for [Backend Call - Create Document] action in BtnValidation widget.
+  ContratsRecord? contratDataForDocUser;
   // Stores action output result for [Custom Action - callDeleteBucketFile] action in BtnValidation widget.
   String? resultDeletionPDF;
 

@@ -134,7 +134,7 @@ final parametersBuilderMap =
           'pdf': getParameter<String>(data, 'pdf'),
         },
       ),
-  'notifications': ParameterData.none(),
+  'mesContrats': ParameterData.none(),
   'infoApplication': ParameterData.none(),
   'quitter': ParameterData.none(),
 };

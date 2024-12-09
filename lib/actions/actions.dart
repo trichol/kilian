@@ -198,6 +198,23 @@ Future sendInvitation(BuildContext context) async {
     singleRecord: true,
   ).then((s) => s.firstOrNull);
   if (destinataire?.reference != null) {
+    // Dialog box
+    await showDialog(
+      context: context,
+      builder: (alertDialogContext) {
+        return AlertDialog(
+          title: const Text('Notificatioon'),
+          content: Text(
+              'Vous allez envoyer une invitation à signer ce contrat à ${destinataire?.displayName}.Cette utilisateur a déja l\'application Kilian installé.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(alertDialogContext),
+              child: const Text('Continuer'),
+            ),
+          ],
+        );
+      },
+    );
     triggerPushNotification(
       notificationTitle: 'Invitation de ${FFAppState().smsFrom}',
       notificationText:
@@ -208,6 +225,23 @@ Future sendInvitation(BuildContext context) async {
       parameterData: {},
     );
   } else {
+    // Dialog box
+    await showDialog(
+      context: context,
+      builder: (alertDialogContext) {
+        return AlertDialog(
+          title: const Text('SMS'),
+          content: Text(
+              'Vous allez envoyer une invitation à  signer ce contrat à ${destinataire?.displayName}.Cette utilisateur n\'a pas l\'application Kilian installé. Un lien d\'installation lui sera proposé!'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(alertDialogContext),
+              child: const Text('Continuer'),
+            ),
+          ],
+        );
+      },
+    );
     if (isiOS) {
       await launchUrl(Uri.parse(
           "sms:${FFAppState().phoneNumberTo}&body=${Uri.encodeComponent('Bonjour ${FFAppState().smsTo},${FFAppState().smsFrom} vous invite à installer le logiciel Kilian. Cliquer sur le lien correspondant à votre mobil.\\nIOS : ${FFAppConstants.urlInstallationKilianIos}\\nAndroid : ${FFAppConstants.urlInstallationKilianAndroid}.')}"));
@@ -222,4 +256,20 @@ Future sendInvitation(BuildContext context) async {
       ));
     }
   }
+
+  // Memorisation message
+
+  await UserInWaitingRecord.collection.doc().set(createUserInWaitingRecordData(
+        message: createDataLabelValueStruct(
+          label: 'contrat',
+          value: FFAppState().phoneNumberTo,
+          valueBis: currentUserUid,
+          valueTer: FFAppState().contratDataId,
+          clearUnsetFields: false,
+          create: true,
+        ),
+      ));
+  await actions.logAction(
+    '${FFAppState().phoneNumberTo}$currentUserUid${FFAppState().contratDataId}',
+  );
 }

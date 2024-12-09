@@ -49,4 +49,10 @@ class FFAppState extends ChangeNotifier {
   set phoneNumberTo(String value) {
     _phoneNumberTo = value;
   }
+
+  String _contratDataId = '';
+  String get contratDataId => _contratDataId;
+  set contratDataId(String value) {
+    _contratDataId = value;
+  }
 }

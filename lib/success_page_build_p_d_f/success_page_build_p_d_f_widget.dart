@@ -153,7 +153,6 @@ class _SuccessPageBuildPDFWidgetState extends State<SuccessPageBuildPDFWidget> {
                               ContratsRecord.collection.doc();
                           await contratsRecordReference
                               .set(createContratsRecordData(
-                            uid: currentUserUid,
                             contratData: updateContratDataStruct(
                               widget.postedContrat?.contratData,
                               clearUnsetFields: false,
@@ -163,7 +162,6 @@ class _SuccessPageBuildPDFWidgetState extends State<SuccessPageBuildPDFWidget> {
                           _model.contratCourant =
                               ContratsRecord.getDocumentFromData(
                                   createContratsRecordData(
-                                    uid: currentUserUid,
                                     contratData: updateContratDataStruct(
                                       widget.postedContrat?.contratData,
                                       clearUnsetFields: false,
@@ -238,7 +236,12 @@ class _SuccessPageBuildPDFWidgetState extends State<SuccessPageBuildPDFWidget> {
                               FFAppState().smsFrom = currentUserDisplayName;
                               FFAppState().smsTo =
                                   _model.currentDocUser!.displayName;
+                              FFAppState().contratDataId =
+                                  widget.postedContrat!.contratData.uid;
                               safeSetState(() {});
+                              await actions.logAction(
+                                '${FFAppState().smsTo}${FFAppState().smsFrom}${FFAppState().phoneNumberTo}${FFAppState().contratDataId}',
+                              );
                               // Send notification
                               await action_blocks.sendInvitation(context);
                               // Dialog box

@@ -659,27 +659,38 @@ class _GenerationAdultContractWidgetState
                             locale: FFLocalizations.of(context).languageCode,
                           )}'
                           ..type = 'adulte'
-                          ..status = 'en attente de signature'
+                          ..status = FFAppConstants.contratEnAttenteSignature
                           ..contractantsData = _model.listContractants.toList()
                           ..dateCreation = getCurrentTimestamp
                           ..auteur =
                               '${valueOrDefault(currentUserDocument?.genre, '')}$currentUserDisplayName'
-                          ..location = currentUserDocument?.location.city,
+                          ..location = currentUserDocument?.location.city
+                          ..uid = random_data.randomString(
+                            8,
+                            9,
+                            true,
+                            true,
+                            true,
+                          )
+                          ..modeleHtmlContrat =
+                              'MODELE/modele_contrat_adulte.html'
+                          ..contratPDF =
+                              'users/$currentUserUid/contrats/adulte/en_cours/${random_data.randomString(
+                            7,
+                            8,
+                            true,
+                            true,
+                            true,
+                          )}.pdf'
+                          ..auteurId = currentUserUid,
                       );
                       safeSetState(() {});
                       // fill postedContratData
                       _model.updatePostedContratDataStruct(
                         (e) => e
                           ..modeleHtmlContrat =
-                              'MODELE/modele_contrat_adulte.html'
-                          ..contratPDF =
-                              'users/$currentUserUid/contrats/adulte/en_cours/${random_data.randomString(
-                            6,
-                            8,
-                            true,
-                            true,
-                            true,
-                          )}.pdf'
+                              _model.contratData?.modeleHtmlContrat
+                          ..contratPDF = _model.contratData?.contratPDF
                           ..contratData = _model.contratData,
                       );
                       safeSetState(() {});
@@ -734,6 +745,28 @@ class _GenerationAdultContractWidgetState
                               ),
                           );
                           safeSetState(() {});
+                          // set contrat data for doc user
+
+                          var contratsRecordReference =
+                              ContratsRecord.collection.doc();
+                          await contratsRecordReference
+                              .set(createContratsRecordData(
+                            contratData: updateContratDataStruct(
+                              _model.contratData,
+                              clearUnsetFields: false,
+                              create: true,
+                            ),
+                          ));
+                          _model.contratDataForDocUser =
+                              ContratsRecord.getDocumentFromData(
+                                  createContratsRecordData(
+                                    contratData: updateContratDataStruct(
+                                      _model.contratData,
+                                      clearUnsetFields: false,
+                                      create: true,
+                                    ),
+                                  ),
+                                  contratsRecordReference);
                           // Dialog end operation
                           await showDialog(
                             context: context,
@@ -751,6 +784,15 @@ class _GenerationAdultContractWidgetState
                               );
                             },
                           );
+
+                          await currentUserReference!.update({
+                            ...mapToFirestore(
+                              {
+                                'contrats': FieldValue.arrayUnion(
+                                    [_model.contratDataForDocUser?.reference]),
+                              },
+                            ),
+                          });
 
                           context.pushNamed(
                             'successPageBuildPDF',

@@ -80,11 +80,6 @@ class UsersRecord extends FirestoreRecord {
   bool get isCompleteRegistration => _isCompleteRegistration ?? false;
   bool hasIsCompleteRegistration() => _isCompleteRegistration != null;
 
-  // "contrats" field.
-  List<DocumentReference>? _contrats;
-  List<DocumentReference> get contrats => _contrats ?? const [];
-  bool hasContrats() => _contrats != null;
-
   // "location" field.
   LocationDataStruct? _location;
   LocationDataStruct get location => _location ?? LocationDataStruct();
@@ -105,17 +100,10 @@ class UsersRecord extends FirestoreRecord {
   String get fcmToken => _fcmToken ?? '';
   bool hasFcmToken() => _fcmToken != null;
 
-  // "nombre_notifications_applicqation" field.
-  int? _nombreNotificationsApplicqation;
-  int get nombreNotificationsApplicqation =>
-      _nombreNotificationsApplicqation ?? 0;
-  bool hasNombreNotificationsApplicqation() =>
-      _nombreNotificationsApplicqation != null;
-
-  // "nombre_notifications_contrat" field.
-  int? _nombreNotificationsContrat;
-  int get nombreNotificationsContrat => _nombreNotificationsContrat ?? 0;
-  bool hasNombreNotificationsContrat() => _nombreNotificationsContrat != null;
+  // "contrats" field.
+  List<DocumentReference>? _contrats;
+  List<DocumentReference> get contrats => _contrats ?? const [];
+  bool hasContrats() => _contrats != null;
 
   void _initializeFields() {
     _adress = snapshotData['adress'] as String?;
@@ -131,15 +119,11 @@ class UsersRecord extends FirestoreRecord {
     _uid = snapshotData['uid'] as String?;
     _createdTime = snapshotData['created_time'] as DateTime?;
     _isCompleteRegistration = snapshotData['is_complete_registration'] as bool?;
-    _contrats = getDataList(snapshotData['contrats']);
     _location = LocationDataStruct.maybeFromMap(snapshotData['location']);
     _deviceToken = snapshotData['deviceToken'] as String?;
     _genre = snapshotData['genre'] as String?;
     _fcmToken = snapshotData['fcm_token'] as String?;
-    _nombreNotificationsApplicqation =
-        castToType<int>(snapshotData['nombre_notifications_applicqation']);
-    _nombreNotificationsContrat =
-        castToType<int>(snapshotData['nombre_notifications_contrat']);
+    _contrats = getDataList(snapshotData['contrats']);
   }
 
   static CollectionReference get collection =>
@@ -193,8 +177,6 @@ Map<String, dynamic> createUsersRecordData({
   String? deviceToken,
   String? genre,
   String? fcmToken,
-  int? nombreNotificationsApplicqation,
-  int? nombreNotificationsContrat,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -215,8 +197,6 @@ Map<String, dynamic> createUsersRecordData({
       'deviceToken': deviceToken,
       'genre': genre,
       'fcm_token': fcmToken,
-      'nombre_notifications_applicqation': nombreNotificationsApplicqation,
-      'nombre_notifications_contrat': nombreNotificationsContrat,
     }.withoutNulls,
   );
 
@@ -245,14 +225,11 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.uid == e2?.uid &&
         e1?.createdTime == e2?.createdTime &&
         e1?.isCompleteRegistration == e2?.isCompleteRegistration &&
-        listEquality.equals(e1?.contrats, e2?.contrats) &&
         e1?.location == e2?.location &&
         e1?.deviceToken == e2?.deviceToken &&
         e1?.genre == e2?.genre &&
         e1?.fcmToken == e2?.fcmToken &&
-        e1?.nombreNotificationsApplicqation ==
-            e2?.nombreNotificationsApplicqation &&
-        e1?.nombreNotificationsContrat == e2?.nombreNotificationsContrat;
+        listEquality.equals(e1?.contrats, e2?.contrats);
   }
 
   @override
@@ -270,13 +247,11 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.uid,
         e?.createdTime,
         e?.isCompleteRegistration,
-        e?.contrats,
         e?.location,
         e?.deviceToken,
         e?.genre,
         e?.fcmToken,
-        e?.nombreNotificationsApplicqation,
-        e?.nombreNotificationsContrat
+        e?.contrats
       ]);
 
   @override

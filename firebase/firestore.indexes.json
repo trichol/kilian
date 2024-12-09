@@ -13,6 +13,34 @@
           "order": "ASCENDING"
         }
       ]
+    },
+    {
+      "collectionGroup": "contrats",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "contratData.status",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "contratData.date_creation",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "contrats",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "contratData.status",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "contratData.date_validation",
+          "order": "DESCENDING"
+        }
+      ]
     }
   ],
   "fieldOverrides": [

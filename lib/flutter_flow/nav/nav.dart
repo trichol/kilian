@@ -179,11 +179,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'notifications',
-          path: '/notifications',
+          name: 'mesContrats',
+          path: '/mesContrats',
           builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'notifications')
-              : const NotificationsWidget(),
+              ? const NavBarPage(initialPage: 'mesContrats')
+              : const MesContratsWidget(),
         ),
         FFRoute(
           name: 'infoApplication',
