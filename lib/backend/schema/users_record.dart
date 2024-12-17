@@ -105,6 +105,11 @@ class UsersRecord extends FirestoreRecord {
   List<DocumentReference> get contrats => _contrats ?? const [];
   bool hasContrats() => _contrats != null;
 
+  // "url_contrats" field.
+  List<String>? _urlContrats;
+  List<String> get urlContrats => _urlContrats ?? const [];
+  bool hasUrlContrats() => _urlContrats != null;
+
   void _initializeFields() {
     _adress = snapshotData['adress'] as String?;
     _birthday = snapshotData['birthday'] as DateTime?;
@@ -119,11 +124,14 @@ class UsersRecord extends FirestoreRecord {
     _uid = snapshotData['uid'] as String?;
     _createdTime = snapshotData['created_time'] as DateTime?;
     _isCompleteRegistration = snapshotData['is_complete_registration'] as bool?;
-    _location = LocationDataStruct.maybeFromMap(snapshotData['location']);
+    _location = snapshotData['location'] is LocationDataStruct
+        ? snapshotData['location']
+        : LocationDataStruct.maybeFromMap(snapshotData['location']);
     _deviceToken = snapshotData['deviceToken'] as String?;
     _genre = snapshotData['genre'] as String?;
     _fcmToken = snapshotData['fcm_token'] as String?;
     _contrats = getDataList(snapshotData['contrats']);
+    _urlContrats = getDataList(snapshotData['url_contrats']);
   }
 
   static CollectionReference get collection =>
@@ -229,7 +237,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.deviceToken == e2?.deviceToken &&
         e1?.genre == e2?.genre &&
         e1?.fcmToken == e2?.fcmToken &&
-        listEquality.equals(e1?.contrats, e2?.contrats);
+        listEquality.equals(e1?.contrats, e2?.contrats) &&
+        listEquality.equals(e1?.urlContrats, e2?.urlContrats);
   }
 
   @override
@@ -251,7 +260,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.deviceToken,
         e?.genre,
         e?.fcmToken,
-        e?.contrats
+        e?.contrats,
+        e?.urlContrats
       ]);
 
   @override

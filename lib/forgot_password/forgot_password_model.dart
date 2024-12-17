@@ -1,3 +1,4 @@
+import '/components/kilian_app_bar_back/kilian_app_bar_back_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'forgot_password_widget.dart' show ForgotPasswordWidget;
 import 'package:flutter/material.dart';
@@ -6,6 +7,8 @@ class ForgotPasswordModel extends FlutterFlowModel<ForgotPasswordWidget> {
   ///  State fields for stateful widgets in this page.
 
   final formKey = GlobalKey<FormState>();
+  // Model for KilianAppBarBack component.
+  late KilianAppBarBackModel kilianAppBarBackModel;
   // State field(s) for emailAddress widget.
   FocusNode? emailAddressFocusNode;
   TextEditingController? emailAddressTextController;
@@ -30,11 +33,13 @@ class ForgotPasswordModel extends FlutterFlowModel<ForgotPasswordWidget> {
 
   @override
   void initState(BuildContext context) {
+    kilianAppBarBackModel = createModel(context, () => KilianAppBarBackModel());
     emailAddressTextControllerValidator = _emailAddressTextControllerValidator;
   }
 
   @override
   void dispose() {
+    kilianAppBarBackModel.dispose();
     emailAddressFocusNode?.dispose();
     emailAddressTextController?.dispose();
   }

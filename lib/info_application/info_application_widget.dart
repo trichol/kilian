@@ -1,9 +1,9 @@
 import '/auth/firebase_auth/auth_util.dart';
-import '/backend/backend.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
+import '/components/kilian_app_bar/kilian_app_bar_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'info_application_model.dart';
 export 'info_application_model.dart';
 
@@ -36,44 +36,24 @@ class _InfoApplicationWidgetState extends State<InfoApplicationWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).primary,
-        automaticallyImplyLeading: false,
-        leading: FlutterFlowIconButton(
-          borderColor: Colors.transparent,
-          borderRadius: 30.0,
-          borderWidth: 1.0,
-          buttonSize: 50.0,
-          icon: Icon(
-            Icons.arrow_back_rounded,
-            color: FlutterFlowTheme.of(context).alternate,
-            size: 20.0,
-          ),
-          onPressed: () async {
-            context.pop();
-          },
-        ),
-        title: Text(
-          'Kilian',
-          style: FlutterFlowTheme.of(context).displaySmall.override(
-                fontFamily: 'Roboto',
-                color: FlutterFlowTheme.of(context).alternate,
-                fontSize: 20.0,
-                letterSpacing: 0.0,
-              ),
-        ),
-        actions: const [],
-        centerTitle: false,
-        elevation: 0.0,
-      ),
       body: Padding(
         padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 22.0),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
+            Container(
+              decoration: const BoxDecoration(),
+              child: wrapWithModel(
+                model: _model.kilianAppBarModel,
+                updateCallback: () => safeSetState(() {}),
+                child: const KilianAppBarWidget(),
+              ),
+            ),
             Column(
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -121,34 +101,17 @@ class _InfoApplicationWidgetState extends State<InfoApplicationWidget> {
             ),
             Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
-              child: StreamBuilder<List<InfoAppliKilianRecord>>(
-                stream: queryInfoAppliKilianRecord(),
-                builder: (context, snapshot) {
-                  // Customize what your widget looks like when it's loading.
-                  if (!snapshot.hasData) {
-                    return Center(
-                      child: SizedBox(
-                        width: 50.0,
-                        height: 50.0,
-                        child: CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            FlutterFlowTheme.of(context).primary,
-                          ),
-                        ),
-                      ),
-                    );
-                  }
-                  List<InfoAppliKilianRecord>
-                      listViewInfoAppliKilianRecordList = snapshot.data!;
+              child: Builder(
+                builder: (context) {
+                  final infoAppli = FFAppState().cApplicationInfo.toList();
 
                   return ListView.builder(
                     padding: EdgeInsets.zero,
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
-                    itemCount: listViewInfoAppliKilianRecordList.length,
-                    itemBuilder: (context, listViewIndex) {
-                      final listViewInfoAppliKilianRecord =
-                          listViewInfoAppliKilianRecordList[listViewIndex];
+                    itemCount: infoAppli.length,
+                    itemBuilder: (context, infoAppliIndex) {
+                      final infoAppliItem = infoAppli[infoAppliIndex];
                       return Padding(
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 2.0),
@@ -174,7 +137,7 @@ class _InfoApplicationWidgetState extends State<InfoApplicationWidget> {
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Text(
-                                  listViewInfoAppliKilianRecord.item.label,
+                                  infoAppliItem.label,
                                   style: FlutterFlowTheme.of(context)
                                       .bodyLarge
                                       .override(
@@ -183,7 +146,7 @@ class _InfoApplicationWidgetState extends State<InfoApplicationWidget> {
                                       ),
                                 ),
                                 Text(
-                                  listViewInfoAppliKilianRecord.item.value,
+                                  infoAppliItem.value,
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(

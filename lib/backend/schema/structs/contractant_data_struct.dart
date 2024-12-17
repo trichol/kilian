@@ -4,30 +4,35 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
 
-import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 class ContractantDataStruct extends FFFirebaseStruct {
   ContractantDataStruct({
     String? nom,
     String? prenom,
-    DateTime? date,
-    String? signature,
-    LocationDataStruct? location,
     String? genre,
     String? phoneNumber,
     String? status,
     String? uid,
+    DateTime? dateSignature,
+    String? signature,
+    bool? estContratTelecharger,
+    String? email,
+    String? adresse,
+    String? type,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _nom = nom,
         _prenom = prenom,
-        _date = date,
-        _signature = signature,
-        _location = location,
         _genre = genre,
         _phoneNumber = phoneNumber,
         _status = status,
         _uid = uid,
+        _dateSignature = dateSignature,
+        _signature = signature,
+        _estContratTelecharger = estContratTelecharger,
+        _email = email,
+        _adresse = adresse,
+        _type = type,
         super(firestoreUtilData);
 
   // "nom" field.
@@ -43,31 +48,6 @@ class ContractantDataStruct extends FFFirebaseStruct {
   set prenom(String? val) => _prenom = val;
 
   bool hasPrenom() => _prenom != null;
-
-  // "date" field.
-  DateTime? _date;
-  DateTime? get date => _date;
-  set date(DateTime? val) => _date = val;
-
-  bool hasDate() => _date != null;
-
-  // "signature" field.
-  String? _signature;
-  String get signature => _signature ?? '';
-  set signature(String? val) => _signature = val;
-
-  bool hasSignature() => _signature != null;
-
-  // "location" field.
-  LocationDataStruct? _location;
-  LocationDataStruct get location => _location ?? LocationDataStruct();
-  set location(LocationDataStruct? val) => _location = val;
-
-  void updateLocation(Function(LocationDataStruct) updateFn) {
-    updateFn(_location ??= LocationDataStruct());
-  }
-
-  bool hasLocation() => _location != null;
 
   // "genre" field.
   String? _genre;
@@ -97,17 +77,62 @@ class ContractantDataStruct extends FFFirebaseStruct {
 
   bool hasUid() => _uid != null;
 
+  // "date_signature" field.
+  DateTime? _dateSignature;
+  DateTime? get dateSignature => _dateSignature;
+  set dateSignature(DateTime? val) => _dateSignature = val;
+
+  bool hasDateSignature() => _dateSignature != null;
+
+  // "signature" field.
+  String? _signature;
+  String get signature => _signature ?? '';
+  set signature(String? val) => _signature = val;
+
+  bool hasSignature() => _signature != null;
+
+  // "est_contrat_telecharger" field.
+  bool? _estContratTelecharger;
+  bool get estContratTelecharger => _estContratTelecharger ?? false;
+  set estContratTelecharger(bool? val) => _estContratTelecharger = val;
+
+  bool hasEstContratTelecharger() => _estContratTelecharger != null;
+
+  // "email" field.
+  String? _email;
+  String get email => _email ?? '';
+  set email(String? val) => _email = val;
+
+  bool hasEmail() => _email != null;
+
+  // "adresse" field.
+  String? _adresse;
+  String get adresse => _adresse ?? '';
+  set adresse(String? val) => _adresse = val;
+
+  bool hasAdresse() => _adresse != null;
+
+  // "type" field.
+  String? _type;
+  String get type => _type ?? '';
+  set type(String? val) => _type = val;
+
+  bool hasType() => _type != null;
+
   static ContractantDataStruct fromMap(Map<String, dynamic> data) =>
       ContractantDataStruct(
         nom: data['nom'] as String?,
         prenom: data['prenom'] as String?,
-        date: data['date'] as DateTime?,
-        signature: data['signature'] as String?,
-        location: LocationDataStruct.maybeFromMap(data['location']),
         genre: data['genre'] as String?,
         phoneNumber: data['phone_number'] as String?,
         status: data['status'] as String?,
         uid: data['uid'] as String?,
+        dateSignature: data['date_signature'] as DateTime?,
+        signature: data['signature'] as String?,
+        estContratTelecharger: data['est_contrat_telecharger'] as bool?,
+        email: data['email'] as String?,
+        adresse: data['adresse'] as String?,
+        type: data['type'] as String?,
       );
 
   static ContractantDataStruct? maybeFromMap(dynamic data) => data is Map
@@ -117,13 +142,16 @@ class ContractantDataStruct extends FFFirebaseStruct {
   Map<String, dynamic> toMap() => {
         'nom': _nom,
         'prenom': _prenom,
-        'date': _date,
-        'signature': _signature,
-        'location': _location?.toMap(),
         'genre': _genre,
         'phone_number': _phoneNumber,
         'status': _status,
         'uid': _uid,
+        'date_signature': _dateSignature,
+        'signature': _signature,
+        'est_contrat_telecharger': _estContratTelecharger,
+        'email': _email,
+        'adresse': _adresse,
+        'type': _type,
       }.withoutNulls;
 
   @override
@@ -135,18 +163,6 @@ class ContractantDataStruct extends FFFirebaseStruct {
         'prenom': serializeParam(
           _prenom,
           ParamType.String,
-        ),
-        'date': serializeParam(
-          _date,
-          ParamType.DateTime,
-        ),
-        'signature': serializeParam(
-          _signature,
-          ParamType.String,
-        ),
-        'location': serializeParam(
-          _location,
-          ParamType.DataStruct,
         ),
         'genre': serializeParam(
           _genre,
@@ -164,6 +180,30 @@ class ContractantDataStruct extends FFFirebaseStruct {
           _uid,
           ParamType.String,
         ),
+        'date_signature': serializeParam(
+          _dateSignature,
+          ParamType.DateTime,
+        ),
+        'signature': serializeParam(
+          _signature,
+          ParamType.String,
+        ),
+        'est_contrat_telecharger': serializeParam(
+          _estContratTelecharger,
+          ParamType.bool,
+        ),
+        'email': serializeParam(
+          _email,
+          ParamType.String,
+        ),
+        'adresse': serializeParam(
+          _adresse,
+          ParamType.String,
+        ),
+        'type': serializeParam(
+          _type,
+          ParamType.String,
+        ),
       }.withoutNulls;
 
   static ContractantDataStruct fromSerializableMap(Map<String, dynamic> data) =>
@@ -177,22 +217,6 @@ class ContractantDataStruct extends FFFirebaseStruct {
           data['prenom'],
           ParamType.String,
           false,
-        ),
-        date: deserializeParam(
-          data['date'],
-          ParamType.DateTime,
-          false,
-        ),
-        signature: deserializeParam(
-          data['signature'],
-          ParamType.String,
-          false,
-        ),
-        location: deserializeStructParam(
-          data['location'],
-          ParamType.DataStruct,
-          false,
-          structBuilder: LocationDataStruct.fromSerializableMap,
         ),
         genre: deserializeParam(
           data['genre'],
@@ -214,6 +238,36 @@ class ContractantDataStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
+        dateSignature: deserializeParam(
+          data['date_signature'],
+          ParamType.DateTime,
+          false,
+        ),
+        signature: deserializeParam(
+          data['signature'],
+          ParamType.String,
+          false,
+        ),
+        estContratTelecharger: deserializeParam(
+          data['est_contrat_telecharger'],
+          ParamType.bool,
+          false,
+        ),
+        email: deserializeParam(
+          data['email'],
+          ParamType.String,
+          false,
+        ),
+        adresse: deserializeParam(
+          data['adresse'],
+          ParamType.String,
+          false,
+        ),
+        type: deserializeParam(
+          data['type'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -224,39 +278,48 @@ class ContractantDataStruct extends FFFirebaseStruct {
     return other is ContractantDataStruct &&
         nom == other.nom &&
         prenom == other.prenom &&
-        date == other.date &&
-        signature == other.signature &&
-        location == other.location &&
         genre == other.genre &&
         phoneNumber == other.phoneNumber &&
         status == other.status &&
-        uid == other.uid;
+        uid == other.uid &&
+        dateSignature == other.dateSignature &&
+        signature == other.signature &&
+        estContratTelecharger == other.estContratTelecharger &&
+        email == other.email &&
+        adresse == other.adresse &&
+        type == other.type;
   }
 
   @override
   int get hashCode => const ListEquality().hash([
         nom,
         prenom,
-        date,
-        signature,
-        location,
         genre,
         phoneNumber,
         status,
-        uid
+        uid,
+        dateSignature,
+        signature,
+        estContratTelecharger,
+        email,
+        adresse,
+        type
       ]);
 }
 
 ContractantDataStruct createContractantDataStruct({
   String? nom,
   String? prenom,
-  DateTime? date,
-  String? signature,
-  LocationDataStruct? location,
   String? genre,
   String? phoneNumber,
   String? status,
   String? uid,
+  DateTime? dateSignature,
+  String? signature,
+  bool? estContratTelecharger,
+  String? email,
+  String? adresse,
+  String? type,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -265,13 +328,16 @@ ContractantDataStruct createContractantDataStruct({
     ContractantDataStruct(
       nom: nom,
       prenom: prenom,
-      date: date,
-      signature: signature,
-      location: location ?? (clearUnsetFields ? LocationDataStruct() : null),
       genre: genre,
       phoneNumber: phoneNumber,
       status: status,
       uid: uid,
+      dateSignature: dateSignature,
+      signature: signature,
+      estContratTelecharger: estContratTelecharger,
+      email: email,
+      adresse: adresse,
+      type: type,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,
@@ -328,14 +394,6 @@ Map<String, dynamic> getContractantDataFirestoreData(
     return {};
   }
   final firestoreData = mapToFirestore(contractantData.toMap());
-
-  // Handle nested data for "location" field.
-  addLocationDataStructData(
-    firestoreData,
-    contractantData.hasLocation() ? contractantData.location : null,
-    'location',
-    forFieldValue,
-  );
 
   // Add any Firestore field values
   contractantData.firestoreUtilData.fieldValues

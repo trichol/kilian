@@ -23,6 +23,10 @@ class ContratDataStruct extends FFFirebaseStruct {
     String? contratPDF,
     String? modeleHtmlContrat,
     String? auteurId,
+    DateTime? horaireRendezVous,
+    bool? allContractantsRegistered,
+    bool? isNotificationCreationSent,
+    int? nombreMessage,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _title = title,
         _type = type,
@@ -38,6 +42,10 @@ class ContratDataStruct extends FFFirebaseStruct {
         _contratPDF = contratPDF,
         _modeleHtmlContrat = modeleHtmlContrat,
         _auteurId = auteurId,
+        _horaireRendezVous = horaireRendezVous,
+        _allContractantsRegistered = allContractantsRegistered,
+        _isNotificationCreationSent = isNotificationCreationSent,
+        _nombreMessage = nombreMessage,
         super(firestoreUtilData);
 
   // "title" field.
@@ -148,6 +156,38 @@ class ContratDataStruct extends FFFirebaseStruct {
 
   bool hasAuteurId() => _auteurId != null;
 
+  // "horaire_rendezVous" field.
+  DateTime? _horaireRendezVous;
+  DateTime? get horaireRendezVous => _horaireRendezVous;
+  set horaireRendezVous(DateTime? val) => _horaireRendezVous = val;
+
+  bool hasHoraireRendezVous() => _horaireRendezVous != null;
+
+  // "allContractantsRegistered" field.
+  bool? _allContractantsRegistered;
+  bool get allContractantsRegistered => _allContractantsRegistered ?? false;
+  set allContractantsRegistered(bool? val) => _allContractantsRegistered = val;
+
+  bool hasAllContractantsRegistered() => _allContractantsRegistered != null;
+
+  // "is_notification_creation_sent" field.
+  bool? _isNotificationCreationSent;
+  bool get isNotificationCreationSent => _isNotificationCreationSent ?? false;
+  set isNotificationCreationSent(bool? val) =>
+      _isNotificationCreationSent = val;
+
+  bool hasIsNotificationCreationSent() => _isNotificationCreationSent != null;
+
+  // "nombre_message" field.
+  int? _nombreMessage;
+  int get nombreMessage => _nombreMessage ?? 0;
+  set nombreMessage(int? val) => _nombreMessage = val;
+
+  void incrementNombreMessage(int amount) =>
+      nombreMessage = nombreMessage + amount;
+
+  bool hasNombreMessage() => _nombreMessage != null;
+
   static ContratDataStruct fromMap(Map<String, dynamic> data) =>
       ContratDataStruct(
         title: data['title'] as String?,
@@ -170,6 +210,11 @@ class ContratDataStruct extends FFFirebaseStruct {
         contratPDF: data['contratPDF'] as String?,
         modeleHtmlContrat: data['modeleHtmlContrat'] as String?,
         auteurId: data['auteurId'] as String?,
+        horaireRendezVous: data['horaire_rendezVous'] as DateTime?,
+        allContractantsRegistered: data['allContractantsRegistered'] as bool?,
+        isNotificationCreationSent:
+            data['is_notification_creation_sent'] as bool?,
+        nombreMessage: castToType<int>(data['nombre_message']),
       );
 
   static ContratDataStruct? maybeFromMap(dynamic data) => data is Map
@@ -191,6 +236,10 @@ class ContratDataStruct extends FFFirebaseStruct {
         'contratPDF': _contratPDF,
         'modeleHtmlContrat': _modeleHtmlContrat,
         'auteurId': _auteurId,
+        'horaire_rendezVous': _horaireRendezVous,
+        'allContractantsRegistered': _allContractantsRegistered,
+        'is_notification_creation_sent': _isNotificationCreationSent,
+        'nombre_message': _nombreMessage,
       }.withoutNulls;
 
   @override
@@ -252,6 +301,22 @@ class ContratDataStruct extends FFFirebaseStruct {
         'auteurId': serializeParam(
           _auteurId,
           ParamType.String,
+        ),
+        'horaire_rendezVous': serializeParam(
+          _horaireRendezVous,
+          ParamType.DateTime,
+        ),
+        'allContractantsRegistered': serializeParam(
+          _allContractantsRegistered,
+          ParamType.bool,
+        ),
+        'is_notification_creation_sent': serializeParam(
+          _isNotificationCreationSent,
+          ParamType.bool,
+        ),
+        'nombre_message': serializeParam(
+          _nombreMessage,
+          ParamType.int,
         ),
       }.withoutNulls;
 
@@ -329,6 +394,26 @@ class ContratDataStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
+        horaireRendezVous: deserializeParam(
+          data['horaire_rendezVous'],
+          ParamType.DateTime,
+          false,
+        ),
+        allContractantsRegistered: deserializeParam(
+          data['allContractantsRegistered'],
+          ParamType.bool,
+          false,
+        ),
+        isNotificationCreationSent: deserializeParam(
+          data['is_notification_creation_sent'],
+          ParamType.bool,
+          false,
+        ),
+        nombreMessage: deserializeParam(
+          data['nombre_message'],
+          ParamType.int,
+          false,
+        ),
       );
 
   @override
@@ -351,7 +436,11 @@ class ContratDataStruct extends FFFirebaseStruct {
         uid == other.uid &&
         contratPDF == other.contratPDF &&
         modeleHtmlContrat == other.modeleHtmlContrat &&
-        auteurId == other.auteurId;
+        auteurId == other.auteurId &&
+        horaireRendezVous == other.horaireRendezVous &&
+        allContractantsRegistered == other.allContractantsRegistered &&
+        isNotificationCreationSent == other.isNotificationCreationSent &&
+        nombreMessage == other.nombreMessage;
   }
 
   @override
@@ -369,7 +458,11 @@ class ContratDataStruct extends FFFirebaseStruct {
         uid,
         contratPDF,
         modeleHtmlContrat,
-        auteurId
+        auteurId,
+        horaireRendezVous,
+        allContractantsRegistered,
+        isNotificationCreationSent,
+        nombreMessage
       ]);
 }
 
@@ -386,6 +479,10 @@ ContratDataStruct createContratDataStruct({
   String? contratPDF,
   String? modeleHtmlContrat,
   String? auteurId,
+  DateTime? horaireRendezVous,
+  bool? allContractantsRegistered,
+  bool? isNotificationCreationSent,
+  int? nombreMessage,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -404,6 +501,10 @@ ContratDataStruct createContratDataStruct({
       contratPDF: contratPDF,
       modeleHtmlContrat: modeleHtmlContrat,
       auteurId: auteurId,
+      horaireRendezVous: horaireRendezVous,
+      allContractantsRegistered: allContractantsRegistered,
+      isNotificationCreationSent: isNotificationCreationSent,
+      nombreMessage: nombreMessage,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

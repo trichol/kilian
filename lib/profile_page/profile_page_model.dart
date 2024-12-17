@@ -1,3 +1,4 @@
+import '/components/kilian_app_bar_back/kilian_app_bar_back_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'profile_page_widget.dart' show ProfilePageWidget;
@@ -21,6 +22,8 @@ class ProfilePageModel extends FlutterFlowModel<ProfilePageWidget> {
   ///  State fields for stateful widgets in this page.
 
   final formKey = GlobalKey<FormState>();
+  // Model for KilianAppBarBack component.
+  late KilianAppBarBackModel kilianAppBarBackModel;
   // State field(s) for ChoiceReadOrWrite widget.
   FormFieldController<List<String>>? choiceReadOrWriteValueController;
   String? get choiceReadOrWriteValue =>
@@ -90,12 +93,14 @@ class ProfilePageModel extends FlutterFlowModel<ProfilePageWidget> {
 
   @override
   void initState(BuildContext context) {
+    kilianAppBarBackModel = createModel(context, () => KilianAppBarBackModel());
     birthdayTextControllerValidator = _birthdayTextControllerValidator;
     phoneNumberTextControllerValidator = _phoneNumberTextControllerValidator;
   }
 
   @override
   void dispose() {
+    kilianAppBarBackModel.dispose();
     nameFocusNode?.dispose();
     nameTextController?.dispose();
 

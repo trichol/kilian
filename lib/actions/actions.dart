@@ -193,7 +193,7 @@ Future sendInvitation(BuildContext context) async {
   destinataire = await queryUsersRecordOnce(
     queryBuilder: (usersRecord) => usersRecord.where(
       'phone_number',
-      isEqualTo: FFAppState().phoneNumberTo,
+      isEqualTo: FFAppState().smsDataAppState.recipientPhoneNumber,
     ),
     singleRecord: true,
   ).then((s) => s.firstOrNull);
@@ -216,7 +216,7 @@ Future sendInvitation(BuildContext context) async {
       },
     );
     triggerPushNotification(
-      notificationTitle: 'Invitation de ${FFAppState().smsFrom}',
+      notificationTitle: 'Invitation de $currentUserDisplayName',
       notificationText:
           'Consulter vos contrat, une proposition vient de vous être faite!',
       notificationSound: 'default',
@@ -232,7 +232,7 @@ Future sendInvitation(BuildContext context) async {
         return AlertDialog(
           title: const Text('SMS'),
           content: Text(
-              'Vous allez envoyer une invitation à  signer ce contrat à ${destinataire?.displayName}.Cette utilisateur n\'a pas l\'application Kilian installé. Un lien d\'installation lui sera proposé!'),
+              'Vous allez envoyer une invitation  de  signer ce contrat au propriétaire du numéro ${FFAppState().smsDataAppState.recipientPhoneNumber}. Cette utilisateur n\'a pas l\'application Kilian installé. Un lien d\'installation lui sera proposé!'),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(alertDialogContext),
@@ -244,32 +244,301 @@ Future sendInvitation(BuildContext context) async {
     );
     if (isiOS) {
       await launchUrl(Uri.parse(
-          "sms:${FFAppState().phoneNumberTo}&body=${Uri.encodeComponent('Bonjour ${FFAppState().smsTo},${FFAppState().smsFrom} vous invite à installer le logiciel Kilian. Cliquer sur le lien correspondant à votre mobil.\\nIOS : ${FFAppConstants.urlInstallationKilianIos}\\nAndroid : ${FFAppConstants.urlInstallationKilianAndroid}.')}"));
+          "sms:${FFAppState().smsDataAppState.recipientPhoneNumber}&body=${Uri.encodeComponent(FFAppState().smsDataAppState.message)}"));
     } else {
       await launchUrl(Uri(
         scheme: 'sms',
-        path: FFAppState().phoneNumberTo,
+        path: FFAppState().smsDataAppState.recipientPhoneNumber,
         queryParameters: <String, String>{
-          'body':
-              'Bonjour ${FFAppState().smsTo},${FFAppState().smsFrom} vous invite à installer le logiciel Kilian. Cliquer sur le lien correspondant à votre mobil.\\nIOS : ${FFAppConstants.urlInstallationKilianIos}\\nAndroid : ${FFAppConstants.urlInstallationKilianAndroid}.',
+          'body': FFAppState().smsDataAppState.message,
         },
       ));
     }
   }
 
-  // Memorisation message
-
-  await UserInWaitingRecord.collection.doc().set(createUserInWaitingRecordData(
-        message: createDataLabelValueStruct(
-          label: 'contrat',
-          value: FFAppState().phoneNumberTo,
-          valueBis: currentUserUid,
-          valueTer: FFAppState().contratDataId,
-          clearUnsetFields: false,
-          create: true,
-        ),
-      ));
   await actions.logAction(
-    '${FFAppState().phoneNumberTo}$currentUserUid${FFAppState().contratDataId}',
+    '${FFAppState().smsDataAppState.recipientPhoneNumber}$currentUserUid${FFAppState().contratDataAppState.uid}',
   );
+  // Dialog box
+  await showDialog(
+    context: context,
+    builder: (alertDialogContext) {
+      return AlertDialog(
+        title: const Text('Notification envoyé'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(alertDialogContext),
+            child: const Text('Continuer'),
+          ),
+        ],
+      );
+    },
+  );
+}
+
+Future downloadPdf(BuildContext context) async {
+  bool? pdfApplication;
+  bool? pdfWeb;
+
+  if (isAndroid || isiOS) {
+    // MOBILE
+    pdfApplication = await actions.downloadPdf(
+      getJsonField(
+        FFAppState().contratDataAppState.toMap(),
+        r'''$.url''',
+      ).toString().toString(),
+    );
+    if (pdfApplication) {
+      await showDialog(
+        context: context,
+        builder: (alertDialogContext) {
+          return AlertDialog(
+            title: const Text('Chargement réussi'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(alertDialogContext),
+                child: const Text('Continuer'),
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      await showDialog(
+        context: context,
+        builder: (alertDialogContext) {
+          return AlertDialog(
+            title: const Text('Chargement impossible'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(alertDialogContext),
+                child: const Text('recommencer'),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  } else {
+    // WEB
+    pdfWeb = await actions.downloadPdfWeb(
+      getJsonField(
+        FFAppState().contratDataAppState.toMap(),
+        r'''$.url''',
+      ).toString().toString(),
+    );
+    if (pdfWeb) {
+      await showDialog(
+        context: context,
+        builder: (alertDialogContext) {
+          return AlertDialog(
+            title: const Text('Chargement réussi'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(alertDialogContext),
+                child: const Text('Continuer'),
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      await showDialog(
+        context: context,
+        builder: (alertDialogContext) {
+          return AlertDialog(
+            title: const Text('Chargement impossible'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(alertDialogContext),
+                child: const Text('recommencer'),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+}
+
+Future buildContratPdfFromModel(BuildContext context) async {
+  await actions.logAction(
+    'Appel bloc creation CONTRAT',
+  );
+}
+
+Future blockSignerContrat(BuildContext context) async {
+  bool? fullySigned;
+  UsersRecord? currentUserContractantDoc;
+
+  // Demande signature
+  var confirmDialogResponse = await showDialog<bool>(
+        context: context,
+        builder: (alertDialogContext) {
+          return AlertDialog(
+            title: const Text('Notifications'),
+            content: const Text(
+                'Envoi d\'une demande  de signature  aux autres contractants.'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(alertDialogContext, false),
+                child: const Text('Annuler'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(alertDialogContext, true),
+                child: const Text('Envoyer'),
+              ),
+            ],
+          );
+        },
+      ) ??
+      false;
+  if (confirmDialogResponse) {
+    await actions.signatureContractant(
+      FFAppState().contratDataAppState.uid,
+      currentUserUid,
+      valueOrDefault(currentUserDocument?.signature, ''),
+    );
+    fullySigned = await actions.isContratFullySigned(
+      FFAppState().contratDataAppState.uid,
+    );
+    if (fullySigned) {
+      await actions.signatureContrat(
+        FFAppState().contratDataAppState.uid,
+      );
+    }
+    // iLoop
+    FFAppState().iLoop = 0;
+    while (FFAppState().iLoop !=
+        FFAppState().contratDataAppState.contractantsData.length) {
+      // User DOC
+      currentUserContractantDoc = await queryUsersRecordOnce(
+        queryBuilder: (usersRecord) => usersRecord.where(
+          'uid',
+          isEqualTo: FFAppState()
+              .contratDataAppState
+              .contractantsData
+              .elementAtOrNull(FFAppState().iLoop)
+              ?.uid,
+        ),
+        singleRecord: true,
+      ).then((s) => s.firstOrNull);
+      if (currentUserContractantDoc?.reference != null) {
+        // Envoi Notification
+        triggerPushNotification(
+          notificationTitle: 'Contrat signé!',
+          notificationText:
+              'Bonjour,${currentUserDisplayName}Un contrat signé est disponible dans votre rubrique \"mes contrats\".',
+          userRefs: [currentUserContractantDoc!.reference],
+          initialPageName: 'dashboard',
+          parameterData: {},
+        );
+      }
+      // iLoop
+      FFAppState().iLoop = FFAppState().iLoop + 1;
+    }
+    // iLoop
+    FFAppState().iLoop = 0;
+    await showDialog(
+      context: context,
+      builder: (alertDialogContext) {
+        return AlertDialog(
+          title: const Text('Félicitation ....Contrat signé!'),
+          content: const Text(
+              'Depuis l\'onglet \"mes contrats\", vous pourrez avoir accès à ce contrat. Tant que  ce contrat ne sera pas signé par le(s) autre(s) contractants il sera disponible que sous une forme incomplète.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(alertDialogContext),
+              child: const Text('Continuer'),
+            ),
+          ],
+        );
+      },
+    );
+  } else {
+    await showDialog(
+      context: context,
+      builder: (alertDialogContext) {
+        return AlertDialog(
+          title: const Text('Note informative'),
+          content: const Text(
+              'Depuis l\'onglet \"mes contrats\", vous pourrez signer ce contrat ultèrieurement.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(alertDialogContext),
+              child: const Text('Continuer'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+Future blockNotificationInvitationContratASigner(BuildContext context) async {
+  ContratsRecord? referenceContrat;
+
+  if (!FFAppState().contratDataAppState.isNotificationCreationSent) {
+    // GET DOC CONTRAT COURANT
+    referenceContrat = await queryContratsRecordOnce(
+      queryBuilder: (contratsRecord) => contratsRecord.where(
+        'contratData.uid',
+        isEqualTo: FFAppState().contratDataAppState.uid,
+      ),
+      singleRecord: true,
+    ).then((s) => s.firstOrNull);
+    // reset iloop
+    FFAppState().iLoop = 0;
+    while (FFAppState().iLoop <
+        FFAppState().contratDataAppState.contractantsData.length) {
+      if (currentUserUid !=
+          FFAppState()
+              .contratDataAppState
+              .contractantsData
+              .elementAtOrNull(FFAppState().iLoop)
+              ?.uid) {
+        // MEMORISATION INFO SMS
+        FFAppState().updateSmsDataAppStateStruct(
+          (e) => e
+            ..recipientPhoneNumber = FFAppState()
+                .contratDataAppState
+                .contractantsData
+                .elementAtOrNull(FFAppState().iLoop)
+                ?.phoneNumber
+            ..message =
+                'Bonjour ${'${FFAppState().contratDataAppState.contractantsData.elementAtOrNull(FFAppState().iLoop)?.genre} ${FFAppState().contratDataAppState.contractantsData.elementAtOrNull(FFAppState().iLoop)?.nom} ${FFAppState().contratDataAppState.contractantsData.elementAtOrNull(FFAppState().iLoop)?.prenom}'},$currentUserDisplayName vous invite à installer le logiciel Kilian. Cliquer sur le lien correspondant à votre mobil.\\nIOS : ${FFAppConstants.urlInstallationKilianIos}\\nAndroid : ${FFAppConstants.urlInstallationKilianAndroid}.',
+        );
+        // Send notification
+        await action_blocks.sendInvitation(context);
+      } else {
+        await actions.logAction(
+          'pas d\'envoi a  $currentUserDisplayName',
+        );
+      }
+
+      // CREATE DOC MESSAGE
+
+      await MessageRecord.collection.doc().set(createMessageRecordData(
+            phoneReceiver: FFAppState()
+                .contratDataAppState
+                .contractantsData
+                .elementAtOrNull(FFAppState().iLoop)
+                ?.phoneNumber,
+            uidSender: currentUserReference,
+            contratId: referenceContrat?.reference,
+            type: referenceContrat?.contratData.type,
+            datetimeSent: getCurrentTimestamp,
+            status: FFAppConstants.listeStatus
+                .elementAtOrNull(FFAppConstants.indiceEnAttente),
+          ));
+      // increment iloop
+      FFAppState().iLoop = FFAppState().iLoop + 1;
+    }
+    // reset iloop
+    FFAppState().iLoop = 0;
+    // Notification sent
+    FFAppState().updateContratDataAppStateStruct(
+      (e) => e..isNotificationCreationSent = true,
+    );
+  }
 }

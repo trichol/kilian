@@ -7,22 +7,7 @@ import 'default_page_model.dart';
 export 'default_page_model.dart';
 
 class DefaultPageWidget extends StatefulWidget {
-  const DefaultPageWidget({
-    super.key,
-    bool? connectedWithOtherUser,
-    bool? docGenerated,
-    bool? contactEstablished,
-    this.contractTypeSelected,
-    this.nombreContractant,
-  })  : connectedWithOtherUser = connectedWithOtherUser ?? false,
-        docGenerated = docGenerated ?? false,
-        contactEstablished = contactEstablished ?? false;
-
-  final bool connectedWithOtherUser;
-  final bool docGenerated;
-  final bool contactEstablished;
-  final String? contractTypeSelected;
-  final String? nombreContractant;
+  const DefaultPageWidget({super.key});
 
   @override
   State<DefaultPageWidget> createState() => _DefaultPageWidgetState();

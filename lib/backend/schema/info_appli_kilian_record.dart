@@ -21,7 +21,9 @@ class InfoAppliKilianRecord extends FirestoreRecord {
   bool hasItem() => _item != null;
 
   void _initializeFields() {
-    _item = DataLabelValueStruct.maybeFromMap(snapshotData['item']);
+    _item = snapshotData['item'] is DataLabelValueStruct
+        ? snapshotData['item']
+        : DataLabelValueStruct.maybeFromMap(snapshotData['item']);
   }
 
   static CollectionReference get collection =>

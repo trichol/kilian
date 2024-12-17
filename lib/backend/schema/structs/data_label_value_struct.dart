@@ -10,13 +10,11 @@ class DataLabelValueStruct extends FFFirebaseStruct {
   DataLabelValueStruct({
     String? label,
     String? value,
-    String? valueBis,
-    String? valueTer,
+    String? url,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _label = label,
         _value = value,
-        _valueBis = valueBis,
-        _valueTer = valueTer,
+        _url = url,
         super(firestoreUtilData);
 
   // "label" field.
@@ -33,26 +31,18 @@ class DataLabelValueStruct extends FFFirebaseStruct {
 
   bool hasValue() => _value != null;
 
-  // "value_bis" field.
-  String? _valueBis;
-  String get valueBis => _valueBis ?? '';
-  set valueBis(String? val) => _valueBis = val;
+  // "url" field.
+  String? _url;
+  String get url => _url ?? '';
+  set url(String? val) => _url = val;
 
-  bool hasValueBis() => _valueBis != null;
-
-  // "value_ter" field.
-  String? _valueTer;
-  String get valueTer => _valueTer ?? '';
-  set valueTer(String? val) => _valueTer = val;
-
-  bool hasValueTer() => _valueTer != null;
+  bool hasUrl() => _url != null;
 
   static DataLabelValueStruct fromMap(Map<String, dynamic> data) =>
       DataLabelValueStruct(
         label: data['label'] as String?,
         value: data['value'] as String?,
-        valueBis: data['value_bis'] as String?,
-        valueTer: data['value_ter'] as String?,
+        url: data['url'] as String?,
       );
 
   static DataLabelValueStruct? maybeFromMap(dynamic data) => data is Map
@@ -62,8 +52,7 @@ class DataLabelValueStruct extends FFFirebaseStruct {
   Map<String, dynamic> toMap() => {
         'label': _label,
         'value': _value,
-        'value_bis': _valueBis,
-        'value_ter': _valueTer,
+        'url': _url,
       }.withoutNulls;
 
   @override
@@ -76,12 +65,8 @@ class DataLabelValueStruct extends FFFirebaseStruct {
           _value,
           ParamType.String,
         ),
-        'value_bis': serializeParam(
-          _valueBis,
-          ParamType.String,
-        ),
-        'value_ter': serializeParam(
-          _valueTer,
+        'url': serializeParam(
+          _url,
           ParamType.String,
         ),
       }.withoutNulls;
@@ -98,13 +83,8 @@ class DataLabelValueStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
-        valueBis: deserializeParam(
-          data['value_bis'],
-          ParamType.String,
-          false,
-        ),
-        valueTer: deserializeParam(
-          data['value_ter'],
+        url: deserializeParam(
+          data['url'],
           ParamType.String,
           false,
         ),
@@ -118,20 +98,17 @@ class DataLabelValueStruct extends FFFirebaseStruct {
     return other is DataLabelValueStruct &&
         label == other.label &&
         value == other.value &&
-        valueBis == other.valueBis &&
-        valueTer == other.valueTer;
+        url == other.url;
   }
 
   @override
-  int get hashCode =>
-      const ListEquality().hash([label, value, valueBis, valueTer]);
+  int get hashCode => const ListEquality().hash([label, value, url]);
 }
 
 DataLabelValueStruct createDataLabelValueStruct({
   String? label,
   String? value,
-  String? valueBis,
-  String? valueTer,
+  String? url,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -140,8 +117,7 @@ DataLabelValueStruct createDataLabelValueStruct({
     DataLabelValueStruct(
       label: label,
       value: value,
-      valueBis: valueBis,
-      valueTer: valueTer,
+      url: url,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

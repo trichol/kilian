@@ -1,4 +1,5 @@
 import '/backend/backend.dart';
+import '/components/kilian_app_bar/kilian_app_bar_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'generation_adult_contract_widget.dart'
@@ -23,11 +24,6 @@ class GenerationAdultContractModel
           int index, Function(String) updateFn) =>
       listPhoneContractantValide[index] =
           updateFn(listPhoneContractantValide[index]);
-
-  ContratDataStruct? contratData;
-  void updateContratDataStruct(Function(ContratDataStruct) updateFn) {
-    updateFn(contratData ??= ContratDataStruct());
-  }
 
   List<ObjetContratStruct> listObjetContrat = [];
   void addToListObjetContrat(ObjetContratStruct item) =>
@@ -55,24 +51,27 @@ class GenerationAdultContractModel
           int index, Function(ContractantDataStruct) updateFn) =>
       listContractants[index] = updateFn(listContractants[index]);
 
-  PostedContratDataStruct? postedContratData;
-  void updatePostedContratDataStruct(
-      Function(PostedContratDataStruct) updateFn) {
-    updateFn(postedContratData ??= PostedContratDataStruct());
-  }
-
-  String? resultat;
-
   String? phoneNumberController;
+
+  bool isBuildAction = true;
 
   ///  State fields for stateful widgets in this page.
 
+  // Model for KilianAppBar component.
+  late KilianAppBarModel kilianAppBarModel;
   // State field(s) for CheckboxGroup widget.
   FormFieldController<List<String>>? checkboxGroupValueController;
   List<String>? get checkboxGroupValues => checkboxGroupValueController?.value;
   set checkboxGroupValues(List<String>? v) =>
       checkboxGroupValueController?.value = v;
 
+  // State field(s) for horaireRendezVous widget.
+  FocusNode? horaireRendezVousFocusNode;
+  TextEditingController? horaireRendezVousTextController;
+  final horaireRendezVousMask =
+      MaskTextInputFormatter(mask: '##/##/#### ##:##');
+  String? Function(BuildContext, String?)?
+      horaireRendezVousTextControllerValidator;
   // State field(s) for currentPhoneTxt widget.
   FocusNode? currentPhoneTxtFocusNode;
   TextEditingController? currentPhoneTxtTextController;
@@ -85,22 +84,26 @@ class GenerationAdultContractModel
   List<UsersRecord>? userByPhoneFoundList;
   // Stores action output result for [Firestore Query - Query a collection] action in IconButton widget.
   List<UsersRecord>? itemPhoneCur;
-  // Stores action output result for [Firestore Query - Query a collection] action in BtnValidation widget.
-  UsersRecord? currentUserDoc;
-  // Stores action output result for [Custom Action - callPostedContratFunction] action in BtnValidation widget.
+  // Stores action output result for [Backend Call - Create Document] action in BtnGenerationContrat widget.
+  ContratsRecord? contratDataDoc;
+  // Stores action output result for [Firestore Query - Query a collection] action in BtnGenerationContrat widget.
+  UsersRecord? currentUserContractantDoc;
+  // Stores action output result for [Custom Action - buildContratPDF] action in BtnGenerationContrat widget.
   String? resultBuidPDF;
-  // Stores action output result for [Custom Action - getDownloadUrl] action in BtnValidation widget.
-  String? urlContratPDFDraft;
-  // Stores action output result for [Backend Call - Create Document] action in BtnValidation widget.
-  ContratsRecord? contratDataForDocUser;
-  // Stores action output result for [Custom Action - callDeleteBucketFile] action in BtnValidation widget.
-  String? resultDeletionPDF;
+  // Stores action output result for [Custom Action - getDownloadUrl] action in BtnGenerationContrat widget.
+  String? urlContratPDFEnAttente;
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    kilianAppBarModel = createModel(context, () => KilianAppBarModel());
+  }
 
   @override
   void dispose() {
+    kilianAppBarModel.dispose();
+    horaireRendezVousFocusNode?.dispose();
+    horaireRendezVousTextController?.dispose();
+
     currentPhoneTxtFocusNode?.dispose();
     currentPhoneTxtTextController?.dispose();
   }

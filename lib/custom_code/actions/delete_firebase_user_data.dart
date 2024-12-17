@@ -19,9 +19,9 @@ Future<bool> deleteFirebaseUserData() async {
 
     // TEST UTILISATEUR LOGGED
     if (currentUser != null) {
-      print("User ID: ${currentUser.uid}");
+      print("###### KILIAN User ID: ${currentUser.uid}");
     } else {
-      print("No user is logged in.");
+      print("###### KILIAN No user is logged in.");
       throw Exception("No user is logged in.");
     }
     // SUPPRESSION FIRESTORE DATA
@@ -43,7 +43,7 @@ Future<bool> deleteFirebaseUserData() async {
     if (currentUser != null) {
       try {
         await currentUser.delete();
-        print("User successfully deleted.");
+        print("###### KILIAN User successfully deleted.");
       } catch (e) {
         throw Exception("Error deleting user: $e");
       }
@@ -54,7 +54,7 @@ Future<bool> deleteFirebaseUserData() async {
     // LOG OUT
     try {
       await FirebaseAuth.instance.signOut();
-      print("User logged out successfully.");
+      print("###### KILIAN User logged out successfully.");
     } catch (e) {
       print("Error during logout: $e");
       throw Exception("Logout failed: $e");

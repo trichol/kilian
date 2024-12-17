@@ -40,12 +40,24 @@ class ObjetContratRecord extends FirestoreRecord {
   String get sousCategorie => _sousCategorie ?? '';
   bool hasSousCategorie() => _sousCategorie != null;
 
+  // "enletat" field.
+  String? _enletat;
+  String get enletat => _enletat ?? '';
+  bool hasEnletat() => _enletat != null;
+
+  // "estFonctionnel" field.
+  String? _estFonctionnel;
+  String get estFonctionnel => _estFonctionnel ?? '';
+  bool hasEstFonctionnel() => _estFonctionnel != null;
+
   void _initializeFields() {
     _titre = snapshotData['titre'] as String?;
     _description = snapshotData['description'] as String?;
     _prix = snapshotData['prix'] as String?;
     _categorie = snapshotData['categorie'] as String?;
     _sousCategorie = snapshotData['sousCategorie'] as String?;
+    _enletat = snapshotData['enletat'] as String?;
+    _estFonctionnel = snapshotData['estFonctionnel'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -88,6 +100,8 @@ Map<String, dynamic> createObjetContratRecordData({
   String? prix,
   String? categorie,
   String? sousCategorie,
+  String? enletat,
+  String? estFonctionnel,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -96,6 +110,8 @@ Map<String, dynamic> createObjetContratRecordData({
       'prix': prix,
       'categorie': categorie,
       'sousCategorie': sousCategorie,
+      'enletat': enletat,
+      'estFonctionnel': estFonctionnel,
     }.withoutNulls,
   );
 
@@ -112,12 +128,21 @@ class ObjetContratRecordDocumentEquality
         e1?.description == e2?.description &&
         e1?.prix == e2?.prix &&
         e1?.categorie == e2?.categorie &&
-        e1?.sousCategorie == e2?.sousCategorie;
+        e1?.sousCategorie == e2?.sousCategorie &&
+        e1?.enletat == e2?.enletat &&
+        e1?.estFonctionnel == e2?.estFonctionnel;
   }
 
   @override
-  int hash(ObjetContratRecord? e) => const ListEquality().hash(
-      [e?.titre, e?.description, e?.prix, e?.categorie, e?.sousCategorie]);
+  int hash(ObjetContratRecord? e) => const ListEquality().hash([
+        e?.titre,
+        e?.description,
+        e?.prix,
+        e?.categorie,
+        e?.sousCategorie,
+        e?.enletat,
+        e?.estFonctionnel
+      ]);
 
   @override
   bool isValidKey(Object? o) => o is ObjetContratRecord;

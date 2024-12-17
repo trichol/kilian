@@ -21,7 +21,9 @@ class ContratsRecord extends FirestoreRecord {
   bool hasContratData() => _contratData != null;
 
   void _initializeFields() {
-    _contratData = ContratDataStruct.maybeFromMap(snapshotData['contratData']);
+    _contratData = snapshotData['contratData'] is ContratDataStruct
+        ? snapshotData['contratData']
+        : ContratDataStruct.maybeFromMap(snapshotData['contratData']);
   }
 
   static CollectionReference get collection =>

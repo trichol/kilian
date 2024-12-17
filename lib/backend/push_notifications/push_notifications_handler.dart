@@ -110,6 +110,19 @@ final parametersBuilderMap =
           'isEditMode': getParameter<bool>(data, 'isEditMode'),
         },
       ),
+  'generationAdultContract': ParameterData.none(),
+  'defaultPage': ParameterData.none(),
+  'successPageBuildPDF': ParameterData.none(),
+  'mesContrats': ParameterData.none(),
+  'infoApplication': ParameterData.none(),
+  'quitter': ParameterData.none(),
+  'viewPdfContrat': (data) async => ParameterData(
+        allParams: {
+          'url': getParameter<String>(data, 'url'),
+        },
+      ),
+  'generationVenteContract': ParameterData.none(),
+  'generationCessationContract': ParameterData.none(),
   'dashboard': (data) async => ParameterData(
         allParams: {
           'contractTypeSelected':
@@ -117,26 +130,6 @@ final parametersBuilderMap =
           'isGetStared': getParameter<bool>(data, 'isGetStared'),
         },
       ),
-  'generationAdultContract': ParameterData.none(),
-  'defaultPage': (data) async => ParameterData(
-        allParams: {
-          'connectedWithOtherUser':
-              getParameter<bool>(data, 'connectedWithOtherUser'),
-          'docGenerated': getParameter<bool>(data, 'docGenerated'),
-          'contactEstablished': getParameter<bool>(data, 'contactEstablished'),
-          'contractTypeSelected':
-              getParameter<String>(data, 'contractTypeSelected'),
-          'nombreContractant': getParameter<String>(data, 'nombreContractant'),
-        },
-      ),
-  'successPageBuildPDF': (data) async => ParameterData(
-        allParams: {
-          'pdf': getParameter<String>(data, 'pdf'),
-        },
-      ),
-  'mesContrats': ParameterData.none(),
-  'infoApplication': ParameterData.none(),
-  'quitter': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

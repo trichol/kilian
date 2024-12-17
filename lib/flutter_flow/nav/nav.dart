@@ -18,6 +18,8 @@ export 'serialization_util.dart';
 
 const kTransitionInfoKey = '__transition_info__';
 
+GlobalKey<NavigatorState> appNavigatorKey = GlobalKey<NavigatorState>();
+
 class AppStateNotifier extends ChangeNotifier {
   AppStateNotifier._();
 
@@ -75,6 +77,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
+      navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) =>
           appStateNotifier.loggedIn ? const NavBarPage() : const LoginWidget(),
       routes: [
@@ -107,27 +110,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 ),
         ),
         FFRoute(
-          name: 'dashboard',
-          path: '/dashboard',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'dashboard')
-              : NavBarPage(
-                  initialPage: 'dashboard',
-                  page: DashboardWidget(
-                    contractTypeSelected: params.getParam(
-                      'contractTypeSelected',
-                      ParamType.String,
-                    ),
-                    isGetStared: params.getParam(
-                      'isGetStared',
-                      ParamType.bool,
-                    ),
-                  ),
-                ),
-        ),
-        FFRoute(
           name: 'generationAdultContract',
           path: '/generationAdultContract',
+          requireAuth: true,
           builder: (context, params) => const NavBarPage(
             initialPage: '',
             page: GenerationAdultContractWidget(),
@@ -136,46 +121,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'defaultPage',
           path: '/defaultPage',
-          builder: (context, params) => DefaultPageWidget(
-            connectedWithOtherUser: params.getParam(
-              'connectedWithOtherUser',
-              ParamType.bool,
-            ),
-            docGenerated: params.getParam(
-              'docGenerated',
-              ParamType.bool,
-            ),
-            contactEstablished: params.getParam(
-              'contactEstablished',
-              ParamType.bool,
-            ),
-            contractTypeSelected: params.getParam(
-              'contractTypeSelected',
-              ParamType.String,
-            ),
-            nombreContractant: params.getParam(
-              'nombreContractant',
-              ParamType.String,
-            ),
-          ),
+          builder: (context, params) => const DefaultPageWidget(),
         ),
         FFRoute(
           name: 'successPageBuildPDF',
           path: '/successPageBuildPDF',
-          builder: (context, params) => NavBarPage(
+          builder: (context, params) => const NavBarPage(
             initialPage: '',
-            page: SuccessPageBuildPDFWidget(
-              pdf: params.getParam(
-                'pdf',
-                ParamType.String,
-              ),
-              postedContrat: params.getParam(
-                'postedContrat',
-                ParamType.DataStruct,
-                isList: false,
-                structBuilder: PostedContratDataStruct.fromSerializableMap,
-              ),
-            ),
+            page: SuccessPageBuildPDFWidget(),
           ),
         ),
         FFRoute(
@@ -198,6 +151,57 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => params.isEmpty
               ? const NavBarPage(initialPage: 'quitter')
               : const QuitterWidget(),
+        ),
+        FFRoute(
+          name: 'viewPdfContrat',
+          path: '/viewPdfContrat',
+          builder: (context, params) => NavBarPage(
+            initialPage: '',
+            page: ViewPdfContratWidget(
+              url: params.getParam(
+                'url',
+                ParamType.String,
+              ),
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'generationVenteContract',
+          path: '/generationVenteContract',
+          requireAuth: true,
+          builder: (context, params) => const NavBarPage(
+            initialPage: '',
+            page: GenerationVenteContractWidget(),
+          ),
+        ),
+        FFRoute(
+          name: 'generationCessationContract',
+          path: '/generationCessationContract',
+          requireAuth: true,
+          builder: (context, params) => const NavBarPage(
+            initialPage: '',
+            page: GenerationCessationContractWidget(),
+          ),
+        ),
+        FFRoute(
+          name: 'dashboard',
+          path: '/dashboard',
+          requireAuth: true,
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'dashboard')
+              : NavBarPage(
+                  initialPage: 'dashboard',
+                  page: DashboardWidget(
+                    contractTypeSelected: params.getParam(
+                      'contractTypeSelected',
+                      ParamType.String,
+                    ),
+                    isGetStared: params.getParam(
+                      'isGetStared',
+                      ParamType.bool,
+                    ),
+                  ),
+                ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

@@ -13,12 +13,16 @@ class ObjetContratStruct extends FFFirebaseStruct {
     String? prix,
     String? categorie,
     String? sousCategorie,
+    String? enletat,
+    String? estFonctionnel,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _titre = titre,
         _description = description,
         _prix = prix,
         _categorie = categorie,
         _sousCategorie = sousCategorie,
+        _enletat = enletat,
+        _estFonctionnel = estFonctionnel,
         super(firestoreUtilData);
 
   // "titre" field.
@@ -56,6 +60,20 @@ class ObjetContratStruct extends FFFirebaseStruct {
 
   bool hasSousCategorie() => _sousCategorie != null;
 
+  // "enletat" field.
+  String? _enletat;
+  String get enletat => _enletat ?? '';
+  set enletat(String? val) => _enletat = val;
+
+  bool hasEnletat() => _enletat != null;
+
+  // "estFonctionnel" field.
+  String? _estFonctionnel;
+  String get estFonctionnel => _estFonctionnel ?? '';
+  set estFonctionnel(String? val) => _estFonctionnel = val;
+
+  bool hasEstFonctionnel() => _estFonctionnel != null;
+
   static ObjetContratStruct fromMap(Map<String, dynamic> data) =>
       ObjetContratStruct(
         titre: data['titre'] as String?,
@@ -63,6 +81,8 @@ class ObjetContratStruct extends FFFirebaseStruct {
         prix: data['prix'] as String?,
         categorie: data['categorie'] as String?,
         sousCategorie: data['sousCategorie'] as String?,
+        enletat: data['enletat'] as String?,
+        estFonctionnel: data['estFonctionnel'] as String?,
       );
 
   static ObjetContratStruct? maybeFromMap(dynamic data) => data is Map
@@ -75,6 +95,8 @@ class ObjetContratStruct extends FFFirebaseStruct {
         'prix': _prix,
         'categorie': _categorie,
         'sousCategorie': _sousCategorie,
+        'enletat': _enletat,
+        'estFonctionnel': _estFonctionnel,
       }.withoutNulls;
 
   @override
@@ -97,6 +119,14 @@ class ObjetContratStruct extends FFFirebaseStruct {
         ),
         'sousCategorie': serializeParam(
           _sousCategorie,
+          ParamType.String,
+        ),
+        'enletat': serializeParam(
+          _enletat,
+          ParamType.String,
+        ),
+        'estFonctionnel': serializeParam(
+          _estFonctionnel,
           ParamType.String,
         ),
       }.withoutNulls;
@@ -128,6 +158,16 @@ class ObjetContratStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
+        enletat: deserializeParam(
+          data['enletat'],
+          ParamType.String,
+          false,
+        ),
+        estFonctionnel: deserializeParam(
+          data['estFonctionnel'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -140,12 +180,21 @@ class ObjetContratStruct extends FFFirebaseStruct {
         description == other.description &&
         prix == other.prix &&
         categorie == other.categorie &&
-        sousCategorie == other.sousCategorie;
+        sousCategorie == other.sousCategorie &&
+        enletat == other.enletat &&
+        estFonctionnel == other.estFonctionnel;
   }
 
   @override
-  int get hashCode => const ListEquality()
-      .hash([titre, description, prix, categorie, sousCategorie]);
+  int get hashCode => const ListEquality().hash([
+        titre,
+        description,
+        prix,
+        categorie,
+        sousCategorie,
+        enletat,
+        estFonctionnel
+      ]);
 }
 
 ObjetContratStruct createObjetContratStruct({
@@ -154,6 +203,8 @@ ObjetContratStruct createObjetContratStruct({
   String? prix,
   String? categorie,
   String? sousCategorie,
+  String? enletat,
+  String? estFonctionnel,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -165,6 +216,8 @@ ObjetContratStruct createObjetContratStruct({
       prix: prix,
       categorie: categorie,
       sousCategorie: sousCategorie,
+      enletat: enletat,
+      estFonctionnel: estFonctionnel,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

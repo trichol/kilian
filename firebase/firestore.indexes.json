@@ -1,44 +1,16 @@
 {
   "indexes": [
     {
-      "collectionGroup": "objetContrat",
+      "collectionGroup": "message",
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "categorie",
+          "fieldPath": "phone_receiver",
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "titre",
+          "fieldPath": "datetime_sent",
           "order": "ASCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "contrats",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "contratData.status",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "contratData.date_creation",
-          "order": "ASCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "contrats",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "contratData.status",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "contratData.date_validation",
-          "order": "DESCENDING"
         }
       ]
     }

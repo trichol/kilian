@@ -16,11 +16,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 Future<bool> generateAndSaveDeviceToken(String? userId) async {
   // Add your function code here!
   try {
-    print("appel generateAndSaveDeviceToken");
+    print("###### KILIAN appel generateAndSaveDeviceToken");
     FirebaseMessaging messaging = FirebaseMessaging.instance;
 
     // Request notification permissions (iOS-specific)
-    print("Request notification permissions (iOS-specific)");
+    print("###### KILIAN Request notification permissions (iOS-specific)");
     await messaging.requestPermission(
       alert: true,
       badge: true,
@@ -28,25 +28,25 @@ Future<bool> generateAndSaveDeviceToken(String? userId) async {
     );
 
     // Get the device token
-    print("Get the device token : ");
+    print("###### KILIAN Get the device token : ");
     String? token = await messaging.getToken();
 
     if (token != null) {
-      print('Device Token: $token');
+      print('###### KILIAN Device Token: $token');
 
       // Save the token to Firestore
       await FirebaseFirestore.instance.collection('users').doc(userId).update({
         'deviceToken': token,
       });
 
-      print('Device token saved to Firestore.');
+      print('###### KILIAN Device token saved to Firestore.');
       return true;
     } else {
-      print('Failed to generate device token');
+      print('###### KILIAN Failed to generate device token');
       return false;
     }
   } catch (e) {
-    print('Error saving device token: $e');
+    print('###### KILIAN Error saving device token: $e');
     return false;
   }
 }

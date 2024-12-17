@@ -12,34 +12,31 @@ import 'package:flutter/material.dart';
 
 import 'package:cloud_functions/cloud_functions.dart';
 
-Future<String> callPostedContratFunction(
-  String? modeleHtmlContrat,
-  String? contratPDF,
+Future<String> buildContratPDF(
   String? contratDataJson,
 ) async {
   try {
-    // print("Before jsonDecode");
     final Map<String, dynamic> contratData =
         jsonDecode(contratDataJson!); // Deserialize it back into a Map
 
-    // print("after jsonDecode");
-    // print("Decoded JSON: $contratData");
+    final typeContrat = contratData['type'];
+    final cloudFunction = "cloudBuildContrat" + typeContrat;
+    print("###### KILIAN buildContratPDF : " + cloudFunction);
+    print("Decoded JSON: $contratData");
 
     final HttpsCallable callable =
         FirebaseFunctions.instanceFor(region: 'europe-west1')
-            .httpsCallable('postedContratFunction');
+            .httpsCallable(cloudFunction);
 
     final result = await callable.call({
-      'modeleHtmlContrat': modeleHtmlContrat,
-      'contratPDF': contratPDF,
       'contratData': contratData,
     });
 
     print(result.data['message']);
     return result.data['message'];
   } catch (e) {
-    print('Error calling function: $e');
-    print('Error calling function: $contratDataJson');
-    throw Exception('Failed to call Cloud Function');
+    print('####### KILIAN   Error buildContratPDF : $e');
+    print('####### KILIAN   Error buildContratPDF : $contratDataJson');
+    return '####### KILIAN buildContratPDF  erreur: $e';
   }
 }

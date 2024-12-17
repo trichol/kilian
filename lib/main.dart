@@ -138,8 +138,8 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     final tabs = {
       'dashboard': const DashboardWidget(),
-      'profilePage': const ProfilePageWidget(),
       'mesContrats': const MesContratsWidget(),
+      'profilePage': const ProfilePageWidget(),
       'infoApplication': const InfoApplicationWidget(),
       'quitter': const QuitterWidget(),
     };
@@ -169,7 +169,7 @@ class _NavBarPageState extends State<NavBarPage> {
           selectedItemColor: FlutterFlowTheme.of(context).alternate,
           unselectedItemColor: FlutterFlowTheme.of(context).alternate,
           selectedBackgroundColor: FlutterFlowTheme.of(context).primary,
-          borderRadius: 8.0,
+          borderRadius: 0.0,
           itemBorderRadius: 8.0,
           margin: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
           padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
@@ -205,13 +205,14 @@ class _NavBarPageState extends State<NavBarPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
-                    Icons.person_2,
+                    Icons.history_rounded,
                     color: currentIndex == 1
                         ? FlutterFlowTheme.of(context).alternate
                         : FlutterFlowTheme.of(context).alternate,
+                    size: 24.0,
                   ),
                   Text(
-                    'Mon compte',
+                    'Contrats',
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       color: currentIndex == 1
@@ -228,14 +229,13 @@ class _NavBarPageState extends State<NavBarPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
-                    Icons.history_rounded,
+                    Icons.person_2,
                     color: currentIndex == 2
                         ? FlutterFlowTheme.of(context).alternate
                         : FlutterFlowTheme.of(context).alternate,
-                    size: 24.0,
                   ),
                   Text(
-                    'Historique',
+                    'Mon compte',
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       color: currentIndex == 2

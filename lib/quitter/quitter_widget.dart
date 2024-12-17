@@ -1,5 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
+import '/components/kilian_app_bar_accueil/kilian_app_bar_accueil_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -49,53 +49,38 @@ class _QuitterWidgetState extends State<QuitterWidget> {
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).primary,
-        automaticallyImplyLeading: false,
-        leading: FlutterFlowIconButton(
-          borderColor: Colors.transparent,
-          borderRadius: 30.0,
-          borderWidth: 1.0,
-          buttonSize: 50.0,
-          icon: Icon(
-            Icons.arrow_back_rounded,
-            color: FlutterFlowTheme.of(context).alternate,
-            size: 20.0,
-          ),
-          onPressed: () async {
-            context.pop();
-          },
-        ),
-        title: Text(
-          'Kilian',
-          style: FlutterFlowTheme.of(context).displaySmall.override(
-                fontFamily: 'Roboto',
-                color: FlutterFlowTheme.of(context).alternate,
-                fontSize: 20.0,
-                letterSpacing: 0.0,
-              ),
-        ),
-        actions: const [],
-        centerTitle: false,
-        elevation: 0.0,
-      ),
-      body: Align(
-        alignment: const AlignmentDirectional(0.0, 0.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              'Au revoir ',
-              textAlign: TextAlign.center,
-              style: FlutterFlowTheme.of(context).headlineLarge.override(
-                    fontFamily: 'Roboto',
-                    letterSpacing: 0.0,
-                  ),
+      body: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Container(
+            decoration: const BoxDecoration(),
+            child: wrapWithModel(
+              model: _model.kilianAppBarAccueilModel,
+              updateCallback: () => safeSetState(() {}),
+              child: const KilianAppBarAccueilWidget(),
             ),
-          ].addToStart(const SizedBox(height: 10.0)).addToEnd(const SizedBox(height: 10.0)),
-        ),
+          ),
+          Align(
+            alignment: const AlignmentDirectional(0.0, 0.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'Au revoir ',
+                  textAlign: TextAlign.center,
+                  style: FlutterFlowTheme.of(context).headlineLarge.override(
+                        fontFamily: 'Roboto',
+                        letterSpacing: 0.0,
+                      ),
+                ),
+              ]
+                  .addToStart(const SizedBox(height: 10.0))
+                  .addToEnd(const SizedBox(height: 10.0)),
+            ),
+          ),
+        ],
       ),
     );
   }

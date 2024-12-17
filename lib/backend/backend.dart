@@ -7,12 +7,11 @@ import 'schema/util/firestore_util.dart';
 
 import 'schema/users_record.dart';
 import 'schema/contrats_record.dart';
-import 'schema/contractants_record.dart';
 import 'schema/location_record.dart';
 import 'schema/objet_contrat_record.dart';
 import 'schema/info_appli_kilian_record.dart';
 import 'schema/notifications_record.dart';
-import 'schema/user_in_waiting_record.dart';
+import 'schema/message_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -23,12 +22,11 @@ export 'schema/util/schema_util.dart';
 
 export 'schema/users_record.dart';
 export 'schema/contrats_record.dart';
-export 'schema/contractants_record.dart';
 export 'schema/location_record.dart';
 export 'schema/objet_contrat_record.dart';
 export 'schema/info_appli_kilian_record.dart';
 export 'schema/notifications_record.dart';
-export 'schema/user_in_waiting_record.dart';
+export 'schema/message_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -99,43 +97,6 @@ Future<List<ContratsRecord>> queryContratsRecordOnce({
     queryCollectionOnce(
       ContratsRecord.collection,
       ContratsRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-/// Functions to query ContractantsRecords (as a Stream and as a Future).
-Future<int> queryContractantsRecordCount({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-}) =>
-    queryCollectionCount(
-      ContractantsRecord.collection,
-      queryBuilder: queryBuilder,
-      limit: limit,
-    );
-
-Stream<List<ContractantsRecord>> queryContractantsRecord({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollection(
-      ContractantsRecord.collection,
-      ContractantsRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<List<ContractantsRecord>> queryContractantsRecordOnce({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollectionOnce(
-      ContractantsRecord.collection,
-      ContractantsRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
@@ -289,38 +250,38 @@ Future<List<NotificationsRecord>> queryNotificationsRecordOnce({
       singleRecord: singleRecord,
     );
 
-/// Functions to query UserInWaitingRecords (as a Stream and as a Future).
-Future<int> queryUserInWaitingRecordCount({
+/// Functions to query MessageRecords (as a Stream and as a Future).
+Future<int> queryMessageRecordCount({
   Query Function(Query)? queryBuilder,
   int limit = -1,
 }) =>
     queryCollectionCount(
-      UserInWaitingRecord.collection,
+      MessageRecord.collection,
       queryBuilder: queryBuilder,
       limit: limit,
     );
 
-Stream<List<UserInWaitingRecord>> queryUserInWaitingRecord({
+Stream<List<MessageRecord>> queryMessageRecord({
   Query Function(Query)? queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollection(
-      UserInWaitingRecord.collection,
-      UserInWaitingRecord.fromSnapshot,
+      MessageRecord.collection,
+      MessageRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
     );
 
-Future<List<UserInWaitingRecord>> queryUserInWaitingRecordOnce({
+Future<List<MessageRecord>> queryMessageRecordOnce({
   Query Function(Query)? queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollectionOnce(
-      UserInWaitingRecord.collection,
-      UserInWaitingRecord.fromSnapshot,
+      MessageRecord.collection,
+      MessageRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

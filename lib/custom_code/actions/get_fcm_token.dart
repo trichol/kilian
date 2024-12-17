@@ -16,7 +16,7 @@ Future<String?> getFcmToken() async {
   try {
     FirebaseMessaging messaging = FirebaseMessaging.instance;
     String? token = await messaging.getToken();
-    print("OK : getFcmToken : $token");
+    print("###### KILIAN OK : getFcmToken : $token");
     return token;
   } catch (e) {
     print("###### KILIAN ERROR : getFcmToken : $e");

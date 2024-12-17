@@ -6,38 +6,50 @@ const fs = require("fs");
 const htmlPdf = require("html-pdf-node");
 // To avoid deployment errors, do not call admin.initializeApp() in your code
 
-exports.postedContratFunction = functions
+function formatDateTime(input) {
+  // Parse the input string into a Date object
+  const date = new Date(input);
+
+  // Check if the Date object is valid
+  if (isNaN(date.getTime())) {
+    throw new Error("Invalid datetime format");
+  }
+
+  // Extract components of the date
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are 0-based
+  const year = date.getFullYear();
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+
+  // Construct the formatted string
+  return `le ${day}/${month}/${year} à ${hours}:${minutes}`;
+}
+
+exports.cloudBuildContratVente = functions
   .region("europe-west1")
   .runWith({
     memory: "512MB",
   })
   .https.onCall(async (data, context) => {
     // Write your code below!
+    let posCode = "0";
     try {
       // Validate input
-      if (
-        !data.modeleHtmlContrat ||
-        typeof data.modeleHtmlContrat !== "string"
-      ) {
-        return { message: "Invalid modeleHtmlContrat" };
-      }
-      if (!data.contratPDF || typeof data.contratPDF !== "string") {
-        return { message: "Invalid contratPDF" };
-      }
-      if (!data.contratData || typeof data.contratData !== "object") {
+      if (!data.contratData) {
         return { message: "Invalid contratData" };
       }
       // Access nested fields
-      const modeleHtmlContrat = data.modeleHtmlContrat;
-      const contratPDF = data.contratPDF;
-      const contratData = data.contratData;
-      const title = contratData.title;
-      const status = contratData.status;
-      const auteur = contratData.auteur;
-      const location = contratData.location;
-      let date_creation = contratData.date_creation.substring(0, 19);
-      const contractants = contratData.contractantsData || [];
-      const objetsContrat = contratData.objetsContrat || [];
+      const modeleHtmlContrat = data.contratData.modeleHtmlContrat;
+      const contratPDF = data.contratData.contratPDF;
+      //const title = data.contratData.title;
+      //const status = data.contratData.status;
+      const auteur = data.contratData.auteur;
+      const location = data.contratData.location;
+      const horaire = formatDateTime(data.contratData.horaire_rendezVous);
+      let date_creation = data.contratData.date_creation.substring(0, 19);
+      const contractants = data.contratData.contractantsData || [];
+      const objetsContrat = data.contratData.objetsContrat || [];
 
       const timestamp = Date.now().toString();
       const bucket = admin.storage().bucket();
@@ -52,13 +64,35 @@ exports.postedContratFunction = functions
 
       const listeNomPrenomContractants = contractants
         .map(
-          (contractant) =>
-            `<b>${contractant.genre} ${contractant.nom} ${contractant.prenom}</b>`,
+          (contractant) => `${contractant.type} :<br>
+                    <b>Nom : </b>${contractant.genre} ${contractant.nom} ${contractant.prenom}<br>
+                    <b>Adresse : </b>${contractant.adresse}<br>
+                    <b>Nom : </b>${contractant.genre} ${contractant.nom} ${contractant.prenom}<br>
+                    <b>Téléphone : </b>${contractant.phone_number}<br>
+                    <b>Courriel : </b>${contractant.email}<br>                    
+                    `,
         )
-        .join(", ");
-      const listePratiquesContractualisee = objetsContrat
-        .map((objetContrat) => `<li>${objetContrat.titre}</li>`)
-        .join(", ");
+        .join("<br><br> ");
+
+      const descriptionObjetContrat = `<p class='section-title'>1. Objet de la vente</p>
+        <p>
+            Le vendeur s'engage à vendre à l'acheteur le bien suivant :${objetContrat.titre}<br>
+            - Description : ${objetContrat.description}<br>
+        </p>
+
+        <p class='section-title'>2. Prix de vente</p>
+        <p>
+            Le prix convenu pour le bien est de : <strong>${objetContrat.prix} €</strong>.<br>
+        </p>
+
+        <p class='section-title'>3. État du bien</p>
+        <p>
+            L'acheteur reconnaît avoir examiné le bien et accepte de l'acquérir dans son état actuel :<br>
+            - Vendu 'en l'état' : ${objetContrat.enletat}<br>
+            - Le vendeur garantit le bon fonctionnement du bien : ${objetContrat.estFonctionnel}
+        </p>`;
+
+      // Formatting horaire properly
 
       // Download the HTML template from Firebase Storage
       const file = bucket.file(modeleHtmlContrat);
@@ -98,10 +132,27 @@ exports.postedContratFunction = functions
       try {
         htmlContent = htmlContent
           .replace(/\[AA\]/g, listeNomPrenomContractants)
-          .replace(/\[BB\]/g, listePratiquesContractualisee)
+          .replace(/\[BB\]/g, descriptionObjetContrat)
+          .replace(/\[HH\]/g, horaire)
           .replace(/\[AUTEUR\]/g, auteur)
           .replace(/\[DATE\]/g, date_creation)
           .replace(/\[LIEU\]/g, location);
+
+        // Check if the 'status' field equals "signé"
+        if (data.contratData.status === "signé") {
+          let date_signature = contractants.date_signature.substring(0, 19);
+
+          const listeSignatureContractants = contractants.contractantsData.map(
+            (contractant) => {
+              return `<td>${contractant.genre} ${contractant.nom} ${contractant.prenom}<br><img src='${contractant.signature}'> <br> le  le ${date_signature} </td>`;
+            },
+          );
+          listeSignatureContractants = "<table>" + +"</table>";
+          htmlContent = htmlContent.replace(
+            /\[EN COURS DE SIGNATURE PAR TOUS LES CONTRACTANTS\]/g,
+            listeSignatureContractants,
+          );
+        }
       } catch (error) {
         return { message: "Error reading file:" + tempHtmlPath };
       }
@@ -157,7 +208,8 @@ exports.postedContratFunction = functions
       return {
         message:
           "postedContratFunction : An error occurred while processing the request." +
-          error,
+          error +
+          posCode,
       };
     }
   });

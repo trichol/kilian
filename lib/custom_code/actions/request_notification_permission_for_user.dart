@@ -19,11 +19,11 @@ Future<bool> requestNotificationPermissionForUser() async {
   // Add your function code here!
   try {
     if (!Platform.isAndroid && !Platform.isIOS) {
-      print("Notifications are not supported on this platform.");
+      print("###### KILIAN Notifications are not supported on this platform.");
       return true;
     }
     // Request notification permissions
-    print('Request notification permissions');
+    print('###### KILIAN Request notification permissions');
     NotificationSettings settings =
         await FirebaseMessaging.instance.requestPermission(
       alert: true,
@@ -32,17 +32,19 @@ Future<bool> requestNotificationPermissionForUser() async {
       sound: true,
     );
 
-    print('Authorization status: ${settings.authorizationStatus}');
+    print(
+        '###### KILIAN Authorization status: ${settings.authorizationStatus}');
 
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      print('Notification permission granted.');
+      print('###### KILIAN Notification permission granted.');
     } else if (settings.authorizationStatus == AuthorizationStatus.denied) {
-      print('Notification permission denied.');
+      print('###### KILIAN Notification permission denied.');
     } else if (settings.authorizationStatus ==
         AuthorizationStatus.provisional) {
-      print('Provisional notification permission granted.');
+      print('###### KILIAN Provisional notification permission granted.');
     } else {
-      print('Notification permission status: ${settings.authorizationStatus}');
+      print(
+          '###### KILIAN Notification permission status: ${settings.authorizationStatus}');
     }
 
 /*  SET TOKEN

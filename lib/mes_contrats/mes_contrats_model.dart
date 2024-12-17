@@ -1,138 +1,184 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/components/kilian_app_bar/kilian_app_bar_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'mes_contrats_widget.dart' show MesContratsWidget;
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
 class MesContratsModel extends FlutterFlowModel<MesContratsWidget> {
   ///  Local state fields for this page.
 
-  List<ContratDataStruct> listContratWaitingForMe = [];
-  void addToListContratWaitingForMe(ContratDataStruct item) =>
-      listContratWaitingForMe.add(item);
-  void removeFromListContratWaitingForMe(ContratDataStruct item) =>
-      listContratWaitingForMe.remove(item);
-  void removeAtIndexFromListContratWaitingForMe(int index) =>
-      listContratWaitingForMe.removeAt(index);
-  void insertAtIndexInListContratWaitingForMe(
+  List<ContratDataStruct> listeContratEnAttente = [];
+  void addToListeContratEnAttente(ContratDataStruct item) =>
+      listeContratEnAttente.add(item);
+  void removeFromListeContratEnAttente(ContratDataStruct item) =>
+      listeContratEnAttente.remove(item);
+  void removeAtIndexFromListeContratEnAttente(int index) =>
+      listeContratEnAttente.removeAt(index);
+  void insertAtIndexInListeContratEnAttente(
           int index, ContratDataStruct item) =>
-      listContratWaitingForMe.insert(index, item);
-  void updateListContratWaitingForMeAtIndex(
+      listeContratEnAttente.insert(index, item);
+  void updateListeContratEnAttenteAtIndex(
           int index, Function(ContratDataStruct) updateFn) =>
-      listContratWaitingForMe[index] = updateFn(listContratWaitingForMe[index]);
+      listeContratEnAttente[index] = updateFn(listeContratEnAttente[index]);
 
-  List<ContratDataStruct> listContratWaitingFromMe = [];
-  void addToListContratWaitingFromMe(ContratDataStruct item) =>
-      listContratWaitingFromMe.add(item);
-  void removeFromListContratWaitingFromMe(ContratDataStruct item) =>
-      listContratWaitingFromMe.remove(item);
-  void removeAtIndexFromListContratWaitingFromMe(int index) =>
-      listContratWaitingFromMe.removeAt(index);
-  void insertAtIndexInListContratWaitingFromMe(
-          int index, ContratDataStruct item) =>
-      listContratWaitingFromMe.insert(index, item);
-  void updateListContratWaitingFromMeAtIndex(
-          int index, Function(ContratDataStruct) updateFn) =>
-      listContratWaitingFromMe[index] =
-          updateFn(listContratWaitingFromMe[index]);
+  List<DataLabelValueStruct> listContratSigned = [];
+  void addToListContratSigned(DataLabelValueStruct item) =>
+      listContratSigned.add(item);
+  void removeFromListContratSigned(DataLabelValueStruct item) =>
+      listContratSigned.remove(item);
+  void removeAtIndexFromListContratSigned(int index) =>
+      listContratSigned.removeAt(index);
+  void insertAtIndexInListContratSigned(int index, DataLabelValueStruct item) =>
+      listContratSigned.insert(index, item);
+  void updateListContratSignedAtIndex(
+          int index, Function(DataLabelValueStruct) updateFn) =>
+      listContratSigned[index] = updateFn(listContratSigned[index]);
 
-  List<ContratDataStruct> listContratRejectedByMe = [];
-  void addToListContratRejectedByMe(ContratDataStruct item) =>
-      listContratRejectedByMe.add(item);
-  void removeFromListContratRejectedByMe(ContratDataStruct item) =>
-      listContratRejectedByMe.remove(item);
-  void removeAtIndexFromListContratRejectedByMe(int index) =>
-      listContratRejectedByMe.removeAt(index);
-  void insertAtIndexInListContratRejectedByMe(
-          int index, ContratDataStruct item) =>
-      listContratRejectedByMe.insert(index, item);
-  void updateListContratRejectedByMeAtIndex(
-          int index, Function(ContratDataStruct) updateFn) =>
-      listContratRejectedByMe[index] = updateFn(listContratRejectedByMe[index]);
+  bool? isPageLoaded = true;
 
-  List<ContratDataStruct> listContratRejectedToMe = [];
-  void addToListContratRejectedToMe(ContratDataStruct item) =>
-      listContratRejectedToMe.add(item);
-  void removeFromListContratRejectedToMe(ContratDataStruct item) =>
-      listContratRejectedToMe.remove(item);
-  void removeAtIndexFromListContratRejectedToMe(int index) =>
-      listContratRejectedToMe.removeAt(index);
-  void insertAtIndexInListContratRejectedToMe(
-          int index, ContratDataStruct item) =>
-      listContratRejectedToMe.insert(index, item);
-  void updateListContratRejectedToMeAtIndex(
-          int index, Function(ContratDataStruct) updateFn) =>
-      listContratRejectedToMe[index] = updateFn(listContratRejectedToMe[index]);
+  ///  State fields for stateful widgets in this page.
 
-  ContratDataStruct? listContratSigned;
-  void updateListContratSignedStruct(Function(ContratDataStruct) updateFn) {
-    updateFn(listContratSigned ??= ContratDataStruct());
-  }
+  // Model for KilianAppBar component.
+  late KilianAppBarModel kilianAppBarModel;
 
-  int? iLoopPage;
-
-  ContratDataStruct? contratCourant;
-  void updateContratCourantStruct(Function(ContratDataStruct) updateFn) {
-    updateFn(contratCourant ??= ContratDataStruct());
+  @override
+  void initState(BuildContext context) {
+    kilianAppBarModel = createModel(context, () => KilianAppBarModel());
   }
 
   @override
-  void initState(BuildContext context) {}
-
-  @override
-  void dispose() {}
+  void dispose() {
+    kilianAppBarModel.dispose();
+  }
 
   /// Action blocks.
-  Future fillContratsWaitingFromMe(BuildContext context) async {
-    // loop
-    FFAppState().iLoop = 0;
-    // contratsWaintingToMe
-    FFAppState().iLoop = 0;
-  }
+  Future gestionContratEnCours(BuildContext context) async {
+    List<MessageRecord>? listeContratEnAttenteDoc;
+    ContratsRecord? currentContratDoc;
+    String? urlContratPDF;
 
-  Future fillContratsWaitingToMe(BuildContext context) async {
-    List<UserInWaitingRecord>? docMessageContratsWaitingToMe;
-
-    // contratsWaintingToMe
-    docMessageContratsWaitingToMe = await queryUserInWaitingRecordOnce(
-      queryBuilder: (userInWaitingRecord) => userInWaitingRecord
+    // contrats en attente pour moi
+    listeContratEnAttenteDoc = await queryMessageRecordOnce(
+      queryBuilder: (messageRecord) => messageRecord
           .where(
-            'message.label',
-            isEqualTo: 'contrat',
-          )
-          .where(
-            'message.value',
+            'phone_receiver',
             isEqualTo: currentPhoneNumber,
-          ),
+          )
+          .orderBy('datetime_sent'),
+    );
+    await actions.logAction(
+      'Gestion contrat en cours...${listeContratEnAttenteDoc.length.toString()}',
     );
     // loop
     FFAppState().iLoop = 0;
-    // contratsWaintingToMe
+    while (FFAppState().iLoop != listeContratEnAttenteDoc.length) {
+      // get contrat DOC
+      currentContratDoc = await queryContratsRecordOnce(
+        queryBuilder: (contratsRecord) => contratsRecord.where(
+          'contratData.uid',
+          isEqualTo: listeContratEnAttenteDoc
+              ?.elementAtOrNull(FFAppState().iLoop)
+              ?.contratId
+              ?.id,
+        ),
+        singleRecord: true,
+      ).then((s) => s.firstOrNull);
+      await actions.logAction(
+        'Contrat: ${currentContratDoc?.contratData.title}',
+      );
+      // Init ContratDataAppState
+      FFAppState().contratDataAppState = currentContratDoc!.contratData;
+      if (currentContratDoc.contratData.status ==
+          FFAppConstants.listeStatus
+              .elementAtOrNull(FFAppConstants.indiceSigne)) {
+        if (!functions.isContratDownloadedByContractant(
+            FFAppState().contratDataAppState, currentUserUid)!) {
+          // contratPDF field to user location
+          FFAppState().updateContratDataAppStateStruct(
+            (e) => e
+              ..contratPDF = 'users/$currentUserUid/contrats/${dateTimeFormat(
+                "dMY",
+                getCurrentTimestamp,
+                locale: FFLocalizations.of(context).languageCode,
+              )}_${functions.removePatternFromStr(FFAppState().contratDataAppState.type, 'contrat ')}_${FFAppState().contratDataAppState.uid}.pdf',
+          );
+          await actions.logAction(
+            'le contrat  va etre telechargé vers : ${FFAppState().contratDataAppState.contratPDF}',
+          );
+          // build contrat for user
+          await actions.buildContratPDF(
+            functions.fixImproperJson(
+                FFAppState().contratDataAppState.toMap().toString()),
+          );
+          await Future.delayed(const Duration(milliseconds: 2000));
+          // crypt contrat
+          await actions.encryptAndStoreFile(
+            FFAppState().contratDataAppState.contratPDF,
+          );
+          // build URL contratPDF
+          urlContratPDF = await actions.getDownloadUrl(
+            FFAppState().contratDataAppState.contratPDF,
+          );
+          // Update user with url
+
+          await currentUserReference!.update({
+            ...mapToFirestore(
+              {
+                'url_contrats': FieldValue.arrayUnion([urlContratPDF]),
+              },
+            ),
+          });
+          // contratAppState re-init contratPDF
+          FFAppState().updateContratDataAppStateStruct(
+            (e) => e
+              ..contratPDF =
+                  'TMP/contrats/${FFAppState().contratDataAppState.uid}.pdf',
+          );
+        } else {
+          await actions.logAction(
+            'Contrat  déja téléchargé',
+          );
+        }
+      } else {
+        await actions.logAction(
+          'Contrat non signé!   ${currentContratDoc.contratData.status}   ....',
+        );
+        // Fill liste contrats en  cours
+        addToListeContratEnAttente(currentContratDoc.contratData);
+        await actions.logAction(
+          'contratID : ${listeContratEnAttente.lastOrNull?.title}',
+        );
+      }
+
+      // Reset ContratDataAppState
+      FFAppState().contratDataAppState = ContratDataStruct();
+      FFAppState().update(() {});
+      // iLoop
+      FFAppState().iLoop = FFAppState().iLoop + 1;
+    }
+    // reset loop
     FFAppState().iLoop = 0;
   }
 
-  Future fillContratsRejectedByMe(BuildContext context) async {
-    List<UserInWaitingRecord>? docMessageContratsRejectedByMeCopy;
+  Future gestionContratArchive(BuildContext context) async {
+    List<DataLabelValueStruct>? listSignedContrat;
 
-    // contratsWaintingToMe
-    docMessageContratsRejectedByMeCopy = await queryUserInWaitingRecordOnce(
-      queryBuilder: (userInWaitingRecord) => userInWaitingRecord
-          .where(
-            'message.label',
-            isEqualTo: 'contrat',
-          )
-          .where(
-            'message.value',
-            isEqualTo: currentPhoneNumber,
-          ),
+    await actions.logAction(
+      'Gestion contrat archive',
     );
-    // loop
-    FFAppState().iLoop = 0;
-    // contratsWaintingToMe
-    FFAppState().iLoop = 0;
+    listContratSigned = [];
+    // Liste Contrat signes
+    listSignedContrat = await actions.getListUrlContratSigned(
+      currentUserUid,
+    );
+    await actions.logAction(
+      'fin get list fichier contrat signé',
+    );
+    listContratSigned =
+        listSignedContrat.toList().cast<DataLabelValueStruct>();
   }
-
-  Future fillContratsRejectedToMe(BuildContext context) async {}
-
-  Future fillContratsSigned(BuildContext context) async {}
 }

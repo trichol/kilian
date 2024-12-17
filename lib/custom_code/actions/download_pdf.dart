@@ -16,7 +16,7 @@ Future<bool> downloadPdf(String? url) async {
   // Add your function code here!
   if (url == null || url.isEmpty) {
     // Handle the null or empty filePath case
-    print('Error: url is null or empty.');
+    print('###### KILIAN downloadPdf Error: url is null or empty.');
     return false;
   }
 
@@ -24,7 +24,7 @@ Future<bool> downloadPdf(String? url) async {
     await launch(url);
     return true;
   } else {
-    print("Imposible de lancer download : " + url);
+    print("###### KILIAN downloadPdf Imposible de lancer download : " + url);
     return false;
   }
 }
