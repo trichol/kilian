@@ -73,6 +73,21 @@ class _MesContratsWidgetState extends State<MesContratsWidget> {
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 5.0, 0.0, 20.0),
+            child: AuthUserStreamWidget(
+              builder: (context) => Text(
+                currentUserDisplayName,
+                style: FlutterFlowTheme.of(context).headlineMedium.override(
+                      fontFamily: 'Outfit',
+                      color: Colors.black,
+                      fontSize: 20.0,
+                      letterSpacing: 0.0,
+                      fontWeight: FontWeight.w500,
+                    ),
+              ),
+            ),
+          ),
           Column(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -92,28 +107,9 @@ class _MesContratsWidgetState extends State<MesContratsWidget> {
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          Row(
+                          const Row(
                             mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 5.0, 0.0, 20.0),
-                                child: AuthUserStreamWidget(
-                                  builder: (context) => Text(
-                                    currentUserDisplayName,
-                                    style: FlutterFlowTheme.of(context)
-                                        .headlineMedium
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          color: Colors.black,
-                                          fontSize: 20.0,
-                                          letterSpacing: 0.0,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                  ),
-                                ),
-                              ),
-                            ],
+                            children: [],
                           ),
                           Builder(
                             builder: (context) {
@@ -336,8 +332,15 @@ class _MesContratsWidgetState extends State<MesContratsWidget> {
                                                                               .blockSignerContrat(context);
                                                                           FFAppState().contratDataAppState =
                                                                               ContratDataStruct();
-                                                                          safeSetState(
-                                                                              () {});
+                                                                          FFAppState()
+                                                                              .update(() {});
+                                                                          // reload page
+                                                                          if (Navigator.of(context)
+                                                                              .canPop()) {
+                                                                            context.pop();
+                                                                          }
+                                                                          context
+                                                                              .pushNamed('mesContrats');
                                                                         },
                                                                       );
                                                                     } else if (functions.isContratSignedByContractant(
@@ -869,24 +872,6 @@ class _MesContratsWidgetState extends State<MesContratsWidget> {
                                                                         .override(
                                                                           fontFamily:
                                                                               'Mukta',
-                                                                          letterSpacing:
-                                                                              0.0,
-                                                                        ),
-                                                                  ),
-                                                                  Text(
-                                                                    listView2ContentItem
-                                                                        .value,
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .start,
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Mukta',
-                                                                          fontSize:
-                                                                              12.0,
                                                                           letterSpacing:
                                                                               0.0,
                                                                         ),

@@ -15,6 +15,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 Future deleteFileByUrl(String fileUrl) async {
   // Add your function code here!
   try {
+    print("###### KILIAN deleteFileByUrl :url " + fileUrl);
     // Extract the file path from the file URL
     final RegExp regExp = RegExp(r'%2F(.*?)\?alt');
     final RegExpMatch? match = regExp.firstMatch(fileUrl);
@@ -27,13 +28,14 @@ Future deleteFileByUrl(String fileUrl) async {
 
       // Delete the file
       await storageRef.delete();
-      print('File successfully deleted: $filePath');
+      print(
+          '###### KILIAN deleteFileByUrl File successfully deleted: $filePath');
     } else {
-      print('Invalid file URL format');
+      print('###### KILIAN deleteFileByUrl Invalid file URL format');
       throw Exception('Could not extract file path from URL');
     }
   } catch (e) {
-    print('Error deleting file: $e');
+    print('deleteFileByUrl : Error deleting file: $e');
     rethrow;
   }
 }

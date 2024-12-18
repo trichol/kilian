@@ -22,14 +22,16 @@ Future completeContractant() async {
     // Ensure the user is authenticated
     if (userId == null) {
       throw Exception(
-          '####kilian completeContractant No authenticated user found.');
+          '####kilian completeContractant aucun utilisateur trouvé dans la base  : ' +
+              userId!);
     }
 
     // Fetch the user's document from the "users" collection
     final userDoc =
         await FirebaseFirestore.instance.collection('users').doc(userId).get();
 
-    print('####kilian completeContractantUser Fetch the user.');
+    print(
+        '####kilian completeContractantUser récupération data user dans base OK!');
     // Check if the document exists
     /*
     if (!userDoc.exists) {
@@ -49,7 +51,7 @@ Future completeContractant() async {
     final uid = userDoc.data()?['uid'];
     final est_contrat_telecharger = false;
 
-    print('####kilian completeContractantUser Fetch the user.' +
+    print('####kilian completeContractantUser data gathered for : ' +
         userDoc.data()?['display_name']);
 
     // Initialize a Firestore instance
@@ -61,27 +63,39 @@ Future completeContractant() async {
     // Loop through each document in the collection
     for (final doc in querySnapshot.docs) {
       final data = doc.data() as Map<String, dynamic>;
-      print(
-          '####kilian completeContractantUser Check if contractantsData exists and is a list.');
+
+      ///print('####kilian completeContractantUser Check if contractantsData exists and is a list.');
       // Check if 'contractantsData' exists and is a list
       if (data['contratData']?['contractantsData'] is List) {
-        print('####kilian completeContractantUser aaaa');
         final contractants = data['contratData']['contractantsData'] as List;
+
+        bool updated = false; // Flag to track if any changes were made
 
         // Look for the target phone number in the 'contractantsData' array
         for (final contractant in contractants) {
           if (contractant['phone_number'] == phoneNumber) {
+            print('####kilian test phone OK :' +
+                contractant['phone_number'] +
+                ' == ' +
+                phoneNumber);
             if (contractant['nom'] == null ||
                 (contractant['nom'] is String &&
-                    contractant['nom'].trim().isEmpty)) {
+                    contractant['nom']!.trim().isEmpty)) {
+              print('####kilian test nom vide OK  vide!');
               contractant['genre'] = genre;
               contractant['nom'] = nom;
               contractant['prenom'] = prenom;
               contractant['uid'] = uid;
               contractant['signature'] = signature;
               contractant['est_contrat_telecharger'] = est_contrat_telecharger;
-              print('##### KILIAN : utilisateur trouvé et incomplet : $nom');
+              print(
+                  '##### KILIAN : utilisateur trouvé et incomplet : $nom  = ' +
+                      contractant['nom'] +
+                      ' --- $prenom  = ' +
+                      contractant['prenom']);
+              updated = true; // Set the flag to true
             } else {
+              print('####kilian test nom vide NOK :' + contractant['nom']);
               print(
                   '####kilian completeContractantUser : utilisateur trouvé et complet ' +
                       userDoc.data()?['display_name']);
@@ -89,9 +103,21 @@ Future completeContractant() async {
             //let contratId = data['contratData']['uid'];
             break;
           } else {
-            print(
-                '####kilian completeContractantUser data contractants complete');
+            print('####kilian test phone NOK :' +
+                contractant['phone_number'] +
+                ' == ' +
+                phoneNumber);
+            // print('####kilian completeContractantUser data contractants complete');
           }
+        }
+
+        // Update Firestore if any modifications were made
+        if (updated) {
+          await doc.reference.update({
+            'contratData.contractantsData': contractants,
+          });
+          print(
+              '####kilian Firestore updated successfully for doc ID: ${doc.id}');
         }
       } else {
         print(

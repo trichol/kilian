@@ -46,6 +46,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
       await actions.logAction(
         'dashboard :  onload init :${valueOrDefault<bool>(currentUserDocument?.isCompleteRegistration, false).toString()}',
       );
+      await Future.delayed(const Duration(milliseconds: 2000));
       if (!valueOrDefault<bool>(
           currentUserDocument?.isCompleteRegistration, false)) {
         await Future.delayed(const Duration(milliseconds: 2000));

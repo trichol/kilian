@@ -28,14 +28,18 @@ Future<String> decryptAndDownload(String fileLocation) async {
     // Retrieve the encryption key
     String? storedKey = await secureStorage.read(key: 'encryptionKey');
     if (storedKey == null) {
-      throw Exception('Encryption key not found in secure storage.');
+      throw Exception(
+          '####kilian decryptAndDownload Encryption key not found in secure storage.');
     }
 
     // Decode the stored key
+    print('####kilian decryptAndDownload : Decode the stored key');
     final key = encrypt.Key.fromBase64(storedKey);
     final encrypter = encrypt.Encrypter(encrypt.AES(key));
 
     // Retrieve the encrypted file from Firebase Storage
+    print(
+        '####kilian decryptAndDownload : Retrieve the encrypted file from Firebase Storage');
     final storageRef = FirebaseStorage.instance.ref(fileLocation);
     final encryptedFileBytes = await storageRef.getData();
 
@@ -44,11 +48,14 @@ Future<String> decryptAndDownload(String fileLocation) async {
     }
 
     // Decrypt the file
+    print('####kilian decryptAndDownload : Decrypt the file');
     final decryptedBytes = encrypter.decryptBytes(
       encrypt.Encrypted(encryptedFileBytes),
     );
 
     // Save the decrypted file to a temporary location
+    print(
+        '####kilian decryptAndDownload : Save the decrypted file to a temporary location');
     final tempDir = await getTemporaryDirectory();
     final tempFile = File('${tempDir.path}/decrypted.pdf');
     await tempFile.writeAsBytes(decryptedBytes);
@@ -56,6 +63,7 @@ Future<String> decryptAndDownload(String fileLocation) async {
     // Display the PDF using PDFViewer
     // Pass the temporary file path to the PDF viewer
     // Example:
+    print('####kilian decryptAndDownload : Display the PDF using PDFViewer');
     PDFView(
       filePath: tempFile.path,
     );

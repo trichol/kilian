@@ -115,10 +115,6 @@ class MesContratsModel extends FlutterFlowModel<MesContratsWidget> {
                 FFAppState().contratDataAppState.toMap().toString()),
           );
           await Future.delayed(const Duration(milliseconds: 2000));
-          // crypt contrat
-          await actions.encryptAndStoreFile(
-            FFAppState().contratDataAppState.contratPDF,
-          );
           // build URL contratPDF
           urlContratPDF = await actions.getDownloadUrl(
             FFAppState().contratDataAppState.contratPDF,
@@ -128,7 +124,17 @@ class MesContratsModel extends FlutterFlowModel<MesContratsWidget> {
           await currentUserReference!.update({
             ...mapToFirestore(
               {
-                'url_contrats': FieldValue.arrayUnion([urlContratPDF]),
+                'url_contrats': FieldValue.arrayUnion([
+                  getDataLabelValueFirestoreData(
+                    createDataLabelValueStruct(
+                      url: urlContratPDF,
+                      value: FFAppState().contratDataAppState.contratPDF,
+                      label: FFAppState().contratDataAppState.title,
+                      clearUnsetFields: false,
+                    ),
+                    true,
+                  )
+                ]),
               },
             ),
           });
@@ -165,20 +171,12 @@ class MesContratsModel extends FlutterFlowModel<MesContratsWidget> {
   }
 
   Future gestionContratArchive(BuildContext context) async {
-    List<DataLabelValueStruct>? listSignedContrat;
-
     await actions.logAction(
       'Gestion contrat archive',
     );
     listContratSigned = [];
-    // Liste Contrat signes
-    listSignedContrat = await actions.getListUrlContratSigned(
-      currentUserUid,
-    );
-    await actions.logAction(
-      'fin get list fichier contrat signé',
-    );
-    listContratSigned =
-        listSignedContrat.toList().cast<DataLabelValueStruct>();
+    listContratSigned = (currentUserDocument?.urlContrats.toList() ?? [])
+        .toList()
+        .cast<DataLabelValueStruct>();
   }
 }

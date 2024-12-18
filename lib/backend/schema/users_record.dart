@@ -106,8 +106,8 @@ class UsersRecord extends FirestoreRecord {
   bool hasContrats() => _contrats != null;
 
   // "url_contrats" field.
-  List<String>? _urlContrats;
-  List<String> get urlContrats => _urlContrats ?? const [];
+  List<DataLabelValueStruct>? _urlContrats;
+  List<DataLabelValueStruct> get urlContrats => _urlContrats ?? const [];
   bool hasUrlContrats() => _urlContrats != null;
 
   void _initializeFields() {
@@ -131,7 +131,10 @@ class UsersRecord extends FirestoreRecord {
     _genre = snapshotData['genre'] as String?;
     _fcmToken = snapshotData['fcm_token'] as String?;
     _contrats = getDataList(snapshotData['contrats']);
-    _urlContrats = getDataList(snapshotData['url_contrats']);
+    _urlContrats = getStructList(
+      snapshotData['url_contrats'],
+      DataLabelValueStruct.fromMap,
+    );
   }
 
   static CollectionReference get collection =>

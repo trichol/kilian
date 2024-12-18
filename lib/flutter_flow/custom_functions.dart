@@ -221,9 +221,12 @@ bool? isContratSignedByContractant(
     // Check if there is a contractant with the specified uid and status "signé"
     for (var contractant in contractants) {
       if (contractant.uid == userId && contractant.status == "signé") {
-        print('####### KILIAN isContratSignedByContractant FOUND : nom ' +
+        print('####### KILIAN isContratSignedByContractant found signé :  ' +
             contractant.nom);
         return true;
+      } else {
+        print('####### KILIAN isContratSignedByContractant not found signé ' +
+            contractant.nom);
       }
     }
 

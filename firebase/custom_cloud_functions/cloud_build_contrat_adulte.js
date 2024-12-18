@@ -129,14 +129,17 @@ exports.cloudBuildContratAdulte = functions
         // Check if the 'status' field equals "signé"
         if (data.contratData.status === "signé") {
           // let   date_signature = (contractants.date_signature).substring(0, 19);
-          /*
-            const listeSignatureContractants = contractants.contractantsData.map(contractant => {
-           // return `<td>${contractant.genre} ${contractant.nom} ${contractant.prenom}<br><img src='${contractant.signature}'> <br> le  le ${date_signature} </td>`;
-            return `<td>${contractant.genre} ${contractant.nom} ${contractant.prenom} </td>`;
-          });
-          */
-          //    listeSignatureContractants = "<table>" + listeSignatureContractants + "</table>";
-          listeSignatureContractants = "zzz";
+
+          let listeSignatureContractants = contractants.contractantsData.map(
+            (contractant) => {
+              // return `<td>${contractant.genre} ${contractant.nom} ${contractant.prenom}<br><img src='${contractant.signature}'> <br> le  le ${date_signature} </td>`;
+              return `<td>${contractant.genre} ${contractant.nom} ${contractant.prenom} </td>`;
+            },
+          );
+
+          listeSignatureContractants =
+            "zouk<table>" + listeSignatureContractants + "</table>";
+          //    listeSignatureContractants = "zzz";
           htmlContent = htmlContent.replace(
             /\[EN COURS DE SIGNATURE PAR TOUS LES CONTRACTANTS\]/g,
             listeSignatureContractants,
@@ -145,7 +148,7 @@ exports.cloudBuildContratAdulte = functions
       } catch (error) {
         return {
           message:
-            "cloudBuildContratAdulte : 0 parsing signature erreur" + error,
+            "cloudBuildContratAdulte :  parsing signature erreur" + error,
         };
       }
 
