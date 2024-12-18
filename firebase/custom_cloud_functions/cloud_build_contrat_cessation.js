@@ -127,20 +127,33 @@ exports.cloudBuildContratCessation = functions
           .replace(/\[DATE\]/g, date_creation)
           .replace(/\[LIEU\]/g, location);
 
-        // Check if the 'status' field equals "signé"
-        if (data.contratData.status === "signé") {
-          let date_signature = contractants.date_signature.substring(0, 19);
+        try {
+          // Check if the 'status' field equals "signé"
+          if (data.contratData.status === "signé") {
+            let listeSignatureContractants = contractants
+              .map((contractant) => {
+                const dateSignature = contractant.date_signature
+                  ? contractant.date_signature.substring(0, 19)
+                  : "Date non disponible";
+                return `<td><b>${contractant.genre} ${contractant.nom} ${contractant.prenom}</b><br><br>
+                  <img src="${contractant.signature}" ><br><br> le ${dateSignature} </td><br>`;
+              })
+              .join(" ");
 
-          const listeSignatureContractants = contractants.contractantsData.map(
-            (contractant) => {
-              return `<td>${contractant.genre} ${contractant.nom} ${contractant.prenom}<br><img src='${contractant.signature}'> <br> le  le ${date_signature} </td>`;
-            },
-          );
-          listeSignatureContractants = "<table>" + +"</table>";
-          htmlContent = htmlContent.replace(
-            /\[EN COURS DE SIGNATURE PAR TOUS LES CONTRACTANTS\]/g,
-            listeSignatureContractants,
-          );
+            listeSignatureContractants =
+              "<center><table  cellspacing='20'><tr>" +
+              listeSignatureContractants +
+              "</tr></table></center>";
+            htmlContent = htmlContent.replace(
+              /\[EN COURS DE SIGNATURE PAR TOUS LES CONTRACTANTS\]/g,
+              listeSignatureContractants,
+            );
+          }
+        } catch (error) {
+          return {
+            message:
+              "cloudBuildContratAdulte :  parsing signature erreur" + error,
+          };
         }
       } catch (error) {
         return { message: "Error reading file:" + tempHtmlPath };

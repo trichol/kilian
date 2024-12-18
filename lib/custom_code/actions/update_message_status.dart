@@ -18,7 +18,7 @@ Future updateMessageStatus(
 ) async {
   // Add your function code here!
   try {
-    print('###### KILIAN APPEL updateMessageStatus  ' + phoneNumber!);
+    // print('###### KILIAN APPEL updateMessageStatus  ' + phoneNumber!);
 
     // Reference to the Firestore collection
     final CollectionReference messagesCollection =

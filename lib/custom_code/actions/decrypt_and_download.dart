@@ -36,6 +36,8 @@ Future<String> decryptAndDownload(String fileLocation) async {
     print('####kilian decryptAndDownload : Decode the stored key');
     final key = encrypt.Key.fromBase64(storedKey);
     final encrypter = encrypt.Encrypter(encrypt.AES(key));
+    //final encrypter = encrypt.Encrypter(
+    //    encrypt.AES(key, mode: encrypt.AESMode.cbc, padding: 'PKCS7'));
 
     // Retrieve the encrypted file from Firebase Storage
     print(
@@ -43,15 +45,42 @@ Future<String> decryptAndDownload(String fileLocation) async {
     final storageRef = FirebaseStorage.instance.ref(fileLocation);
     final encryptedFileBytes = await storageRef.getData();
 
+/*
     if (encryptedFileBytes == null) {
       throw Exception('Failed to retrieve file from Firebase Storage.');
     }
+    */
+    print('####kilian decryptAndDownload :  check not null crypted data');
+    if (encryptedFileBytes == null || encryptedFileBytes.length < 16) {
+      throw Exception(
+          'Invalid or corrupted file: IV missing or file too small.');
+    }
 
+    // Extract the IV (first 16 bytes) and encrypted data
+    print(
+        '####kilian decryptAndDownload :  Extract the IV (first 16 bytes) and encrypted data');
+    final ivBytes = encryptedFileBytes.sublist(0, 16);
+    final encryptedData = encryptedFileBytes.sublist(16);
+    final iv = encrypt.IV(ivBytes);
+
+    // Check key
+    print('####### KILIAN Decryption Key: ${key.base64}');
+    print('####### KILIAN Decryption IV: ${iv.base64}');
+
+    // Decrypt the file
+    print('####kilian decryptAndDownload :  Decrypt the file');
+    final decryptedBytes = encrypter.decryptBytes(
+      encrypt.Encrypted(encryptedData),
+      iv: iv,
+    );
+
+    /*
     // Decrypt the file
     print('####kilian decryptAndDownload : Decrypt the file');
     final decryptedBytes = encrypter.decryptBytes(
       encrypt.Encrypted(encryptedFileBytes),
     );
+    */
 
     // Save the decrypted file to a temporary location
     print(
@@ -64,11 +93,9 @@ Future<String> decryptAndDownload(String fileLocation) async {
     // Pass the temporary file path to the PDF viewer
     // Example:
     print('####kilian decryptAndDownload : Display the PDF using PDFViewer');
-    PDFView(
-      filePath: tempFile.path,
-    );
+    PDFView(filePath: tempFile.path);
 
-    print('Decrypted PDF displayed successfully.');
+    print('####kilian decryptAndDownload :  successfull.');
     return tempFile.path;
   } catch (e) {
     print('Error during decryption and display: $e');

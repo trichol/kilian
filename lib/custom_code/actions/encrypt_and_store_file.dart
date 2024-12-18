@@ -62,6 +62,8 @@ Future encryptAndStoreFile(String fileLocation) async {
     await storageRef.putData(Uint8List.fromList(combinedBytes));
 
     print('File encrypted and saved successfully at $fileLocation');
+    print('####### KILIAN Encryption Key: ${key.base64}');
+    print('####### KILIAN Encryption IV: ${iv.base64}');
   } catch (e) {
     print('Error during encryption and storage: $e');
     throw Exception('Failed to encrypt and store the file.');

@@ -70,59 +70,63 @@ class _ViewPdfContratWidgetState extends State<ViewPdfContratWidget> {
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Colors.white,
-      body: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Container(
-            decoration: const BoxDecoration(),
-            child: wrapWithModel(
-              model: _model.kilianAppBarModel,
-              updateCallback: () => safeSetState(() {}),
-              child: const KilianAppBarWidget(),
+      body: SafeArea(
+        top: true,
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Container(
+              decoration: const BoxDecoration(),
+              child: wrapWithModel(
+                model: _model.kilianAppBarModel,
+                updateCallback: () => safeSetState(() {}),
+                child: const KilianAppBarWidget(),
+              ),
             ),
-          ),
-          SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                      child: AuthUserStreamWidget(
-                        builder: (context) => Text(
-                          currentUserDisplayName,
-                          style: FlutterFlowTheme.of(context)
-                              .headlineMedium
-                              .override(
-                                fontFamily: 'Outfit',
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                fontSize: 20.0,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.w500,
-                              ),
+            SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                        child: AuthUserStreamWidget(
+                          builder: (context) => Text(
+                            currentUserDisplayName,
+                            style: FlutterFlowTheme.of(context)
+                                .headlineMedium
+                                .override(
+                                  fontFamily: 'Outfit',
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  fontSize: 20.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                FlutterFlowPdfViewer(
-                  networkPath: widget.url!,
-                  width: MediaQuery.sizeOf(context).width * 1.0,
-                  height: MediaQuery.sizeOf(context).height * 0.9,
-                  horizontalScroll: false,
-                ),
-              ]
-                  .divide(const SizedBox(height: 10.0))
-                  .addToStart(const SizedBox(height: 10.0))
-                  .addToEnd(const SizedBox(height: 10.0)),
+                    ],
+                  ),
+                  FlutterFlowPdfViewer(
+                    networkPath: widget.url!,
+                    width: MediaQuery.sizeOf(context).width * 1.0,
+                    height: MediaQuery.sizeOf(context).height * 0.9,
+                    horizontalScroll: false,
+                  ),
+                ]
+                    .divide(const SizedBox(height: 10.0))
+                    .addToStart(const SizedBox(height: 10.0))
+                    .addToEnd(const SizedBox(height: 10.0)),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

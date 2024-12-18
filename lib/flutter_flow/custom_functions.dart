@@ -120,8 +120,8 @@ String getLocation(
 
 String? fixImproperJson(String? rawJson) {
   try {
-    print("Before Fixing:");
-    print(rawJson);
+    // print("Before Fixing:");
+    // print(rawJson);
 
     // Step 1: Add quotes around keys
     String fixedJson = rawJson!.replaceAllMapped(
@@ -139,8 +139,8 @@ String? fixImproperJson(String? rawJson) {
       },
     );
 
-    print("After Fixing:");
-    print(fixedJson);
+    // print("After Fixing:");
+    // print(fixedJson);
 
     return fixedJson;
   } catch (e) {
@@ -212,7 +212,7 @@ bool? isContratSignedByContractant(
   ContratDataStruct? contrat,
   String? userId,
 ) {
-  print('####### KILIAN APPEL  isContratSignedByContractant');
+  //print('####### KILIAN APPEL  isContratSignedByContractant');
 
   // Retrieve the list of contractants from the contrat object
   try {
@@ -221,8 +221,7 @@ bool? isContratSignedByContractant(
     // Check if there is a contractant with the specified uid and status "signé"
     for (var contractant in contractants) {
       if (contractant.uid == userId && contractant.status == "signé") {
-        print('####### KILIAN isContratSignedByContractant found signé :  ' +
-            contractant.nom);
+        // print('####### KILIAN isContratSignedByContractant found signé :  ' + ontractant.nom);
         return true;
       } else {
         print('####### KILIAN isContratSignedByContractant not found signé ' +
@@ -231,7 +230,7 @@ bool? isContratSignedByContractant(
     }
 
     // If no match is found, return false
-    print('####### KILIAN   isContratSignedByContractant : not signed');
+    //print('####### KILIAN   isContratSignedByContractant : not signed');
 
     return false;
   } catch (e) {

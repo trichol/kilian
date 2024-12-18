@@ -20,6 +20,7 @@ Future<String> getDownloadUrl(String? filePath) async {
       print('###### KILIAN Error: filePath is null or empty.');
       return '';
     }
+    print('###### KILIAN getDownloadUrl path : $filePath');
 
     final Reference storageRef = FirebaseStorage.instance.ref().child(filePath);
     final String downloadUrl = await storageRef.getDownloadURL();

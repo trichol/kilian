@@ -95,109 +95,115 @@ class _SuccessPageBuildPDFWidgetState extends State<SuccessPageBuildPDFWidget> {
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Container(
-              decoration: const BoxDecoration(),
-              child: wrapWithModel(
-                model: _model.kilianAppBarBackModel,
-                updateCallback: () => safeSetState(() {}),
-                child: const KilianAppBarBackWidget(),
+      body: SafeArea(
+        top: true,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Container(
+                decoration: const BoxDecoration(),
+                child: wrapWithModel(
+                  model: _model.kilianAppBarBackModel,
+                  updateCallback: () => safeSetState(() {}),
+                  child: const KilianAppBarBackWidget(),
+                ),
               ),
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                  child: AuthUserStreamWidget(
-                    builder: (context) => Text(
-                      currentUserDisplayName,
-                      style:
-                          FlutterFlowTheme.of(context).headlineMedium.override(
-                                fontFamily: 'Outfit',
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                fontSize: 20.0,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.w500,
-                              ),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                    child: AuthUserStreamWidget(
+                      builder: (context) => Text(
+                        currentUserDisplayName,
+                        style: FlutterFlowTheme.of(context)
+                            .headlineMedium
+                            .override(
+                              fontFamily: 'Outfit',
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              fontSize: 20.0,
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.w500,
+                            ),
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Télécharger brouillon contrat',
-                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Mukta',
-                        letterSpacing: 0.0,
-                      ),
-                ),
-                FlutterFlowIconButton(
-                  borderColor: FlutterFlowTheme.of(context).secondary,
-                  borderRadius: 4.0,
-                  borderWidth: 1.0,
-                  buttonSize: 40.0,
-                  fillColor: FlutterFlowTheme.of(context).primary,
-                  icon: Icon(
-                    Icons.download_for_offline,
-                    color: FlutterFlowTheme.of(context).info,
-                    size: 24.0,
-                  ),
-                  onPressed: () async {
-                    await action_blocks.downloadPdf(context);
-                  },
-                ),
-                Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(40.0, 0.0, 0.0, 0.0),
-                  child: Text(
-                    'Signer',
+                ],
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Télécharger brouillon contrat',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Mukta',
                           letterSpacing: 0.0,
                         ),
                   ),
-                ),
-                FlutterFlowIconButton(
-                  borderColor: FlutterFlowTheme.of(context).secondary,
-                  borderRadius: 4.0,
-                  borderWidth: 1.0,
-                  buttonSize: 40.0,
-                  fillColor: FlutterFlowTheme.of(context).primary,
-                  icon: FaIcon(
-                    FontAwesomeIcons.fileSignature,
-                    color: FlutterFlowTheme.of(context).info,
-                    size: 24.0,
+                  FlutterFlowIconButton(
+                    borderColor: FlutterFlowTheme.of(context).secondary,
+                    borderRadius: 4.0,
+                    borderWidth: 1.0,
+                    buttonSize: 40.0,
+                    fillColor: FlutterFlowTheme.of(context).primary,
+                    icon: Icon(
+                      Icons.download_for_offline,
+                      color: FlutterFlowTheme.of(context).info,
+                      size: 24.0,
+                    ),
+                    onPressed: () async {
+                      await action_blocks.downloadPdf(context);
+                    },
                   ),
-                  onPressed: () async {
-                    await action_blocks.blockSignerContrat(context);
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(40.0, 0.0, 0.0, 0.0),
+                    child: Text(
+                      'Signer',
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Mukta',
+                            letterSpacing: 0.0,
+                          ),
+                    ),
+                  ),
+                  FlutterFlowIconButton(
+                    borderColor: FlutterFlowTheme.of(context).secondary,
+                    borderRadius: 4.0,
+                    borderWidth: 1.0,
+                    buttonSize: 40.0,
+                    fillColor: FlutterFlowTheme.of(context).primary,
+                    icon: FaIcon(
+                      FontAwesomeIcons.fileSignature,
+                      color: FlutterFlowTheme.of(context).info,
+                      size: 24.0,
+                    ),
+                    onPressed: () async {
+                      await action_blocks.blockSignerContrat(context);
 
-                    context.pushNamed('dashboard');
-                  },
-                ),
-              ].divide(const SizedBox(width: 5.0)),
-            ),
-            Align(
-              alignment: const AlignmentDirectional(0.0, -1.0),
-              child: FlutterFlowPdfViewer(
-                networkPath: getJsonField(
-                  FFAppState().contratDataAppState.toMap(),
-                  r'''$.url''',
-                ).toString(),
-                width: MediaQuery.sizeOf(context).width * 1.0,
-                height: MediaQuery.sizeOf(context).height * 0.9,
-                horizontalScroll: false,
+                      context.pushNamed('dashboard');
+                    },
+                  ),
+                ].divide(const SizedBox(width: 5.0)),
               ),
-            ),
-          ].divide(const SizedBox(height: 10.0)).addToEnd(const SizedBox(height: 10.0)),
+              Align(
+                alignment: const AlignmentDirectional(0.0, -1.0),
+                child: FlutterFlowPdfViewer(
+                  networkPath: getJsonField(
+                    FFAppState().contratDataAppState.toMap(),
+                    r'''$.url''',
+                  ).toString(),
+                  width: MediaQuery.sizeOf(context).width * 1.0,
+                  height: MediaQuery.sizeOf(context).height * 0.9,
+                  horizontalScroll: false,
+                ),
+              ),
+            ].divide(const SizedBox(height: 10.0)).addToEnd(const SizedBox(height: 10.0)),
+          ),
         ),
       ),
     );

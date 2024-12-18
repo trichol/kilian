@@ -30,8 +30,7 @@ Future completeContractant() async {
     final userDoc =
         await FirebaseFirestore.instance.collection('users').doc(userId).get();
 
-    print(
-        '####kilian completeContractantUser récupération data user dans base OK!');
+    //print('####kilian completeContractantUser récupération data user dans base OK!');
     // Check if the document exists
     /*
     if (!userDoc.exists) {
@@ -51,8 +50,7 @@ Future completeContractant() async {
     final uid = userDoc.data()?['uid'];
     final est_contrat_telecharger = false;
 
-    print('####kilian completeContractantUser data gathered for : ' +
-        userDoc.data()?['display_name']);
+    // print('####kilian completeContractantUser data gathered for : ' +  userDoc.data()?['display_name']);
 
     // Initialize a Firestore instance
     final firestore = FirebaseFirestore.instance;
@@ -74,14 +72,11 @@ Future completeContractant() async {
         // Look for the target phone number in the 'contractantsData' array
         for (final contractant in contractants) {
           if (contractant['phone_number'] == phoneNumber) {
-            print('####kilian test phone OK :' +
-                contractant['phone_number'] +
-                ' == ' +
-                phoneNumber);
+            // print('####kilian test phone OK :' + contractant['phone_number'] + ' == ' + phoneNumber);
             if (contractant['nom'] == null ||
                 (contractant['nom'] is String &&
                     contractant['nom']!.trim().isEmpty)) {
-              print('####kilian test nom vide OK  vide!');
+              //print('####kilian test nom vide OK  vide!');
               contractant['genre'] = genre;
               contractant['nom'] = nom;
               contractant['prenom'] = prenom;
@@ -94,21 +89,24 @@ Future completeContractant() async {
                       ' --- $prenom  = ' +
                       contractant['prenom']);
               updated = true; // Set the flag to true
-            } else {
-              print('####kilian test nom vide NOK :' + contractant['nom']);
-              print(
-                  '####kilian completeContractantUser : utilisateur trouvé et complet ' +
-                      userDoc.data()?['display_name']);
+            }
+            /*
+            else {
+              //print('####kilian test nom vide NOK :' + contractant['nom']);
+              print('####kilian completeContractantUser : utilisateur trouvé et complet ' +   userDoc.data()?['display_name']);
             }
             //let contratId = data['contratData']['uid'];
+            */
             break;
-          } else {
+          }
+          /* else {
             print('####kilian test phone NOK :' +
                 contractant['phone_number'] +
                 ' == ' +
                 phoneNumber);
             // print('####kilian completeContractantUser data contractants complete');
           }
+          */
         }
 
         // Update Firestore if any modifications were made

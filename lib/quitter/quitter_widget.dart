@@ -49,38 +49,41 @@ class _QuitterWidgetState extends State<QuitterWidget> {
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Colors.white,
-      body: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Container(
-            decoration: const BoxDecoration(),
-            child: wrapWithModel(
-              model: _model.kilianAppBarAccueilModel,
-              updateCallback: () => safeSetState(() {}),
-              child: const KilianAppBarAccueilWidget(),
+      body: SafeArea(
+        top: true,
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Container(
+              decoration: const BoxDecoration(),
+              child: wrapWithModel(
+                model: _model.kilianAppBarAccueilModel,
+                updateCallback: () => safeSetState(() {}),
+                child: const KilianAppBarAccueilWidget(),
+              ),
             ),
-          ),
-          Align(
-            alignment: const AlignmentDirectional(0.0, 0.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  'Au revoir ',
-                  textAlign: TextAlign.center,
-                  style: FlutterFlowTheme.of(context).headlineLarge.override(
-                        fontFamily: 'Roboto',
-                        letterSpacing: 0.0,
-                      ),
-                ),
-              ]
-                  .addToStart(const SizedBox(height: 10.0))
-                  .addToEnd(const SizedBox(height: 10.0)),
+            Align(
+              alignment: const AlignmentDirectional(0.0, 0.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    'Au revoir ',
+                    textAlign: TextAlign.center,
+                    style: FlutterFlowTheme.of(context).headlineLarge.override(
+                          fontFamily: 'Roboto',
+                          letterSpacing: 0.0,
+                        ),
+                  ),
+                ]
+                    .addToStart(const SizedBox(height: 10.0))
+                    .addToEnd(const SizedBox(height: 10.0)),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -37,3 +37,4 @@ export 'increment_nombre_message.dart' show incrementNombreMessage;
 export 'does_collection_exist.dart' show doesCollectionExist;
 export 'update_message_status.dart' show updateMessageStatus;
 export 'get_contract_u_i_ds_by_phone.dart' show getContractUIDsByPhone;
+export 'remove_url_contrat_by_value.dart' show removeUrlContratByValue;

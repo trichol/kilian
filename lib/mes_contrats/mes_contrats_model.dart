@@ -44,6 +44,8 @@ class MesContratsModel extends FlutterFlowModel<MesContratsWidget> {
 
   // Model for KilianAppBar component.
   late KilianAppBarModel kilianAppBarModel;
+  // Stores action output result for [Custom Action - decryptAndDownload] action in IconButtonView widget.
+  String? decryptedFile;
 
   @override
   void initState(BuildContext context) {
@@ -60,6 +62,7 @@ class MesContratsModel extends FlutterFlowModel<MesContratsWidget> {
     List<MessageRecord>? listeContratEnAttenteDoc;
     ContratsRecord? currentContratDoc;
     String? urlContratPDF;
+    bool? haveAllContractantDownloaded;
 
     // contrats en attente pour moi
     listeContratEnAttenteDoc = await queryMessageRecordOnce(
@@ -115,35 +118,109 @@ class MesContratsModel extends FlutterFlowModel<MesContratsWidget> {
                 FFAppState().contratDataAppState.toMap().toString()),
           );
           await Future.delayed(const Duration(milliseconds: 2000));
+          // crypt contrat
+          await actions.encryptAndStoreFile(
+            FFAppState().contratDataAppState.contratPDF,
+          );
           // build URL contratPDF
           urlContratPDF = await actions.getDownloadUrl(
             FFAppState().contratDataAppState.contratPDF,
           );
-          // Update user with url
-
-          await currentUserReference!.update({
-            ...mapToFirestore(
-              {
-                'url_contrats': FieldValue.arrayUnion([
-                  getDataLabelValueFirestoreData(
-                    createDataLabelValueStruct(
-                      url: urlContratPDF,
-                      value: FFAppState().contratDataAppState.contratPDF,
-                      label: FFAppState().contratDataAppState.title,
-                      clearUnsetFields: false,
-                    ),
-                    true,
-                  )
-                ]),
-              },
-            ),
-          });
-          // contratAppState re-init contratPDF
-          FFAppState().updateContratDataAppStateStruct(
-            (e) => e
-              ..contratPDF =
-                  'TMP/contrats/${FFAppState().contratDataAppState.uid}.pdf',
+          await actions.logAction(
+            urlContratPDF,
           );
+          if (urlContratPDF != '') {
+            // Update user with url
+
+            await currentUserReference!.update({
+              ...mapToFirestore(
+                {
+                  'url_contrats': FieldValue.arrayUnion([
+                    getDataLabelValueFirestoreData(
+                      createDataLabelValueStruct(
+                        url: urlContratPDF,
+                        value: FFAppState().contratDataAppState.contratPDF,
+                        label: FFAppState().contratDataAppState.title,
+                        clearUnsetFields: false,
+                      ),
+                      true,
+                    )
+                  ]),
+                },
+              ),
+            });
+            // update "est_contrat-telecherge"
+            await actions.updateContractantDownloadStatus(
+              FFAppState().contratDataAppState.uid,
+              currentPhoneNumber,
+            );
+            // contratAppState re-init contratPDF
+            FFAppState().updateContratDataAppStateStruct(
+              (e) => e
+                ..contratPDF =
+                    'TMP/contrats/${FFAppState().contratDataAppState.uid}.pdf',
+            );
+            if (currentUserUid == FFAppState().contratDataAppState.auteurId) {
+              // have all contractant download
+              haveAllContractantDownloaded =
+                  await actions.downloadAllContractantDone(
+                FFAppState().contratDataAppState.uid,
+              );
+              if (haveAllContractantDownloaded) {
+                // Nettoyage collection message
+                await actions.deleteDocumentsMessage(
+                  currentPhoneNumber,
+                  FFAppState().contratDataAppState.uid,
+                );
+                // Clean user from old contrat
+                await actions.deleteContratReference(
+                  FFAppState().contratDataAppState.uid,
+                );
+                // delete Doc contrat
+                await actions.deleteFirestoreDocument(
+                  'contrats',
+                  FFAppState().contratDataAppState.uid,
+                );
+                // delete draft build PDF
+                await actions.callDeleteBucketFile(
+                  FFAppState().contratDataAppState.contratPDF,
+                );
+              }
+            } else {
+              // Nettoyage collection message
+              await actions.deleteDocumentsMessage(
+                currentPhoneNumber,
+                FFAppState().contratDataAppState.uid,
+              );
+              // update contrat DOC
+
+              await currentContratDoc.reference
+                  .update(createContratsRecordData(
+                contratData: updateContratDataStruct(
+                  FFAppState().contratDataAppState,
+                  clearUnsetFields: false,
+                ),
+              ));
+            }
+          } else {
+            // ERREUR DIALOG
+            await showDialog(
+              context: context,
+              builder: (alertDialogContext) {
+                return AlertDialog(
+                  title: const Text('Anomalie'),
+                  content: Text(
+                      'Probléme lors de la création du lien : ${FFAppState().contratDataAppState.contratPDF}'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(alertDialogContext),
+                      child: const Text('Ok'),
+                    ),
+                  ],
+                );
+              },
+            );
+          }
         } else {
           await actions.logAction(
             'Contrat  déja téléchargé',
