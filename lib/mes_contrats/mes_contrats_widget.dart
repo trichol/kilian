@@ -609,6 +609,11 @@ class _MesContratsWidgetState extends State<MesContratsWidget> {
                                                                           listView1ContentItem
                                                                               .uid,
                                                                         );
+                                                                        await actions
+                                                                            .deleteContratReference(
+                                                                          listView1ContentItem
+                                                                              .uid,
+                                                                        );
                                                                         if (_model
                                                                             .areAllMessagesDeleted!) {
                                                                           await actions
@@ -704,11 +709,6 @@ class _MesContratsWidgetState extends State<MesContratsWidget> {
                                                                         }
                                                                       }
 
-                                                                      await actions
-                                                                          .deleteContratReference(
-                                                                        listView1ContentItem
-                                                                            .uid,
-                                                                      );
                                                                       FFAppState()
                                                                           .iLoop = 0;
                                                                       safeSetState(
