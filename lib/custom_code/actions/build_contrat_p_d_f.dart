@@ -21,8 +21,8 @@ Future<String> buildContratPDF(
 
     final typeContrat = contratData['type'];
     final cloudFunction = "cloudBuildContrat" + typeContrat;
-    // print("###### KILIAN buildContratPDF : " + cloudFunction);
-    // print("Decoded JSON: $contratData");
+    print("###### KILIAN buildContratPDF : " + cloudFunction);
+    print("Decoded JSON: $contratData");
 
     final HttpsCallable callable =
         FirebaseFunctions.instanceFor(region: 'europe-west1')

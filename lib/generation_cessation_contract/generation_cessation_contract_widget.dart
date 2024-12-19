@@ -264,90 +264,104 @@ class _GenerationCessationContractWidgetState
                                                 ),
                                           ),
                                         ),
-                                        SizedBox(
-                                          width: 250.0,
-                                          child: TextFormField(
-                                            controller:
-                                                _model.articleTextController,
-                                            focusNode: _model.articleFocusNode,
-                                            autofocus: false,
-                                            obscureText: false,
-                                            decoration: InputDecoration(
-                                              isDense: true,
-                                              labelStyle:
+                                        Container(
+                                          height: 30.0,
+                                          decoration: const BoxDecoration(),
+                                          child: SizedBox(
+                                            width: 250.0,
+                                            child: TextFormField(
+                                              controller:
+                                                  _model.articleTextController,
+                                              focusNode:
+                                                  _model.articleFocusNode,
+                                              autofocus: false,
+                                              obscureText: false,
+                                              decoration: InputDecoration(
+                                                isDense: true,
+                                                labelStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily: 'Mukta',
+                                                          fontSize: 12.0,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                hintStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily: 'Mukta',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                          fontSize: 12.0,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondary,
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          4.0),
+                                                ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: const BorderSide(
+                                                    color: Color(0x00000000),
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          4.0),
+                                                ),
+                                                errorBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .error,
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          4.0),
+                                                ),
+                                                focusedErrorBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .error,
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          4.0),
+                                                ),
+                                                filled: true,
+                                                fillColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .tertiary,
+                                              ),
+                                              style:
                                                   FlutterFlowTheme.of(context)
-                                                      .labelMedium
+                                                      .bodyMedium
                                                       .override(
                                                         fontFamily: 'Mukta',
+                                                        fontSize: 14.0,
                                                         letterSpacing: 0.0,
                                                       ),
-                                              hintStyle:
+                                              cursorColor:
                                                   FlutterFlowTheme.of(context)
-                                                      .labelMedium
-                                                      .override(
-                                                        fontFamily: 'Mukta',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryText,
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                              enabledBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondary,
-                                                  width: 1.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(4.0),
-                                              ),
-                                              focusedBorder: OutlineInputBorder(
-                                                borderSide: const BorderSide(
-                                                  color: Color(0x00000000),
-                                                  width: 1.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(4.0),
-                                              ),
-                                              errorBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .error,
-                                                  width: 1.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(4.0),
-                                              ),
-                                              focusedErrorBorder:
-                                                  OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .error,
-                                                  width: 1.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(4.0),
-                                              ),
-                                              filled: true,
-                                              fillColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .tertiary,
+                                                      .primaryText,
+                                              validator: _model
+                                                  .articleTextControllerValidator
+                                                  .asValidator(context),
                                             ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Mukta',
-                                                  letterSpacing: 0.0,
-                                                ),
-                                            cursorColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .primaryText,
-                                            validator: _model
-                                                .articleTextControllerValidator
-                                                .asValidator(context),
                                           ),
                                         ),
                                       ],
@@ -1300,10 +1314,9 @@ class _GenerationCessationContractWidgetState
                                       (_model.descriptionTextController
                                                   .text !=
                                               '') &&
-                                      (/* NOT RECOMMENDED */ _model
-                                              .horaireRendezVousTextController
-                                              .text ==
-                                          'true')) {
+                                      (_model.horaireRendezVousTextController
+                                                  .text !=
+                                              '')) {
                                     _model.isBuildAction = true;
                                     safeSetState(() {});
                                     // clean page state variable
@@ -1448,8 +1461,8 @@ class _GenerationCessationContractWidgetState
                                             '${FFAppConstants.listeLabelContrat.elementAtOrNull(0)} rédiger par $currentUserDisplayName le  ${functions.getCurrentDateTimeStr()}'
                                         ..type = FFAppConstants
                                             .listeLabelContrat
-                                            .elementAtOrNull(FFAppState()
-                                                .indiceTypeContratAppState)
+                                            .elementAtOrNull(
+                                                FFAppConstants.indiceCessation)
                                         ..dateCreation =
                                             functions.getCurrentDateTime()
                                         ..status = FFAppConstants.listeStatus

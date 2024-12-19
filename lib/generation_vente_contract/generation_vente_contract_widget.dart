@@ -271,97 +271,111 @@ class _GenerationVenteContractWidgetState
                                                       ),
                                             ),
                                           ),
-                                          SizedBox(
-                                            width: 250.0,
-                                            child: TextFormField(
-                                              controller:
-                                                  _model.articleTextController,
-                                              focusNode:
-                                                  _model.articleFocusNode,
-                                              autofocus: false,
-                                              obscureText: false,
-                                              decoration: InputDecoration(
-                                                isDense: true,
-                                                labelStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelMedium
-                                                        .override(
-                                                          fontFamily: 'Mukta',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                hintStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelMedium
-                                                        .override(
-                                                          fontFamily: 'Mukta',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondary,
-                                                    width: 1.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          4.0),
-                                                ),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: const BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 1.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          4.0),
-                                                ),
-                                                errorBorder: OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .error,
-                                                    width: 1.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          4.0),
-                                                ),
-                                                focusedErrorBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .error,
-                                                    width: 1.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          4.0),
-                                                ),
-                                                filled: true,
-                                                fillColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .tertiary,
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
+                                          Container(
+                                            height: 30.0,
+                                            decoration: const BoxDecoration(),
+                                            child: SizedBox(
+                                              width: 250.0,
+                                              child: TextFormField(
+                                                controller: _model
+                                                    .articleTextController,
+                                                focusNode:
+                                                    _model.articleFocusNode,
+                                                autofocus: false,
+                                                obscureText: false,
+                                                decoration: InputDecoration(
+                                                  isDense: true,
+                                                  labelStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .override(
+                                                            fontFamily: 'Mukta',
+                                                            fontSize: 12.0,
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                  hintStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .labelMedium
                                                       .override(
                                                         fontFamily: 'Mukta',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                        fontSize: 12.0,
                                                         letterSpacing: 0.0,
                                                       ),
-                                              cursorColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              validator: _model
-                                                  .articleTextControllerValidator
-                                                  .asValidator(context),
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondary,
+                                                      width: 1.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4.0),
+                                                  ),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: const BorderSide(
+                                                      color: Color(0x00000000),
+                                                      width: 1.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4.0),
+                                                  ),
+                                                  errorBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .error,
+                                                      width: 1.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4.0),
+                                                  ),
+                                                  focusedErrorBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .error,
+                                                      width: 1.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4.0),
+                                                  ),
+                                                  filled: true,
+                                                  fillColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .tertiary,
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Mukta',
+                                                          fontSize: 14.0,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                cursorColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                validator: _model
+                                                    .articleTextControllerValidator
+                                                    .asValidator(context),
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -513,107 +527,118 @@ class _GenerationVenteContractWidgetState
                                         Row(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
-                                            Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 0.0, 5.0, 0.0),
-                                              child: SizedBox(
-                                                width: 100.0,
-                                                child: TextFormField(
-                                                  controller:
-                                                      _model.prixTextController,
-                                                  focusNode:
-                                                      _model.prixFocusNode,
-                                                  autofocus: false,
-                                                  obscureText: false,
-                                                  decoration: InputDecoration(
-                                                    isDense: true,
-                                                    labelStyle: FlutterFlowTheme
-                                                            .of(context)
-                                                        .labelMedium
-                                                        .override(
-                                                          fontFamily: 'Mukta',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                    hintStyle: FlutterFlowTheme
-                                                            .of(context)
-                                                        .labelMedium
-                                                        .override(
-                                                          fontFamily: 'Mukta',
+                                            Container(
+                                              height: 30.0,
+                                              decoration: const BoxDecoration(),
+                                              child: Padding(
+                                                padding: const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 0.0, 5.0, 0.0),
+                                                child: SizedBox(
+                                                  width: 100.0,
+                                                  child: TextFormField(
+                                                    controller: _model
+                                                        .prixTextController,
+                                                    focusNode:
+                                                        _model.prixFocusNode,
+                                                    autofocus: false,
+                                                    obscureText: false,
+                                                    decoration: InputDecoration(
+                                                      isDense: true,
+                                                      labelStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Mukta',
+                                                                fontSize: 12.0,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                              ),
+                                                      hintStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Mukta',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryText,
+                                                                fontSize: 12.0,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                              ),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .primaryText,
+                                                              .secondary,
+                                                          width: 1.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4.0),
+                                                      ),
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: const BorderSide(
+                                                          color:
+                                                              Color(0x00000000),
+                                                          width: 1.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4.0),
+                                                      ),
+                                                      errorBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .error,
+                                                          width: 1.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4.0),
+                                                      ),
+                                                      focusedErrorBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .error,
+                                                          width: 1.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4.0),
+                                                      ),
+                                                      filled: true,
+                                                      fillColor:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .tertiary,
+                                                    ),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Mukta',
+                                                          fontSize: 14.0,
                                                           letterSpacing: 0.0,
                                                         ),
-                                                    enabledBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondary,
-                                                        width: 1.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              4.0),
-                                                    ),
-                                                    focusedBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: const BorderSide(
-                                                        color:
-                                                            Color(0x00000000),
-                                                        width: 1.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              4.0),
-                                                    ),
-                                                    errorBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
-                                                        width: 1.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              4.0),
-                                                    ),
-                                                    focusedErrorBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
-                                                        width: 1.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              4.0),
-                                                    ),
-                                                    filled: true,
-                                                    fillColor:
+                                                    cursorColor:
                                                         FlutterFlowTheme.of(
                                                                 context)
-                                                            .tertiary,
+                                                            .primaryText,
+                                                    validator: _model
+                                                        .prixTextControllerValidator
+                                                        .asValidator(context),
                                                   ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Mukta',
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                                  cursorColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .primaryText,
-                                                  validator: _model
-                                                      .prixTextControllerValidator
-                                                      .asValidator(context),
                                                 ),
                                               ),
                                             ),
@@ -1489,362 +1514,376 @@ class _GenerationVenteContractWidgetState
                                   ),
                                 ),
                               if (_model.listPhoneContractantValide.length > 1)
-                                FFButtonWidget(
-                                  onPressed: () async {
-                                    // LOG APPEL ACTION
-                                    await actions.logAction(
-                                      'Appel btn generation contrat',
-                                    );
-                                    if ((_model.articleTextController.text !=
-                                                '') &&
-                                        (_model.descriptionTextController
-                                                    .text !=
-                                                '') &&
-                                        (_model.prixTextController.text !=
-                                                '') &&
-                                        (/* NOT RECOMMENDED */ _model
-                                                .horaireRendezVousTextController
-                                                .text ==
-                                            'true')) {
-                                      _model.isBuildAction = true;
-                                      safeSetState(() {});
-                                      // clean page state variable
-                                      _model.listObjetContrat = [];
-                                      _model.listContractants = [];
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 50.0),
+                                  child: FFButtonWidget(
+                                    onPressed: () async {
                                       // LOG APPEL ACTION
                                       await actions.logAction(
-                                        'Appel clean data contrat',
+                                        'Appel btn generation contrat',
                                       );
-                                      // CLEAN contratData
-                                      FFAppState().contratDataAppState =
-                                          ContratDataStruct();
-                                      safeSetState(() {});
-                                      // Pretraitement contratData
-                                      FFAppState()
-                                          .updateContratDataAppStateStruct(
-                                        (e) => e
-                                          ..allContractantsRegistered = true
-                                          ..uid = random_data.randomString(
-                                            18,
-                                            19,
-                                            true,
-                                            true,
-                                            true,
-                                          ),
-                                      );
-                                      // CONTRATDATA TO DOCUMENT
-
-                                      var contratsRecordReference =
-                                          ContratsRecord.collection.doc(
-                                              FFAppState()
-                                                  .contratDataAppState
-                                                  .uid);
-                                      await contratsRecordReference
-                                          .set(createContratsRecordData(
-                                        contratData: updateContratDataStruct(
-                                          FFAppState().contratDataAppState,
-                                          clearUnsetFields: false,
-                                          create: true,
-                                        ),
-                                      ));
-                                      _model.contratDataDoc =
-                                          ContratsRecord.getDocumentFromData(
-                                              createContratsRecordData(
-                                                contratData:
-                                                    updateContratDataStruct(
-                                                  FFAppState()
-                                                      .contratDataAppState,
-                                                  clearUnsetFields: false,
-                                                  create: true,
-                                                ),
-                                              ),
-                                              contratsRecordReference);
-                                      // reset loop increment
-                                      FFAppState().iLoop = 0;
-                                      FFAppState().indiceTypeContratAppState =
-                                          FFAppConstants.indiceAdulte;
-                                      // create objetContrat
-                                      _model.addToListObjetContrat(
-                                          ObjetContratStruct(
-                                        titre:
-                                            _model.articleTextController.text,
-                                        categorie: 'vente',
-                                        description: _model
-                                            .descriptionTextController.text,
-                                        prix: _model.prixTextController.text,
-                                        enletat: _model.checkboxEnlEtatValue!
-                                            ? 'Oui'
-                                            : 'Non',
-                                        estFonctionnel:
-                                            _model.checkboxEstFonctionnelValue!
-                                                ? 'Oui'
-                                                : 'Non',
-                                      ));
-                                      // reset loop increment
-                                      FFAppState().iLoop = 0;
-                                      while (FFAppState().iLoop <
-                                          _model.listPhoneContractantValide
-                                              .length) {
-                                        // find contractant
-                                        _model.currentUserContractantDoc =
-                                            await queryUsersRecordOnce(
-                                          queryBuilder: (usersRecord) =>
-                                              usersRecord.where(
-                                            'phone_number',
-                                            isEqualTo: _model
-                                                .listPhoneContractantValide
-                                                .elementAtOrNull(
-                                                    FFAppState().iLoop),
-                                          ),
-                                          singleRecord: true,
-                                        ).then((s) => s.firstOrNull);
-                                        if (!(_model.currentUserContractantDoc
-                                                ?.reference !=
-                                            null)) {
-                                          // MISSING CONTRACTANT STATUS
-                                          FFAppState()
-                                              .updateContratDataAppStateStruct(
-                                            (e) => e
-                                              ..allContractantsRegistered =
-                                                  false,
-                                          );
-                                        }
-                                        // CREATION CONTRACTANT
-                                        _model.addToListContractants(
-                                            ContractantDataStruct(
-                                          nom: _model
-                                              .currentUserContractantDoc?.name,
-                                          prenom: _model
-                                              .currentUserContractantDoc
-                                              ?.nickname,
-                                          phoneNumber: _model
-                                              .listPhoneContractantValide
-                                              .elementAtOrNull(
-                                                  FFAppState().iLoop),
-                                          status: FFAppConstants.listeStatus
-                                              .elementAtOrNull(0),
-                                          uid: _model
-                                              .currentUserContractantDoc?.uid,
-                                          genre: _model
-                                              .currentUserContractantDoc?.genre,
-                                          signature: _model
-                                              .currentUserContractantDoc
-                                              ?.signature,
-                                          email: _model
-                                              .currentUserContractantDoc?.email,
-                                          adresse: _model
-                                              .currentUserContractantDoc
-                                              ?.adress,
-                                          type: currentUserUid ==
-                                                  _model
-                                                      .currentUserContractantDoc
-                                                      ?.uid
-                                              ? _model
-                                                  .choiceTypeContractantValue
-                                              : functions.invertedRole(_model
-                                                  .choiceTypeContractantValue),
-                                          estContratTelecharger: false,
-                                        ));
-                                        // increment
-                                        FFAppState().iLoop =
-                                            FFAppState().iLoop + 1;
-                                      }
-                                      // REMPLISSAGE CONTRATDATA
-                                      FFAppState()
-                                          .updateContratDataAppStateStruct(
-                                        (e) => e
-                                          ..title =
-                                              '${FFAppConstants.listeLabelContrat.elementAtOrNull(0)} rédiger par $currentUserDisplayName le  ${functions.getCurrentDateTimeStr()}'
-                                          ..type = FFAppConstants
-                                              .listeLabelContrat
-                                              .elementAtOrNull(FFAppState()
-                                                  .indiceTypeContratAppState)
-                                          ..dateCreation =
-                                              functions.getCurrentDateTime()
-                                          ..status = FFAppConstants.listeStatus
-                                              .elementAtOrNull(FFAppState()
-                                                  .indiceStatusAppState)
-                                          ..contractantsData =
-                                              _model.listContractants.toList()
-                                          ..objetsContrat =
-                                              _model.listObjetContrat.toList()
-                                          ..auteur = currentUserDisplayName
-                                          ..location =
-                                              '${currentUserDocument?.location.city}  ${currentUserDocument?.location.country}'
-                                          ..modeleHtmlContrat = FFAppConstants
-                                              .listeFichierContrat
-                                              .elementAtOrNull(
-                                                  FFAppConstants.indiceVente)
-                                          ..auteurId = currentUserUid
-                                          ..horaireRendezVous = functions
-                                              .myParseDateFromString(_model
-                                                  .horaireRendezVousTextController
-                                                  .text)
-                                          ..isNotificationCreationSent = false
-                                          ..nombreMessage =
-                                              _model.listContractants.length,
-                                      );
-                                      // SET FIELD contratPDF
-                                      FFAppState()
-                                          .updateContratDataAppStateStruct(
-                                        (e) => e
-                                          ..contratPDF =
-                                              '${FFAppConstants.repertoireContratsEnCours}${FFAppState().contratDataAppState.uid}.pdf',
-                                      );
-                                      // Call HTTP build PDF
-                                      _model.resultBuidPDF =
-                                          await actions.buildContratPDF(
-                                        functions.fixImproperJson(FFAppState()
-                                            .contratDataAppState
-                                            .toMap()
-                                            .toString()),
-                                      );
-                                      if (_model.resultBuidPDF == null ||
-                                          _model.resultBuidPDF == '') {
-                                        await Future.delayed(
-                                            const Duration(milliseconds: 3000));
-                                        // convert pdf location in URL
-                                        _model.urlContratPDFEnAttente =
-                                            await actions.getDownloadUrl(
-                                          FFAppState()
-                                              .contratDataAppState
-                                              .contratPDF,
+                                      if ((_model.articleTextController
+                                                      .text !=
+                                                  '') &&
+                                          (_model.descriptionTextController
+                                                      .text !=
+                                                  '') &&
+                                          (_model.prixTextController.text !=
+                                                  '') &&
+                                          (_model.horaireRendezVousTextController
+                                                      .text !=
+                                                  '')) {
+                                        _model.isBuildAction = true;
+                                        safeSetState(() {});
+                                        // clean page state variable
+                                        _model.listObjetContrat = [];
+                                        _model.listContractants = [];
+                                        // LOG APPEL ACTION
+                                        await actions.logAction(
+                                          'Appel clean data contrat',
                                         );
-                                        // UPDATE URL CONTRAT
+                                        // CLEAN contratData
+                                        FFAppState().contratDataAppState =
+                                            ContratDataStruct();
+                                        safeSetState(() {});
+                                        // Pretraitement contratData
                                         FFAppState()
                                             .updateContratDataAppStateStruct(
                                           (e) => e
-                                            ..url =
-                                                '${_model.urlContratPDFEnAttente}',
+                                            ..allContractantsRegistered = true
+                                            ..uid = random_data.randomString(
+                                              18,
+                                              19,
+                                              true,
+                                              true,
+                                              true,
+                                            ),
                                         );
-                                        // UPDATE CONTRATDATA DOCUMENT
+                                        // CONTRATDATA TO DOCUMENT
 
-                                        await _model.contratDataDoc!.reference
-                                            .update(createContratsRecordData(
+                                        var contratsRecordReference =
+                                            ContratsRecord.collection.doc(
+                                                FFAppState()
+                                                    .contratDataAppState
+                                                    .uid);
+                                        await contratsRecordReference
+                                            .set(createContratsRecordData(
                                           contratData: updateContratDataStruct(
                                             FFAppState().contratDataAppState,
                                             clearUnsetFields: false,
+                                            create: true,
                                           ),
                                         ));
-                                        // ADDING TO USER CONTRATDATA
+                                        _model.contratDataDoc =
+                                            ContratsRecord.getDocumentFromData(
+                                                createContratsRecordData(
+                                                  contratData:
+                                                      updateContratDataStruct(
+                                                    FFAppState()
+                                                        .contratDataAppState,
+                                                    clearUnsetFields: false,
+                                                    create: true,
+                                                  ),
+                                                ),
+                                                contratsRecordReference);
+                                        // reset loop increment
+                                        FFAppState().iLoop = 0;
+                                        FFAppState().indiceTypeContratAppState =
+                                            FFAppConstants.indiceAdulte;
+                                        // create objetContrat
+                                        _model.addToListObjetContrat(
+                                            ObjetContratStruct(
+                                          titre:
+                                              _model.articleTextController.text,
+                                          categorie: 'vente',
+                                          description: _model
+                                              .descriptionTextController.text,
+                                          prix: _model.prixTextController.text,
+                                          enletat: _model.checkboxEnlEtatValue!
+                                              ? 'Oui'
+                                              : 'Non',
+                                          estFonctionnel: _model
+                                                  .checkboxEstFonctionnelValue!
+                                              ? 'Oui'
+                                              : 'Non',
+                                        ));
+                                        // reset loop increment
+                                        FFAppState().iLoop = 0;
+                                        while (FFAppState().iLoop <
+                                            _model.listPhoneContractantValide
+                                                .length) {
+                                          // find contractant
+                                          _model.currentUserContractantDoc =
+                                              await queryUsersRecordOnce(
+                                            queryBuilder: (usersRecord) =>
+                                                usersRecord.where(
+                                              'phone_number',
+                                              isEqualTo: _model
+                                                  .listPhoneContractantValide
+                                                  .elementAtOrNull(
+                                                      FFAppState().iLoop),
+                                            ),
+                                            singleRecord: true,
+                                          ).then((s) => s.firstOrNull);
+                                          if (!(_model.currentUserContractantDoc
+                                                  ?.reference !=
+                                              null)) {
+                                            // MISSING CONTRACTANT STATUS
+                                            FFAppState()
+                                                .updateContratDataAppStateStruct(
+                                              (e) => e
+                                                ..allContractantsRegistered =
+                                                    false,
+                                            );
+                                          }
+                                          // CREATION CONTRACTANT
+                                          _model.addToListContractants(
+                                              ContractantDataStruct(
+                                            nom: _model
+                                                .currentUserContractantDoc
+                                                ?.name,
+                                            prenom: _model
+                                                .currentUserContractantDoc
+                                                ?.nickname,
+                                            phoneNumber: _model
+                                                .listPhoneContractantValide
+                                                .elementAtOrNull(
+                                                    FFAppState().iLoop),
+                                            status: FFAppConstants.listeStatus
+                                                .elementAtOrNull(0),
+                                            uid: _model
+                                                .currentUserContractantDoc?.uid,
+                                            genre: _model
+                                                .currentUserContractantDoc
+                                                ?.genre,
+                                            signature: _model
+                                                .currentUserContractantDoc
+                                                ?.signature,
+                                            email: _model
+                                                .currentUserContractantDoc
+                                                ?.email,
+                                            adresse: _model
+                                                .currentUserContractantDoc
+                                                ?.adress,
+                                            type: currentUserUid ==
+                                                    _model
+                                                        .currentUserContractantDoc
+                                                        ?.uid
+                                                ? _model
+                                                    .choiceTypeContractantValue
+                                                : functions.invertedRole(_model
+                                                    .choiceTypeContractantValue),
+                                            estContratTelecharger: false,
+                                          ));
+                                          // increment
+                                          FFAppState().iLoop =
+                                              FFAppState().iLoop + 1;
+                                        }
+                                        // REMPLISSAGE CONTRATDATA
+                                        FFAppState()
+                                            .updateContratDataAppStateStruct(
+                                          (e) => e
+                                            ..title =
+                                                '${FFAppConstants.listeLabelContrat.elementAtOrNull(0)} rédiger par $currentUserDisplayName le  ${functions.getCurrentDateTimeStr()}'
+                                            ..type = FFAppConstants
+                                                .listeLabelContrat
+                                                .elementAtOrNull(
+                                                    FFAppConstants.indiceVente)
+                                            ..dateCreation =
+                                                functions.getCurrentDateTime()
+                                            ..status = FFAppConstants
+                                                .listeStatus
+                                                .elementAtOrNull(FFAppState()
+                                                    .indiceStatusAppState)
+                                            ..contractantsData =
+                                                _model.listContractants.toList()
+                                            ..objetsContrat =
+                                                _model.listObjetContrat.toList()
+                                            ..auteur = currentUserDisplayName
+                                            ..location =
+                                                '${currentUserDocument?.location.city}  ${currentUserDocument?.location.country}'
+                                            ..modeleHtmlContrat = FFAppConstants
+                                                .listeFichierContrat
+                                                .elementAtOrNull(
+                                                    FFAppConstants.indiceVente)
+                                            ..auteurId = currentUserUid
+                                            ..horaireRendezVous = functions
+                                                .myParseDateFromString(_model
+                                                    .horaireRendezVousTextController
+                                                    .text)
+                                            ..isNotificationCreationSent = false
+                                            ..nombreMessage =
+                                                _model.listContractants.length,
+                                        );
+                                        // SET FIELD contratPDF
+                                        FFAppState()
+                                            .updateContratDataAppStateStruct(
+                                          (e) => e
+                                            ..contratPDF =
+                                                '${FFAppConstants.repertoireContratsEnCours}${FFAppState().contratDataAppState.uid}.pdf',
+                                        );
+                                        // Call HTTP build PDF
+                                        _model.resultBuidPDF =
+                                            await actions.buildContratPDF(
+                                          functions.fixImproperJson(FFAppState()
+                                              .contratDataAppState
+                                              .toMap()
+                                              .toString()),
+                                        );
+                                        if (_model.resultBuidPDF == null ||
+                                            _model.resultBuidPDF == '') {
+                                          await Future.delayed(const Duration(
+                                              milliseconds: 3000));
+                                          // convert pdf location in URL
+                                          _model.urlContratPDFEnAttente =
+                                              await actions.getDownloadUrl(
+                                            FFAppState()
+                                                .contratDataAppState
+                                                .contratPDF,
+                                          );
+                                          // UPDATE URL CONTRAT
+                                          FFAppState()
+                                              .updateContratDataAppStateStruct(
+                                            (e) => e
+                                              ..url =
+                                                  '${_model.urlContratPDFEnAttente}',
+                                          );
+                                          // UPDATE CONTRATDATA DOCUMENT
 
-                                        await currentUserReference!.update({
-                                          ...mapToFirestore(
-                                            {
-                                              'contrats':
-                                                  FieldValue.arrayUnion([
-                                                _model.contratDataDoc?.reference
-                                              ]),
+                                          await _model.contratDataDoc!.reference
+                                              .update(createContratsRecordData(
+                                            contratData:
+                                                updateContratDataStruct(
+                                              FFAppState().contratDataAppState,
+                                              clearUnsetFields: false,
+                                            ),
+                                          ));
+                                          // ADDING TO USER CONTRATDATA
+
+                                          await currentUserReference!.update({
+                                            ...mapToFirestore(
+                                              {
+                                                'contrats':
+                                                    FieldValue.arrayUnion([
+                                                  _model
+                                                      .contratDataDoc?.reference
+                                                ]),
+                                              },
+                                            ),
+                                          });
+                                          // Notifications
+                                          await action_blocks
+                                              .blockNotificationInvitationContratASigner(
+                                                  context);
+                                          _model.isBuildAction = false;
+                                          safeSetState(() {});
+                                          // FIN OPERATION
+                                          await showDialog(
+                                            context: context,
+                                            builder: (alertDialogContext) {
+                                              return AlertDialog(
+                                                title:
+                                                    const Text('Operation terminée!'),
+                                                content: const Text(
+                                                    'Le contrat a été généré avec succès.'),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            alertDialogContext),
+                                                    child: const Text('Voir'),
+                                                  ),
+                                                ],
+                                              );
                                             },
-                                          ),
-                                        });
-                                        // Notifications
-                                        await action_blocks
-                                            .blockNotificationInvitationContratASigner(
-                                                context);
-                                        _model.isBuildAction = false;
-                                        safeSetState(() {});
-                                        // FIN OPERATION
+                                          );
+                                          // NAVIGATION
+
+                                          context
+                                              .pushNamed('successPageBuildPDF');
+                                        } else {
+                                          _model.isBuildAction = false;
+                                          safeSetState(() {});
+                                          // Return resultat
+                                          await showDialog(
+                                            context: context,
+                                            builder: (alertDialogContext) {
+                                              return AlertDialog(
+                                                title: const Text(
+                                                    'Création contrat impossible'),
+                                                content:
+                                                    Text(_model.resultBuidPDF!),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            alertDialogContext),
+                                                    child: const Text('continuer'),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                        }
+                                      } else {
+                                        // Formulaire incomplet
                                         await showDialog(
                                           context: context,
                                           builder: (alertDialogContext) {
                                             return AlertDialog(
                                               title:
-                                                  const Text('Operation terminée!'),
+                                                  const Text('Formulaire incomplet'),
                                               content: const Text(
-                                                  'Le contrat a été généré avec succès.'),
+                                                  'Vous devez remplir les champs.'),
                                               actions: [
                                                 TextButton(
                                                   onPressed: () =>
                                                       Navigator.pop(
                                                           alertDialogContext),
-                                                  child: const Text('Voir'),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
-                                        // NAVIGATION
-
-                                        context
-                                            .pushNamed('successPageBuildPDF');
-                                      } else {
-                                        _model.isBuildAction = false;
-                                        safeSetState(() {});
-                                        // Return resultat
-                                        await showDialog(
-                                          context: context,
-                                          builder: (alertDialogContext) {
-                                            return AlertDialog(
-                                              title: const Text(
-                                                  'Création contrat impossible'),
-                                              content:
-                                                  Text(_model.resultBuidPDF!),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(
-                                                          alertDialogContext),
-                                                  child: const Text('continuer'),
+                                                  child: const Text('OK'),
                                                 ),
                                               ],
                                             );
                                           },
                                         );
                                       }
-                                    } else {
-                                      // Formulaire incomplet
-                                      await showDialog(
-                                        context: context,
-                                        builder: (alertDialogContext) {
-                                          return AlertDialog(
-                                            title: const Text('Formulaire incomplet'),
-                                            content: const Text(
-                                                'Vous devez séléctioner une pratique.'),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    alertDialogContext),
-                                                child: const Text('OK'),
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
-                                    }
 
-                                    safeSetState(() {});
-                                  },
-                                  text: 'Générer le contrat',
-                                  icon: const Icon(
-                                    Icons.build,
-                                    size: 15.0,
-                                  ),
-                                  options: FFButtonOptions(
-                                    width: double.infinity,
-                                    height: 45.0,
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .override(
-                                          fontFamily: 'Roboto',
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          fontSize: 16.0,
-                                          letterSpacing: 0.0,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                    elevation: 2.0,
-                                    borderSide: BorderSide(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondary,
-                                      width: 1.0,
+                                      safeSetState(() {});
+                                    },
+                                    text: 'Générer le contrat',
+                                    icon: const Icon(
+                                      Icons.build,
+                                      size: 15.0,
                                     ),
-                                    borderRadius: BorderRadius.circular(4.0),
+                                    options: FFButtonOptions(
+                                      width: double.infinity,
+                                      height: 45.0,
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 0.0),
+                                      iconPadding:
+                                          const EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 0.0, 0.0, 0.0),
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .override(
+                                            fontFamily: 'Roboto',
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            fontSize: 16.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                      elevation: 2.0,
+                                      borderSide: BorderSide(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondary,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(4.0),
+                                    ),
                                   ),
                                 ),
                             ]

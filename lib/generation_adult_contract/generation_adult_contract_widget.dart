@@ -999,6 +999,13 @@ class _GenerationAdultContractWidgetState
                                       FFAppState().iLoop =
                                           FFAppState().iLoop + 1;
                                     }
+                                    // SET FIELD contratPDF
+                                    FFAppState()
+                                        .updateContratDataAppStateStruct(
+                                      (e) => e
+                                        ..contratPDF =
+                                            '${FFAppConstants.repertoireContratsEnCours}${FFAppState().contratDataAppState.uid}.pdf',
+                                    );
                                     // REMPLISSAGE CONTRATDATA
                                     FFAppState()
                                         .updateContratDataAppStateStruct(
@@ -1007,8 +1014,8 @@ class _GenerationAdultContractWidgetState
                                             '${FFAppConstants.listeLabelContrat.elementAtOrNull(0)} rédiger par $currentUserDisplayName le  ${functions.getCurrentDateTimeStr()}'
                                         ..type = FFAppConstants
                                             .listeLabelContrat
-                                            .elementAtOrNull(FFAppState()
-                                                .indiceTypeContratAppState)
+                                            .elementAtOrNull(
+                                                FFAppConstants.indiceAdulte)
                                         ..dateCreation =
                                             functions.getCurrentDateTime()
                                         ..status = FFAppConstants.listeStatus
@@ -1033,13 +1040,6 @@ class _GenerationAdultContractWidgetState
                                         ..isNotificationCreationSent = false
                                         ..nombreMessage =
                                             _model.listContractants.length,
-                                    );
-                                    // SET FIELD contratPDF
-                                    FFAppState()
-                                        .updateContratDataAppStateStruct(
-                                      (e) => e
-                                        ..contratPDF =
-                                            '${FFAppConstants.repertoireContratsEnCours}${FFAppState().contratDataAppState.uid}.pdf',
                                     );
                                     // Call HTTP build PDF
                                     _model.resultBuidPDF =

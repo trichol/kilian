@@ -74,13 +74,26 @@ exports.cloudBuildContratCessation = functions
         )
         .join("<br><br> ");
 
-      const descriptionObjetContrat = `        <p>Le donateur s'engage à donner au bénéficiaire le bien suivant :</p>
+      const descriptionObjetContrat = objetsContrat
+        .map(
+          (
+            objetContrat,
+          ) => ` <p>Le donateur s'engage à donner au bénéficiaire le bien suivant :</p>
+        <p>- Titre : ${objetContrat.titre}<br>
+        <p>- Description : ${objetContrat.description}<br>
+        <p>- Vendu 'en l'état' : ${objetContrat.enletat}<br>
+        <p>- Le vendeur garantit le bon fonctionnement du bien : ${objetContrat.estFonctionnel}
+        <br>`,
+        )
+        .join(" ");
+      /*     
+      const descriptionObjetContrat =  `        <p>Le donateur s'engage à donner au bénéficiaire le bien suivant :</p>
         <p>- Titre : ${objetContrat.titre}<br>
         <p>- Description : ${objetContrat.description}<br>
         <p>- Vendu 'en l'état' : ${objetContrat.enletat}<br>
         <p>- Le vendeur garantit le bon fonctionnement du bien : ${objetContrat.estFonctionnel}
         <br>`;
-
+*/
       // Formatting horaire properly
 
       // Download the HTML template from Firebase Storage
@@ -209,7 +222,7 @@ exports.cloudBuildContratCessation = functions
       console.error("Error processing function:", error);
       return {
         message:
-          "postedContratFunction : An error occurred while processing the request." +
+          "cloudBuildContratCessation : An error occurred while processing the request." +
           error +
           posCode,
       };

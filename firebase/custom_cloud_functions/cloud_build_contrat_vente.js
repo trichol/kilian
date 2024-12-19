@@ -74,7 +74,9 @@ exports.cloudBuildContratVente = functions
         )
         .join("<br><br> ");
 
-      const descriptionObjetContrat = `<p class='section-title'>1. Objet de la vente</p>
+      const descriptionObjetContrat = objetsContrat
+        .map(
+          (objetContrat) => `<p class='section-title'>1. Objet de la vente</p>
         <p>
             Le vendeur s'engage à vendre à l'acheteur le bien suivant :${objetContrat.titre}<br>
             - Description : ${objetContrat.description}<br>
@@ -90,8 +92,9 @@ exports.cloudBuildContratVente = functions
             L'acheteur reconnaît avoir examiné le bien et accepte de l'acquérir dans son état actuel :<br>
             - Vendu 'en l'état' : ${objetContrat.enletat}<br>
             - Le vendeur garantit le bon fonctionnement du bien : ${objetContrat.estFonctionnel}
-        </p>`;
-
+        </p>`,
+        )
+        .join(" ");
       // Formatting horaire properly
 
       // Download the HTML template from Firebase Storage
@@ -220,7 +223,7 @@ exports.cloudBuildContratVente = functions
       console.error("Error processing function:", error);
       return {
         message:
-          "postedContratFunction : An error occurred while processing the request." +
+          "cloudBuildContratVente : An error occurred while processing the request." +
           error +
           posCode,
       };
