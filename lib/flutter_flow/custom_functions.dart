@@ -252,9 +252,9 @@ String? invertedRole(String? role) {
       return 'Acheteur';
     case 'Acheteur':
       return 'Vendeur';
-    case 'Donateur ':
-      return 'Bénéficiaire ';
-    case 'Bénéficiaire ':
+    case 'Donateur':
+      return 'Bénéficiaire';
+    case 'Bénéficiaire':
       return 'Donateur ';
     default:
       print("############# KILIAN : Invalid role provided $role");
