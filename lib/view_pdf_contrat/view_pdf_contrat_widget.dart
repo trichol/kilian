@@ -72,19 +72,19 @@ class _ViewPdfContratWidgetState extends State<ViewPdfContratWidget> {
       backgroundColor: Colors.white,
       body: SafeArea(
         top: true,
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Container(
-              decoration: const BoxDecoration(),
-              child: wrapWithModel(
-                model: _model.kilianAppBarModel,
-                updateCallback: () => safeSetState(() {}),
-                child: const KilianAppBarWidget(),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Container(
+                decoration: const BoxDecoration(),
+                child: wrapWithModel(
+                  model: _model.kilianAppBarModel,
+                  updateCallback: () => safeSetState(() {}),
+                  child: const KilianAppBarWidget(),
+                ),
               ),
-            ),
-            SingleChildScrollView(
-              child: Column(
+              Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Row(
@@ -124,8 +124,8 @@ class _ViewPdfContratWidgetState extends State<ViewPdfContratWidget> {
                     .addToStart(const SizedBox(height: 10.0))
                     .addToEnd(const SizedBox(height: 10.0)),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
