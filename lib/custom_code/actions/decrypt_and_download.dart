@@ -17,6 +17,8 @@ import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:path_provider/path_provider.dart';
 
 Future<String> decryptAndDownload(String fileLocation) async {
   // Add your function code here!
@@ -85,9 +87,38 @@ Future<String> decryptAndDownload(String fileLocation) async {
     // Save the decrypted file to a temporary location
     print(
         '####kilian decryptAndDownload : Save the decrypted file to a temporary location');
-    final tempDir = await getTemporaryDirectory();
+    Directory tempDir;
+    if (kIsWeb) {
+      throw UnsupportedError(
+          "Saving files temporarily is not supported on the web.");
+    } else if (Platform.isAndroid || Platform.isIOS) {
+      // Retrieve the temporary directory
+      print(
+          '####kilian decryptAndDownload : Platform.isAndroid || Platform.isIOS');
+      tempDir = await getTemporaryDirectory();
+    } else if (Platform.isMacOS || Platform.isLinux || Platform.isWindows) {
+      print(
+          '####kilian decryptAndDownload : Platform.isMacOS || Platform.isLinux || Platform.isWindows');
+      tempDir = await getApplicationSupportDirectory();
+    } else {
+      throw UnsupportedError("Unsupported platform.");
+    }
+    //final tempDir = await getTemporaryDirectory();
+
+    // Ensure the temporary directory exists
+    if (!await tempDir.exists()) {
+      print(
+          '####kilian decryptAndDownload : Ensure the temporary directory exists');
+      await tempDir.create(recursive: true);
+    }
+
     final tempFile = File('${tempDir.path}/decrypted.pdf');
     await tempFile.writeAsBytes(decryptedBytes);
+
+    // Ensure the temporary directory exists
+    if (!await tempFile.exists()) {
+      throw Exception('Ensure the temporary directory exists');
+    }
 
     // Display the PDF using PDFViewer
     // Pass the temporary file path to the PDF viewer
@@ -98,7 +129,8 @@ Future<String> decryptAndDownload(String fileLocation) async {
     print('####kilian decryptAndDownload :  successfull.' + tempFile.path);
     return tempFile.path;
   } catch (e) {
-    print('Error during decryption and display: $e');
-    throw Exception('Failed to decrypt and display the file.');
+    print(
+        '####kilian decryptAndDownload :Error during decryption and display: $e');
+    return "";
   }
 }
