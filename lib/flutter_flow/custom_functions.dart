@@ -272,3 +272,15 @@ bool? checkEmailOk(String? email) {
   final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
   return emailRegex.hasMatch(email);
 }
+
+List<ObjetContratStruct>? orderedObjetContrat(
+    List<ObjetContratStruct>? listObjetContrat) {
+  // return a reordered list of ObjetContrat by increasing field priority
+  if (listObjetContrat == null || listObjetContrat.isEmpty) {
+    return null;
+  }
+
+  listObjetContrat.sort((a, b) => a.priority.compareTo(b.priority));
+
+  return listObjetContrat;
+}

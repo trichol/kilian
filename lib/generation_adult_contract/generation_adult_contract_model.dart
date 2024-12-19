@@ -78,7 +78,7 @@ class GenerationAdultContractModel
   final currentPhoneTxtMask = MaskTextInputFormatter(mask: '##########');
   String? Function(BuildContext, String?)?
       currentPhoneTxtTextControllerValidator;
-  // Stores action output result for [Custom Action - pickPhoneNumber] action in IconButton widget.
+  // Stores action output result for [Custom Action - pickPhoneNumber] action in IconButtonContacts widget.
   String? selectedPhoneNumber;
   // Stores action output result for [Firestore Query - Query a collection] action in IconButton widget.
   List<UsersRecord>? userByPhoneFoundList;

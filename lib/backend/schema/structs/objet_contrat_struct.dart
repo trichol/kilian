@@ -15,6 +15,7 @@ class ObjetContratStruct extends FFFirebaseStruct {
     String? sousCategorie,
     String? enletat,
     String? estFonctionnel,
+    int? priority,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _titre = titre,
         _description = description,
@@ -23,6 +24,7 @@ class ObjetContratStruct extends FFFirebaseStruct {
         _sousCategorie = sousCategorie,
         _enletat = enletat,
         _estFonctionnel = estFonctionnel,
+        _priority = priority,
         super(firestoreUtilData);
 
   // "titre" field.
@@ -74,6 +76,15 @@ class ObjetContratStruct extends FFFirebaseStruct {
 
   bool hasEstFonctionnel() => _estFonctionnel != null;
 
+  // "priority" field.
+  int? _priority;
+  int get priority => _priority ?? 0;
+  set priority(int? val) => _priority = val;
+
+  void incrementPriority(int amount) => priority = priority + amount;
+
+  bool hasPriority() => _priority != null;
+
   static ObjetContratStruct fromMap(Map<String, dynamic> data) =>
       ObjetContratStruct(
         titre: data['titre'] as String?,
@@ -83,6 +94,7 @@ class ObjetContratStruct extends FFFirebaseStruct {
         sousCategorie: data['sousCategorie'] as String?,
         enletat: data['enletat'] as String?,
         estFonctionnel: data['estFonctionnel'] as String?,
+        priority: castToType<int>(data['priority']),
       );
 
   static ObjetContratStruct? maybeFromMap(dynamic data) => data is Map
@@ -97,6 +109,7 @@ class ObjetContratStruct extends FFFirebaseStruct {
         'sousCategorie': _sousCategorie,
         'enletat': _enletat,
         'estFonctionnel': _estFonctionnel,
+        'priority': _priority,
       }.withoutNulls;
 
   @override
@@ -128,6 +141,10 @@ class ObjetContratStruct extends FFFirebaseStruct {
         'estFonctionnel': serializeParam(
           _estFonctionnel,
           ParamType.String,
+        ),
+        'priority': serializeParam(
+          _priority,
+          ParamType.int,
         ),
       }.withoutNulls;
 
@@ -168,6 +185,11 @@ class ObjetContratStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
+        priority: deserializeParam(
+          data['priority'],
+          ParamType.int,
+          false,
+        ),
       );
 
   @override
@@ -182,7 +204,8 @@ class ObjetContratStruct extends FFFirebaseStruct {
         categorie == other.categorie &&
         sousCategorie == other.sousCategorie &&
         enletat == other.enletat &&
-        estFonctionnel == other.estFonctionnel;
+        estFonctionnel == other.estFonctionnel &&
+        priority == other.priority;
   }
 
   @override
@@ -193,7 +216,8 @@ class ObjetContratStruct extends FFFirebaseStruct {
         categorie,
         sousCategorie,
         enletat,
-        estFonctionnel
+        estFonctionnel,
+        priority
       ]);
 }
 
@@ -205,6 +229,7 @@ ObjetContratStruct createObjetContratStruct({
   String? sousCategorie,
   String? enletat,
   String? estFonctionnel,
+  int? priority,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -218,6 +243,7 @@ ObjetContratStruct createObjetContratStruct({
       sousCategorie: sousCategorie,
       enletat: enletat,
       estFonctionnel: estFonctionnel,
+      priority: priority,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

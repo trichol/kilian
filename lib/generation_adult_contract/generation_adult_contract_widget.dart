@@ -130,8 +130,10 @@ class _GenerationAdultContractWidgetState
                               ),
                             ),
                             child: FlutterFlowCheckboxGroup(
-                              options: FFAppState()
-                                  .cListObjetContratAdulte
+                              options: functions
+                                  .orderedObjetContrat(FFAppState()
+                                      .cListObjetContratAdulte
+                                      .toList())!
                                   .map((e) => e.titre)
                                   .toList(),
                               onChanged: (val) => safeSetState(

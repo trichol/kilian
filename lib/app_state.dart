@@ -75,17 +75,17 @@ class FFAppState extends ChangeNotifier {
 
   List<ObjetContratStruct> _cListObjetContratAdulte = [
     ObjetContratStruct.fromSerializableMap(jsonDecode(
-        '{\"titre\":\"Relation sexuelle hardcore\",\"description\":\"Rapport sexuel dans un lieu privé\",\"prix\":\"\",\"categorie\":\"adulte\",\"sousCategorie\":\"hardcore\",\"enletat\":\"\",\"estFonctionnel\":\"\"}')),
+        '{\"titre\":\"Relation sexuelle hardcore\",\"description\":\"Rapport sexuel dans un lieu privé\",\"prix\":\"\",\"categorie\":\"adulte\",\"sousCategorie\":\"hardcore\",\"enletat\":\"\",\"estFonctionnel\":\"\",\"priority\":\"5\"}')),
     ObjetContratStruct.fromSerializableMap(jsonDecode(
-        '{\"titre\":\"Relation sexuelle BDSM\",\"description\":\"Rapport sexuel BDSM dans un lieu privé.\",\"prix\":\"\",\"categorie\":\"Adulte\",\"sousCategorie\":\"Hardcore\",\"enletat\":\"\",\"estFonctionnel\":\"\"}')),
+        '{\"titre\":\"Relation sexuelle BDSM\",\"description\":\"Rapport sexuel BDSM dans un lieu privé.\",\"prix\":\"\",\"categorie\":\"Adulte\",\"sousCategorie\":\"Hardcore\",\"enletat\":\"\",\"estFonctionnel\":\"\",\"priority\":\"6\"}')),
     ObjetContratStruct.fromSerializableMap(jsonDecode(
-        '{\"titre\":\"Rendez-vous galant\",\"description\":\"Flirt dans un lieu public\",\"prix\":\"\",\"categorie\":\"Adulte\",\"sousCategorie\":\"Soft\",\"enletat\":\"\",\"estFonctionnel\":\"\"}')),
+        '{\"titre\":\"Rendez-vous galant\",\"description\":\"Flirt dans un lieu public\",\"prix\":\"\",\"categorie\":\"Adulte\",\"sousCategorie\":\"Soft\",\"enletat\":\"\",\"estFonctionnel\":\"\",\"priority\":\"2\"}')),
     ObjetContratStruct.fromSerializableMap(jsonDecode(
-        '{\"titre\":\"Diner professionnel\",\"description\":\"Relation professionnel dans un cadre publique\",\"prix\":\"\",\"categorie\":\"Adulte\",\"sousCategorie\":\"Soft\",\"enletat\":\"\",\"estFonctionnel\":\"\"}')),
+        '{\"titre\":\"Rendez-vous amical\",\"description\":\"Entretien amical dans un cadre publique\",\"prix\":\"\",\"categorie\":\"Adulte\",\"sousCategorie\":\"Soft\",\"enletat\":\"\",\"estFonctionnel\":\"\",\"priority\":\"1\"}')),
     ObjetContratStruct.fromSerializableMap(jsonDecode(
-        '{\"titre\":\"Relation sexuelle soft\",\"description\":\"Rapport sexuel soft dans un lieu privé\",\"prix\":\"\",\"categorie\":\"Adulte\",\"sousCategorie\":\"Hardcore\",\"enletat\":\"\",\"estFonctionnel\":\"\"}')),
+        '{\"titre\":\"Relation sexuelle soft\",\"description\":\"Rapport sexuel soft dans un lieu privé\",\"prix\":\"\",\"categorie\":\"Adulte\",\"sousCategorie\":\"Hardcore\",\"enletat\":\"\",\"estFonctionnel\":\"\",\"priority\":\"4\"}')),
     ObjetContratStruct.fromSerializableMap(jsonDecode(
-        '{\"titre\":\"Relation consentie soft\",\"description\":\"Flirt dans un lieu privé\",\"prix\":\"\",\"categorie\":\"Adulte\",\"sousCategorie\":\"Soft\",\"enletat\":\"\",\"estFonctionnel\":\"\"}'))
+        '{\"titre\":\"Relation consentie soft\",\"description\":\"Flirt dans un lieu privé\",\"prix\":\"\",\"categorie\":\"Adulte\",\"sousCategorie\":\"Soft\",\"enletat\":\"\",\"estFonctionnel\":\"\",\"priority\":\"3\"}'))
   ];
   List<ObjetContratStruct> get cListObjetContratAdulte =>
       _cListObjetContratAdulte;

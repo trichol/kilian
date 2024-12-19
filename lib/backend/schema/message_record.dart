@@ -20,16 +20,6 @@ class MessageRecord extends FirestoreRecord {
   String get phoneReceiver => _phoneReceiver ?? '';
   bool hasPhoneReceiver() => _phoneReceiver != null;
 
-  // "uid_sender" field.
-  DocumentReference? _uidSender;
-  DocumentReference? get uidSender => _uidSender;
-  bool hasUidSender() => _uidSender != null;
-
-  // "contratId" field.
-  DocumentReference? _contratId;
-  DocumentReference? get contratId => _contratId;
-  bool hasContratId() => _contratId != null;
-
   // "type" field.
   String? _type;
   String get type => _type ?? '';
@@ -55,15 +45,25 @@ class MessageRecord extends FirestoreRecord {
   String get status => _status ?? '';
   bool hasStatus() => _status != null;
 
+  // "uid_sender" field.
+  String? _uidSender;
+  String get uidSender => _uidSender ?? '';
+  bool hasUidSender() => _uidSender != null;
+
+  // "contratId" field.
+  String? _contratId;
+  String get contratId => _contratId ?? '';
+  bool hasContratId() => _contratId != null;
+
   void _initializeFields() {
     _phoneReceiver = snapshotData['phone_receiver'] as String?;
-    _uidSender = snapshotData['uid_sender'] as DocumentReference?;
-    _contratId = snapshotData['contratId'] as DocumentReference?;
     _type = snapshotData['type'] as String?;
     _contenu = snapshotData['contenu'] as String?;
     _objet = snapshotData['objet'] as String?;
     _datetimeSent = snapshotData['datetime_sent'] as DateTime?;
     _status = snapshotData['status'] as String?;
+    _uidSender = snapshotData['uid_sender'] as String?;
+    _contratId = snapshotData['contratId'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -102,24 +102,24 @@ class MessageRecord extends FirestoreRecord {
 
 Map<String, dynamic> createMessageRecordData({
   String? phoneReceiver,
-  DocumentReference? uidSender,
-  DocumentReference? contratId,
   String? type,
   String? contenu,
   String? objet,
   DateTime? datetimeSent,
   String? status,
+  String? uidSender,
+  String? contratId,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'phone_receiver': phoneReceiver,
-      'uid_sender': uidSender,
-      'contratId': contratId,
       'type': type,
       'contenu': contenu,
       'objet': objet,
       'datetime_sent': datetimeSent,
       'status': status,
+      'uid_sender': uidSender,
+      'contratId': contratId,
     }.withoutNulls,
   );
 
@@ -132,25 +132,25 @@ class MessageRecordDocumentEquality implements Equality<MessageRecord> {
   @override
   bool equals(MessageRecord? e1, MessageRecord? e2) {
     return e1?.phoneReceiver == e2?.phoneReceiver &&
-        e1?.uidSender == e2?.uidSender &&
-        e1?.contratId == e2?.contratId &&
         e1?.type == e2?.type &&
         e1?.contenu == e2?.contenu &&
         e1?.objet == e2?.objet &&
         e1?.datetimeSent == e2?.datetimeSent &&
-        e1?.status == e2?.status;
+        e1?.status == e2?.status &&
+        e1?.uidSender == e2?.uidSender &&
+        e1?.contratId == e2?.contratId;
   }
 
   @override
   int hash(MessageRecord? e) => const ListEquality().hash([
         e?.phoneReceiver,
-        e?.uidSender,
-        e?.contratId,
         e?.type,
         e?.contenu,
         e?.objet,
         e?.datetimeSent,
-        e?.status
+        e?.status,
+        e?.uidSender,
+        e?.contratId
       ]);
 
   @override

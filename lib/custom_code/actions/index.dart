@@ -24,6 +24,7 @@ export 'delete_firestore_document.dart' show deleteFirestoreDocument;
 export 'complete_contractant.dart' show completeContractant;
 export 'is_contrat_fully_signed.dart' show isContratFullySigned;
 export 'signature_contrat.dart' show signatureContrat;
+export 'reset_nombre_message.dart' show resetNombreMessage;
 export 'encrypt_and_store_file.dart' show encryptAndStoreFile;
 export 'update_contrat_field.dart' show updateContratField;
 export 'decrypt_and_download.dart' show decryptAndDownload;

@@ -205,7 +205,7 @@ Future sendInvitation(BuildContext context) async {
         return AlertDialog(
           title: const Text('Notificatioon'),
           content: Text(
-              'Vous allez envoyer une invitation à signer ce contrat à ${destinataire?.displayName}.Cette utilisateur a déja l\'application Kilian installé.'),
+              'Vous allez envoyer une invitation à signer ce contrat à ${destinataire?.displayName}.'),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(alertDialogContext),
@@ -256,9 +256,6 @@ Future sendInvitation(BuildContext context) async {
     }
   }
 
-  await actions.logAction(
-    '${FFAppState().smsDataAppState.recipientPhoneNumber}$currentUserUid${FFAppState().contratDataAppState.uid}',
-  );
   // Dialog box
   await showDialog(
     context: context,
@@ -445,7 +442,7 @@ Future blockSignerContrat(BuildContext context) async {
         return AlertDialog(
           title: const Text('Félicitation ....Contrat signé!'),
           content: const Text(
-              'Depuis l\'onglet \"mes contrats\", vous pourrez avoir accès à ce contrat. Tant que  ce contrat ne sera pas signé par le(s) autre(s) contractants il sera disponible que sous une forme incomplète.'),
+              'Depuis l\'onglet \"mes contrats\", vous pourrez avoir accès à ce contrat. Tant que  ce contrat ne sera pas signé par le(s) autre(s) contractant(s) il sera disponible que sous une forme incomplète.'),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(alertDialogContext),
@@ -510,12 +507,7 @@ Future blockNotificationInvitationContratASigner(BuildContext context) async {
         );
         // Send notification
         await action_blocks.sendInvitation(context);
-      } else {
-        await actions.logAction(
-          'pas d\'envoi a  $currentUserDisplayName',
-        );
       }
-
       // CREATE DOC MESSAGE
 
       await MessageRecord.collection.doc().set(createMessageRecordData(
@@ -524,8 +516,8 @@ Future blockNotificationInvitationContratASigner(BuildContext context) async {
                 .contractantsData
                 .elementAtOrNull(FFAppState().iLoop)
                 ?.phoneNumber,
-            uidSender: currentUserReference,
-            contratId: referenceContrat?.reference,
+            uidSender: currentUserUid,
+            contratId: referenceContrat?.contratData.uid,
             type: referenceContrat?.contratData.type,
             datetimeSent: getCurrentTimestamp,
             status: FFAppConstants.listeStatus

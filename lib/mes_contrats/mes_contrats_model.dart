@@ -44,6 +44,10 @@ class MesContratsModel extends FlutterFlowModel<MesContratsWidget> {
 
   // Model for KilianAppBar component.
   late KilianAppBarModel kilianAppBarModel;
+  // Stores action output result for [Custom Action - deleteAllDocumentsMessage] action in IconButtonDeleteEnCours widget.
+  bool? areAllMessagesDeleted;
+  // Stores action output result for [Custom Action - deleteDocumentsMessage] action in IconButtonDeleteEnCours widget.
+  bool? isMessageDeleted;
   // Stores action output result for [Custom Action - decryptAndDownload] action in IconButtonViewArchivedContrat widget.
   String? decryptedFile;
 
@@ -85,8 +89,7 @@ class MesContratsModel extends FlutterFlowModel<MesContratsWidget> {
           'contratData.uid',
           isEqualTo: listeContratEnAttenteDoc
               ?.elementAtOrNull(FFAppState().iLoop)
-              ?.contratId
-              ?.id,
+              ?.contratId,
         ),
         singleRecord: true,
       ).then((s) => s.firstOrNull);

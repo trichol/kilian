@@ -604,48 +604,111 @@ class _MesContratsWidgetState extends State<MesContratsWidget> {
                                                                               .uid,
                                                                         );
                                                                         // delete all document message
-                                                                        await actions
-                                                                            .deleteAllDocumentsMessage(
+                                                                        _model.areAllMessagesDeleted =
+                                                                            await actions.deleteAllDocumentsMessage(
                                                                           listView1ContentItem
                                                                               .uid,
                                                                         );
+                                                                        if (_model
+                                                                            .areAllMessagesDeleted!) {
+                                                                          await actions
+                                                                              .resetNombreMessage(
+                                                                            listView1ContentItem.uid,
+                                                                          );
+                                                                          await showDialog(
+                                                                            context:
+                                                                                context,
+                                                                            builder:
+                                                                                (alertDialogContext) {
+                                                                              return AlertDialog(
+                                                                                title: const Text('Opération réussie'),
+                                                                                content: const Text('Le contrat a été supprimé'),
+                                                                                actions: [
+                                                                                  TextButton(
+                                                                                    onPressed: () => Navigator.pop(alertDialogContext),
+                                                                                    child: const Text('Continuer'),
+                                                                                  ),
+                                                                                ],
+                                                                              );
+                                                                            },
+                                                                          );
+                                                                        } else {
+                                                                          await showDialog(
+                                                                            context:
+                                                                                context,
+                                                                            builder:
+                                                                                (alertDialogContext) {
+                                                                              return AlertDialog(
+                                                                                title: const Text('Opération échouée'),
+                                                                                content: const Text('Une anomalie a été rencontrée.'),
+                                                                                actions: [
+                                                                                  TextButton(
+                                                                                    onPressed: () => Navigator.pop(alertDialogContext),
+                                                                                    child: const Text('Continuer'),
+                                                                                  ),
+                                                                                ],
+                                                                              );
+                                                                            },
+                                                                          );
+                                                                        }
                                                                       } else {
                                                                         // delete user message contrat Id
-                                                                        await actions
-                                                                            .deleteDocumentsMessage(
+                                                                        _model.isMessageDeleted =
+                                                                            await actions.deleteDocumentsMessage(
                                                                           currentPhoneNumber,
                                                                           listView1ContentItem
                                                                               .auteurId,
                                                                         );
+                                                                        if (_model
+                                                                            .isMessageDeleted!) {
+                                                                          await actions
+                                                                              .incrementNombreMessage(
+                                                                            listView1ContentItem.uid,
+                                                                            false,
+                                                                          );
+                                                                          await showDialog(
+                                                                            context:
+                                                                                context,
+                                                                            builder:
+                                                                                (alertDialogContext) {
+                                                                              return AlertDialog(
+                                                                                title: const Text('Opération réussie'),
+                                                                                content: const Text('Le contrat a été supprimé'),
+                                                                                actions: [
+                                                                                  TextButton(
+                                                                                    onPressed: () => Navigator.pop(alertDialogContext),
+                                                                                    child: const Text('Continuer'),
+                                                                                  ),
+                                                                                ],
+                                                                              );
+                                                                            },
+                                                                          );
+                                                                        } else {
+                                                                          await showDialog(
+                                                                            context:
+                                                                                context,
+                                                                            builder:
+                                                                                (alertDialogContext) {
+                                                                              return AlertDialog(
+                                                                                title: const Text('Opération échouée'),
+                                                                                content: const Text('Une anomalie a été rencontrée.'),
+                                                                                actions: [
+                                                                                  TextButton(
+                                                                                    onPressed: () => Navigator.pop(alertDialogContext),
+                                                                                    child: const Text('Continuer'),
+                                                                                  ),
+                                                                                ],
+                                                                              );
+                                                                            },
+                                                                          );
+                                                                        }
                                                                       }
 
-                                                                      await actions
-                                                                          .incrementNombreMessage(
-                                                                        listView1ContentItem
-                                                                            .uid,
-                                                                        false,
-                                                                      );
-                                                                      await showDialog(
-                                                                        context:
-                                                                            context,
-                                                                        builder:
-                                                                            (alertDialogContext) {
-                                                                          return AlertDialog(
-                                                                            title:
-                                                                                const Text('Opération réussie'),
-                                                                            content:
-                                                                                const Text('Le contrat a été supprimé'),
-                                                                            actions: [
-                                                                              TextButton(
-                                                                                onPressed: () => Navigator.pop(alertDialogContext),
-                                                                                child: const Text('Continuer'),
-                                                                              ),
-                                                                            ],
-                                                                          );
-                                                                        },
-                                                                      );
                                                                       FFAppState()
                                                                           .iLoop = 0;
+                                                                      safeSetState(
+                                                                          () {});
+
                                                                       safeSetState(
                                                                           () {});
                                                                     },
