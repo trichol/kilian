@@ -1194,25 +1194,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                 context.goNamed('dashboard');
 
                                 await Future.delayed(
-                                    const Duration(milliseconds: 1000));
-                                await showDialog(
-                                  context: context,
-                                  builder: (alertDialogContext) {
-                                    return AlertDialog(
-                                      title: Text(
-                                          'Bienvenue ${valueOrDefault(currentUserDocument?.genre, '')} $currentUserDisplayName'),
-                                      content: const Text(
-                                          'Vous allez pouvoir en quelques clics générer et gérer vos contrats (vente, cessation, consentement)'),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(alertDialogContext),
-                                          child: const Text('Continuer'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
+                                    const Duration(milliseconds: 10000));
                               } else {
                                 await showDialog(
                                   context: context,
