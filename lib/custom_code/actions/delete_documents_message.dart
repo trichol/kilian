@@ -29,8 +29,7 @@ Future<bool> deleteDocumentsMessage(
         '###### KILIAN deleteDocumentsMessage : Query the collection for matching documents');
     final querySnapshot = await collectionRef
         .where('phone_receiver', isEqualTo: phoneNumber)
-        .where('contratId',
-            isEqualTo: FirebaseFirestore.instance.doc(contratId))
+        .where('contratId', isEqualTo: contratId)
         .get();
 
     // Iterate through the results and delete each document
