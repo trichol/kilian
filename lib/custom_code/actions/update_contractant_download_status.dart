@@ -34,7 +34,7 @@ Future updateContractantDownloadStatus(
       // Update the `est_contrat_telecharger` for the matching phone number
       for (int i = 0; i < contractantsData.length; i++) {
         if (contractantsData[i]['phone_number'] == phoneNumberValue) {
-          contractantsData[i]['est_contrat_telecharger'] = "true";
+          contractantsData[i]['est_contrat_telecharger'] = true;
         }
       }
 

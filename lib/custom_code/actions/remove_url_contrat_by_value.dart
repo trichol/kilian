@@ -25,7 +25,8 @@ Future removeUrlContratByValue(
     // Fetch the current data
     final userDoc = await userDocRef.get();
     if (!userDoc.exists) {
-      throw Exception("User document does not exist");
+      throw Exception(
+          "#### KILIAN removeUrlContratByValue User document does not exist");
     }
 
     // Extract the current url_contrats list

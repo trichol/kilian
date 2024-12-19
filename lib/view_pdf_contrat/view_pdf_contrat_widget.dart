@@ -115,8 +115,6 @@ class _ViewPdfContratWidgetState extends State<ViewPdfContratWidget> {
                   ),
                   FlutterFlowPdfViewer(
                     networkPath: widget.url!,
-                    width: MediaQuery.sizeOf(context).width * 1.0,
-                    height: MediaQuery.sizeOf(context).height * 0.9,
                     horizontalScroll: false,
                   ),
                 ]

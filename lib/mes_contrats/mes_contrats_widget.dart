@@ -969,6 +969,21 @@ class _MesContratsWidgetState extends State<MesContratsWidget> {
                                                                           .value,
                                                                     );
 
+                                                                    context
+                                                                        .pushNamed(
+                                                                      'viewPdfContrat',
+                                                                      queryParameters:
+                                                                          {
+                                                                        'url':
+                                                                            serializeParam(
+                                                                          _model
+                                                                              .decryptedFile,
+                                                                          ParamType
+                                                                              .String,
+                                                                        ),
+                                                                      }.withoutNulls,
+                                                                    );
+
                                                                     safeSetState(
                                                                         () {});
                                                                   },

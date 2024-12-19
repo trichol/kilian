@@ -32,7 +32,7 @@ Future updateMessageStatus(
     // Loop through the filtered documents and update their "status" field
     for (final QueryDocumentSnapshot doc in querySnapshot.docs) {
       await doc.reference.update({'status': newStatus});
-      print('###### -KILIAN updateMessageStatus completion  found!');
+      //print('###### -KILIAN updateMessageStatus completion  found!');
     }
   } catch (e) {
     print('Error updating documents: $e');

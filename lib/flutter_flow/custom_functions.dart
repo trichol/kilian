@@ -191,7 +191,7 @@ bool? isContratDownloadedByContractant(
     // Check if there is a contractant with the specified uid and status "signé"
     for (var contractant in contractants) {
       if (contractant.uid == userId &&
-          contractant.status == "est_contrat_telecharger") {
+          contractant.est_contrat_telecharger == true) {
         print(
             '####### KILIAN FIN  isContratDownloadedByContractant : deja télécharge');
         return true;

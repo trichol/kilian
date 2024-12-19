@@ -93,9 +93,9 @@ Future<String> decryptAndDownload(String fileLocation) async {
     // Pass the temporary file path to the PDF viewer
     // Example:
     print('####kilian decryptAndDownload : Display the PDF using PDFViewer');
-    PDFView(filePath: tempFile.path);
+    //PDFView(filePath: tempFile.path);
 
-    print('####kilian decryptAndDownload :  successfull.');
+    print('####kilian decryptAndDownload :  successfull.' + tempFile.path);
     return tempFile.path;
   } catch (e) {
     print('Error during decryption and display: $e');

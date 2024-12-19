@@ -91,7 +91,7 @@ class MesContratsModel extends FlutterFlowModel<MesContratsWidget> {
         singleRecord: true,
       ).then((s) => s.firstOrNull);
       await actions.logAction(
-        'Contrat: ${currentContratDoc?.contratData.title}',
+        '2-Contrat: ${currentContratDoc?.contratData.title}  /${currentContratDoc?.reference.id}   /${FFAppState().iLoop.toString()}   / ${listeContratEnAttenteDoc.length.toString()}/${currentContratDoc?.reference.id}${currentContratDoc?.contratData.uid}',
       );
       // Init ContratDataAppState
       FFAppState().contratDataAppState = currentContratDoc!.contratData;
@@ -228,18 +228,21 @@ class MesContratsModel extends FlutterFlowModel<MesContratsWidget> {
         }
       } else {
         await actions.logAction(
-          'Contrat non signé!   ${currentContratDoc.contratData.status}   ....',
+          '3-Contrat non signé!   ${currentContratDoc.contratData.status}   ....',
         );
         // Fill liste contrats en  cours
         addToListeContratEnAttente(currentContratDoc.contratData);
         await actions.logAction(
-          'contratID : ${listeContratEnAttente.lastOrNull?.title}',
+          '4-contrat : ${listeContratEnAttente.lastOrNull?.title}',
         );
       }
 
       // Reset ContratDataAppState
       FFAppState().contratDataAppState = ContratDataStruct();
       FFAppState().update(() {});
+      await actions.logAction(
+        'Gestion contrat en cours  iLoop :${FFAppState().iLoop.toString()}',
+      );
       // iLoop
       FFAppState().iLoop = FFAppState().iLoop + 1;
     }
