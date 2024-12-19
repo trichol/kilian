@@ -23,14 +23,16 @@ Future deleteContratReference(String contratId) async {
       throw Exception('No authenticated user found.');
     }
 
-    print(
-        '###### KILIAN deleteContratReference :   $contratId   / currentUser.uid');
+    print('###### KILIAN deleteContratReference :   $contratId   / ' +
+        currentUser.uid);
 
     // Reference to the user's document in the "users" collection
     final userDocRef =
         FirebaseFirestore.instance.collection('users').doc(currentUser.uid);
 
     // Fetch the user's document data
+    print(
+        '###### KILIAN deleteContratReference : Fetch the users document data');
     final userDoc = await userDocRef.get();
 
     if (!userDoc.exists) {
@@ -38,6 +40,8 @@ Future deleteContratReference(String contratId) async {
     }
 
     // Get the 'contrats' field from the document
+    print(
+        '###### KILIAN deleteContratReference : Get the contrats field from the document');
     final List<dynamic>? contrats = userDoc.data()?['contrats'];
 
     if (contrats == null || contrats.isEmpty) {
@@ -46,12 +50,24 @@ Future deleteContratReference(String contratId) async {
 
     // Filter out the contrat with the given contratId
     final updatedContrats = contrats.where((contrat) {
-      final ref = contrat['__ref__'] as String?;
-      // Check if the reference ends with the contratId
-      return ref == null || !ref.endsWith(contratId);
+      // Ensure contrat is a Map and contains the '__ref__' key
+      if (contrat is Map<String, dynamic> && contrat.containsKey('__ref__')) {
+        final ref = contrat['__ref__'] as String?;
+        // Check if the reference ends with the contratId
+        return ref == null || !ref.endsWith(contratId);
+      }
+      // Exclude any invalid contrat entries
+      return false;
     }).toList();
 
+    // Check the updated list
+    if (updatedContrats.isEmpty) {
+      print('No valid contrats remain after filtering.');
+    }
+
     // Update the user document with the modified list
+    print(
+        '###### KILIAN deleteContratReference : Update the user document with the modified list');
     await userDocRef.update({'contrats': updatedContrats});
 
     print(

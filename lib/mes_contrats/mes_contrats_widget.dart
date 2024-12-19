@@ -616,10 +616,6 @@ class _MesContratsWidgetState extends State<MesContratsWidget> {
                                                                         );
                                                                         if (_model
                                                                             .areAllMessagesDeleted!) {
-                                                                          await actions
-                                                                              .resetNombreMessage(
-                                                                            listView1ContentItem.uid,
-                                                                          );
                                                                           await showDialog(
                                                                             context:
                                                                                 context,
@@ -713,6 +709,14 @@ class _MesContratsWidgetState extends State<MesContratsWidget> {
                                                                           .iLoop = 0;
                                                                       safeSetState(
                                                                           () {});
+                                                                      if (Navigator.of(
+                                                                              context)
+                                                                          .canPop()) {
+                                                                        context
+                                                                            .pop();
+                                                                      }
+                                                                      context.pushNamed(
+                                                                          'mesContrats');
 
                                                                       safeSetState(
                                                                           () {});
