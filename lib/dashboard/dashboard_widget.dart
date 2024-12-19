@@ -638,7 +638,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                                   .elementAtOrNull(
                                                                       FFAppConstants
                                                                           .indiceCessation)) {
-                                                            context.goNamed(
+                                                            context.pushNamed(
                                                                 'generationCessationContract');
                                                           } else {
                                                             // Cas  inconnu
