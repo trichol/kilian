@@ -17,9 +17,10 @@ Future deleteDocumentsMessage(
   String contratId,
 ) async {
   // Add your function code here!
+  print('###### KILIAN deleteDocumentsMessage : $phoneNumber $phoneNumber');
   try {
     // Reference to the Firestore collection
-    final collectionRef = FirebaseFirestore.instance.collection('messages');
+    final collectionRef = FirebaseFirestore.instance.collection('message');
 
     // Query the collection for matching documents
     final querySnapshot = await collectionRef
@@ -34,6 +35,7 @@ Future deleteDocumentsMessage(
     }
   } catch (e) {
     // Handle any errors
-    print('Error deleting documents: $e');
+    print(
+        '###### KILIAN deleteDocumentsMessage : Error deleting documents: $e');
   }
 }
