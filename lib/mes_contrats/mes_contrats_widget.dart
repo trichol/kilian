@@ -657,7 +657,7 @@ class _MesContratsWidgetState extends State<MesContratsWidget> {
                                                                             await actions.deleteDocumentsMessage(
                                                                           currentPhoneNumber,
                                                                           listView1ContentItem
-                                                                              .auteurId,
+                                                                              .uid,
                                                                         );
                                                                         if (_model
                                                                             .isMessageDeleted!) {

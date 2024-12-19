@@ -38,6 +38,7 @@ Future<bool> deleteDocumentsMessage(
 
     for (var doc in querySnapshot.docs) {
       await doc.reference.delete();
+      print('###### KILIAN deleteDocumentsMessage found doc to suppress!');
     }
     return true;
   } catch (e) {
