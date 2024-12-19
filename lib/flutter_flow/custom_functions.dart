@@ -224,8 +224,7 @@ bool? isContratSignedByContractant(
         // print('####### KILIAN isContratSignedByContractant found signé :  ' + ontractant.nom);
         return true;
       } else {
-        print('####### KILIAN isContratSignedByContractant not found signé ' +
-            contractant.nom);
+        // print('####### KILIAN isContratSignedByContractant not found signé ' + contractant.nom);
       }
     }
 

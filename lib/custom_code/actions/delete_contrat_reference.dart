@@ -23,6 +23,9 @@ Future deleteContratReference(String contratId) async {
       throw Exception('No authenticated user found.');
     }
 
+    print(
+        '###### KILIAN deleteContratReference :   $contratId   / currentUser.uid');
+
     // Reference to the user's document in the "users" collection
     final userDocRef =
         FirebaseFirestore.instance.collection('users').doc(currentUser.uid);
@@ -51,9 +54,11 @@ Future deleteContratReference(String contratId) async {
     // Update the user document with the modified list
     await userDocRef.update({'contrats': updatedContrats});
 
-    print('Contrat with ID $contratId successfully removed.');
+    print(
+        '###### KILIAN deleteContratReference : Contrat with ID $contratId successfully removed.');
   } catch (e) {
-    print('Error deleting contrat reference: $e');
+    print(
+        '###### KILIAN deleteContratReference : Error deleting contrat reference: $e');
     rethrow;
   }
 }
