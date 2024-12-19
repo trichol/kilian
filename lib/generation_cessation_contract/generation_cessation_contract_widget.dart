@@ -86,24 +86,24 @@ class _GenerationCessationContractWidgetState
         backgroundColor: Colors.white,
         body: SafeArea(
           top: true,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Container(
-                decoration: const BoxDecoration(),
-                child: wrapWithModel(
-                  model: _model.kilianAppBarModel,
-                  updateCallback: () => safeSetState(() {}),
-                  child: const KilianAppBarWidget(),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Container(
+                  decoration: const BoxDecoration(),
+                  child: wrapWithModel(
+                    model: _model.kilianAppBarModel,
+                    updateCallback: () => safeSetState(() {}),
+                    child: const KilianAppBarWidget(),
+                  ),
                 ),
-              ),
-              Builder(
-                builder: (context) {
-                  if (!_model.isBuildAction) {
-                    return Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                      child: SingleChildScrollView(
+                Builder(
+                  builder: (context) {
+                    if (!_model.isBuildAction) {
+                      return Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            16.0, 0.0, 16.0, 0.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -1651,29 +1651,29 @@ class _GenerationCessationContractWidgetState
                               .addToStart(const SizedBox(height: 10.0))
                               .addToEnd(const SizedBox(height: 10.0)),
                         ),
-                      ),
-                    );
-                  } else {
-                    return Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 200.0, 0.0, 0.0),
-                      child: Container(
-                        decoration: const BoxDecoration(),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Image.asset(
-                            'assets/images/Animation_-_1734414688819.gif',
-                            width: 200.0,
-                            height: 200.0,
-                            fit: BoxFit.cover,
+                      );
+                    } else {
+                      return Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            0.0, 200.0, 0.0, 0.0),
+                        child: Container(
+                          decoration: const BoxDecoration(),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Image.asset(
+                              'assets/images/Animation_-_1734414688819.gif',
+                              width: 200.0,
+                              height: 200.0,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  }
-                },
-              ),
-            ],
+                      );
+                    }
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
