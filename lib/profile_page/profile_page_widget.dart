@@ -1148,102 +1148,109 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                 ].divide(const SizedBox(width: 20.0)),
                               ),
                             ),
+                            if ((widget.isEditMode == true) ||
+                                !valueOrDefault<bool>(
+                                    currentUserDocument?.isCompleteRegistration,
+                                    false))
+                              AuthUserStreamWidget(
+                                builder: (context) => FFButtonWidget(
+                                  onPressed: () async {
+                                    if ((_model.nameTextController.text !=
+                                                '') &&
+                                        (_model.nicknameTextController.text !=
+                                                '') &&
+                                        (_model.adressTextController.text !=
+                                                '') &&
+                                        (_model.phoneNumberTextController.text !=
+                                                '') &&
+                                        (_model.birthdayTextController.text !=
+                                                '') &&
+                                        (valueOrDefault(
+                                                    currentUserDocument
+                                                        ?.signature,
+                                                    '') !=
+                                                '') &&
+                                        (_model.selectorGenreValue != null &&
+                                            _model.selectorGenreValue != '')) {
+                                      // update user
+
+                                      await currentUserReference!
+                                          .update(createUsersRecordData(
+                                        genre: _model.selectorGenreValue,
+                                        nickname:
+                                            _model.nicknameTextController.text,
+                                        displayName: functions.displayName(
+                                            _model.nameTextController.text,
+                                            _model.nicknameTextController.text),
+                                        name: _model.nameTextController.text,
+                                        adress:
+                                            _model.adressTextController.text,
+                                        birthday: functions
+                                            .myParseDateFromString(_model
+                                                .birthdayTextController.text),
+                                        phoneNumber: _model
+                                            .phoneNumberTextController.text,
+                                        online: true,
+                                        isCompleteRegistration: true,
+                                      ));
+
+                                      context.goNamed('dashboard');
+
+                                      await Future.delayed(
+                                          const Duration(milliseconds: 10000));
+                                    } else {
+                                      await showDialog(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            title: const Text('Formulaire incorrect'),
+                                            content: const Text(
+                                                'Tous les champs doivent être renseignées correctement !'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext),
+                                                child: const Text('Recommencer'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    }
+                                  },
+                                  text: 'Enregistrer',
+                                  options: FFButtonOptions(
+                                    width: double.infinity,
+                                    height: 50.0,
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          fontFamily: 'Roboto',
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          fontSize: 16.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w500,
+                                          lineHeight: 0.5,
+                                        ),
+                                    elevation: 3.0,
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondary,
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(4.0),
+                                  ),
+                                ),
+                              ),
                           ].divide(const SizedBox(height: 8.0)),
                         ),
                       ),
-                      if ((widget.isEditMode == true) ||
-                          !valueOrDefault<bool>(
-                              currentUserDocument?.isCompleteRegistration,
-                              false))
-                        AuthUserStreamWidget(
-                          builder: (context) => FFButtonWidget(
-                            onPressed: () async {
-                              if ((_model.nameTextController.text != '') &&
-                                  (_model.nicknameTextController.text !=
-                                          '') &&
-                                  (_model.adressTextController.text != '') &&
-                                  (_model.phoneNumberTextController.text !=
-                                          '') &&
-                                  (_model.birthdayTextController.text !=
-                                          '') &&
-                                  (valueOrDefault(
-                                              currentUserDocument?.signature,
-                                              '') !=
-                                          '') &&
-                                  (_model.selectorGenreValue != null &&
-                                      _model.selectorGenreValue != '')) {
-                                // update user
-
-                                await currentUserReference!
-                                    .update(createUsersRecordData(
-                                  genre: _model.selectorGenreValue,
-                                  nickname: _model.nicknameTextController.text,
-                                  displayName: functions.displayName(
-                                      _model.nameTextController.text,
-                                      _model.nicknameTextController.text),
-                                  name: _model.nameTextController.text,
-                                  adress: _model.adressTextController.text,
-                                  birthday: functions.myParseDateFromString(
-                                      _model.birthdayTextController.text),
-                                  phoneNumber:
-                                      _model.phoneNumberTextController.text,
-                                  online: true,
-                                  isCompleteRegistration: true,
-                                ));
-
-                                context.goNamed('dashboard');
-
-                                await Future.delayed(
-                                    const Duration(milliseconds: 10000));
-                              } else {
-                                await showDialog(
-                                  context: context,
-                                  builder: (alertDialogContext) {
-                                    return AlertDialog(
-                                      title: const Text('Formulaire incorrect'),
-                                      content: const Text(
-                                          'Tous les champs doivent être renseignées correctement !'),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(alertDialogContext),
-                                          child: const Text('Recommencer'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                              }
-                            },
-                            text: 'Enregistrer',
-                            options: FFButtonOptions(
-                              width: double.infinity,
-                              height: 50.0,
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              color: FlutterFlowTheme.of(context).primary,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .titleSmall
-                                  .override(
-                                    fontFamily: 'Roboto',
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                    fontSize: 16.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w500,
-                                    lineHeight: 0.5,
-                                  ),
-                              elevation: 3.0,
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).secondary,
-                                width: 1.0,
-                              ),
-                              borderRadius: BorderRadius.circular(4.0),
-                            ),
-                          ),
-                        ),
                     ]
                         .divide(const SizedBox(height: 0.0))
                         .addToStart(const SizedBox(height: 5.0)),

@@ -17,7 +17,7 @@ Future<String> getDownloadUrl(String? filePath) async {
   try {
     if (filePath == null || filePath.isEmpty) {
       // Handle the null or empty filePath case
-      print('###### KILIAN Error: filePath is null or empty.');
+      print('###### KILIAN getDownloadUrl Error: filePath is null or empty.');
       return '';
     }
     print('###### KILIAN getDownloadUrl path : $filePath');
@@ -26,7 +26,7 @@ Future<String> getDownloadUrl(String? filePath) async {
     final String downloadUrl = await storageRef.getDownloadURL();
     return downloadUrl;
   } catch (e) {
-    print('###### KILIAN Error fetching download URL: $e');
+    print('###### KILIAN getDownloadUrl Error fetching download URL: $e');
     return '';
   }
 }

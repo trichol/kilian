@@ -44,7 +44,7 @@ class MesContratsModel extends FlutterFlowModel<MesContratsWidget> {
 
   // Model for KilianAppBar component.
   late KilianAppBarModel kilianAppBarModel;
-  // Stores action output result for [Custom Action - decryptAndDownload] action in IconButtonView widget.
+  // Stores action output result for [Custom Action - decryptAndDownload] action in IconButtonViewArchivedContrat widget.
   String? decryptedFile;
 
   @override

@@ -22,7 +22,7 @@ Future<bool> checkFileExists(String url) async {
   try {
     // Open a HEAD request to the given URL
     request.open('HEAD', url);
-    print('###### KILIAN url ok : $url');
+    print('###### KILIAN checkFileExists : $url');
     await Future.delayed(Duration(seconds: 1));
 
     // Listen for when the request completes
